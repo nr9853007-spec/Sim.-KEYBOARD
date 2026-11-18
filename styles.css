@@ -74,3 +74,30 @@ body{background:var(--bg);color:var(--ink);font-family:Onest,Inter,system-ui,san
 .terms-note{margin-top:15px!important;padding:11px 13px;background:#fff1ed;border-radius:10px;color:#a85f53;font-weight:800;font-size:9px}
 @media(max-width:700px){.topbar{height:66px}.promo{border:1px solid #485477}.promo-copy h1{letter-spacing:-.7px}.product-image:after{width:90px;height:90px}.terms-overlay{padding:9px;align-items:end}.terms-panel{max-height:88vh;border-radius:19px 19px 12px 12px}.terms-panel header{padding:16px}.terms-body{padding:15px 16px 22px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+/* Navigation, iconography and interaction polish */
+.nav-icon svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;display:block}
+.nav-item{min-height:70px;padding:2px 5px 0;border-radius:15px;transition:color .2s,transform .2s}
+.nav-item:active{transform:scale(.96)}
+.nav-item.active .nav-icon{box-shadow:inset 0 0 0 1.5px currentColor,0 5px 14px #17243a12;transform:translateY(-2px)}
+.nav-icon{transition:transform .22s cubic-bezier(.2,.8,.2,1),box-shadow .22s}
+.nav-item b{font-weight:750;letter-spacing:-.15px}
+.game-short img{width:76px;height:76px;border-radius:20px;object-fit:cover;box-shadow:0 7px 18px #17243a13;transition:transform .25s,box-shadow .25s}
+.game-short.active img{box-shadow:0 0 0 2px #ff806b,0 7px 18px #ff806b30;transform:translateY(-3px)}
+.game-short small{font-weight:650;color:#647087}
+.game-options img{width:52px;height:52px;border-radius:15px;object-fit:cover;box-shadow:0 4px 12px #17243a13}
+.game-options button{min-height:76px;border:1px solid #eef0f5!important;border-radius:16px!important;padding:11px 13px!important}
+.game-options button[aria-pressed="true"]{background:#fff5f1;border-color:#ffb8aa!important}
+.game-options button b{font-size:10px;letter-spacing:.2px}
+.sheet{transform:translateY(22px);transition:transform .28s cubic-bezier(.2,.8,.2,1)}
+.game-sheet:not([hidden]) .sheet{transform:translateY(0)}
+.page{display:none}
+.page.active{display:block;animation:sectionIn .28s ease both}
+@keyframes sectionIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.section-art{display:inline-grid;place-items:center;width:58px;height:58px;border-radius:17px;background:linear-gradient(145deg,#f1edff,#fff0ec);font-size:30px;color:#7767d7}
+.empty-illustration{display:flex;flex-direction:column;align-items:center;gap:10px;color:#a28ae9}
+.empty-illustration p{font-size:13px;color:#8a94a6}
+.tabs button{transition:background .2s,color .2s,box-shadow .2s}
+.tabs button:focus-visible,.nav-item:focus-visible,.game-short:focus-visible{outline:3px solid #ffab9b;outline-offset:3px}
+body.modal-open{overflow:hidden}
+@media(max-width:700px){.game-short img{width:66px;height:66px;border-radius:17px}.game-short{min-width:76px}.nav-icon{width:42px;height:42px;border-radius:14px}.nav-icon svg{width:21px;height:21px}.nav-item{min-width:0;flex:1}.nav-item b{font-size:11px}.nav-item small{font-size:9px}.sell-grid{grid-template-columns:1fr}.swap-board{grid-template-columns:1fr 32px 1fr;gap:6px}.swap-board>div:not(.swap-arrows){padding:13px 8px;min-height:175px}.swap-board h3{font-size:12px}.section-art{width:50px;height:50px}}
