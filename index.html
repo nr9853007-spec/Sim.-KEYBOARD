@@ -12,12 +12,12 @@
 <div class="top-note"><span class="pulse"></span> СЕРВИС СОПРОВОЖДЕНИЯ СДЕЛОК <span class="note-sep">·</span> ТАРИФ 0 ₽</div>
 <header class="header">
  <a class="brand" href="#home"><span class="brand-mark">N<span>✦</span></span><span>N1kmeL<small>GUARANTOR SERVICE</small></span></a>
- <nav class="nav"><a href="#how">Как работаем</a><a href="#request">Оставить заявку</a><a href="#reviews">Отзывы</a><a href="#faq">FAQ</a></nav>
+ <nav class="nav" aria-label="Основные разделы"><button class="tab-btn active" type="button" data-tab="home" aria-selected="true"><span>⌂</span>Главная</button><button class="tab-btn" type="button" data-tab="how" aria-selected="false"><span>↗</span>Как это работает</button><button class="tab-btn" type="button" data-tab="request" aria-selected="false"><span>✎</span>Заявка</button><button class="tab-btn" type="button" data-tab="reviews" aria-selected="false"><span>★</span>Отзывы</button><button class="tab-btn" type="button" data-tab="faq" aria-selected="false"><span>?</span>FAQ</button></nav>
  <a class="header-cta" href="https://t.me/N1kmeL" target="_blank" rel="noopener">Мой Telegram <span>↗</span></a>
  <button class="menu-btn" id="menuBtn" aria-label="Открыть меню"><i></i><i></i></button>
 </header>
 <main id="home">
-<section class="hero">
+<section class="hero" data-view="home">
  <div class="hero-grid"></div><div class="hero-glow glow-a"></div><div class="hero-glow glow-b"></div>
  <div class="hero-copy reveal">
   <div class="eyebrow"><span class="eyebrow-dot"></span> N1KMEL • БЕСПЛАТНЫЙ ГАРАНТ</div>
@@ -35,8 +35,8 @@
  </div>
  <div class="hero-bottom"><span>01 / 04</span><div></div><span>SAFE DEAL PROCESS</span></div>
 </section>
-<section class="ticker" aria-label="Преимущества"><div class="ticker-track"><span>БЕСПЛАТНЫЙ ТАРИФ <b>✦</b></span><span>ПОНЯТНЫЕ УСЛОВИЯ <b>✦</b></span><span>СОПРОВОЖДЕНИЕ СДЕЛКИ <b>✦</b></span><span>ОБРАТНАЯ СВЯЗЬ В TELEGRAM <b>✦</b></span><span>БЕСПЛАТНЫЙ ТАРИФ <b>✦</b></span><span>ПОНЯТНЫЕ УСЛОВИЯ <b>✦</b></span></div></section>
-<section class="section benefits" id="how">
+<section class="ticker" data-view="home" aria-label="Преимущества"><div class="ticker-track"><span>БЕСПЛАТНЫЙ ТАРИФ <b>✦</b></span><span>ПОНЯТНЫЕ УСЛОВИЯ <b>✦</b></span><span>СОПРОВОЖДЕНИЕ СДЕЛКИ <b>✦</b></span><span>ОБРАТНАЯ СВЯЗЬ В TELEGRAM <b>✦</b></span><span>БЕСПЛАТНЫЙ ТАРИФ <b>✦</b></span><span>ПОНЯТНЫЕ УСЛОВИЯ <b>✦</b></span></div></section>
+<section class="section benefits" id="how" data-view="how" hidden>
  <div class="section-heading reveal"><div><div class="eyebrow"><span class="eyebrow-dot"></span> ПРОСТО И ПОНЯТНО</div><h2>Как проходит<br><em>сделка</em></h2></div><p>Сначала уточняем все детали. Никаких неожиданных условий — каждый шаг обсуждается заранее.</p></div>
  <div class="steps">
   <article class="step reveal"><span class="step-no">01</span><div class="step-icon">✎</div><h3>Оставляешь заявку</h3><p>Укажи свой ник, Place и кратко опиши, что планируете обменять.</p><span class="step-arrow">↗</span></article>
@@ -45,7 +45,7 @@
  </div>
  <div class="notice-box reveal"><span>i</span><p><strong>Важно:</strong> не передавай никому пароль, коды подтверждения или доступ к аккаунту. Условия сделки и способ проверки согласовываются отдельно.</p></div>
 </section>
-<section class="request-section" id="request">
+<section class="request-section" id="request" data-view="request" hidden>
  <div class="request-orb"></div><div class="request-layout">
   <div class="request-copy reveal"><div class="eyebrow"><span class="eyebrow-dot"></span> НАЧНЁМ С ОБСУЖДЕНИЯ</div><h2>Оставь заявку<br><em>на гаранта</em></h2><p>Заполни короткую форму. Telegram откроется с готовым сообщением — проверь его и нажми «Отправить».</p>
    <div class="request-points"><span><b>✓</b> Бесплатный тариф</span><span><b>✓</b> Без обязательств</span><span><b>✓</b> Ответ в Telegram</span></div>
@@ -65,7 +65,7 @@
   </form>
  </div>
 </section>
-<section class="section reviews" id="reviews">
+<section class="section reviews" id="reviews" data-view="reviews" hidden>
  <div class="section-heading reveal"><div><div class="eyebrow"><span class="eyebrow-dot"></span> МНЕНИЕ ВАЖНО</div><h2>Отзывы <em>участников</em></h2></div><p>Пока здесь нет опубликованных отзывов. Если уже работали вместе — расскажи о своём опыте.</p></div>
  <div class="reviews-empty reveal"><div class="empty-stars">✦ ✦ ✦ ✦ ✦</div><strong>Твой отзыв может стать первым</strong><span>Отзывы публикуются после проверки владельцем сайта.</span><button class="btn btn-secondary" id="reviewOpen">Оставить отзыв <span>↗</span></button></div>
  <form class="review-form" id="reviewForm" hidden>
@@ -77,7 +77,7 @@
   <p class="form-foot">Отзыв не появится на сайте автоматически — сначала владелец проверит его.</p>
  </form>
 </section>
-<section class="faq-section" id="faq"><div class="section-heading reveal"><div><div class="eyebrow"><span class="eyebrow-dot"></span> ОТВЕТЫ НА ВОПРОСЫ</div><h2>Часто <em>спрашивают</em></h2></div><p>Если не нашёл ответ — напиши напрямую в Telegram.</p></div>
+<section class="faq-section" id="faq" data-view="faq" hidden><div class="section-heading reveal"><div><div class="eyebrow"><span class="eyebrow-dot"></span> ОТВЕТЫ НА ВОПРОСЫ</div><h2>Часто <em>спрашивают</em></h2></div><p>Если не нашёл ответ — напиши напрямую в Telegram.</p></div>
  <div class="faq-list">
   <details><summary>Сколько стоит услуга гаранта?<span>＋</span></summary><p>На сайте указан бесплатный тариф — 0 ₽. Дополнительные условия, если они появятся, обсуждаются до начала сделки.</p></details>
   <details><summary>Что указать в поле Place?<span>＋</span></summary><p>Напиши название Roblox-игры или Place, в котором проходит обмен. Если знаешь ссылку на Place, можешь добавить её в описание.</p></details>
@@ -85,7 +85,7 @@
   <details><summary>Как публикуются отзывы?<span>＋</span></summary><p>Отзывы отправляются владельцу сайта на проверку. Публиковать можно только отзывы реальных участников с их согласия.</p></details>
  </div>
 </section>
-<section class="closing"><div class="closing-spark">✦</div><div class="eyebrow">N1KMEL • GUARANTOR</div><h2>Готов обсудить<br><em>свою сделку?</em></h2><a class="btn btn-primary" href="#request">Оставить заявку <span>↗</span></a></section>
+<section class="closing" data-view="home"><div class="closing-spark">✦</div><div class="eyebrow">N1KMEL • GUARANTOR</div><h2>Готов обсудить<br><em>свою сделку?</em></h2><a class="btn btn-primary" href="#request">Оставить заявку <span>↗</span></a></section>
 </main>
 <footer class="footer"><a class="brand" href="#home"><span class="brand-mark">N<span>✦</span></span><span>N1kmeL<small>GUARANTOR SERVICE</small></span></a><span>© 2026 N1kmeL. Информационный демо-сайт.</span><a href="https://t.me/N1kmeL" target="_blank" rel="noopener">@N1kmeL ↗</a></footer>
 <a class="floating-telegram" href="https://t.me/N1kmeL" target="_blank" rel="noopener" aria-label="Написать в Telegram"><span>➤</span><b>Telegram</b></a>
