@@ -1,147 +1,57 @@
-(() => {
- 'use strict';
- const $=(s,root=document)=>root.querySelector(s);
- const $$=(s,root=document)=>[...root.querySelectorAll(s)];
- const toast=$('#toast');
- let toastTimer=0;
- function notify(message){
-  if(!toast)return;
-  toast.textContent=message;toast.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer=setTimeout(()=>toast.classList.remove('show'),2400);
- }
- const games={
-  'Adopt Me':{icon:'adopt-me.svg',title:'Предметы на продаже'},
-  'MM2 Market':{icon:'mm2.svg',title:'MM2 Market — демо-каталог'},
-  'MM2 Swap':{icon:'mm2-swap.svg',title:'MM2 Swap — демо-каталог'},
-  'Steal a Brainrot':{icon:'brainrot.svg',title:'Steal a Brainrot — демо-каталог'},
-  'Grow a Garden':{icon:'garden.svg',title:'Grow a Garden — демо-каталог'},
-  'Blox Fruits':{icon:'blox.svg',title:'Blox Fruits — демо-каталог'}
- };
- const pages=['buy','sell','swap','items','profile'];
- let currentGame='Adopt Me',currentPage='buy',filterMode='all',sortAscending=false;
- const favorites=new Set(),grid=$('#products'),cards=grid?$$('.product',grid):[];
- const sheet=$('#gameSheet'),gameOpen=$('#gameOpen');
- function changePage(name){
-  if(!pages.includes(name))return;
-  const target=$('#page-'+name);
-  if(!target)return;
-  $$('.page').forEach(p=>p.classList.toggle('active',p===target));
-  $$('.nav-item[data-page]').forEach(b=>{
-   const active=b.dataset.page===name;
-   b.classList.toggle('active',active);
-   if(active)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');
-  });
-  currentPage=name;
-  window.scrollTo({top:0,behavior:'smooth'});
- }
- function closeSheet(){
-  if(!sheet)return;
-  sheet.hidden=true;document.body.classList.remove('modal-open');
-  gameOpen?.setAttribute('aria-expanded','false');
-  gameOpen?.focus();
- }
- function openSheet(){
-  if(!sheet)return;
-  sheet.hidden=false;document.body.classList.add('modal-open');
-  gameOpen?.setAttribute('aria-expanded','true');
-  $('#gameClose')?.focus();
- }
- function selectGame(name){
-  const data=games[name];if(!data)return;
-  currentGame=name;
-  const art=$('#headerGameArt');if(art){art.src='assets/games/'+data.icon+'?v=20261118c';art.alt=name;}
-  const nameNode=$('#headGameName');if(nameNode)nameNode.textContent=name;
-  $$('.game-short[data-game]').forEach(b=>{
-   const active=b.dataset.game===name;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));
-  });
-  $$('.game-options [data-game]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.game===name)));
-  const title=$('#catalogTitle');if(title)title.textContent=data.title;
-  const search=$('#search');if(search)search.value='';
-  filterMode='all';renderCatalog();closeSheet();
-  notify('Выбрана игра: '+name+' · демо-каталог');
- }
- gameOpen?.addEventListener('click',openSheet);
- $('#gameClose')?.addEventListener('click',closeSheet);
- sheet?.addEventListener('click',e=>{if(e.target===sheet)closeSheet();});
- $$('.game-options [data-game],.game-short[data-game]').forEach(b=>b.addEventListener('click',()=>selectGame(b.dataset.game)));
- $$('.nav-item[data-page]').forEach(b=>b.addEventListener('click',()=>changePage(b.dataset.page)));
- $('#languageBtn')?.addEventListener('click',()=>notify('В демо доступен русский язык.'));
- $('#noticeBtn')?.addEventListener('click',()=>notify('Демонстрационных уведомлений пока нет.'));
- $('#promoClose')?.addEventListener('click',()=>$('.promo')?.remove());
- $('#promoAction')?.addEventListener('click',()=>$('#catalog')?.scrollIntoView({behavior:'smooth',block:'start'}));
- $('#cartBtn')?.addEventListener('click',()=>notify('Корзина декоративная. Заказы и платежи отключены.'));
- function renderCatalog(){
-  const query=($('#search')?.value||'').trim().toLocaleLowerCase('ru');
-  let visibleCount=0;
-  cards.forEach(card=>{
-   const name=(card.dataset.name||'').toLocaleLowerCase('ru');
-   const isFavorite=favorites.has(card.dataset.name);
-   const gameMatches=currentGame==='Adopt Me';
-   const queryMatches=name.includes(query);
-   const filterMatches=filterMode==='all'||(filterMode==='favorites'&&isFavorite)||(filterMode==='pet'&&card.dataset.kind==='pet');
-   const visible=gameMatches&&queryMatches&&filterMatches;
-   card.hidden=!visible;if(visible)visibleCount++;
-   const heart=$('.heart',card);
-   if(heart){heart.classList.toggle('is-favorite',isFavorite);heart.textContent=isFavorite?'♥':'♡';heart.setAttribute('aria-pressed',String(isFavorite));}
-  });
-  const count=$('#resultCount');if(count)count.textContent=visibleCount+' предметов';
-  const empty=$('#empty');
-  if(empty){
-   empty.hidden=visibleCount>0;
-   empty.textContent=currentGame!=='Adopt Me'?'Для этой игры демонстрационный каталог пока не подготовлен.':filterMode==='favorites'?'В избранном пока пусто. Отметь карточки сердечком.':'Ничего не найдено. Измени запрос или фильтр.';
-  }
-  const badge=$('#filterBadge');if(badge)badge.textContent=filterMode==='all'?'0':'1';
-  $('#filterBtn')?.classList.toggle('filter-selected',filterMode!=='all');
- }
- cards.forEach(card=>{
-  $('.heart',card)?.addEventListener('click',()=>{
-   const name=card.dataset.name;
-   if(favorites.has(name)){favorites.delete(name);notify('Удалено из избранного');}
-   else{favorites.add(name);notify('Добавлено в избранное');}
-   renderCatalog();
-  });
-  $('.add',card)?.addEventListener('click',()=>notify('Демонстрационная карточка: покупка и добавление отключены.'));
- });
- $('#search')?.addEventListener('input',renderCatalog);
- $('#clearSearch')?.addEventListener('click',()=>{const field=$('#search');if(field){field.value='';renderCatalog();field.focus();}});
- $('#sortBtn')?.addEventListener('click',()=>{
-  sortAscending=!sortAscending;
-  [...cards].sort((a,b)=>sortAscending?Number(a.dataset.price)-Number(b.dataset.price):Number(b.dataset.price)-Number(a.dataset.price)).forEach(card=>grid?.appendChild(card));
-  notify(sortAscending?'Сначала дешевле':'Сначала дороже');
- });
- $('#filterBtn')?.addEventListener('click',()=>{
-  filterMode=filterMode==='favorites'?'all':'favorites';renderCatalog();
-  notify(filterMode==='favorites'?'Показано избранное':'Все предметы');
- });
- $('#showFavorites')?.addEventListener('click',()=>{filterMode='favorites';changePage('buy');renderCatalog();});
- $('#priceBtn')?.addEventListener('click',()=>$('#sortBtn')?.click());
- $('#transportBtn')?.addEventListener('click',()=>notify('В этом демо транспорт пока не добавлен.'));
- $('#petBtn')?.addEventListener('click',()=>{
-  filterMode=filterMode==='pet'?'all':'pet';renderCatalog();
-  notify(filterMode==='pet'?'Показаны питомцы':'Фильтр питомцев снят');
- });
- $$('.demo-action').forEach(b=>b.addEventListener('click',()=>notify('Демо-режим: реальные операции недоступны.')));
- $$('.currency button').forEach(button=>button.addEventListener('click',()=>{
-  $$('.currency button').forEach(item=>{const active=item===button;item.classList.toggle('selected',active);item.setAttribute('aria-pressed',String(active));});
-  notify('Выбрана валюта интерфейса: '+button.textContent.trim());
- }));
- $$('.tabs button').forEach((button,index)=>button.addEventListener('click',()=>{
-  $$('.tabs button').forEach((item,i)=>{item.classList.toggle('selected',i===index);item.setAttribute('aria-pressed',String(i===index));});
-  const note=$('.notice-box');
-  if(note)note.textContent=index===0?'Это демонстрационный экран. Подключение игрового инвентаря недоступно.':'Раздел объявлений — пример интерфейса. Публикация и продажа отключены.';
- }));
- const terms=$('#termsOverlay');
- function openTerms(){if(!terms)return;terms.hidden=false;document.body.classList.add('modal-open');$('#termsClose')?.focus();}
- function closeTerms(){if(!terms)return;terms.hidden=true;document.body.classList.remove('modal-open');}
- $('#termsClose')?.addEventListener('click',closeTerms);
- terms?.addEventListener('click',e=>{if(e.target===terms)closeTerms();});
- $('#aboutDemo')?.addEventListener('click',openTerms);
- const footer=document.createElement('button');
- footer.type='button';footer.className='terms-link';footer.textContent='Соглашение и отказ от ответственности';footer.addEventListener('click',openTerms);
- $('main')?.appendChild(footer);
- document.addEventListener('keydown',e=>{
-  if(e.key==='Escape'){if(sheet&&!sheet.hidden)closeSheet();if(terms&&!terms.hidden)closeTerms();}
- });
- renderCatalog();
+(()=>{'use strict';
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+let lang='ru',game='Adopt Me',filter='all',ascending=false,balance=0;const fav=new Set(),toast=$('#toast');
+function note(t){if(!toast)return;toast.textContent=t;toast.classList.add('show');clearTimeout(note.timer);note.timer=setTimeout(()=>toast.classList.remove('show'),2300)}
+const games={
+'Adopt Me':['adopt-me.svg','Предметы на продаже','Питомцы, яйца и волшебные предметы'],
+'MM2 Market':['mm2.svg','Коллекция MM2','Редкости, эффекты и коллекционные предметы'],
+'MM2 Swap':['mm2-swap.svg','Обменная коллекция MM2','Коллекционные предметы для демо-обмена'],
+'Steal a Brainrot':['brainrot.svg','Коллекция Brainrot','Необычные персонажи и забавные артефакты'],
+'Grow a Garden':['garden.svg','Садовая коллекция','Семена, растения и волшебные находки'],
+'Blox Fruits':['blox.svg','Коллекция Blox Fruits','Фрукты, реликвии и редкие артефакты']};
+const data=[
+['Adopt Me','Crystal Egg','egg',67,'R','#83e9f3','#3f9ed4'],['Adopt Me','Ride Potion','potion',124,'R','#f5a5e9','#9a67d7'],['Adopt Me','Copycat','cat',1130,'M','#d9eaff','#8799ca'],['Adopt Me','Ancient Dragon','dragon',670,'M','#ffe17b','#ee9637'],['Adopt Me','Dark Choccybunny','bunny',670,'M','#a36a50','#59364a'],['Adopt Me','DJ Snooze','star',420,'R','#ffa74d','#7450ad'],['Adopt Me','Golden Griffin','bird',890,'L','#ffe37b','#d68b34'],['Adopt Me','Mr Whiskerpips','cat',250,'N','#d8f3ed','#5ab8a4'],
+['MM2 Market','Prism Cache','crystal',167,'L','#c5a8ff','#6558c8'],['MM2 Market','Aurora Effect','aura',367,'M','#8de6dc','#8274e8'],['MM2 Market','Pixel Badge','badge',97,'R','#8bd5ff','#5478d5'],['MM2 Market','Mystery Crate','crate',267,'E','#ffc47c','#e77e59'],
+['MM2 Swap','Prism Cache','crystal',167,'L','#c5a8ff','#6558c8'],['MM2 Swap','Aurora Effect','aura',367,'M','#8de6dc','#8274e8'],['MM2 Swap','Pixel Badge','badge',97,'R','#8bd5ff','#5478d5'],['MM2 Swap','Mystery Crate','crate',267,'E','#ffc47c','#e77e59'],
+['Steal a Brainrot','Lime Orbit','orb',167,'R','#b9f477','#42a98b'],['Steal a Brainrot','Cloud Buddy','cloud',367,'M','#b4e7ff','#7d8be8'],['Steal a Brainrot','Neon Cactus','cactus',97,'N','#a8ed9a','#3aab83'],['Steal a Brainrot','Mango Meteor','meteor',267,'L','#ffd77b','#f17c67'],
+['Grow a Garden','Sunseed','seed',67,'N','#ffe78a','#eaa64c'],['Grow a Garden','Berry Bloom','flower',167,'R','#ffa4c5','#a66be2'],['Grow a Garden','Crystal Sprout','crystal',367,'M','#9de9dc','#5b9ed7'],['Grow a Garden','Moonlit Mushroom','mushroom',267,'L','#c5b0ff','#6c65c9'],
+['Blox Fruits','Flame Relic','flame',367,'L','#ffc36b','#ec5d4e'],['Blox Fruits','Ocean Charm','shell',167,'R','#8be6ef','#4e85d7'],['Blox Fruits','Sky Token','star',97,'N','#c7dfff','#8c9de8'],['Blox Fruits','Solar Fruit','fruit',670,'M','#ffda77','#f08b49']];
+const art={
+egg:'<path d="M60 18C42 18 28 53 28 73a32 32 0 0 0 64 0C92 53 78 18 60 18Z" fill="url(#g)" stroke="#fff" stroke-width="3"/><path d="M42 64q18-18 36 0M38 77q22-15 44 0" fill="none" stroke="#fff" stroke-width="5"/>',
+potion:'<path d="M48 19h24v19l17 31a20 20 0 0 1-17 30H48a20 20 0 0 1-17-30l17-31Z" fill="url(#g)" stroke="#fff" stroke-width="3"/><path d="M47 19h26M40 72q20-13 40 0" fill="none" stroke="#fff" stroke-width="5"/>',
+cat:'<path d="m29 48 3-23 21 14q8-3 16 0l20-14 3 24q8 28-6 43-25 20-50 0Q22 76 29 48Z" fill="url(#g)" stroke="#fff" stroke-width="3"/><ellipse cx="47" cy="63" rx="5" ry="7" fill="#26334a"/><ellipse cx="73" cy="63" rx="5" ry="7" fill="#26334a"/><path d="m55 76 5 4 5-4" fill="none" stroke="#26334a" stroke-width="3"/>',
+dragon:'<path d="M28 76Q20 43 49 37l10-17 12 17q25 1 25 26l-10 20-24 11-24-8Z" fill="url(#g)" stroke="#fff" stroke-width="3"/><path d="m43 43-14-18 27 9m21 9 15-18-3 27" fill="#fff" fill-opacity=".4" stroke="#fff" stroke-width="3"/><circle cx="48" cy="61" r="4" fill="#26334a"/>',
+bunny:'<path d="M42 45Q22 4 38 12q18 8 22 32 4-24 22-32 16-8-4 34 18 34-1 48-19 17-38 0-19-17 3-49Z" fill="url(#g)" stroke="#fff" stroke-width="3"/><circle cx="49" cy="66" r="4" fill="#fff"/><circle cx="71" cy="66" r="4" fill="#fff"/>',
+star:'<path d="m60 13 13 29 32 4-24 22 7 32-28-17-28 17 7-32-24-22 32-4Z" fill="url(#g)" stroke="#fff" stroke-width="3"/>',
+bird:'<path d="M25 69q2-37 38-43 32 0 36 34-1 37-39 40-29-2-35-31Z" fill="url(#g)" stroke="#fff" stroke-width="3"/><path d="m81 57 23 8-23 9" fill="#fff"/><circle cx="53" cy="57" r="5" fill="#26334a"/>',
+crystal:'<path d="m60 12 32 28-9 48-23 18-23-18-9-48Z" fill="url(#g)" stroke="#fff" stroke-width="3"/><path d="m60 12 0 94M28 40l32 10 32-10M37 88l23-38 23 38" fill="none" stroke="#fff" stroke-width="3"/>',
+aura:'<circle cx="60" cy="60" r="39" fill="none" stroke="url(#g)" stroke-width="15"/><circle cx="60" cy="60" r="22" fill="url(#g)" opacity=".6"/><path d="M60 8v18M60 94v18M8 60h18M94 60h18" stroke="#fff" stroke-width="5"/>',
+badge:'<path d="M60 14 99 36v47l-39 23-39-23V36Z" fill="url(#g)" stroke="#fff" stroke-width="3"/><path d="m50 61 7 7 14-16" fill="none" stroke="#fff" stroke-width="5"/>',
+crate:'<path d="m24 38 36-21 36 21v46l-36 21-36-21Z" fill="url(#g)" stroke="#fff" stroke-width="3"/><path d="m24 38 36 21 36-21M60 59v46" fill="none" stroke="#fff" stroke-width="4"/>',
+orb:'<circle cx="60" cy="60" r="39" fill="url(#g)" stroke="#fff" stroke-width="3"/><ellipse cx="60" cy="60" rx="52" ry="16" fill="none" stroke="#fff" stroke-width="5" transform="rotate(-28 60 60)"/>',
+cloud:'<path d="M28 81a19 19 0 0 1 3-38 30 30 0 0 1 56 7 17 17 0 0 1-2 34Z" fill="url(#g)" stroke="#fff" stroke-width="3"/><circle cx="50" cy="63" r="4" fill="#34415d"/><circle cx="70" cy="63" r="4" fill="#34415d"/>',
+cactus:'<path d="M47 94V40q0-14 13-14t13 14v54M47 59H35q-9 0-9-10V40M73 70h12q9 0 9-10V49" fill="none" stroke="url(#g)" stroke-width="15" stroke-linecap="round"/>',
+meteor:'<path d="M24 78 53 23q7-13 18-4l27 27q10 10-3 19L42 94q-15 7-18-16Z" fill="url(#g)" stroke="#fff" stroke-width="3"/><path d="m13 88 19-12M18 103l21-14" stroke="#fff" stroke-width="5"/>',
+seed:'<ellipse cx="60" cy="62" rx="25" ry="37" transform="rotate(34 60 62)" fill="url(#g)" stroke="#fff" stroke-width="3"/><path d="M47 80q2-34 34-47" fill="none" stroke="#fff" stroke-width="5"/>',
+flower:'<g fill="url(#g)" stroke="#fff" stroke-width="2"><circle cx="60" cy="34" r="17"/><circle cx="84" cy="52" r="17"/><circle cx="75" cy="80" r="17"/><circle cx="45" cy="80" r="17"/><circle cx="36" cy="52" r="17"/></g><circle cx="60" cy="59" r="17" fill="#ffdf78"/><path d="M60 76v27" stroke="#4da878" stroke-width="6"/>',
+mushroom:'<path d="M60 24Q24 24 20 62h80Q96 24 60 24Z" fill="url(#g)" stroke="#fff" stroke-width="3"/><path d="M48 61h24l6 38H42Z" fill="#f6e9d7" stroke="#fff" stroke-width="3"/>',
+flame:'<path d="M61 13q18 28 3 39 25-9 25 17a29 29 0 0 1-58 0q0-20 18-35-3 17 7 20 15-18 5-41Z" fill="url(#g)" stroke="#fff" stroke-width="3"/>',
+shell:'<path d="M22 80q-2-54 38-61 40 7 38 61-38 30-76 0Z" fill="url(#g)" stroke="#fff" stroke-width="3"/><path d="M60 19v78M60 38 38 87M60 38l22 49" stroke="#fff" stroke-width="4"/>',
+fruit:'<path d="M60 35q-35-20-39 18-4 38 34 48 5 2 10 0 38-10 34-48-4-38-39-18Z" fill="url(#g)" stroke="#fff" stroke-width="3"/><path d="M60 35q-4-17 11-23" stroke="#4d9a61" stroke-width="7" fill="none"/>'
+};
+function picture(p){const svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="'+p[5]+'"/><stop offset="1" stop-color="'+p[6]+'"/></linearGradient><radialGradient id="bg"><stop stop-color="#fff"/><stop offset="1" stop-color="#f0f2fb"/></radialGradient></defs><rect x="3" y="3" width="114" height="114" rx="27" fill="url(#bg)"/><circle cx="60" cy="60" r="47" fill="'+p[5]+'" opacity=".12"/><g style="filter:drop-shadow(0 7px 6px #17243a28)">'+art[p[2]]+'</g><path d="m94 17 2 5 5 2-5 2-2 5-2-5-5-2 5-2Z" fill="#fff"/></svg>';return 'data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(svg)}
+const catalog=$('#products');
+function render(){if(!catalog)return;let q=($('#search')?.value||'').toLowerCase();let list=data.filter(p=>p[0]===game&&(p[1].toLowerCase().includes(q)||p[7]?.toLowerCase().includes(q))&&(filter==='all'||(filter==='favorites'&&fav.has(p[1]))||(filter==='pet'&&['pet','egg'].includes(p[2]))||(filter==='collectible'&&!['pet','egg','potion'].includes(p[2]))));list.sort((a,b)=>ascending?a[3]-b[3]:0);catalog.innerHTML=list.map(p=>'<article class="product" data-name="'+p[1]+'" data-price="'+p[3]+'" data-kind="'+p[2]+'"><div class="product-image"><span class="rarity '+({L:'purple',M:'purple',R:'blue',N:'green',E:'orange'}[p[4]]||'orange')+'">'+p[4]+'</span><img class="item-art" loading="lazy" src="'+picture(p)+'" alt="'+p[1]+'"><button class="heart '+(fav.has(p[1])?'is-favorite':'')+'" aria-label="Избранное">'+(fav.has(p[1])?'♥':'♡')+'</button></div><div class="product-details"><h3>'+p[1]+'</h3><p>'+p[7]+' · '+p[0]+'</p><div class="product-bottom"><strong>'+p[3].toLocaleString('ru-RU')+' <small>YAPI</small></strong><button class="add" aria-label="Демо-действие"><svg viewBox="0 0 24 24"><path d="M3 4h2l2 11h11l3-8H6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button></div></div></article>').join('');$('#catalogTitle').textContent=games[game][1];$('#catalogSubtitle').textContent=games[game][2];$('#resultCount').textContent=list.length+(lang==='ru'?' предметов':' items');$('#empty').hidden=list.length>0;$('#empty').textContent=lang==='ru'?'Предметов не найдено. Попробуй другой поиск.':'No items found.';$('#filterBadge').textContent=filter==='all'?'0':'1'}
+function chooseGame(n){game=n;$('#headerGameArt').src='assets/games/'+games[n][0]+'?v=20261118d';$('#headGameName').textContent=n;$$('[data-game]').forEach(b=>{b.classList.toggle('active',b.dataset.game===n);b.setAttribute('aria-pressed',String(b.dataset.game===n))});$('#search').value='';filter='all';render();closeSheet();note('Выбрана игра: '+n)}
+const sheet=$('#gameSheet'),opener=$('#gameOpen');function openSheet(){sheet.hidden=false;document.body.classList.add('modal-open');opener.setAttribute('aria-expanded','true')}function closeSheet(){sheet.hidden=true;document.body.classList.remove('modal-open');opener.setAttribute('aria-expanded','false')}
+opener?.addEventListener('click',openSheet);$('#gameClose')?.addEventListener('click',closeSheet);sheet?.addEventListener('click',e=>{if(e.target===sheet)closeSheet()});$$('[data-game]').forEach(b=>b.addEventListener('click',()=>chooseGame(b.dataset.game)));
+const pages=['buy','sell','swap','items','profile','tokens'];function page(n){if(!pages.includes(n))return;$$('.page').forEach(x=>x.classList.toggle('active',x.id==='page-'+n));$$('.nav-item').forEach(x=>{let active=x.dataset.page===n;x.classList.toggle('active',active);if(active)x.setAttribute('aria-current','page');else x.removeAttribute('aria-current')});window.scrollTo({top:0,behavior:'smooth'})}$$('.nav-item').forEach(b=>b.addEventListener('click',()=>page(b.dataset.page)));
+catalog?.addEventListener('click',e=>{let heart=e.target.closest('.heart');if(heart){let name=heart.closest('.product').dataset.name;fav.has(name)?fav.delete(name):fav.add(name);render();return}if(e.target.closest('.add'))note('Демо: покупка предметов отключена.')});
+$('#search')?.addEventListener('input',render);$('#clearSearch')?.addEventListener('click',()=>{$('#search').value='';render()});$('#sortBtn')?.addEventListener('click',()=>{ascending=!ascending;render();note(ascending?'Сначала дешевле':'Стандартная сортировка')});$('#priceBtn')?.addEventListener('click',()=>$('#sortBtn').click());$('#filterBtn')?.addEventListener('click',()=>{filter=filter==='favorites'?'all':'favorites';render()});$('#petBtn')?.addEventListener('click',()=>{filter=filter==='pet'?'all':'pet';render()});$('#transportBtn')?.addEventListener('click',()=>{filter=filter==='collectible'?'all':'collectible';render()});$('#showFavorites')?.addEventListener('click',()=>{filter='favorites';page('buy');render()});
+$('#cartBtn')?.addEventListener('click',()=>note('Корзина — декоративный элемент демо.'));$('#noticeBtn')?.addEventListener('click',()=>note('Новых уведомлений нет.'));$('#promoClose')?.addEventListener('click',()=>$('.promo')?.remove());$('#promoAction')?.addEventListener('click',()=>$('#catalog').scrollIntoView({behavior:'smooth'}));
+$$('.demo-action').forEach(b=>b.addEventListener('click',()=>note('Демо-режим: реальные операции отключены.')));
+function balanceText(){let t=balance.toLocaleString('ru-RU')+' YAPI';$('#tokenBalance').textContent=t;$('#profileBalance').textContent=t}$$('.token-get').forEach(b=>b.addEventListener('click',()=>{balance+=Number(b.dataset.tokenAmount);balanceText();note('Добавлено '+b.dataset.tokenAmount+' YAPI в демо-баланс.')}));
+const dict={ru:{buy:'Купить',sell:'Продать',swap:'Swap',items:'Предметы',profile:'Профиль',tokens:'67 YAPI',search:'Поиск предметов'},en:{buy:'Shop',sell:'Sell',swap:'Swap',items:'Items',profile:'Profile',tokens:'67 YAPI',search:'Search items'}};function language(){document.documentElement.lang=lang;$('#languageBtn').textContent=lang.toUpperCase();$('#search').placeholder=dict[lang].search;for(const b of $$('.nav-item')){let k=b.dataset.page;if(k){$('b',b).textContent=dict[lang][k];$('small',b).textContent=({buy:lang==='ru'?'на маркете':'market',sell:lang==='ru'?'предметы':'items',swap:lang==='ru'?'предметов':'items',items:lang==='ru'?'Инвентарь':'inventory',profile:lang==='ru'?'Аккаунт':'account',tokens:lang==='ru'?'токены':'tokens'})[k]}}render()}$('#languageBtn')?.addEventListener('click',()=>{lang=lang==='ru'?'en':'ru';language();note(lang==='ru'?'Язык: русский':'Language: English')});
+const terms=$('#termsOverlay');$('#termsClose')?.addEventListener('click',()=>{terms.hidden=true;document.body.classList.remove('modal-open')});terms?.addEventListener('click',e=>{if(e.target===terms){terms.hidden=true;document.body.classList.remove('modal-open')}});let termsBtn=document.createElement('button');termsBtn.className='terms-link';termsBtn.textContent='Соглашение и отказ от ответственности';termsBtn.addEventListener('click',()=>{terms.hidden=false;document.body.classList.add('modal-open')});$('main')?.appendChild(termsBtn);document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(!sheet.hidden)closeSheet();if(terms&&!terms.hidden){terms.hidden=true;document.body.classList.remove('modal-open')}}});
+render();balanceText();
 })();
