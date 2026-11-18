@@ -103,7 +103,12 @@
     render();
   }));
   $$('.view-item').forEach(btn => btn.addEventListener('click', () => openItem(btn.closest('.product-card'))));
-  $$('.game-tile').forEach(btn => btn.addEventListener('click', () => {
+  $('.market-game').forEach(btn => btn.addEventListener('click', () => {
+    $('.market-game').forEach(tile => tile.classList.remove('active'));
+    btn.classList.add('active');
+    notify('Выбран раздел: ' + btn.dataset.game + '. Сейчас показан демонстрационный каталог.');
+  }));
+  $('.game-tile').forEach(btn => btn.addEventListener('click', () => {
     $$('.game-tile').forEach(tile => tile.classList.remove('selected'));
     btn.classList.add('selected');
     const game = btn.dataset.game;
