@@ -1,63 +1,147 @@
 (() => {
- const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
- const toast=$('#toast');let toastTimer;
- function notify(msg){toast.textContent=msg;toast.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove('show'),2300)}
- let cart=0,game='Adopt Me',favorites=new Set();
- const icons={'Adopt Me':'adopt-me.svg','MM2 Market':'mm2.svg','MM2 Swap':'mm2-swap.svg','Steal a Brainrot':'brainrot.svg','Grow a Garden':'garden.svg','Blox Fruits':'blox.svg'};
- function selectGame(name){
-  game=name;$('#headGameName').textContent=name;$('#headerGameArt').src='assets/games/'+(icons[name]||'adopt-me.svg');$('#headerGameArt').alt=name;
-  $$('.game-short').forEach(b=>b.classList.toggle('active',b.dataset.game===name));
-  $('#catalogTitle').textContent=name==='Adopt Me'?'Предметы на продаже':name+' — демо-предметы';
-  $('#search').value='';render();$('#gameSheet').hidden=true;notify('Выбрана игра: '+name+' · демо-каталог');
+ 'use strict';
+ const $=(s,root=document)=>root.querySelector(s);
+ const $$=(s,root=document)=>[...root.querySelectorAll(s)];
+ const toast=$('#toast');
+ let toastTimer=0;
+ function notify(message){
+  if(!toast)return;
+  toast.textContent=message;toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>toast.classList.remove('show'),2400);
  }
- $('#gameOpen').addEventListener('click',()=>$('#gameSheet').hidden=false);
- $('#gameClose').addEventListener('click',()=>$('#gameSheet').hidden=true);
- $('#gameSheet').addEventListener('click',e=>{if(e.target===$('#gameSheet'))$('#gameSheet').hidden=true});
- $$('.game-options button').forEach(b=>b.addEventListener('click',()=>selectGame(b.dataset.game)));
- $$('.game-short').forEach(b=>b.addEventListener('click',()=>selectGame(b.dataset.game)));
- $('#languageBtn').addEventListener('click',()=>notify('В демо доступен русский язык.'));
- $('#noticeBtn').addEventListener('click',()=>notify('Уведомлений пока нет.'));
- $('#promoClose').addEventListener('click',()=>$('.promo').remove());
- $('#promoAction').addEventListener('click',()=>$('#catalog').scrollIntoView({behavior:'smooth'}));
+ const games={
+  'Adopt Me':{icon:'adopt-me.svg',title:'Предметы на продаже'},
+  'MM2 Market':{icon:'mm2.svg',title:'MM2 Market — демо-каталог'},
+  'MM2 Swap':{icon:'mm2-swap.svg',title:'MM2 Swap — демо-каталог'},
+  'Steal a Brainrot':{icon:'brainrot.svg',title:'Steal a Brainrot — демо-каталог'},
+  'Grow a Garden':{icon:'garden.svg',title:'Grow a Garden — демо-каталог'},
+  'Blox Fruits':{icon:'blox.svg',title:'Blox Fruits — демо-каталог'}
+ };
+ const pages=['buy','sell','swap','items','profile'];
+ let currentGame='Adopt Me',currentPage='buy',filterMode='all',sortAscending=false;
+ const favorites=new Set(),grid=$('#products'),cards=grid?$$('.product',grid):[];
+ const sheet=$('#gameSheet'),gameOpen=$('#gameOpen');
  function changePage(name){
-  $$('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+name));
-  $$('.nav-item').forEach(b=>b.classList.toggle('active',b.dataset.page===name));
+  if(!pages.includes(name))return;
+  const target=$('#page-'+name);
+  if(!target)return;
+  $$('.page').forEach(p=>p.classList.toggle('active',p===target));
+  $$('.nav-item[data-page]').forEach(b=>{
+   const active=b.dataset.page===name;
+   b.classList.toggle('active',active);
+   if(active)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');
+  });
+  currentPage=name;
   window.scrollTo({top:0,behavior:'smooth'});
  }
- $$('.nav-item').forEach(b=>b.addEventListener('click',()=>changePage(b.dataset.page)));
- function addToCart(name){notify('«'+name+'» — только демонстрационная карточка. Добавление в заказ отключено.');}
- $$('.add').forEach(b=>b.addEventListener('click',()=>addToCart(b.dataset.item)));
- $('#cartBtn').addEventListener('click',()=>notify('Корзина отключена: на N1kmeL нельзя оформить заказ или оплату.'));
- $$('.heart').forEach((b,i)=>b.addEventListener('click',()=>{
-  const card=b.closest('.product'),name=card.dataset.name;
-  if(favorites.has(name)){favorites.delete(name);b.classList.remove('is-favorite');b.textContent='♡';notify('Удалено из избранного')}
-  else{favorites.add(name);b.classList.add('is-favorite');b.textContent='♥';notify('Добавлено в избранное')}
- }));
- const cards=$$('.product');let sortAsc=false,filter='all';
- function render(){
-  const q=$('#search').value.trim().toLowerCase();let visible=0;
-  cards.forEach(card=>{
-   const fav=favorites.has(card.dataset.name);
-   const ok=game==='Adopt Me'&&card.dataset.name.toLowerCase().includes(q)&&(filter==='all'||(filter==='favorites'&&fav)||(filter===card.dataset.kind));
-   card.hidden=!ok;if(ok)visible++;
-  });
-  $('#resultCount').textContent=visible+' предметов';
-  $('#empty').hidden=visible!==0; if(game!=='Adopt Me') $('#empty').textContent='Для этой игры демо-каталог пока готовится. Сейчас доступны иллюстрированные предметы Adopt Me.'; else $('#empty').textContent='Ничего не найдено. Попробуй изменить поиск.';
+ function closeSheet(){
+  if(!sheet)return;
+  sheet.hidden=true;document.body.classList.remove('modal-open');
+  gameOpen?.setAttribute('aria-expanded','false');
+  gameOpen?.focus();
  }
- $('#search').addEventListener('input',render);
- $('#clearSearch').addEventListener('click',()=>{$('#search').value='';render();$('#search').focus()});
- $('#showFavorites').addEventListener('click',()=>{changePage('buy');filter='favorites';render();notify('Показано избранное')});
- $('#sortBtn').addEventListener('click',()=>{sortAsc=!sortAsc;const grid=$('#products');cards.sort((a,b)=>sortAsc?+a.dataset.price- +b.dataset.price:+b.dataset.price- +a.dataset.price).forEach(c=>grid.appendChild(c));notify(sortAsc?'Сначала дешевле':'Сначала дороже')});
- function quickFilter(kind,label){filter=kind;render();notify(label)}
- $('#filterBtn').addEventListener('click',()=>quickFilter('favorites','Фильтр избранного включён'));
- $('#priceBtn').addEventListener('click',()=>{$('#sortBtn').click()});
- $('#transportBtn').addEventListener('click',()=>notify('В этом демо доступны только примеры питомцев и предметов.'));
- $('#petBtn').addEventListener('click',()=>{filter='pet';render();notify('Показаны питомцы')});
- $$('.demo-action').forEach(b=>b.addEventListener('click',()=>notify('Это демонстрационная функция — реальные действия отключены.')));
- $$('.currency button').forEach(b=>b.addEventListener('click',()=>{$$('.currency button').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');notify('В демо выбран формат валюты: '+b.textContent)}));
- $('#filterBadge').textContent='0';
- const terms=$('#termsOverlay');const openTerms=()=>{terms.hidden=false;document.body.style.overflow='hidden'};const closeTerms=()=>{terms.hidden=true;document.body.style.overflow=''};
- const footer=document.createElement('button');footer.type='button';footer.className='terms-link';footer.textContent='Соглашение и отказ от ответственности';footer.onclick=openTerms;document.querySelector('main').appendChild(footer);
- $('#termsClose').onclick=closeTerms;terms.addEventListener('click',e=>{if(e.target===terms)closeTerms()});$('#aboutDemo').onclick=openTerms;document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeTerms();$('#gameSheet').hidden=true}});
- render();
+ function openSheet(){
+  if(!sheet)return;
+  sheet.hidden=false;document.body.classList.add('modal-open');
+  gameOpen?.setAttribute('aria-expanded','true');
+  $('#gameClose')?.focus();
+ }
+ function selectGame(name){
+  const data=games[name];if(!data)return;
+  currentGame=name;
+  const art=$('#headerGameArt');if(art){art.src='assets/games/'+data.icon;art.alt=name;}
+  const nameNode=$('#headGameName');if(nameNode)nameNode.textContent=name;
+  $$('.game-short[data-game]').forEach(b=>{
+   const active=b.dataset.game===name;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));
+  });
+  $$('.game-options [data-game]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.game===name)));
+  const title=$('#catalogTitle');if(title)title.textContent=data.title;
+  const search=$('#search');if(search)search.value='';
+  filterMode='all';renderCatalog();closeSheet();
+  notify('Выбрана игра: '+name+' · демо-каталог');
+ }
+ gameOpen?.addEventListener('click',openSheet);
+ $('#gameClose')?.addEventListener('click',closeSheet);
+ sheet?.addEventListener('click',e=>{if(e.target===sheet)closeSheet();});
+ $$('.game-options [data-game],.game-short[data-game]').forEach(b=>b.addEventListener('click',()=>selectGame(b.dataset.game)));
+ $$('.nav-item[data-page]').forEach(b=>b.addEventListener('click',()=>changePage(b.dataset.page)));
+ $('#languageBtn')?.addEventListener('click',()=>notify('В демо доступен русский язык.'));
+ $('#noticeBtn')?.addEventListener('click',()=>notify('Демонстрационных уведомлений пока нет.'));
+ $('#promoClose')?.addEventListener('click',()=>$('.promo')?.remove());
+ $('#promoAction')?.addEventListener('click',()=>$('#catalog')?.scrollIntoView({behavior:'smooth',block:'start'}));
+ $('#cartBtn')?.addEventListener('click',()=>notify('Корзина декоративная. Заказы и платежи отключены.'));
+ function renderCatalog(){
+  const query=($('#search')?.value||'').trim().toLocaleLowerCase('ru');
+  let visibleCount=0;
+  cards.forEach(card=>{
+   const name=(card.dataset.name||'').toLocaleLowerCase('ru');
+   const isFavorite=favorites.has(card.dataset.name);
+   const gameMatches=currentGame==='Adopt Me';
+   const queryMatches=name.includes(query);
+   const filterMatches=filterMode==='all'||(filterMode==='favorites'&&isFavorite)||(filterMode==='pet'&&card.dataset.kind==='pet');
+   const visible=gameMatches&&queryMatches&&filterMatches;
+   card.hidden=!visible;if(visible)visibleCount++;
+   const heart=$('.heart',card);
+   if(heart){heart.classList.toggle('is-favorite',isFavorite);heart.textContent=isFavorite?'♥':'♡';heart.setAttribute('aria-pressed',String(isFavorite));}
+  });
+  const count=$('#resultCount');if(count)count.textContent=visibleCount+' предметов';
+  const empty=$('#empty');
+  if(empty){
+   empty.hidden=visibleCount>0;
+   empty.textContent=currentGame!=='Adopt Me'?'Для этой игры демонстрационный каталог пока не подготовлен.':filterMode==='favorites'?'В избранном пока пусто. Отметь карточки сердечком.':'Ничего не найдено. Измени запрос или фильтр.';
+  }
+  const badge=$('#filterBadge');if(badge)badge.textContent=filterMode==='all'?'0':'1';
+  $('#filterBtn')?.classList.toggle('filter-selected',filterMode!=='all');
+ }
+ cards.forEach(card=>{
+  $('.heart',card)?.addEventListener('click',()=>{
+   const name=card.dataset.name;
+   if(favorites.has(name)){favorites.delete(name);notify('Удалено из избранного');}
+   else{favorites.add(name);notify('Добавлено в избранное');}
+   renderCatalog();
+  });
+  $('.add',card)?.addEventListener('click',()=>notify('Демонстрационная карточка: покупка и добавление отключены.'));
+ });
+ $('#search')?.addEventListener('input',renderCatalog);
+ $('#clearSearch')?.addEventListener('click',()=>{const field=$('#search');if(field){field.value='';renderCatalog();field.focus();}});
+ $('#sortBtn')?.addEventListener('click',()=>{
+  sortAscending=!sortAscending;
+  [...cards].sort((a,b)=>sortAscending?Number(a.dataset.price)-Number(b.dataset.price):Number(b.dataset.price)-Number(a.dataset.price)).forEach(card=>grid?.appendChild(card));
+  notify(sortAscending?'Сначала дешевле':'Сначала дороже');
+ });
+ $('#filterBtn')?.addEventListener('click',()=>{
+  filterMode=filterMode==='favorites'?'all':'favorites';renderCatalog();
+  notify(filterMode==='favorites'?'Показано избранное':'Все предметы');
+ });
+ $('#showFavorites')?.addEventListener('click',()=>{filterMode='favorites';changePage('buy');renderCatalog();});
+ $('#priceBtn')?.addEventListener('click',()=>$('#sortBtn')?.click());
+ $('#transportBtn')?.addEventListener('click',()=>notify('В этом демо транспорт пока не добавлен.'));
+ $('#petBtn')?.addEventListener('click',()=>{
+  filterMode=filterMode==='pet'?'all':'pet';renderCatalog();
+  notify(filterMode==='pet'?'Показаны питомцы':'Фильтр питомцев снят');
+ });
+ $$('.demo-action').forEach(b=>b.addEventListener('click',()=>notify('Демо-режим: реальные операции недоступны.')));
+ $$('.currency button').forEach(button=>button.addEventListener('click',()=>{
+  $$('.currency button').forEach(item=>{const active=item===button;item.classList.toggle('selected',active);item.setAttribute('aria-pressed',String(active));});
+  notify('Выбрана валюта интерфейса: '+button.textContent.trim());
+ }));
+ $$('.tabs button').forEach((button,index)=>button.addEventListener('click',()=>{
+  $$('.tabs button').forEach((item,i)=>{item.classList.toggle('selected',i===index);item.setAttribute('aria-pressed',String(i===index));});
+  const note=$('.notice-box');
+  if(note)note.textContent=index===0?'Это демонстрационный экран. Подключение игрового инвентаря недоступно.':'Раздел объявлений — пример интерфейса. Публикация и продажа отключены.';
+ }));
+ const terms=$('#termsOverlay');
+ function openTerms(){if(!terms)return;terms.hidden=false;document.body.classList.add('modal-open');$('#termsClose')?.focus();}
+ function closeTerms(){if(!terms)return;terms.hidden=true;document.body.classList.remove('modal-open');}
+ $('#termsClose')?.addEventListener('click',closeTerms);
+ terms?.addEventListener('click',e=>{if(e.target===terms)closeTerms();});
+ $('#aboutDemo')?.addEventListener('click',openTerms);
+ const footer=document.createElement('button');
+ footer.type='button';footer.className='terms-link';footer.textContent='Соглашение и отказ от ответственности';footer.addEventListener('click',openTerms);
+ $('main')?.appendChild(footer);
+ document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){if(sheet&&!sheet.hidden)closeSheet();if(terms&&!terms.hidden)closeTerms();}
+ });
+ renderCatalog();
 })();
