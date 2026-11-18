@@ -78,22 +78,21 @@
     $$('.bottom-item').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     const tab = btn.dataset.tab;
-    if (tab === 'Каталог') {
+    if (tab === 'Купить') {
       favoritesOnly = false;
       search.value = '';
       activeFilter = 'all';
-      $$('.filter-chip').forEach(b => b.classList.toggle('active', b.dataset.filter === 'all'));
+      $('.filter-chip').forEach(b => b.classList.toggle('active', b.dataset.filter === 'all'));
       filterCards();
       $('#catalog').scrollIntoView({behavior:'smooth'});
-    } else if (tab === 'Избранное') {
-      favoritesOnly = true;
-      activeFilter = 'all';
-      $$('.filter-chip').forEach(b => b.classList.toggle('active', b.dataset.filter === 'all'));
-      filterCards();
-      $('#catalog').scrollIntoView({behavior:'smooth'});
-      notify('Показываем избранное');
+    } else if (tab === 'Продать') {
+      showDialog('Продать', 'Этот раздел пока не поддерживает выставление предметов на продажу. В N1kmeL нет реальных сделок или передачи игровых аккаунтов.');
+    } else if (tab === 'Swap') {
+      showDialog('Swap', 'Раздел обмена пока демонстрационный. Никакие предметы не передаются.');
+    } else if (tab === 'Предметы') {
+      showDialog('Инвентарь', 'Личная коллекция предметов появится в следующем обновлении.');
     } else {
-      showDialog(tab, tab === 'Обмен' ? 'Раздел обмена пока демонстрационный. Никакие предметы не передаются.' : tab === 'Коллекция' ? 'Твоя личная коллекция появится после разработки профилей.' : 'Профиль игрока появится в следующем обновлении.');
+      showDialog('Профиль', 'Личный кабинет игрока появится в следующем обновлении. Не вводи здесь пароли от игровых аккаунтов.');
     }
   }));
   filterCards();
