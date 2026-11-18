@@ -6,10 +6,13 @@ const bcrypt = require('bcryptjs');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const path = require('path');
+const os = require('os');
+const fs = require('fs');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const dbPath = process.env.DATABASE_PATH || path.join(__dirname, 'site.db');
+const dbPath = process.env.DATABASE_PATH || path.join(os.tmpdir(), 'n1kmel-site.db');
+fs.mkdirSync(path.dirname(dbPath), { recursive: true });
 const db = new Database(dbPath);
 db.pragma('journal_mode = WAL');
 db.pragma('foreign_keys = ON');
@@ -44,14 +47,14 @@ async function ensureAdmin() {
  if (existing) db.prepare("UPDATE users SET password_hash=?, role='admin', banned=0 WHERE id=?").run(hash, existing.id);
  else db.prepare("INSERT INTO users(username,password_hash,role) VALUES(?,?,'admin')").run(username, hash);
 }
-ensureAdmin().catch(err => { console.error('Admin initialization failed', err); process.exit(1); });
+const adminReady = ensureAdmin();
 
 app.disable('x-powered-by');
 app.use(helmet({ contentSecurityPolicy: false }));
 app.use(express.json({ limit: '20kb' }));
 app.use(session({
  store: new SQLiteStore({ db: 'sessions.sqlite', dir: path.dirname(dbPath) }),
- secret: process.env.SESSION_SECRET || 'replace-this-session-secret-before-deploying',
+ secret: process.env.SESSION_SECRET || require('crypto').randomBytes(48).toString('hex'),
  resave: false, saveUninitialized: false,
  cookie: { httpOnly: true, sameSite: 'lax', secure: process.env.NODE_ENV === 'production', maxAge: 7 * 24 * 60 * 60 * 1000 }
 }));
@@ -147,4 +150,4 @@ app.patch('/api/admin/tickets/:id',current,admin,(req,res)=>{
 });
 
 app.get('*',(req,res)=>res.sendFile(path.join(__dirname,'index.html')));
-app.listen(PORT,()=>console.log('N1kmeL site listening on '+PORT));
+adminReady.then(()=>app.listen(PORT,()=>console.log('N1kmeL site listening on '+PORT))).catch(err => { console.error('Admin initialization failed', err); process.exit(1); });
