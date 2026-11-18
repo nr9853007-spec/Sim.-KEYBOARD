@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071329">
+  <meta name="description" content="N1kmeL — игровая вселенная с мини-играми, рекордами и достижениями.">
+  <title>N1kmeL — игровая вселенная</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="stars" aria-hidden="true"></div>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="N1kmeL — главная"><span class="brand-mark">N</span><span>N1kmeL<span class="brand-dot">.</span></span></a>
+    <nav class="nav" aria-label="Главная навигация">
+      <a class="active" href="#home">Главная</a>
+      <a href="#games">Игры</a>
+      <a href="#leaderboard">Лидеры</a>
+      <a href="#profile">Профиль</a>
+      <a href="#store">Магазин</a>
+    </nav>
+    <a class="login-link" href="#profile">Войти <span aria-hidden="true">↗</span></a>
+    <button class="menu-toggle" aria-label="Открыть меню" aria-expanded="false">☰</button>
+  </header>
+
+  <main id="home">
+    <section class="hero section-wrap">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="pulse"></span> ТВОЯ ИГРОВАЯ ВСЕЛЕННАЯ</div>
+        <h1>Играй на своей<br><span>орбите.</span></h1>
+        <p class="hero-text">Открывай мини-игры, ставь рекорды и поднимайся в таблице лидеров. Твоя следующая победа уже близко.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#games">Исследовать игры <span>→</span></a>
+          <a class="button button-quiet" href="#leaderboard">Таблица лидеров</a>
+        </div>
+        <div class="hero-stats">
+          <div><strong>03</strong><span>мини-игры в планах</span></div>
+          <div><strong>∞</strong><span>новых рекордов</span></div>
+          <div><strong>01</strong><span>твоя вселенная</span></div>
+        </div>
+      </div>
+      <div class="orbit-scene" aria-label="Декоративная иллюстрация планеты">
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <div class="planet"><div class="planet-glow"></div></div>
+        <div class="moon"></div><div class="spark spark-a">✦</div><div class="spark spark-b">✧</div><div class="spark spark-c">·</div>
+        <div class="orbit-label"><span class="live-dot"></span> SYSTEM ONLINE</div>
+      </div>
+    </section>
+
+    <section class="section-wrap games-section" id="games">
+      <div class="section-heading">
+        <div><div class="eyebrow">ВЫБИРАЙ СВОЙ ВЫЗОВ</div><h2>Игровая <span>станция</span></h2></div>
+        <span class="section-note">ПЕРВЫЕ МИССИИ</span>
+      </div>
+      <div class="game-grid">
+        <article class="game-card featured">
+          <div class="game-art reaction-art"><span class="art-orb"></span><span class="art-cross">＋</span><span class="art-label">01 / REFLEX</span></div>
+          <div class="game-info"><div><span class="game-tag">РЕАКЦИЯ</span><h3>Реактивный тест</h3><p>Проверь скорость своей реакции.</p></div><button class="play-button" data-game="reaction" aria-label="Играть в Реактивный тест">Играть <span>→</span></button></div>
+        </article>
+        <article class="game-card">
+          <div class="game-art memory-art"><span class="memory-tile">✦</span><span class="memory-tile">◈</span><span class="memory-tile">✧</span><span class="art-label">02 / MEMORY</span></div>
+          <div class="game-info"><div><span class="game-tag">ПАМЯТЬ</span><h3>Космические пары</h3><p>Найди одинаковые символы.</p></div><span class="coming-soon">СКОРО</span></div>
+        </article>
+        <article class="game-card">
+          <div class="game-art keyboard-art"><div class="key-row"><i>W</i><i>A</i><i>S</i><i>D</i></div><span class="art-label">03 / KEYBOARD</span></div>
+          <div class="game-info"><div><span class="game-tag">КЛАВИАТУРА</span><h3>Клавишный рывок</h3><p>Точность и скорость набора.</p></div><span class="coming-soon">СКОРО</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="lower-grid section-wrap">
+      <article class="panel leaderboard" id="leaderboard">
+        <div class="panel-heading"><div><div class="eyebrow">ЛУЧШИЕ ПИЛОТЫ</div><h2>Таблица лидеров</h2></div><span class="panel-icon">↗</span></div>
+        <div class="leader-row"><span class="rank rank-gold">01</span><span class="avatar avatar-blue">N</span><span class="player-name">NovaPilot <small>Демо-игрок</small></span><strong>2 450 <small>XP</small></strong></div>
+        <div class="leader-row"><span class="rank">02</span><span class="avatar avatar-purple">S</span><span class="player-name">StarFox <small>Демо-игрок</small></span><strong>1 980 <small>XP</small></strong></div>
+        <div class="leader-row"><span class="rank">03</span><span class="avatar avatar-cyan">A</span><span class="player-name">AstroKid <small>Демо-игрок</small></span><strong>1 720 <small>XP</small></strong></div>
+        <p class="demo-note">Пример оформления — реальные рейтинги подключим позже.</p>
+      </article>
+      <article class="panel profile-panel" id="profile">
+        <div class="eyebrow">ТВОЙ КОСМИЧЕСКИЙ ID</div><div class="profile-avatar">?</div>
+        <h2>Пилот, привет!</h2><p>Войди в систему, чтобы сохранять результаты и собирать достижения.</p>
+        <button class="button button-primary profile-button" id="profileAction">Скоро: регистрация <span>→</span></button>
+      </article>
+      <article class="panel store-panel" id="store">
+        <div class="store-symbol">✧</div><div><div class="eyebrow">ОРБИТАЛЬНЫЙ МАРКЕТ</div><h2>Магазин предметов</h2><p>Аватары, рамки и визуальные улучшения профиля — в следующем обновлении.</p><span class="coming-soon">СКОРО ОТКРЫТИЕ</span></div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer"><a class="brand" href="#home"><span class="brand-mark">N</span><span>N1kmeL<span class="brand-dot">.</span></span></a><span>Исследуй. Играй. Становись легендой.</span><span>© 2026 N1kmeL</span></footer>
+
+  <div class="modal" id="gameModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+    <div class="modal-card">
+      <button class="modal-close" id="closeModal" aria-label="Закрыть">×</button>
+      <div class="eyebrow">МИССИЯ 01 / РЕАКЦИЯ</div>
+      <h2 id="modalTitle">Готов проверить реакцию?</h2>
+      <p id="gameMessage">Нажми «Старт», дождись синего сигнала и нажми как можно быстрее.</p>
+      <div class="reaction-zone" id="reactionZone">ГОТОВ?</div>
+      <button class="button button-primary modal-start" id="startGame">Старт</button>
+      <p class="game-result" id="gameResult" aria-live="polite"></p>
+    </div>
+  </div>
+</body>
+</html>
