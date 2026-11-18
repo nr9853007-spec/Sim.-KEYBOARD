@@ -45,7 +45,8 @@
  reviewForm.addEventListener('submit',event=>{
   event.preventDefault();if(!reviewForm.reportValidity())return;const data=new FormData(reviewForm);
   const message=['⭐ ОТЗЫВ НА МОДЕРАЦИЮ — N1kmeL','','👤 Автор: '+data.get('reviewName').trim(),'Оценка: '+rating+'/5','💬 Отзыв: '+data.get('reviewText').trim(),'','Пожалуйста, проверь отзыв перед публикацией.'].join('\n');
-  notify('Открываем Telegram для отправки отзыва…');openTelegram(message);
+  const mailUrl='mailto:nr9853007@gmail.com?subject='+encodeURIComponent('Отзыв для сайта N1kmeL')+'&body='+encodeURIComponent(message);
+  notify('Открываем почту с готовым отзывом…');window.location.href=mailUrl;
  });
  document.querySelectorAll('.faq-list details').forEach(detail=>detail.addEventListener('toggle',()=>{if(detail.open)document.querySelectorAll('.faq-list details').forEach(other=>{if(other!==detail)other.open=false;});}));
  document.querySelectorAll('a[href^="#"]').forEach(anchor=>anchor.addEventListener('click',event=>{
