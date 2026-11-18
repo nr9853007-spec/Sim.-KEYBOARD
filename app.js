@@ -50,7 +50,7 @@
  function selectGame(name){
   const data=games[name];if(!data)return;
   currentGame=name;
-  const art=$('#headerGameArt');if(art){art.src='assets/games/'+data.icon;art.alt=name;}
+  const art=$('#headerGameArt');if(art){art.src='assets/games/'+data.icon+'?v=20261118c';art.alt=name;}
   const nameNode=$('#headGameName');if(nameNode)nameNode.textContent=name;
   $$('.game-short[data-game]').forEach(b=>{
    const active=b.dataset.game===name;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));
