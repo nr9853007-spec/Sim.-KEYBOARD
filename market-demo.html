@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#ffffff"><meta name="description" content="N1kmeL — демо-маркет игровых предметов.">
+<title>N1kmeL — демо-маркет</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css"><script src="app.js" defer></script>
+</head>
+<body>
+<div class="demo-ribbon"><span>●</span> ДЕМО-ВЕРСИЯ N1KMEL · ВСЕ ТОВАРЫ И БАЛАНС ВЫМЫШЛЕННЫЕ</div>
+<header class="topbar">
+ <a class="logo" href="#" aria-label="N1kmeL"><img src="assets/logo-mark.svg" alt=""><b>N1kmeL</b></a>
+ <button class="head-game" id="gameOpen"><img id="headerGameArt" src="assets/games/adopt-me.svg" alt=""><b id="headGameName">Adopt Me</b><span>⌄</span></button>
+ <button class="head-pill language" id="languageBtn">RU</button>
+ <button class="head-pill notice" id="noticeBtn" aria-label="Уведомления"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><i></i></button>
+ <button class="head-cart" id="cartBtn" aria-label="Корзина"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h8.7a2 2 0 0 0 1.9-1.4L22 8H6M10 21a1 1 0 1 0 0-2 1 1 0 0 0 0 2ZM18 21a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><b id="cartCount">0</b></button>
+</header>
+<main>
+ <section class="page active" id="page-buy">
+  <div class="promo wrap">
+   <button class="promo-close" id="promoClose">×</button>
+   <div class="promo-art"><img src="assets/n1-mascot.svg" alt="Маскот N1kmeL"></div>
+   <div class="promo-copy"><small>N1KMEL COMMUNITY ✦ DEMO</small><h1>Твоя игровая<br>коллекция начинается здесь</h1><p>Исследуй предметы и собирай избранное</p></div>
+   <button class="promo-cta" id="promoAction">ПОСМОТРЕТЬ <span>↗</span></button>
+  </div>
+  <div class="game-shortcuts wrap" id="gameShortcuts">
+   <button class="game-short active" data-game="Adopt Me"><img src="assets/games/adopt-me.svg" alt=""><small>Adopt Me</small></button>
+   <button class="game-short" data-game="MM2 Market"><img src="assets/games/mm2.svg" alt=""><small>MM2 Market</small></button>
+   <button class="game-short" data-game="MM2 Swap"><img src="assets/games/mm2-swap.svg" alt=""><small>MM2 Swap</small></button>
+   <button class="game-short" data-game="Steal a Brainrot"><img src="assets/games/brainrot.svg" alt=""><small>Steal a<br>Brainrot</small></button>
+   <button class="game-short" data-game="Grow a Garden"><img src="assets/games/garden.svg" alt=""><small>Grow a<br>Garden</small></button>
+   <button class="game-short" data-game="Blox Fruits"><img src="assets/games/blox.svg" alt=""><small>Blox Fruits</small></button>
+  </div>
+  <section class="catalog wrap" id="catalog">
+   <label class="search"><span>⌕</span><input id="search" type="search" placeholder="Поиск предметов" aria-label="Поиск предметов"><button id="clearSearch">×</button></label>
+   <div class="filters">
+    <button class="filter-icon" id="sortBtn">☷</button><button class="filter-icon" id="filterBtn">☷<i id="filterBadge">0</i></button>
+    <button class="filter-chip" id="priceBtn">Цена <span>⌄</span></button>
+    <button class="filter-chip" id="transportBtn">Транспорт <span>⌄</span></button>
+    <button class="filter-chip" id="petBtn">Питомцы <span>⌄</span></button>
+   </div>
+   <div class="catalog-heading"><h2 id="catalogTitle">Предметы на продаже</h2><span id="resultCount">8 предметов</span></div>
+   <div class="products" id="products">
+    <article class="product" data-name="Crystal Egg" data-price="2.99" data-kind="egg"><div class="product-image"><span class="rarity orange"></span><img class="item-art" src="assets/pets/crystal-egg.svg" alt="crystal egg"><button class="heart" aria-label="В избранное">♡</button></div><div class="product-details"><h3>Crystal Egg</h3><p>Яйцо · Adopt Me</p><div class="product-bottom"><strong>2.99 <small>₽</small></strong><button class="add" data-item="Crystal Egg"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h8.7a2 2 0 0 0 1.9-1.4L22 8H6M10 21a1 1 0 1 0 0-2 1 1 0 0 0 0 2ZM18 21a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div></article>
+    <article class="product" data-name="Ride Potion" data-price="41.2" data-kind="potion"><div class="product-image"><span class="rarity orange"></span><img class="item-art" src="assets/pets/ride-potion.svg" alt="ride potion"><button class="heart" aria-label="В избранное">♡</button></div><div class="product-details"><h3>Ride Potion</h3><p>Зелье · Adopt Me</p><div class="product-bottom"><strong>41.2 <small>₽</small></strong><button class="add" data-item="Ride Potion"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h8.7a2 2 0 0 0 1.9-1.4L22 8H6M10 21a1 1 0 1 0 0-2 1 1 0 0 0 0 2ZM18 21a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div></article>
+    <article class="product" data-name="Copycat" data-price="1130" data-kind="pet"><div class="product-image"><span class="rarity purple">M</span><img class="item-art" src="assets/pets/copycat.svg" alt="copycat"><button class="heart" aria-label="В избранное">♡</button></div><div class="product-details"><h3>Copycat</h3><p>Питомец · Adopt Me</p><div class="product-bottom"><strong>1.13K <small>₽</small></strong><button class="add" data-item="Copycat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h8.7a2 2 0 0 0 1.9-1.4L22 8H6M10 21a1 1 0 1 0 0-2 1 1 0 0 0 0 2ZM18 21a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div></article>
+    <article class="product" data-name="Ancient Dragon" data-price="125" data-kind="pet"><div class="product-image"><span class="rarity purple">M</span><img class="item-art" src="assets/pets/ancient-dragon.svg" alt="ancient dragon"><button class="heart" aria-label="В избранное">♡</button></div><div class="product-details"><h3>Ancient Dragon</h3><p>Питомец · Adopt Me</p><div class="product-bottom"><strong>125 <small>₽</small></strong><button class="add" data-item="Ancient Dragon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h8.7a2 2 0 0 0 1.9-1.4L22 8H6M10 21a1 1 0 1 0 0-2 1 1 0 0 0 0 2ZM18 21a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div></article>
+    <article class="product" data-name="Dark Choccybunny" data-price="125" data-kind="pet"><div class="product-image"><span class="rarity purple">M</span><img class="item-art" src="assets/pets/dark-choccybunny.svg" alt="dark choccybunny"><button class="heart" aria-label="В избранное">♡</button></div><div class="product-details"><h3>Dark Choccybunny</h3><p>Питомец · Adopt Me</p><div class="product-bottom"><strong>125 <small>₽</small></strong><button class="add" data-item="Dark Choccybunny"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h8.7a2 2 0 0 0 1.9-1.4L22 8H6M10 21a1 1 0 1 0 0-2 1 1 0 0 0 0 2ZM18 21a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div></article>
+    <article class="product" data-name="DJ Snooze" data-price="125" data-kind="pet"><div class="product-image"><span class="rarity blue">M</span><img class="item-art" src="assets/pets/dj-snooze.svg" alt="dj snooze"><button class="heart" aria-label="В избранное">♡</button></div><div class="product-details"><h3>DJ Snooze</h3><p>Питомец · Adopt Me</p><div class="product-bottom"><strong>125 <small>₽</small></strong><button class="add" data-item="DJ Snooze"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h8.7a2 2 0 0 0 1.9-1.4L22 8H6M10 21a1 1 0 1 0 0-2 1 1 0 0 0 0 2ZM18 21a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div></article>
+    <article class="product" data-name="Golden Griffin" data-price="125" data-kind="pet"><div class="product-image"><span class="rarity orange"></span><img class="item-art" src="assets/pets/golden-griffin.svg" alt="golden griffin"><button class="heart" aria-label="В избранное">♡</button></div><div class="product-details"><h3>Golden Griffin</h3><p>Питомец · Adopt Me</p><div class="product-bottom"><strong>125 <small>₽</small></strong><button class="add" data-item="Golden Griffin"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h8.7a2 2 0 0 0 1.9-1.4L22 8H6M10 21a1 1 0 1 0 0-2 1 1 0 0 0 0 2ZM18 21a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div></article>
+    <article class="product" data-name="Mr Whiskerpips" data-price="125" data-kind="pet"><div class="product-image"><span class="rarity green">N</span><img class="item-art" src="assets/pets/mr-whiskerpips.svg" alt="mr whiskerpips"><button class="heart" aria-label="В избранное">♡</button></div><div class="product-details"><h3>Mr Whiskerpips</h3><p>Питомец · Adopt Me</p><div class="product-bottom"><strong>125 <small>₽</small></strong><button class="add" data-item="Mr Whiskerpips"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h8.7a2 2 0 0 0 1.9-1.4L22 8H6M10 21a1 1 0 1 0 0-2 1 1 0 0 0 0 2ZM18 21a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div></article>
+   </div>
+   <p class="empty" id="empty" hidden>Ничего не найдено. Попробуй изменить поиск.</p>
+  </section>
+ </section>
+ <section class="page" id="page-sell"><div class="subpage wrap"><h1>Продать предметы</h1><div class="tabs"><button class="selected">Инвентарь</button><button>Предметы на продаже</button></div><div class="notice-box">Это демонстрационный экран. Подключение игрового инвентаря недоступно.</div><div class="sell-grid"><div class="sell-card"><span>🎒</span><h3>Твой инвентарь</h3><p>Здесь появятся предметы для продажи</p><button class="primary demo-action">Обновить инвентарь</button></div><div class="sell-card"><span>🏷️</span><h3>Мои объявления</h3><p>Пока нет выставленных предметов</p></div></div></div></section>
+ <section class="page" id="page-swap"><div class="subpage wrap"><h1>Swap предметов</h1><p class="muted">Собери предложение для обмена — это только демо.</p><div class="swap-board"><div><span>🎁</span><h3>Ты отдаёшь</h3><button class="outline demo-action">Выбрать предмет</button></div><div class="swap-arrows">⇄</div><div><span>🐾</span><h3>Ты получаешь</h3><button class="outline demo-action">Выбрать предмет</button></div></div><button class="primary demo-action full">Посмотреть обмен</button></div></section>
+ <section class="page" id="page-items"><div class="subpage wrap"><h1>Мои предметы</h1><div class="notice-box">Демо-инвентарь пуст. Здесь отображались бы купленные предметы.</div><div class="empty-illustration">🎒</div></div></section>
+ <section class="page" id="page-profile"><div class="subpage wrap"><h1>Профиль</h1><div class="profile-card"><div class="profile-avatar">N</div><div><h2>Гость N1kmeL</h2><p>Демо-аккаунт · без авторизации</p></div></div><button class="favorite-list" id="showFavorites">♡ Список избранного</button><div class="currency"><button>EUR</button><button class="selected">RUB</button><button>USD</button></div><div class="balance-card"><div><strong>0.00 ₽</strong><p>Ваш демо-баланс</p></div><button class="primary demo-action">＋</button></div><h2 class="section-title">Основное</h2><div class="profile-tiles"><button class="profile-tile demo-action"><b>Купленные предметы</b><span>🎁</span><small>Предметов: 0</small></button><button class="profile-tile demo-action"><b>Вывод</b><span>💼</span></button><button class="profile-tile demo-action"><b>Пополнение</b><span>👛</span></button><button class="profile-tile demo-action"><b>История транзакций</b><span>🕒</span></button></div></div></section>
+</main>
+<nav class="bottom-nav">
+ <button class="nav-item active" data-page="buy"><span class="nav-icon orange-bg">🛒</span><b>Купить</b><small>на маркете</small></button>
+ <button class="nav-item" data-page="sell"><span class="nav-icon purple-bg">◇</span><b>Продать</b><small>предметы</small><i>new</i></button>
+ <button class="nav-item" data-page="swap"><span class="nav-icon blue-bg">⇄</span><b>Swap</b><small>предметов</small></button>
+ <button class="nav-item" data-page="items"><span class="nav-icon teal-bg">▣</span><b>Предметы</b><small>Инвентарь</small></button>
+ <button class="nav-item" data-page="profile"><span class="nav-icon green-bg">♙</span><b>Профиль</b><small>Аккаунт</small></button>
+</nav>
+<div class="game-sheet" id="gameSheet" hidden><div class="sheet" role="dialog" aria-modal="true"><div class="sheet-title"><h2>Выбор игры</h2><button id="gameClose">×</button></div><div class="game-options">
+ <button data-game="Adopt Me"><img src="assets/games/adopt-me.svg" alt=""> <span>Adopt Me</span><b>⚡ Быстро</b></button><button data-game="MM2 Market"><img src="assets/games/mm2.svg" alt=""> <span>MM2 Market</span><b>⚡ Быстро</b></button><button data-game="MM2 Swap"><img src="assets/games/mm2-swap.svg" alt=""> <span>MM2 Swap</span><b>⚡ Быстро</b></button><button data-game="Steal a Brainrot"><img src="assets/games/brainrot.svg" alt=""> <span>Steal a Brainrot</span></button><button data-game="Grow a Garden"><img src="assets/games/garden.svg" alt=""> <span>Grow a Garden</span></button><button data-game="Blox Fruits"><img src="assets/games/blox.svg" alt=""> <span>Blox Fruits</span></button>
+ </div></div></div>
+<div class="toast" id="toast"></div>
+</body></html>
