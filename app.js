@@ -1,149 +1,60 @@
 (() => {
-  const $ = (s, root=document) => root.querySelector(s);
-  const $$ = (s, root=document) => [...root.querySelectorAll(s)];
-  const splash = $('#demoSplash');
-  $('#startDemo').addEventListener('click', () => {
-    splash.classList.add('is-hidden');
-    document.body.classList.remove('intro-active');
-    window.setTimeout(() => splash.remove(), 600);
+ const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+ const toast=$('#toast');let toastTimer;
+ function notify(msg){toast.textContent=msg;toast.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove('show'),2300)}
+ let cart=0,game='Adopt Me',favorites=new Set();
+ const icons={'Adopt Me':'🐻','MM2 Market':'🔪','MM2 Swap':'🔫','Steal a Brainrot':'🧊','Grow a Garden':'🐼','Blox Fruits':'🔥'};
+ function selectGame(name){
+  game=name;$('#headGameName').textContent=name;$('#headGameIcon').textContent=icons[name]||'🎮';
+  $$('.game-short').forEach(b=>b.classList.toggle('active',b.dataset.game===name));
+  $('#catalogTitle').textContent=name==='Adopt Me'?'Предметы на продаже':name+' — демо-предметы';
+  $('#search').value='';render();$('#gameSheet').hidden=true;notify('Выбрана игра: '+name+' · демо-каталог');
+ }
+ $('#gameOpen').addEventListener('click',()=>$('#gameSheet').hidden=false);
+ $('#gameClose').addEventListener('click',()=>$('#gameSheet').hidden=true);
+ $('#gameSheet').addEventListener('click',e=>{if(e.target===$('#gameSheet'))$('#gameSheet').hidden=true});
+ $$('.game-options button').forEach(b=>b.addEventListener('click',()=>selectGame(b.dataset.game)));
+ $$('.game-short').forEach(b=>b.addEventListener('click',()=>selectGame(b.dataset.game)));
+ $('#languageBtn').addEventListener('click',()=>notify('В демо доступен русский язык.'));
+ $('#noticeBtn').addEventListener('click',()=>notify('Уведомлений пока нет.'));
+ $('#promoClose').addEventListener('click',()=>$('.promo').remove());
+ $('#promoAction').addEventListener('click',()=>$('#catalog').scrollIntoView({behavior:'smooth'}));
+ function changePage(name){
+  $$('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+name));
+  $$('.nav-item').forEach(b=>b.classList.toggle('active',b.dataset.page===name));
+  window.scrollTo({top:0,behavior:'smooth'});
+ }
+ $$('.nav-item').forEach(b=>b.addEventListener('click',()=>changePage(b.dataset.page)));
+ function addToCart(name){cart++;$('#cartCount').textContent=cart;notify(name+' добавлен в демо-корзину');}
+ $$('.add').forEach(b=>b.addEventListener('click',()=>addToCart(b.dataset.item)));
+ $('#cartBtn').addEventListener('click',()=>notify('В демо-корзине предметов: '+cart+'. Оформление заказа отключено.'));
+ $$('.heart').forEach((b,i)=>b.addEventListener('click',()=>{
+  const card=b.closest('.product'),name=card.dataset.name;
+  if(favorites.has(name)){favorites.delete(name);b.classList.remove('is-favorite');b.textContent='♡';notify('Удалено из избранного')}
+  else{favorites.add(name);b.classList.add('is-favorite');b.textContent='♥';notify('Добавлено в избранное')}
+ }));
+ const cards=$$('.product');let sortAsc=false,filter='all';
+ function render(){
+  const q=$('#search').value.trim().toLowerCase();let visible=0;
+  cards.forEach(card=>{
+   const fav=favorites.has(card.dataset.name);
+   const ok=card.dataset.name.toLowerCase().includes(q)&&(filter==='all'||(filter==='favorites'&&fav)||(filter===card.dataset.kind));
+   card.hidden=!ok;if(ok)visible++;
   });
-
-  const toast = $('#toast');
-  let toastTimer;
-  function notify(message) {
-    toast.textContent = message;
-    toast.classList.add('show');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
-  }
-  const modal = $('#modal');
-  let selectedItem = null;
-  function openItem(card) {
-    selectedItem = card;
-    const name = card.dataset.name;
-    const emoji = $('.pet-art', card).textContent;
-    const price = card.dataset.price;
-    $('#modalTitle').textContent = name;
-    $('#modalArt').textContent = emoji;
-    $('#modalValue').textContent = price + ' ✦';
-    $('#modalText').textContent = 'Коллекционный предмет из демо-вселенной N1kmeL. Здесь показаны примерная редкость, описание и условная ценность. Все данные вымышлены.';
-    modal.hidden = false;
-  }
-  function closeModal(){ modal.hidden = true; }
-  $('#modalClose').addEventListener('click', closeModal);
-  modal.addEventListener('click', e => { if(e.target === modal) closeModal(); });
-  $('#modalAction').addEventListener('click', () => {
-    if(selectedItem) {
-      notify('«' + selectedItem.dataset.name + '» добавлен в демо-подборку');
-      $('#cartCount').textContent = String(Number($('#cartCount').textContent) + 1);
-    }
-    closeModal();
-  });
-  $('#cartTop').addEventListener('click', () => {
-    notify('Демо-подборка: ' + $('#cartCount').textContent + ' предмет(а). Оформление отключено.');
-  });
-  function showFavorites() {
-    $('#searchInput').value = '';
-    setCategory('favorites');
-    $('#catalog').scrollIntoView({behavior:'smooth'});
-  }
-  $('#favoriteTop').addEventListener('click', showFavorites);
-  $('#mobileFavorites').addEventListener('click', showFavorites);
-  $('#profileTop').addEventListener('click', () => notify('Профиль доступен только как визуальный макет.'));
-  $('#mobileProfile').addEventListener('click', () => notify('Демо-профиль: вход и личные данные отключены.'));
-
-  const cards = $$('.product-card');
-  const search = $('#searchInput');
-  let category = 'all';
-  let extraLegendary = false;
-  let extraNew = false;
-  let sortMode = 'popular';
-  function setCategory(next) {
-    category = next;
-    $('.category-chip').forEach(btn => btn.classList.toggle('active', btn.dataset.filter === next));
-    $('.side-filter').forEach(btn => btn.classList.toggle('active', btn.dataset.filter === next));
-    render();
-  }
-  function render() {
-    const query = search.value.trim().toLocaleLowerCase('ru');
-    let visible = 0;
-    let list = cards.slice();
-    if(sortMode === 'popular') list.sort((a,b) => Number(b.dataset.score)-Number(a.dataset.score));
-    if(sortMode === 'price') list.sort((a,b) => Number(a.dataset.price)-Number(b.dataset.price));
-    if(sortMode === 'new') list.sort((a,b) => (b.dataset.kind.includes('new')?1:0)-(a.dataset.kind.includes('new')?1:0));
-    list.forEach(card => {
-      const nameMatch = card.dataset.name.toLocaleLowerCase('ru').includes(query);
-      const kinds = card.dataset.kind.split(' ');
-      const favorite = $('.favorite', card).classList.contains('is-favorite');
-      const categoryMatch = category === 'all' || (category === 'favorites' ? favorite : kinds.includes(category));
-      const extraMatch = (!extraLegendary || kinds.includes('legendary')) && (!extraNew || kinds.includes('new'));
-      const game = $('#catalogGame')?.value;
-      const match = nameMatch && categoryMatch && extraMatch;
-      card.hidden = !match;
-      if(match) visible++;
-      $('#productGrid').appendChild(card);
-    });
-    $('#resultCount').textContent = String(visible).padStart(2,'0');
-    $('#emptyState').hidden = visible !== 0;
-    $('#filterCount').textContent = String(Number(extraLegendary)+Number(extraNew));
-    if($('#sideLegendary')) $('#sideLegendary').checked = extraLegendary;
-    if($('#sideNew')) $('#sideNew').checked = extraNew;
-  }
-  search.addEventListener('input', render);
-  $('#clearSearch').addEventListener('click', () => {search.value='';render();search.focus();});
-  $('.category-chip').forEach(btn => btn.addEventListener('click', () => setCategory(btn.dataset.filter)));
-  $('.side-filter').forEach(btn => btn.addEventListener('click', () => setCategory(btn.dataset.filter)));
-  $('#sidebarReset')?.addEventListener('click', () => {search.value='';extraLegendary=false;extraNew=false;setCategory('all');render();});
-  $('#sideLegendary')?.addEventListener('change', e => {extraLegendary=e.target.checked;render();});
-  $('#sideNew')?.addEventListener('change', e => {extraNew=e.target.checked;render();});
-  $$('.favorite').forEach(btn => btn.addEventListener('click', () => {
-    btn.classList.toggle('is-favorite');
-    btn.textContent = btn.classList.contains('is-favorite') ? '♥' : '♡';
-    notify(btn.classList.contains('is-favorite') ? 'Добавлено в избранное' : 'Удалено из избранного');
-    render();
-  }));
-  $$('.view-item').forEach(btn => btn.addEventListener('click', () => openItem(btn.closest('.product-card'))));
-  $('.market-game').forEach(btn => btn.addEventListener('click', () => {
-    $('.market-game').forEach(tile => tile.classList.remove('active'));
-    btn.classList.add('active');
-    notify('Выбран раздел: ' + btn.dataset.game + '. Сейчас показан демонстрационный каталог.');
-  }));
-  $('.game-tile').forEach(btn => btn.addEventListener('click', () => {
-    $$('.game-tile').forEach(tile => tile.classList.remove('selected'));
-    btn.classList.add('selected');
-    const game = btn.dataset.game;
-    notify(game === 'Другие игры' ? 'Новые игровые миры скоро появятся.' : 'Выбран мир: ' + game + '. Витрина показывает общий демо-набор.');
-  }));
-  $('#sortButton').addEventListener('click', () => {
-    const modes = ['popular','new','price'];
-    sortMode = modes[(modes.indexOf(sortMode)+1)%modes.length];
-    $('#sortButton').innerHTML = (sortMode==='popular'?'Сначала популярные':sortMode==='new'?'Сначала новые':'Сначала дешевле') + ' <span>⌄</span>';
-    render();
-  });
-  const filterModal = $('#filterModal');
-  $('#filterButton').addEventListener('click', () => {
-    $('#legendaryCheck').checked = extraLegendary;
-    $('#newCheck').checked = extraNew;
-    filterModal.hidden = false;
-  });
-  function closeFilters(){filterModal.hidden=true;}
-  $('#filterClose').addEventListener('click', closeFilters);
-  filterModal.addEventListener('click', e => {if(e.target===filterModal)closeFilters();});
-  $('#filterApply').addEventListener('click', () => {
-    extraLegendary=$('#legendaryCheck').checked;
-    extraNew=$('#newCheck').checked;
-    render();
-    closeFilters();
-  });
-  $('#filterReset').addEventListener('click', () => {
-    $('#legendaryCheck').checked=false;$('#newCheck').checked=false;
-    extraLegendary=false;extraNew=false;render();
-  });
-  $('#resetFilters').addEventListener('click', () => {
-    search.value='';extraLegendary=false;extraNew=false;setCategory('all');render();
-  });
-  document.addEventListener('keydown', e => {
-    if(e.key==='Escape'){closeModal();closeFilters();}
-  });
-  render();
+  $('#resultCount').textContent=visible+' предметов';
+  $('#empty').hidden=visible!==0;
+ }
+ $('#search').addEventListener('input',render);
+ $('#clearSearch').addEventListener('click',()=>{$('#search').value='';render();$('#search').focus()});
+ $('#showFavorites').addEventListener('click',()=>{changePage('buy');filter='favorites';render();notify('Показано избранное')});
+ $('#sortBtn').addEventListener('click',()=>{sortAsc=!sortAsc;const grid=$('#products');cards.sort((a,b)=>sortAsc?+a.dataset.price- +b.dataset.price:+b.dataset.price- +a.dataset.price).forEach(c=>grid.appendChild(c));notify(sortAsc?'Сначала дешевле':'Сначала дороже')});
+ function quickFilter(kind,label){filter=kind;render();notify(label)}
+ $('#filterBtn').addEventListener('click',()=>quickFilter('favorites','Фильтр избранного включён'));
+ $('#priceBtn').addEventListener('click',()=>{$('#sortBtn').click()});
+ $('#transportBtn').addEventListener('click',()=>notify('В этом демо доступны только примеры питомцев и предметов.'));
+ $('#petBtn').addEventListener('click',()=>{filter='pet';render();notify('Показаны питомцы')});
+ $$('.demo-action').forEach(b=>b.addEventListener('click',()=>notify('Это демонстрационная функция — реальные действия отключены.')));
+ $$('.currency button').forEach(b=>b.addEventListener('click',()=>{$$('.currency button').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');notify('В демо выбран формат валюты: '+b.textContent)}));
+ $('#filterBadge').textContent='0';
+ render();
 })();
