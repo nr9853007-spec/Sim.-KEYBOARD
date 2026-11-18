@@ -13,8 +13,8 @@
  const telegram='https://t.me/N1kmeL';
  function openTelegram(message){
   const url=telegram+'?text='+encodeURIComponent(message);
-  const opened=window.open(url,'_blank','noopener,noreferrer');
-  if(!opened) window.location.href=url;
+  const opened=window.open(url,'_blank');
+  if(opened) opened.opener=null; else window.location.href=url;
  }
  $('#requestForm').addEventListener('submit',event=>{
   event.preventDefault();
