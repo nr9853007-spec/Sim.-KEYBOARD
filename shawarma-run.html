@@ -91,6 +91,8 @@ function drawBackground(dt){
  for(const side of [-1,1]){const f=roadPoint(side*1,0),n=roadPoint(side*1,1),fo=roadPoint(side*1.035,0),no=roadPoint(side*1.035,1);poly([[f.x,f.y],[fo.x,fo.y],[no.x,bottom],[n.x,bottom]],palette.curb)}
  // lane dashes, with perspective and subtle worn paint
  for(const divider of [-1/3,1/3])for(let i=0;i<8;i++){const z=((i/8+time*speed*.19)%1),p=roadPoint(divider,z),w=1.2+p.scale*2.1,h=4+p.scale*11;roundRect(p.x-w/2,p.y-h/2,w,h,2,'#f3e7cf');}
+ // reflective road studs and warm curb lights add depth without blocking the lanes
+ for(const side of [-1,1])for(let i=0;i<12;i++){const z=((i/12+time*speed*.16)%1),p=roadPoint(side*.985,z),s=p.scale;ctx.globalAlpha=.28+z*.58;ellipse(p.x,p.y,1.2+s*2.1,1+s*1.4,i%3===0?'#fff0b0':'#f2a65c')}ctx.globalAlpha=1;
  // asphalt flecks are stable and restrained
  for(let i=0;i<48;i++){const z=((i/48+time*.12)%1),x=((i*37)%89)/44-1,p=roadPoint(x,z);ctx.globalAlpha=.08+z*.08;ellipse(p.x,p.y,Math.max(.6,p.scale*.65),Math.max(.5,p.scale*.35),i%2?'#fff':'#0c1112')}ctx.globalAlpha=1;
  // storefront blocks with clear silhouettes, windows and awnings
