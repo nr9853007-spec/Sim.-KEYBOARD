@@ -3,9 +3,9 @@
  const toast=$('#toast');let toastTimer;
  function notify(msg){toast.textContent=msg;toast.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove('show'),2300)}
  let cart=0,game='Adopt Me',favorites=new Set();
- const icons={'Adopt Me':'🐻','MM2 Market':'🔪','MM2 Swap':'🔫','Steal a Brainrot':'🧊','Grow a Garden':'🐼','Blox Fruits':'🔥'};
+ const icons={'Adopt Me':'adopt-me.svg','MM2 Market':'mm2.svg','MM2 Swap':'mm2-swap.svg','Steal a Brainrot':'brainrot.svg','Grow a Garden':'garden.svg','Blox Fruits':'blox.svg'};
  function selectGame(name){
-  game=name;$('#headGameName').textContent=name;$('#headGameIcon').textContent=icons[name]||'🎮';
+  game=name;$('#headGameName').textContent=name;$('#headerGameArt').src='assets/games/'+(icons[name]||'adopt-me.svg');$('#headerGameArt').alt=name;
   $$('.game-short').forEach(b=>b.classList.toggle('active',b.dataset.game===name));
   $('#catalogTitle').textContent=name==='Adopt Me'?'Предметы на продаже':name+' — демо-предметы';
   $('#search').value='';render();$('#gameSheet').hidden=true;notify('Выбрана игра: '+name+' · демо-каталог');
@@ -38,11 +38,11 @@
   const q=$('#search').value.trim().toLowerCase();let visible=0;
   cards.forEach(card=>{
    const fav=favorites.has(card.dataset.name);
-   const ok=card.dataset.name.toLowerCase().includes(q)&&(filter==='all'||(filter==='favorites'&&fav)||(filter===card.dataset.kind));
+   const ok=game==='Adopt Me'&&card.dataset.name.toLowerCase().includes(q)&&(filter==='all'||(filter==='favorites'&&fav)||(filter===card.dataset.kind));
    card.hidden=!ok;if(ok)visible++;
   });
   $('#resultCount').textContent=visible+' предметов';
-  $('#empty').hidden=visible!==0;
+  $('#empty').hidden=visible!==0; if(game!=='Adopt Me') $('#empty').textContent='Для этой игры демо-каталог пока готовится. Сейчас доступны иллюстрированные предметы Adopt Me.'; else $('#empty').textContent='Ничего не найдено. Попробуй изменить поиск.';
  }
  $('#search').addEventListener('input',render);
  $('#clearSearch').addEventListener('click',()=>{$('#search').value='';render();$('#search').focus()});
