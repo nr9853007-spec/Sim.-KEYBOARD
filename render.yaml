@@ -11,7 +11,7 @@ services:
       - key: SUPABASE_URL
         value: https://zarbytwwafejzhahooth.supabase.co
       - key: SUPABASE_PUBLISHABLE_KEY
-        sync: false
+        value: sb_publishable_6sdrT1ccs8f37stoEIwrrg_wyoaZOBg
       - key: SUPABASE_SECRET_KEY
         sync: false
       - key: ADMIN_USERNAME
