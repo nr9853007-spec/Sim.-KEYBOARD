@@ -1,6 +1,17 @@
 (() => {
   const $ = (s, root=document) => root.querySelector(s);
   const $$ = (s, root=document) => [...root.querySelectorAll(s)];
+  const splash = $('#demoSplash');
+  const startDemo = $('#startDemo');
+  function enterDemo() {
+    splash.classList.add('is-hidden');
+    document.body.classList.remove('splash-open');
+    window.setTimeout(() => splash.remove(), 500);
+    $('#catalog').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+  startDemo.addEventListener('click', enterDemo);
+  document.body.classList.add('splash-open');
+
   const toast = $('#toast');
   let toastTimer;
   function notify(text) {
