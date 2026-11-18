@@ -6,13 +6,13 @@
 <title>N1kmeL — Collector Club · Demo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=20261118b"><script src="app.js?v=20261118b" defer></script>
+<link rel="stylesheet" href="styles.css?v=20261118c"><script src="app.js?v=20261118c" defer></script>
 </head>
 <body>
 <div class="demo-ribbon"><span>●</span> ДЕМО-ВЕРСИЯ N1KMEL · ВСЕ ТОВАРЫ И БАЛАНС ВЫМЫШЛЕННЫЕ</div>
 <header class="topbar">
  <a class="logo" href="#" aria-label="N1kmeL"><img src="assets/logo-mark.svg" alt=""><b>N1kmeL</b></a>
- <button class="head-game" id="gameOpen"><img id="headerGameArt" src="assets/games/adopt-me.svg" alt=""><b id="headGameName">Adopt Me</b><span>⌄</span></button>
+ <button class="head-game" id="gameOpen"><img id="headerGameArt" src="assets/games/adopt-me.svg?v=20261118c" alt=""><b id="headGameName">Adopt Me</b><span>⌄</span></button>
  <button class="head-pill language" id="languageBtn">RU</button>
  <button class="head-pill notice" id="noticeBtn" aria-label="Уведомления"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><i></i></button>
  <button class="head-cart" id="cartBtn" aria-label="Корзина"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h8.7a2 2 0 0 0 1.9-1.4L22 8H6M10 21a1 1 0 1 0 0-2 1 1 0 0 0 0 2ZM18 21a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><b id="cartCount">0</b></button>
@@ -26,12 +26,12 @@
    <button class="promo-cta" id="promoAction">ПОСМОТРЕТЬ <span>↗</span></button>
   </div>
   <div class="game-shortcuts wrap" id="gameShortcuts">
-   <button class="game-short active" data-game="Adopt Me"><img src="assets/games/adopt-me.svg" alt=""><small>Adopt Me</small></button>
-   <button class="game-short" data-game="MM2 Market"><img src="assets/games/mm2.svg" alt=""><small>MM2 Market</small></button>
-   <button class="game-short" data-game="MM2 Swap"><img src="assets/games/mm2-swap.svg" alt=""><small>MM2 Swap</small></button>
-   <button class="game-short" data-game="Steal a Brainrot"><img src="assets/games/brainrot.svg" alt=""><small>Steal a<br>Brainrot</small></button>
-   <button class="game-short" data-game="Grow a Garden"><img src="assets/games/garden.svg" alt=""><small>Grow a<br>Garden</small></button>
-   <button class="game-short" data-game="Blox Fruits"><img src="assets/games/blox.svg" alt=""><small>Blox Fruits</small></button>
+   <button class="game-short active" data-game="Adopt Me"><img src="assets/games/adopt-me.svg?v=20261118c" alt=""><small>Adopt Me</small></button>
+   <button class="game-short" data-game="MM2 Market"><img src="assets/games/mm2.svg?v=20261118c" alt=""><small>MM2 Market</small></button>
+   <button class="game-short" data-game="MM2 Swap"><img src="assets/games/mm2-swap.svg?v=20261118c" alt=""><small>MM2 Swap</small></button>
+   <button class="game-short" data-game="Steal a Brainrot"><img src="assets/games/brainrot.svg?v=20261118c" alt=""><small>Steal a<br>Brainrot</small></button>
+   <button class="game-short" data-game="Grow a Garden"><img src="assets/games/garden.svg?v=20261118c" alt=""><small>Grow a<br>Garden</small></button>
+   <button class="game-short" data-game="Blox Fruits"><img src="assets/games/blox.svg?v=20261118c" alt=""><small>Blox Fruits</small></button>
   </div>
   <section class="catalog wrap" id="catalog">
    <label class="search"><span>⌕</span><input id="search" type="search" placeholder="Поиск предметов" aria-label="Поиск предметов"><button id="clearSearch">×</button></label>
@@ -68,7 +68,7 @@
 <button class="nav-item" type="button" data-page="profile"><span class="nav-icon green-bg"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span><b>Профиль</b><small>Аккаунт</small></button>
 </nav>
 <div class="game-sheet" id="gameSheet" hidden><div class="sheet" role="dialog" aria-modal="true"><div class="sheet-title"><h2>Выбор игры</h2><button id="gameClose">×</button></div><div class="game-options">
- <button data-game="Adopt Me"><img src="assets/games/adopt-me.svg" alt=""> <span>Adopt Me</span><b>⚡ Быстро</b></button><button data-game="MM2 Market"><img src="assets/games/mm2.svg" alt=""> <span>MM2 Market</span><b>⚡ Быстро</b></button><button data-game="MM2 Swap"><img src="assets/games/mm2-swap.svg" alt=""> <span>MM2 Swap</span><b>⚡ Быстро</b></button><button data-game="Steal a Brainrot"><img src="assets/games/brainrot.svg" alt=""> <span>Steal a Brainrot</span></button><button data-game="Grow a Garden"><img src="assets/games/garden.svg" alt=""> <span>Grow a Garden</span></button><button data-game="Blox Fruits"><img src="assets/games/blox.svg" alt=""> <span>Blox Fruits</span></button>
+ <button data-game="Adopt Me"><img src="assets/games/adopt-me.svg?v=20261118c" alt=""> <span>Adopt Me</span><b>⚡ Быстро</b></button><button data-game="MM2 Market"><img src="assets/games/mm2.svg?v=20261118c" alt=""> <span>MM2 Market</span><b>⚡ Быстро</b></button><button data-game="MM2 Swap"><img src="assets/games/mm2-swap.svg?v=20261118c" alt=""> <span>MM2 Swap</span><b>⚡ Быстро</b></button><button data-game="Steal a Brainrot"><img src="assets/games/brainrot.svg?v=20261118c" alt=""> <span>Steal a Brainrot</span></button><button data-game="Grow a Garden"><img src="assets/games/garden.svg?v=20261118c" alt=""> <span>Grow a Garden</span></button><button data-game="Blox Fruits"><img src="assets/games/blox.svg?v=20261118c" alt=""> <span>Blox Fruits</span></button>
  </div></div></div>
 <div class="toast" id="toast"></div>
 <div class="terms-overlay" id="termsOverlay" hidden><section class="terms-panel" role="dialog" aria-modal="true" aria-labelledby="termsTitle"><header><div><small>N1KMEL · INDEPENDENT PROJECT</small><h2 id="termsTitle">Соглашение и отказ от ответственности</h2></div><button id="termsClose" aria-label="Закрыть">×</button></header><div class="terms-body"><h3>1. Назначение</h3><p>N1kmeL — самостоятельный шуточный демонстрационный макет, созданный для ознакомления с интерфейсом и развлечения. Это не торговая площадка и не сервис проведения сделок.</p><h3>2. Независимость проекта</h3><p>Проект не является копией, официальным сайтом, партнёром или представителем StarPets, Roblox, Adopt Me или иных игровых платформ и компаний. Упоминания названий игр используются только для обозначения тематики. Все товарные знаки принадлежат их правообладателям.</p><h3>3. Вымышленные данные</h3><p>Все товары, цены, профили, идентификаторы, балансы, статусы и примеры являются демонстрационными и не подтверждают наличие или стоимость игровых предметов.</p><h3>4. Отключённые операции</h3><p>Покупки, продажи, обмены, пополнение, вывод средств, подключение игровых аккаунтов и любые платежи не выполняются. Кнопки предназначены только для просмотра демонстрационных экранов.</p><h3>5. Безопасность</h3><p>Не отправляйте деньги, пароли, коды подтверждения, cookie или данные игровых аккаунтов. Регистрация и авторизация для просмотра не нужны.</p><h3>6. Отказ от коммерческого назначения</h3><p>Проект создан в шуточных и ознакомительных целях, не оказывает платных услуг, не принимает оплату и не обещает материальной или практической выгоды. Макет не влияет на игры и игровые аккаунты.</p><h3>7. Использование</h3><p>Продолжая просмотр, пользователь подтверждает, что понимает демонстрационный характер проекта и не рассматривает его как реальную площадку для сделок.</p><p class="terms-note">N1kmeL DEMO · Все данные вымышленные · Реальные операции отключены.</p></div></section></div>
