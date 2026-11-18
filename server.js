@@ -24,6 +24,7 @@ async function supabase(pathname, method='GET', body, token=SUPABASE_SECRET_KEY,
     method,
     headers: {
       apikey: key,
+      Authorization: 'Bearer ' + token,
       'Content-Type': 'application/json',
       Prefer: method === 'POST' ? 'resolution=merge-duplicates,return=representation' : 'return=representation'
     },
