@@ -60,7 +60,8 @@
   let sortMode = 'popular';
   function setCategory(next) {
     category = next;
-    $$('.category-chip').forEach(btn => btn.classList.toggle('active', btn.dataset.filter === next));
+    $('.category-chip').forEach(btn => btn.classList.toggle('active', btn.dataset.filter === next));
+    $('.side-filter').forEach(btn => btn.classList.toggle('active', btn.dataset.filter === next));
     render();
   }
   function render() {
@@ -85,10 +86,16 @@
     $('#resultCount').textContent = String(visible).padStart(2,'0');
     $('#emptyState').hidden = visible !== 0;
     $('#filterCount').textContent = String(Number(extraLegendary)+Number(extraNew));
+    if($('#sideLegendary')) $('#sideLegendary').checked = extraLegendary;
+    if($('#sideNew')) $('#sideNew').checked = extraNew;
   }
   search.addEventListener('input', render);
   $('#clearSearch').addEventListener('click', () => {search.value='';render();search.focus();});
-  $$('.category-chip').forEach(btn => btn.addEventListener('click', () => setCategory(btn.dataset.filter)));
+  $('.category-chip').forEach(btn => btn.addEventListener('click', () => setCategory(btn.dataset.filter)));
+  $('.side-filter').forEach(btn => btn.addEventListener('click', () => setCategory(btn.dataset.filter)));
+  $('#sidebarReset')?.addEventListener('click', () => {search.value='';extraLegendary=false;extraNew=false;setCategory('all');render();});
+  $('#sideLegendary')?.addEventListener('change', e => {extraLegendary=e.target.checked;render();});
+  $('#sideNew')?.addEventListener('change', e => {extraNew=e.target.checked;render();});
   $$('.favorite').forEach(btn => btn.addEventListener('click', () => {
     btn.classList.toggle('is-favorite');
     btn.textContent = btn.classList.contains('is-favorite') ? '♥' : '♡';
