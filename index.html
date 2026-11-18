@@ -6,7 +6,7 @@
 <title>N1kmeL — гарант игровых сделок</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="guarantor.css"><script src="guarantor.js" defer></script>
+<link rel="stylesheet" href="guarantor.css"><script src="guarantor.js" defer></script><script src="portal.js" defer></script>
 </head>
 <body>
 <div class="top-note"><span class="pulse"></span> СЕРВИС СОПРОВОЖДЕНИЯ СДЕЛОК <span class="note-sep">·</span> ТАРИФ 0 ₽</div>
@@ -35,21 +35,21 @@
  </div>
  <div class="hero-bottom"><span>01 / 04</span><div></div><span>SAFE DEAL PROCESS</span></div>
 </section>
-<section class="ticker" data-view="home" aria-label="Преимущества"><div class="ticker-track"><span>БЕСПЛАТНЫЙ ТАРИФ <b>✦</b></span><span>ПОНЯТНЫЕ УСЛОВИЯ <b>✦</b></span><span>СОПРОВОЖДЕНИЕ СДЕЛКИ <b>✦</b></span><span>ОБРАТНАЯ СВЯЗЬ В TELEGRAM <b>✦</b></span><span>БЕСПЛАТНЫЙ ТАРИФ <b>✦</b></span><span>ПОНЯТНЫЕ УСЛОВИЯ <b>✦</b></span></div></section>
+<section class="ticker" data-view="home" aria-label="Преимущества"><div class="ticker-track"><span>БЕСПЛАТНЫЙ ТАРИФ <b>✦</b></span><span>ПОНЯТНЫЕ УСЛОВИЯ <b>✦</b></span><span>СОПРОВОЖДЕНИЕ СДЕЛКИ <b>✦</b></span><span>ОБРАТНАЯ СВЯЗЬ НА САЙТЕ <b>✦</b></span><span>БЕСПЛАТНЫЙ ТАРИФ <b>✦</b></span><span>ПОНЯТНЫЕ УСЛОВИЯ <b>✦</b></span></div></section>
 <section class="section benefits" id="how" data-view="how" hidden>
  <div class="section-heading reveal"><div><div class="eyebrow"><span class="eyebrow-dot"></span> ПРОСТО И ПОНЯТНО</div><h2>Как проходит<br><em>сделка</em></h2></div><p>Сначала уточняем все детали. Никаких неожиданных условий — каждый шаг обсуждается заранее.</p></div>
  <div class="steps">
   <article class="step reveal"><span class="step-no">01</span><div class="step-icon">✎</div><h3>Оставляешь заявку</h3><p>Укажи свой ник, Place и кратко опиши, что планируете обменять.</p><span class="step-arrow">↗</span></article>
-  <article class="step reveal"><span class="step-no">02</span><div class="step-icon">☏</div><h3>Обсуждаем условия</h3><p>Я связываюсь с тобой в Telegram и согласую порядок сделки.</p><span class="step-arrow">↗</span></article>
+  <article class="step reveal"><span class="step-no">02</span><div class="step-icon">☏</div><h3>Обсуждаем условия</h3><p>Поддержка отвечает на заявку прямо в личном кабинете.</p><span class="step-arrow">↗</span></article>
   <article class="step reveal"><span class="step-no">03</span><div class="step-icon">⇄</div><h3>Сопровождаем обмен</h3><p>Действуем по заранее согласованным шагам. Не торопимся и проверяем детали.</p><span class="step-arrow">↗</span></article>
  </div>
  <div class="notice-box reveal"><span>i</span><p><strong>Важно:</strong> не передавай никому пароль, коды подтверждения или доступ к аккаунту. Условия сделки и способ проверки согласовываются отдельно.</p></div>
 </section>
 <section class="request-section" id="request" data-view="request" hidden>
  <div class="request-orb"></div><div class="request-layout">
-  <div class="request-copy reveal"><div class="eyebrow"><span class="eyebrow-dot"></span> НАЧНЁМ С ОБСУЖДЕНИЯ</div><h2>Оставь заявку<br><em>на гаранта</em></h2><p>Заполни короткую форму. Telegram откроется с готовым сообщением — проверь его и нажми «Отправить».</p>
-   <div class="request-points"><span><b>✓</b> Бесплатный тариф</span><span><b>✓</b> Без обязательств</span><span><b>✓</b> Ответ в Telegram</span></div>
-   <div class="contact-card"><div class="telegram-icon">➤</div><span><small>ТВОЙ КОНТАКТ ДЛЯ ЗАЯВОК</small><strong>@N1kmeL</strong></span><div class="contact-actions"><a href="https://t.me/N1kmeL" target="_blank" rel="noopener">Telegram ↗</a><a href="mailto:nr9853007@gmail.com">Gmail ↗</a></div></div>
+  <div class="request-copy reveal"><div class="eyebrow"><span class="eyebrow-dot"></span> НАЧНЁМ С ОБСУЖДЕНИЯ</div><h2>Оставь заявку<br><em>на гаранта</em></h2><p>Заполни короткую форму. Заявка сохранится в личном кабинете и поступит на рассмотрение поддержке.</p>
+   <div class="request-points"><span><b>✓</b> Бесплатный тариф</span><span><b>✓</b> Без обязательств</span><span><b>✓</b> Ответ на сайте</span></div>
+   <div class="contact-card"><div class="telegram-icon">➤</div><span><small>ТВОЙ КОНТАКТ ДЛЯ ЗАЯВОК</small><strong>@N1kmeL</strong></span><div class="contact-actions"><a href="https://t.me/N1kmeL" target="_blank" rel="noopener">Telegram ↗</a><a href="#"></a></div></div>
   </div>
   <form class="request-form reveal" id="requestForm">
    <div class="form-top"><span>ФОРМА ЗАЯВКИ</span><span class="form-step">01 — 01</span></div>
@@ -58,10 +58,10 @@
    <label>В каком Roblox Place проходит сделка?<input name="place" required maxlength="100" placeholder="Название игры / Place"></label>
    <label>Что за сделка?<textarea name="details" required minlength="10" maxlength="700" rows="4" placeholder="Опиши, что передаёте и что получаете..."></textarea><small class="field-hint">Не указывай пароли и коды доступа.</small></label>
    <div class="tariff"><span class="tariff-icon">✦</span><span><small>ВЫБРАННЫЙ ТАРИФ</small><strong>Бесплатный</strong></span><b>0 ₽</b></div>
-   <label class="consent"><input type="checkbox" required><span>Я проверил данные и согласен отправить заявку в Telegram.</span></label>
-   <button class="btn btn-primary submit-btn" type="submit">Отправить заявку в Telegram <span>↗</span></button>
-   <p class="form-foot">Нажимая кнопку, ты откроешь Telegram с текстом заявки. Сообщение отправляется только после твоего подтверждения.</p>
-   <div class="form-success" id="formSuccess" role="status" aria-live="polite">Telegram открыт. Проверь сообщение и нажми «Отправить».</div>
+   <label class="consent"><input type="checkbox" required><span>Я проверил данные и согласен отправить заявку в сайте.</span></label>
+   <button class="btn btn-primary submit-btn" type="submit">Отправить заявку <span>↗</span></button>
+   <p class="form-foot">Заявка сохранится в твоём личном кабинете и будет доступна поддержке.</p>
+   <div class="form-success" id="formSuccess" role="status" aria-live="polite">Заявка отправлена.</div>
   </form>
  </div>
 </section>
@@ -73,8 +73,8 @@
   <label>Как к тебе обращаться<input name="reviewName" required maxlength="40" placeholder="Никнейм"></label>
   <label>Оценка <span class="rating-pick" id="ratingPick"><button type="button" data-rating="1">★</button><button type="button" data-rating="2">★</button><button type="button" data-rating="3">★</button><button type="button" data-rating="4">★</button><button type="button" data-rating="5" class="chosen">★</button></span></label>
   <label>Твой отзыв<textarea name="reviewText" required minlength="8" maxlength="500" rows="3" placeholder="Поделись впечатлением..."></textarea></label>
-  <button class="btn btn-primary" type="submit">Отправить отзыв на Gmail <span>↗</span></button>
-  <p class="form-foot">Нажми кнопку — откроется почтовое приложение с готовым письмом на Gmail. Отзыв появится на сайте только после проверки владельцем.</p>
+  <button class="btn btn-primary" type="submit">Отправить отзыв <span>↗</span></button>
+  <p class="form-foot">Отзыв отправится на модерацию и появится на сайте после одобрения.</p>
  </form>
 </section>
 <section class="faq-section" id="faq" data-view="faq" hidden><div class="section-heading reveal"><div><div class="eyebrow"><span class="eyebrow-dot"></span> ОТВЕТЫ НА ВОПРОСЫ</div><h2>Часто <em>спрашивают</em></h2></div><p>Если не нашёл ответ — напиши напрямую в Telegram.</p></div>
@@ -82,12 +82,12 @@
   <details><summary>Сколько стоит услуга гаранта?<span>＋</span></summary><p>На сайте указан бесплатный тариф — 0 ₽. Дополнительные условия, если они появятся, обсуждаются до начала сделки.</p></details>
   <details><summary>Что указать в поле Place?<span>＋</span></summary><p>Напиши название Roblox-игры или Place, в котором проходит обмен. Если знаешь ссылку на Place, можешь добавить её в описание.</p></details>
   <details><summary>Когда начнётся сделка?<span>＋</span></summary><p>После того как мы свяжемся, проверим детали и согласуем порядок действий. Не начинай обмен до подтверждения условий.</p></details>
-  <details><summary>Как публикуются отзывы?<span>＋</span></summary><p>Отзывы отправляются владельцу сайта на проверку. Публиковать можно только отзывы реальных участников с их согласия.</p></details>
+  <details><summary>Как публикуются отзывы?<span>＋</span></summary><p>Отзывы отправляются на модерацию. После одобрения они появляются на сайте.</p></details>
  </div>
 </section>
 <section class="closing" data-view="home"><div class="closing-spark">✦</div><div class="eyebrow">N1KMEL • GUARANTOR</div><h2>Готов обсудить<br><em>свою сделку?</em></h2><a class="btn btn-primary" href="#request">Оставить заявку <span>↗</span></a></section>
 </main>
-<footer class="footer"><a class="brand" href="#home"><span class="brand-mark">N<span>✦</span></span><span>N1kmeL<small>GUARANTOR SERVICE</small></span></a><span>© 2026 N1kmeL. Информационный демо-сайт.</span><span class="footer-contacts"><a href="https://t.me/N1kmeL" target="_blank" rel="noopener">@N1kmeL ↗</a><a href="mailto:nr9853007@gmail.com">nr9853007@gmail.com ↗</a></span></footer>
+<footer class="footer"><a class="brand" href="#home"><span class="brand-mark">N<span>✦</span></span><span>N1kmeL<small>GUARANTOR SERVICE</small></span></a><span>© 2026 N1kmeL. Сайт с личным кабинетом и поддержкой.</span><span class="footer-contacts"><a href="https://t.me/N1kmeL" target="_blank" rel="noopener">@N1kmeL ↗</a><a href="mailto:nr9853007@gmail.com">nr9853007@gmail.com ↗</a></span></footer>
 <div class="floating-contacts"><a class="floating-telegram" href="https://t.me/N1kmeL" target="_blank" rel="noopener" aria-label="Написать в Telegram"><span>➤</span><b>Telegram</b></a><a class="floating-mail" href="mailto:nr9853007@gmail.com" aria-label="Написать на Gmail"><span>✉</span><b>Gmail</b></a></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body></html>
