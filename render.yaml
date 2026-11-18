@@ -2,18 +2,18 @@ services:
   - type: web
     name: n1kmel-site
     runtime: node
-    plan: starter
+    plan: free
     buildCommand: npm install
     startCommand: npm start
-    disk:
-      name: n1kmel-data
-      mountPath: /var/data
-      sizeGB: 1
     envVars:
       - key: NODE_ENV
         value: production
-      - key: DATABASE_PATH
-        value: /var/data/site.db
+      - key: SUPABASE_URL
+        value: https://zarbytwwafejzhahooth.supabase.co
+      - key: SUPABASE_PUBLISHABLE_KEY
+        sync: false
+      - key: SUPABASE_SECRET_KEY
+        sync: false
       - key: ADMIN_USERNAME
         value: N1kmeL
       - key: ADMIN_PASSWORD
