@@ -11,27 +11,27 @@
 <body>
 <div class="demo-ribbon"><span>●</span> ДЕМО-ВЕРСИЯ N1KMEL · ВСЕ ТОВАРЫ И БАЛАНС ВЫМЫШЛЕННЫЕ</div>
 <header class="topbar">
- <a class="logo" href="#" aria-label="N1kmeL">✦ <b>N1kmeL</b></a>
- <button class="head-game" id="gameOpen"><span id="headGameIcon">🐻</span><b id="headGameName">Adopt Me</b><span>⌄</span></button>
- <button class="head-pill language" id="languageBtn">🇷🇺</button>
- <button class="head-pill notice" id="noticeBtn">🔔<i></i></button>
- <button class="head-cart" id="cartBtn">🛒<b id="cartCount">0</b></button>
+ <a class="logo" href="#" aria-label="N1kmeL"><img src="assets/logo-mark.svg" alt=""><b>N1kmeL</b></a>
+ <button class="head-game" id="gameOpen"><img src="assets/games/adopt-me.svg" alt=""><b id="headGameName">Adopt Me</b><span>⌄</span></button>
+ <button class="head-pill language" id="languageBtn">RU</button>
+ <button class="head-pill notice" id="noticeBtn">♧<i></i></button>
+ <button class="head-cart" id="cartBtn">♧<b id="cartCount">0</b></button>
 </header>
 <main>
  <section class="page active" id="page-buy">
   <div class="promo wrap">
    <button class="promo-close" id="promoClose">×</button>
-   <div class="promo-avatar">🧑🏻‍🚀</div>
+   <div class="promo-art"><img src="assets/n1-mascot.svg" alt="Маскот N1kmeL"></div>
    <div class="promo-copy"><small>N1KMEL COMMUNITY ✦ DEMO</small><h1>Твоя игровая<br>коллекция начинается здесь</h1><p>Исследуй предметы и собирай избранное</p></div>
    <button class="promo-cta" id="promoAction">ПОСМОТРЕТЬ <span>↗</span></button>
   </div>
   <div class="game-shortcuts wrap" id="gameShortcuts">
-   <button class="game-short active" data-game="Adopt Me"><span>🐻</span><small>Adopt Me</small></button>
-   <button class="game-short" data-game="MM2 Market"><span>🔪</span><small>MM2 Market</small></button>
-   <button class="game-short" data-game="MM2 Swap"><span>🔫</span><small>MM2 Swap</small></button>
-   <button class="game-short" data-game="Steal a Brainrot"><span>🧊</span><small>Steal a<br>Brainrot</small></button>
-   <button class="game-short" data-game="Grow a Garden"><span>🐼</span><small>Grow a<br>Garden</small></button>
-   <button class="game-short" data-game="Blox Fruits"><span>🔥</span><small>Blox Fruits</small></button>
+   <button class="game-short active" data-game="Adopt Me"><img src="assets/games/adopt-me.svg" alt=""><small>Adopt Me</small></button>
+   <button class="game-short" data-game="MM2 Market"><img src="assets/games/mm2.svg" alt=""><small>MM2 Market</small></button>
+   <button class="game-short" data-game="MM2 Swap"><img src="assets/games/mm2-swap.svg" alt=""><small>MM2 Swap</small></button>
+   <button class="game-short" data-game="Steal a Brainrot"><img src="assets/games/brainrot.svg" alt=""><small>Steal a<br>Brainrot</small></button>
+   <button class="game-short" data-game="Grow a Garden"><img src="assets/games/garden.svg" alt=""><small>Grow a<br>Garden</small></button>
+   <button class="game-short" data-game="Blox Fruits"><img src="assets/games/blox.svg" alt=""><small>Blox Fruits</small></button>
   </div>
   <section class="catalog wrap" id="catalog">
    <label class="search"><span>⌕</span><input id="search" type="search" placeholder="Поиск предметов" aria-label="Поиск предметов"><button id="clearSearch">×</button></label>
@@ -43,14 +43,14 @@
    </div>
    <div class="catalog-heading"><h2 id="catalogTitle">Предметы на продаже</h2><span id="resultCount">8 предметов</span></div>
    <div class="products" id="products">
-    <article class="product" data-name="Crystal Egg" data-price="2.99" data-kind="egg"><div class="product-image"><span class="rarity orange"></span><span class="item-emoji">🥚</span><button class="heart" aria-label="В избранное">♡</button></div><div class="product-details"><h3>Crystal Egg</h3><p>Яйцо · Adopt Me</p><div class="product-bottom"><strong>2.99 <small>₽</small></strong><button class="add" data-item="Crystal Egg">🛒</button></div></div></article>
-    <article class="product" data-name="Ride Potion" data-price="41.2" data-kind="potion"><div class="product-image"><span class="rarity orange"></span><span class="item-emoji">🧪</span><button class="heart" aria-label="В избранное">♡</button></div><div class="product-details"><h3>Ride Potion</h3><p>Зелье · Adopt Me</p><div class="product-bottom"><strong>41.2 <small>₽</small></strong><button class="add" data-item="Ride Potion">🛒</button></div></div></article>
-    <article class="product" data-name="Copycat" data-price="1130" data-kind="pet"><div class="product-image"><span class="rarity purple">M</span><span class="item-emoji">🐱</span><button class="heart" aria-label="В избранное">♡</button></div><div class="product-details"><h3>Copycat</h3><p>Питомец · Adopt Me</p><div class="product-bottom"><strong>1.13K <small>₽</small></strong><button class="add" data-item="Copycat">🛒</button></div></div></article>
-    <article class="product" data-name="Ancient Dragon" data-price="125" data-kind="pet"><div class="product-image"><span class="rarity purple">M</span><span class="item-emoji">🐉</span><button class="heart" aria-label="В избранное">♡</button></div><div class="product-details"><h3>Ancient Dragon</h3><p>Питомец · Adopt Me</p><div class="product-bottom"><strong>125 <small>₽</small></strong><button class="add" data-item="Ancient Dragon">🛒</button></div></div></article>
-    <article class="product" data-name="Dark Choccybunny" data-price="125" data-kind="pet"><div class="product-image"><span class="rarity purple">M</span><span class="item-emoji">🐰</span><button class="heart" aria-label="В избранное">♡</button></div><div class="product-details"><h3>Dark Choccybunny</h3><p>Питомец · Adopt Me</p><div class="product-bottom"><strong>125 <small>₽</small></strong><button class="add" data-item="Dark Choccybunny">🛒</button></div></div></article>
-    <article class="product" data-name="DJ Snooze" data-price="125" data-kind="pet"><div class="product-image"><span class="rarity blue">M</span><span class="item-emoji">🎧</span><button class="heart" aria-label="В избранное">♡</button></div><div class="product-details"><h3>DJ Snooze</h3><p>Питомец · Adopt Me</p><div class="product-bottom"><strong>125 <small>₽</small></strong><button class="add" data-item="DJ Snooze">🛒</button></div></div></article>
-    <article class="product" data-name="Golden Griffin" data-price="125" data-kind="pet"><div class="product-image"><span class="rarity orange"></span><span class="item-emoji">🦅</span><button class="heart" aria-label="В избранное">♡</button></div><div class="product-details"><h3>Golden Griffin</h3><p>Питомец · Adopt Me</p><div class="product-bottom"><strong>125 <small>₽</small></strong><button class="add" data-item="Golden Griffin">🛒</button></div></div></article>
-    <article class="product" data-name="Mr Whiskerpips" data-price="125" data-kind="pet"><div class="product-image"><span class="rarity green">N</span><span class="item-emoji">🐭</span><button class="heart" aria-label="В избранное">♡</button></div><div class="product-details"><h3>Mr Whiskerpips</h3><p>Питомец · Adopt Me</p><div class="product-bottom"><strong>125 <small>₽</small></strong><button class="add" data-item="Mr Whiskerpips">🛒</button></div></div></article>
+    <article class="product" data-name="Crystal Egg" data-price="2.99" data-kind="egg"><div class="product-image"><span class="rarity orange"></span><img class="item-art" src="assets/pets/crystal-egg.svg" alt="crystal egg"><button class="heart" aria-label="В избранное">♡</button></div><div class="product-details"><h3>Crystal Egg</h3><p>Яйцо · Adopt Me</p><div class="product-bottom"><strong>2.99 <small>₽</small></strong><button class="add" data-item="Crystal Egg">🛒</button></div></div></article>
+    <article class="product" data-name="Ride Potion" data-price="41.2" data-kind="potion"><div class="product-image"><span class="rarity orange"></span><img class="item-art" src="assets/pets/ride-potion.svg" alt="ride potion"><button class="heart" aria-label="В избранное">♡</button></div><div class="product-details"><h3>Ride Potion</h3><p>Зелье · Adopt Me</p><div class="product-bottom"><strong>41.2 <small>₽</small></strong><button class="add" data-item="Ride Potion">🛒</button></div></div></article>
+    <article class="product" data-name="Copycat" data-price="1130" data-kind="pet"><div class="product-image"><span class="rarity purple">M</span><img class="item-art" src="assets/pets/copycat.svg" alt="copycat"><button class="heart" aria-label="В избранное">♡</button></div><div class="product-details"><h3>Copycat</h3><p>Питомец · Adopt Me</p><div class="product-bottom"><strong>1.13K <small>₽</small></strong><button class="add" data-item="Copycat">🛒</button></div></div></article>
+    <article class="product" data-name="Ancient Dragon" data-price="125" data-kind="pet"><div class="product-image"><span class="rarity purple">M</span><img class="item-art" src="assets/pets/ancient-dragon.svg" alt="ancient dragon"><button class="heart" aria-label="В избранное">♡</button></div><div class="product-details"><h3>Ancient Dragon</h3><p>Питомец · Adopt Me</p><div class="product-bottom"><strong>125 <small>₽</small></strong><button class="add" data-item="Ancient Dragon">🛒</button></div></div></article>
+    <article class="product" data-name="Dark Choccybunny" data-price="125" data-kind="pet"><div class="product-image"><span class="rarity purple">M</span><img class="item-art" src="assets/pets/dark-choccybunny.svg" alt="dark choccybunny"><button class="heart" aria-label="В избранное">♡</button></div><div class="product-details"><h3>Dark Choccybunny</h3><p>Питомец · Adopt Me</p><div class="product-bottom"><strong>125 <small>₽</small></strong><button class="add" data-item="Dark Choccybunny">🛒</button></div></div></article>
+    <article class="product" data-name="DJ Snooze" data-price="125" data-kind="pet"><div class="product-image"><span class="rarity blue">M</span><img class="item-art" src="assets/pets/dj-snooze.svg" alt="dj snooze"><button class="heart" aria-label="В избранное">♡</button></div><div class="product-details"><h3>DJ Snooze</h3><p>Питомец · Adopt Me</p><div class="product-bottom"><strong>125 <small>₽</small></strong><button class="add" data-item="DJ Snooze">🛒</button></div></div></article>
+    <article class="product" data-name="Golden Griffin" data-price="125" data-kind="pet"><div class="product-image"><span class="rarity orange"></span><img class="item-art" src="assets/pets/golden-griffin.svg" alt="golden griffin"><button class="heart" aria-label="В избранное">♡</button></div><div class="product-details"><h3>Golden Griffin</h3><p>Питомец · Adopt Me</p><div class="product-bottom"><strong>125 <small>₽</small></strong><button class="add" data-item="Golden Griffin">🛒</button></div></div></article>
+    <article class="product" data-name="Mr Whiskerpips" data-price="125" data-kind="pet"><div class="product-image"><span class="rarity green">N</span><img class="item-art" src="assets/pets/mr-whiskerpips.svg" alt="mr whiskerpips"><button class="heart" aria-label="В избранное">♡</button></div><div class="product-details"><h3>Mr Whiskerpips</h3><p>Питомец · Adopt Me</p><div class="product-bottom"><strong>125 <small>₽</small></strong><button class="add" data-item="Mr Whiskerpips">🛒</button></div></div></article>
    </div>
    <p class="empty" id="empty" hidden>Ничего не найдено. Попробуй изменить поиск.</p>
   </section>
@@ -68,7 +68,7 @@
  <button class="nav-item" data-page="profile"><span class="nav-icon green-bg">♙</span><b>Профиль</b><small>Аккаунт</small></button>
 </nav>
 <div class="game-sheet" id="gameSheet" hidden><div class="sheet" role="dialog" aria-modal="true"><div class="sheet-title"><h2>Выбор игры</h2><button id="gameClose">×</button></div><div class="game-options">
- <button data-game="Adopt Me">🐻 <span>Adopt Me</span><b>⚡ Быстро</b></button><button data-game="MM2 Market">🔪 <span>MM2 Market</span><b>⚡ Быстро</b></button><button data-game="MM2 Swap">🔫 <span>MM2 Swap</span><b>⚡ Быстро</b></button><button data-game="Steal a Brainrot">🧊 <span>Steal a Brainrot</span></button><button data-game="Grow a Garden">🐼 <span>Grow a Garden</span></button><button data-game="Blox Fruits">🔥 <span>Blox Fruits</span></button>
+ <button data-game="Adopt Me"><img src="assets/games/adopt-me.svg" alt=""> <span>Adopt Me</span><b>⚡ Быстро</b></button><button data-game="MM2 Market"><img src="assets/games/mm2.svg" alt=""> <span>MM2 Market</span><b>⚡ Быстро</b></button><button data-game="MM2 Swap"><img src="assets/games/mm2-swap.svg" alt=""> <span>MM2 Swap</span><b>⚡ Быстро</b></button><button data-game="Steal a Brainrot"><img src="assets/games/brainrot.svg" alt=""> <span>Steal a Brainrot</span></button><button data-game="Grow a Garden"><img src="assets/games/garden.svg" alt=""> <span>Grow a Garden</span></button><button data-game="Blox Fruits"><img src="assets/games/blox.svg" alt=""> <span>Blox Fruits</span></button>
  </div></div></div>
 <div class="toast" id="toast"></div>
 </body></html>
