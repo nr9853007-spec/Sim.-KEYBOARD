@@ -77,6 +77,12 @@ function drawBackground(dt){
  const sunX=W*(biome===1?.76:.82),sunY=H*.14;
  const glow=ctx.createRadialGradient(sunX,sunY,4,sunX,sunY,Math.min(W,H)*.17);glow.addColorStop(0,'#fff6d6aa');glow.addColorStop(1,'#fff6d600');ctx.fillStyle=glow;ctx.fillRect(sunX-Math.min(W,H)*.18,sunY-Math.min(W,H)*.18,Math.min(W,H)*.36,Math.min(W,H)*.36);
  ellipse(sunX,sunY,Math.min(W,H)*.027,Math.min(W,H)*.027,'#fff1c5');
+ // Clear visual landmarks make each purchased environment immediately recognizable.
+ if(biome===0){for(let i=0;i<24;i++){const x=(i*83%97)/97*W,y=H*(.035+(i*29%23)/100);ctx.globalAlpha=.25+(i%3)*.12;ellipse(x,y,1.2,1.2,'#e8f4ff')}ctx.globalAlpha=1}
+ else if(biome===1){ctx.globalAlpha=.28;for(let i=0;i<5;i++){const yy=sunY+Math.sin(i*1.4)*H*.035;ctx.strokeStyle='#ffe0a0';ctx.lineWidth=2;ctx.beginPath();ctx.arc(sunX,yy,Math.min(W,H)*(.07+i*.018),Math.PI*1.08,Math.PI*1.92);ctx.stroke()}ctx.globalAlpha=1}
+ else if(biome===2){for(let i=0;i<8;i++){const x=(i*137%101)/101*W,y=H*(.08+(i*19%20)/100),r=4+(i%3)*3;ctx.globalAlpha=.48;ellipse(x,y,r,r,i%3===0?'#ff8fbe':i%3===1?'#fff0a0':'#77e5d4');ctx.globalAlpha=.18;ellipse(x,y,r*2.1,r*2.1,'#fff')}ctx.globalAlpha=1}
+ else if(biome===3){for(let i=0;i<7;i++){const x=(i*149%103)/103*W,y=horizon-H*(.025+(i%3)*.018);ctx.globalAlpha=.55;ellipse(x,y,18+(i%2)*9,7+(i%3)*2,'#b8e2a0')}ctx.globalAlpha=1}
+
  // distant skyline: quiet silhouettes, fixed geometry, no flicker
  for(let i=0;i<13;i++){const bw=W*(.045+(i%4)*.012),bx=i*W/11-W*.04,bh=H*(.10+(i*17%7)*.018);ctx.fillStyle=palette.far;ctx.globalAlpha=.38;ctx.fillRect(bx,horizon-bh,bw,bh);ctx.globalAlpha=1;
   if(i%3===0){ctx.fillStyle=palette.far;poly([[bx-4,horizon-bh],[bx+bw/2,horizon-bh-H*.025],[bx+bw+4,horizon-bh]],palette.far)}
