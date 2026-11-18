@@ -42,12 +42,6 @@
  let rating=5;const ratingButtons=[...document.querySelectorAll('[data-rating]')];
  function paintRating(){ratingButtons.forEach(button=>button.classList.toggle('active',Number(button.dataset.rating)<=rating));}
  ratingButtons.forEach(button=>button.addEventListener('click',()=>{rating=Number(button.dataset.rating);paintRating();}));paintRating();
- reviewForm.addEventListener('submit',event=>{
-  event.preventDefault();if(!reviewForm.reportValidity())return;const data=new FormData(reviewForm);
-  const message=['⭐ ОТЗЫВ НА МОДЕРАЦИЮ — N1kmeL','','👤 Автор: '+data.get('reviewName').trim(),'Оценка: '+rating+'/5','💬 Отзыв: '+data.get('reviewText').trim(),'','Пожалуйста, проверь отзыв перед публикацией.'].join('\n');
-  const mailUrl='https://mail.google.com/mail/?view=cm&fs=1&to=nr9853007%40gmail.com&su='+encodeURIComponent('Отзыв для сайта N1kmeL')+'&body='+encodeURIComponent(message);
-  notify('Открываем Gmail с готовым отзывом…');window.open(mailUrl,'_blank','noopener');
- });
  document.querySelectorAll('.faq-list details').forEach(detail=>detail.addEventListener('toggle',()=>{if(detail.open)document.querySelectorAll('.faq-list details').forEach(other=>{if(other!==detail)other.open=false;});}));
  document.querySelectorAll('a[href^="#"]').forEach(anchor=>anchor.addEventListener('click',event=>{
   const id=anchor.getAttribute('href').slice(1);
