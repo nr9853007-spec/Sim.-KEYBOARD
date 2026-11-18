@@ -25,9 +25,9 @@
   window.scrollTo({top:0,behavior:'smooth'});
  }
  $$('.nav-item').forEach(b=>b.addEventListener('click',()=>changePage(b.dataset.page)));
- function addToCart(name){cart++;$('#cartCount').textContent=cart;notify(name+' добавлен в демо-корзину');}
+ function addToCart(name){notify('«'+name+'» — только демонстрационная карточка. Добавление в заказ отключено.');}
  $$('.add').forEach(b=>b.addEventListener('click',()=>addToCart(b.dataset.item)));
- $('#cartBtn').addEventListener('click',()=>notify('В демо-корзине предметов: '+cart+'. Оформление заказа отключено.'));
+ $('#cartBtn').addEventListener('click',()=>notify('Корзина отключена: на N1kmeL нельзя оформить заказ или оплату.'));
  $$('.heart').forEach((b,i)=>b.addEventListener('click',()=>{
   const card=b.closest('.product'),name=card.dataset.name;
   if(favorites.has(name)){favorites.delete(name);b.classList.remove('is-favorite');b.textContent='♡';notify('Удалено из избранного')}
@@ -56,5 +56,8 @@
  $$('.demo-action').forEach(b=>b.addEventListener('click',()=>notify('Это демонстрационная функция — реальные действия отключены.')));
  $$('.currency button').forEach(b=>b.addEventListener('click',()=>{$$('.currency button').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');notify('В демо выбран формат валюты: '+b.textContent)}));
  $('#filterBadge').textContent='0';
+ const terms=$('#termsOverlay');const openTerms=()=>{terms.hidden=false;document.body.style.overflow='hidden'};const closeTerms=()=>{terms.hidden=true;document.body.style.overflow=''};
+ const footer=document.createElement('button');footer.type='button';footer.className='terms-link';footer.textContent='Соглашение и отказ от ответственности';footer.onclick=openTerms;document.querySelector('main').appendChild(footer);
+ $('#termsClose').onclick=closeTerms;terms.addEventListener('click',e=>{if(e.target===terms)closeTerms()});$('#aboutDemo').onclick=openTerms;document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeTerms();$('#gameSheet').hidden=true}});
  render();
 })();
