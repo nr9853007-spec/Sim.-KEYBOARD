@@ -1,77 +1,84 @@
 <!doctype html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#ffffff"><meta name="description" content="N1kmeL — каталог игровых миров и коллекций.">
-<title>N1kmeL — игровой маркет</title><link rel="stylesheet" href="styles.css"><script src="app.js" defer></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#11111b">
+<meta name="description" content="N1kmeL — интерактивная демо-витрина игровых коллекций.">
+<title>N1kmeL — игровой каталог</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="app.js" defer></script>
 </head>
-<body>\n<div class="demo-splash" id="demoSplash" role="dialog" aria-modal="true" aria-labelledby="splashTitle">
-  <div class="splash-stars" aria-hidden="true"><span>✦</span><span>✧</span><span>·</span><span>✦</span></div>
-  <div class="splash-panel">
-    <div class="splash-logo"><span>✦</span> N1kmeL</div>
-    <span class="splash-label">INTERACTIVE PREVIEW</span>
-    <h1 id="splashTitle">Добро пожаловать<br><em>в игровой маркет</em></h1>
-    <p>Посмотри, как может выглядеть твоя коллекция. Это безопасная демонстрация с вымышленными предметами.</p>
-    <button class="splash-start" id="startDemo">Запустить демо <span>→</span></button>
-    <div class="splash-note"><span>●</span> ДЕМО-РЕЖИМ · БЕЗ ПОКУПОК И ВХОДА В АККАУНТ</div>
+<body class="intro-active">
+<div class="demo-splash" id="demoSplash" role="dialog" aria-modal="true" aria-labelledby="splashTitle">
+  <div class="splash-noise"></div>
+  <div class="splash-top"><div class="brand brand-light"><span class="brand-symbol">✳</span><span>N1K<span class="brand-accent">MEL</span></span></div><span class="preview-tag"><i></i> INTERACTIVE DEMO</span></div>
+  <div class="splash-center">
+    <div class="splash-art"><div class="splash-ring ring-one"></div><div class="splash-ring ring-two"></div><div class="splash-glow"></div><div class="splash-pet">🐉</div><span class="spark spark-a">✦</span><span class="spark spark-b">✧</span><span class="spark spark-c">✳</span><span class="float-chip chip-a">RARE DROP</span><span class="float-chip chip-b">✦ COLLECTION</span></div>
+    <p class="splash-eyebrow">YOUR NEXT FAVORITE FIND</p>
+    <h1 id="splashTitle">Открой свою<br><em>игровую вселенную</em></h1>
+    <p class="splash-description">Исследуй коллекции, находи любимых питомцев и собирай свою витрину.</p>
+    <button class="splash-start" id="startDemo">Войти в демо <span>↗</span></button>
+    <div class="splash-footnote"><span class="pulse-dot"></span> ДЕМО-РЕЖИМ <b>·</b> БЕЗ РЕГИСТРАЦИИ И ПОКУПОК</div>
   </div>
-  <div class="splash-orb orb-a"></div><div class="splash-orb orb-b"></div>
+  <div class="splash-bottom"><span>INDEPENDENT FAN CONCEPT</span><span>© N1KMEL PREVIEW</span></div>
 </div>
-<header class="topbar">
-  <a class="logo" href="#top" aria-label="N1kmeL"><span class="logo-mark">✦</span></a>
+
+<header class="topbar" id="top">
+  <a class="brand" href="#top" aria-label="N1kmeL"><span class="brand-symbol">✳</span><span>N1K<span class="brand-accent">MEL</span></span></a>
+  <nav class="desktop-links"><a class="nav-link active" href="#catalog">Каталог</a><a class="nav-link" href="#games">Игры</a><a class="nav-link" href="#about">О демо</a></nav>
   <div class="top-actions">
-    <button class="top-pill profile-mini" id="profileTop"><span class="mini-avatar">N</span><span class="chevron">⌄</span></button>
-    <button class="top-pill language" aria-label="Язык">🇷🇺</button>
-    <button class="top-pill notification" aria-label="Уведомления">♧<i></i></button>
-    <button class="cart-button" id="cartTop" aria-label="Корзина">♧<b id="cartCount">0</b></button>
+    <button class="icon-button" id="favoriteTop" aria-label="Избранное">♡</button>
+    <button class="profile-button" id="profileTop"><span class="avatar">N</span><span>Демо-профиль</span><span class="chevron">⌄</span></button>
+    <button class="cart-button" id="cartTop"><span>▢</span><b id="cartCount">0</b></button>
   </div>
 </header>
-<main id="top">
-  <section class="promo page-width">
-    <div class="promo-copy"><span class="promo-kicker">N1KMEL COMMUNITY</span><h1>ТВОЯ ИГРА.<br><span>ТВОИ ПРАВИЛА.</span></h1><p>Исследуй игровые миры, собирай любимые образы и создавай свою коллекцию.</p><a class="promo-button" href="#catalog">Открыть каталог <span>→</span></a></div>
-    <div class="promo-art" aria-hidden="true"><div class="halo"></div><div class="planet-ball">✦</div><span class="floating-star star-one">✧</span><span class="floating-star star-two">✦</span><span class="floating-star star-three">·</span><div class="promo-orbit"></div></div>
-    <button class="promo-close" id="closePromo" aria-label="Скрыть баннер">×</button>
+
+<main>
+  <section class="hero page-width">
+    <div class="hero-copy"><div class="hero-kicker"><span class="kicker-line"></span> DIGITAL COLLECTIBLES · DEMO STORE</div><h1>Коллекционируй<br><span>свою магию.</span></h1><p>Любимые игровые миры, редкие находки и питомцы с характером — всё в одном месте.</p><a class="hero-cta" href="#catalog">Исследовать каталог <span>↗</span></a><div class="hero-meta"><span><i class="meta-dot green"></i> Демо-каталог активен</span><span>✦ 100% вымышленные предметы</span></div></div>
+    <div class="hero-visual" aria-hidden="true"><div class="hero-aura"></div><div class="hero-orbit orbit-a"></div><div class="hero-orbit orbit-b"></div><div class="hero-creature">🐲</div><div class="hero-float float-left"><span>✦</span><small>ULTRA RARE</small></div><div class="hero-float float-right"><span>✧</span><small>NEW DROP</small></div><div class="hero-spark s1">✦</div><div class="hero-spark s2">✧</div></div>
+    <div class="hero-counter"><strong>01</strong><span>/ 04</span><div class="counter-bars"><i class="on"></i><i></i><i></i><i></i></div></div>
   </section>
-  <section class="game-strip page-width">
-    <div class="game-shortcuts" id="gameShortcuts">
-      <button class="game-shortcut selected" data-game="Adopt Me"><span class="game-icon adopt">🐻</span><span>Adopt Me</span></button>
-      <button class="game-shortcut" data-game="Grow a Garden"><span class="game-icon garden">🌱</span><span>Grow a Garden</span></button>
-      <button class="game-shortcut" data-game="Sailor Piece"><span class="game-icon sailor">🌊</span><span>Sailor Piece</span></button>
-      <button class="game-shortcut" data-game="Blox Fruits"><span class="game-icon fruit">🍉</span><span>Blox Fruits</span></button>
-      <button class="game-shortcut" data-game="Pet Simulator"><span class="game-icon pet">🐾</span><span>Pet Simulator</span></button>
-      <button class="game-shortcut" data-game="Другие игры"><span class="game-icon more">＋</span><span>Другие</span></button>
+
+  <section class="games-section page-width" id="games">
+    <div class="section-heading"><div><span class="section-eyebrow">CHOOSE YOUR WORLD</span><h2>Игровые миры</h2></div><span class="muted-note">Выбери любимую игру</span></div>
+    <div class="game-list" id="gameShortcuts">
+      <button class="game-tile selected" data-game="Adopt Me"><span class="game-emoji adopt">🐻</span><span><b>Adopt Me</b><small>Питомцы и яйца</small></span><i>↗</i></button>
+      <button class="game-tile" data-game="Grow a Garden"><span class="game-emoji garden">🌱</span><span><b>Grow a Garden</b><small>Сад и коллекции</small></span><i>↗</i></button>
+      <button class="game-tile" data-game="Blox Fruits"><span class="game-emoji fruits">🍉</span><span><b>Blox Fruits</b><small>Предметы мира</small></span><i>↗</i></button>
+      <button class="game-tile" data-game="Pet Simulator"><span class="game-emoji pets">🐾</span><span><b>Pet Simulator</b><small>Милые спутники</small></span><i>↗</i></button>
+      <button class="game-tile game-more" data-game="Другие игры"><span class="game-emoji more">＋</span><span><b>Другие игры</b><small>Скоро в каталоге</small></span><i>↗</i></button>
     </div>
   </section>
-  <section class="catalog page-width" id="catalog">
-    <div class="search-wrap"><span class="search-icon">⌕</span><input id="searchInput" type="search" placeholder="Поиск по каталогу" aria-label="Поиск по каталогу"><button id="clearSearch" aria-label="Очистить поиск">×</button></div>
-    <div class="filters">
-      <button class="filter-icon" id="sortButton" aria-label="Сортировка">☷</button>
-      <button class="filter-icon" id="filterButton" aria-label="Фильтры">☷<sup>0</sup></button>
-      <button class="filter-chip active" data-filter="all">Все</button>
-      <button class="filter-chip" data-filter="popular">Популярное</button>
-      <button class="filter-chip" data-filter="new">Новинки</button>
-      <span class="sort-label" id="sortLabel">Сначала популярные⌄</span>
-    </div>
-    <div class="catalog-heading"><div><span class="eyebrow">ВЫБРАННАЯ ИГРА</span><h2 id="catalogTitle">Adopt Me <span>·</span> Каталог</h2></div><span class="result-count" id="resultCount">6 коллекций</span></div>
+
+  <section class="catalog-section page-width" id="catalog">
+    <div class="catalog-topline"><div><span class="section-eyebrow">HANDPICKED FOR YOU</span><h2>Популярные находки <span>✦</span></h2><p>Витрина демонстрационных предметов</p></div><div class="catalog-stat"><strong id="resultCount">08</strong><span>предметов</span></div></div>
+    <div class="catalog-toolbar"><label class="search-box"><span>⌕</span><input id="searchInput" type="search" placeholder="Найти питомца или предмет..." aria-label="Поиск по каталогу"><button id="clearSearch" aria-label="Очистить поиск">×</button></label><div class="toolbar-actions"><button class="toolbar-button" id="filterButton"><span>☷</span> Фильтры <b id="filterCount">0</b></button><button class="toolbar-button sort-button" id="sortButton">Сначала популярные <span>⌄</span></button></div></div>
+    <div class="category-row" id="categoryFilters"><button class="category-chip active" data-filter="all">Все предметы</button><button class="category-chip" data-filter="popular">Популярное</button><button class="category-chip" data-filter="new">Новинки</button><button class="category-chip" data-filter="legendary">Легендарные</button><button class="category-chip" data-filter="favorites">♡ Избранное</button></div>
     <div class="product-grid" id="productGrid">
-      <article class="product-card" data-name="Золотой щенок" data-kind="popular"><div class="product-visual visual-gold"><span class="product-art">🐶</span><button class="favorite" aria-label="В избранное">♡</button><span class="product-badge">ХИТ</span></div><div class="product-details"><div><h3>Золотой щенок</h3><p>Коллекционный питомец</p></div><button class="detail-button" data-item="Золотой щенок">Подробнее <span>→</span></button></div></article>
-      <article class="product-card" data-name="Лунный кот" data-kind="new"><div class="product-visual visual-lilac"><span class="product-art">🐱</span><button class="favorite" aria-label="В избранное">♡</button><span class="product-badge badge-new">НОВИНКА</span></div><div class="product-details"><div><h3>Лунный кот</h3><p>Коллекционный питомец</p></div><button class="detail-button" data-item="Лунный кот">Подробнее <span>→</span></button></div></article>
-      <article class="product-card" data-name="Розовый дракончик" data-kind="popular"><div class="product-visual visual-pink"><span class="product-art">🐉</span><button class="favorite" aria-label="В избранное">♡</button></div><div class="product-details"><div><h3>Розовый дракончик</h3><p>Коллекционный питомец</p></div><button class="detail-button" data-item="Розовый дракончик">Подробнее <span>→</span></button></div></article>
-      <article class="product-card" data-name="Лесной олень" data-kind="new"><div class="product-visual visual-green"><span class="product-art">🦌</span><button class="favorite" aria-label="В избранное">♡</button><span class="product-badge badge-new">НОВИНКА</span></div><div class="product-details"><div><h3>Лесной олень</h3><p>Коллекционный питомец</p></div><button class="detail-button" data-item="Лесной олень">Подробнее <span>→</span></button></div></article>
-      <article class="product-card" data-name="Облачный кролик" data-kind="popular"><div class="product-visual visual-blue"><span class="product-art">🐰</span><button class="favorite" aria-label="В избранное">♡</button></div><div class="product-details"><div><h3>Облачный кролик</h3><p>Коллекционный питомец</p></div><button class="detail-button" data-item="Облачный кролик">Подробнее <span>→</span></button></div></article>
-      <article class="product-card" data-name="Звёздная сова" data-kind="new"><div class="product-visual visual-orange"><span class="product-art">🦉</span><button class="favorite" aria-label="В избранное">♡</button></div><div class="product-details"><div><h3>Звёздная сова</h3><p>Коллекционный питомец</p></div><button class="detail-button" data-item="Звёздная сова">Подробнее <span>→</span></button></div></article>
+      <article class="product-card" data-name="Золотой дракон" data-kind="popular legendary" data-score="98" data-price="420"><div class="product-art art-gold"><span class="rarity">LEGENDARY</span><span class="pet-art">🐉</span><button class="favorite" aria-label="Добавить в избранное">♡</button><span class="art-glint">✦</span></div><div class="product-info"><div class="product-title"><div><h3>Золотой дракон</h3><p>Adopt Me · Питомец</p></div><span class="rating">✦ 4.9</span></div><div class="product-bottom"><div><small>ДЕМО-ЦЕННОСТЬ</small><strong>420 <i>✦</i></strong></div><button class="view-item" data-item="Золотой дракон">Смотреть <span>↗</span></button></div></div></article>
+      <article class="product-card" data-name="Лунный кот" data-kind="new popular" data-score="92" data-price="280"><div class="product-art art-lilac"><span class="rarity rarity-new">NEW DROP</span><span class="pet-art">🐈‍⬛</span><button class="favorite" aria-label="Добавить в избранное">♡</button><span class="art-glint">✧</span></div><div class="product-info"><div class="product-title"><div><h3>Лунный кот</h3><p>Adopt Me · Питомец</p></div><span class="rating">✦ 4.8</span></div><div class="product-bottom"><div><small>ДЕМО-ЦЕННОСТЬ</small><strong>280 <i>✦</i></strong></div><button class="view-item" data-item="Лунный кот">Смотреть <span>↗</span></button></div></div></article>
+      <article class="product-card" data-name="Облачный кролик" data-kind="popular" data-score="89" data-price="190"><div class="product-art art-blue"><span class="rarity">POPULAR</span><span class="pet-art">🐰</span><button class="favorite" aria-label="Добавить в избранное">♡</button><span class="art-glint">✦</span></div><div class="product-info"><div class="product-title"><div><h3>Облачный кролик</h3><p>Adopt Me · Питомец</p></div><span class="rating">✦ 4.9</span></div><div class="product-bottom"><div><small>ДЕМО-ЦЕННОСТЬ</small><strong>190 <i>✦</i></strong></div><button class="view-item" data-item="Облачный кролик">Смотреть <span>↗</span></button></div></div></article>
+      <article class="product-card" data-name="Лесной олень" data-kind="new legendary" data-score="85" data-price="360"><div class="product-art art-green"><span class="rarity rarity-new">NEW DROP</span><span class="pet-art">🦌</span><button class="favorite" aria-label="Добавить в избранное">♡</button><span class="art-glint">✧</span></div><div class="product-info"><div class="product-title"><div><h3>Лесной олень</h3><p>Grow a Garden · Питомец</p></div><span class="rating">✦ 4.7</span></div><div class="product-bottom"><div><small>ДЕМО-ЦЕННОСТЬ</small><strong>360 <i>✦</i></strong></div><button class="view-item" data-item="Лесной олень">Смотреть <span>↗</span></button></div></div></article>
+      <article class="product-card" data-name="Розовый феникс" data-kind="popular legendary" data-score="82" data-price="510"><div class="product-art art-pink"><span class="rarity">LEGENDARY</span><span class="pet-art">🦩</span><button class="favorite" aria-label="Добавить в избранное">♡</button><span class="art-glint">✦</span></div><div class="product-info"><div class="product-title"><div><h3>Розовый феникс</h3><p>Adopt Me · Питомец</p></div><span class="rating">✦ 5.0</span></div><div class="product-bottom"><div><small>ДЕМО-ЦЕННОСТЬ</small><strong>510 <i>✦</i></strong></div><button class="view-item" data-item="Розовый феникс">Смотреть <span>↗</span></button></div></div></article>
+      <article class="product-card" data-name="Звёздная сова" data-kind="new" data-score="77" data-price="230"><div class="product-art art-orange"><span class="rarity rarity-new">NEW DROP</span><span class="pet-art">🦉</span><button class="favorite" aria-label="Добавить в избранное">♡</button><span class="art-glint">✧</span></div><div class="product-info"><div class="product-title"><div><h3>Звёздная сова</h3><p>Pet Simulator · Питомец</p></div><span class="rating">✦ 4.8</span></div><div class="product-bottom"><div><small>ДЕМО-ЦЕННОСТЬ</small><strong>230 <i>✦</i></strong></div><button class="view-item" data-item="Звёздная сова">Смотреть <span>↗</span></button></div></div></article>
+      <article class="product-card" data-name="Кристальный лис" data-kind="legendary" data-score="74" data-price="470"><div class="product-art art-cyan"><span class="rarity">LEGENDARY</span><span class="pet-art">🦊</span><button class="favorite" aria-label="Добавить в избранное">♡</button><span class="art-glint">✦</span></div><div class="product-info"><div class="product-title"><div><h3>Кристальный лис</h3><p>Adopt Me · Питомец</p></div><span class="rating">✦ 4.9</span></div><div class="product-bottom"><div><small>ДЕМО-ЦЕННОСТЬ</small><strong>470 <i>✦</i></strong></div><button class="view-item" data-item="Кристальный лис">Смотреть <span>↗</span></button></div></div></article>
+      <article class="product-card" data-name="Солнечный мишка" data-kind="popular" data-score="69" data-price="150"><div class="product-art art-yellow"><span class="rarity">POPULAR</span><span class="pet-art">🐻</span><button class="favorite" aria-label="Добавить в избранное">♡</button><span class="art-glint">✧</span></div><div class="product-info"><div class="product-title"><div><h3>Солнечный мишка</h3><p>Grow a Garden · Питомец</p></div><span class="rating">✦ 4.6</span></div><div class="product-bottom"><div><small>ДЕМО-ЦЕННОСТЬ</small><strong>150 <i>✦</i></strong></div><button class="view-item" data-item="Солнечный мишка">Смотреть <span>↗</span></button></div></div></article>
     </div>
-    <div class="empty-state" id="emptyState" hidden>Ничего не найдено. Попробуй изменить запрос.</div>
-    <p class="demo-disclaimer">Демонстрационный каталог N1kmeL · предметы и карточки вымышленные, реальные сделки и платежи отключены.</p>
+    <div class="empty-state" id="emptyState" hidden><span>⌕</span><h3>Ничего не найдено</h3><p>Попробуй другое название или сбрось фильтры.</p><button id="resetFilters">Сбросить фильтры</button></div>
   </section>
+
+  <section class="about-strip page-width" id="about"><div class="about-icon">✳</div><div><strong>Это независимый концепт N1kmeL</strong><p>Витрина создана для демонстрации интерфейса. Все питомцы, оценки и значения вымышлены.</p></div><span class="demo-stamp">DEMO ONLY</span></section>
 </main>
-<nav class="bottom-nav" aria-label="Нижняя навигация">
-  <button class="bottom-item active" data-tab="Купить"><span class="bottom-icon">🛒</span><strong>Купить</strong><small>Каталог</small></button>
-  <button class="bottom-item" data-tab="Продать"><span class="bottom-icon">◇</span><strong>Продать</strong><small>Демо-раздел</small></button>
-  <button class="bottom-item" data-tab="Swap"><span class="bottom-icon">⇄</span><strong>Swap</strong><small>Обмен</small></button>
-  <button class="bottom-item" data-tab="Предметы"><span class="bottom-icon">▧</span><strong>Предметы</strong><small>Инвентарь</small></button>
-  <button class="bottom-item" data-tab="Профиль"><span class="bottom-icon">♙</span><strong>Профиль</strong><small>Аккаунт</small></button>
-</nav>
+
+<footer class="footer page-width"><div class="brand"><span class="brand-symbol">✳</span><span>N1K<span class="brand-accent">MEL</span></span></div><span>Фан-концепт игрового каталога · 2026</span><a href="#top">Наверх ↑</a></footer>
+<nav class="mobile-nav"><a class="mobile-active" href="#catalog"><span>⌂</span>Каталог</a><a href="#games"><span>◈</span>Игры</a><button id="mobileFavorites"><span>♡</span>Избранное</button><button id="mobileProfile"><span>♙</span>Профиль</button></nav>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-<div class="dialog-backdrop" id="dialog" hidden><section class="dialog-card" role="dialog" aria-modal="true" aria-labelledby="dialogTitle"><button class="dialog-close" id="dialogClose" aria-label="Закрыть">×</button><span class="dialog-symbol">✦</span><h2 id="dialogTitle">N1kmeL</h2><p id="dialogText">Это демонстрационная функция.</p><button class="dialog-ok" id="dialogOk">Понятно</button></section></div>
-</body></html>
+<div class="modal-backdrop" id="modal" hidden><section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="modal-close" id="modalClose" aria-label="Закрыть">×</button><div class="modal-art" id="modalArt">🐉</div><span class="section-eyebrow">N1KMEL COLLECTION</span><h2 id="modalTitle">Название предмета</h2><p id="modalText">Демонстрационная карточка.</p><div class="modal-value"><span>Демо-ценность</span><strong id="modalValue">420 ✦</strong></div><button class="modal-primary" id="modalAction">Добавить в подборку <span>↗</span></button><small class="modal-note">Только визуальный макет — без реальных заказов и платежей.</small></section></div>
+<div class="filter-backdrop" id="filterModal" hidden><section class="filter-panel" role="dialog" aria-modal="true" aria-labelledby="filterTitle"><div class="panel-head"><div><span class="section-eyebrow">REFINE YOUR VIEW</span><h2 id="filterTitle">Фильтры</h2></div><button class="modal-close" id="filterClose">×</button></div><p class="filter-label">Редкость предмета</p><label class="check-row"><input type="checkbox" value="legendary" id="legendaryCheck"><span>Легендарные</span><i>✦</i></label><label class="check-row"><input type="checkbox" value="new" id="newCheck"><span>Новинки</span><i>✧</i></label><div class="panel-actions"><button class="reset-button" id="filterReset">Сбросить</button><button class="apply-button" id="filterApply">Показать предметы</button></div></section></div>
+</body>
+</html>
