@@ -184,15 +184,15 @@ const shopItems=[
 ];
 let owned=['classic','city'],selectedSkin='classic',selectedBg='city';
 try{wallet=+(localStorage.getItem('shawarmaWallet')||0);owned=JSON.parse(localStorage.getItem('shawarmaOwned')||'[\"classic\",\"city\"]');selectedSkin=localStorage.getItem('shawarmaSkin')||'classic';selectedBg=localStorage.getItem('shawarmaBg')||'city';}catch(e){wallet=0;owned=['classic','city'];}
-const laneX=[-.66,0,.66],rand=(a,b)=>a+Math.random()*(b-a);
-function laneOffset(value){return value<1?-.66*(1-value):.66*(value-1)}
+const laneX=[-.68,0,.68],rand=(a,b)=>a+Math.random()*(b-a);
+function laneOffset(value){return value<1?-.68*(1-value):.68*(value-1)}
 try{best=+(localStorage.getItem('shawarmaRunBest')||0)}catch(e){}
 function resize(){DPR=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;canvas.width=Math.round(W*DPR);canvas.height=Math.round(H*DPR);ctx.setTransform(DPR,0,0,DPR,0,0)}
 addEventListener('resize',resize);resize();
 function poly(points,fill,stroke){ctx.beginPath();ctx.moveTo(points[0][0],points[0][1]);for(let i=1;i<points.length;i++)ctx.lineTo(points[i][0],points[i][1]);ctx.closePath();ctx.fillStyle=fill;ctx.fill();if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=2;ctx.stroke()}}
 function ellipse(x,y,rx,ry,color){ctx.beginPath();ctx.ellipse(x,y,rx,ry,0,0,Math.PI*2);ctx.fillStyle=color;ctx.fill()}
 function roundRect(x,y,w,h,r,color){ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fillStyle=color;ctx.fill()}
-function roadPoint(x,z){const depth=Math.max(0,Math.min(1,z));const horizon=H*.34;const y=horizon+depth*depth*(H*.66);const expansion=1-Math.exp(-Math.max(0,time)*.045);const half=W*(.10+depth*(.27+.06*expansion));return{x:W/2+x*half,y,scale:.44+depth*.68,half}}
+function roadPoint(x,z){const depth=Math.max(0,Math.min(1,z));const horizon=H*.34;const y=horizon+depth*depth*(H*.66);const half=W*(.13+depth*.37);return{x:W/2+x*half,y,scale:.44+depth*.68,half}}
 function drawBackground(dt){
  const horizon=H*.34, bottom=H;
  const bgIds=['city','sunset','candy','forest','coast','snow'];const biome=Math.max(0,bgIds.indexOf(selectedBg));
@@ -280,17 +280,38 @@ function drawBackground(dt){
  for(const side of [-1,1])for(let i=0;i<12;i++){const z=((i/12+time*speed*.16)%1),p=roadPoint(side*.985,z),s=p.scale;ctx.globalAlpha=.28+z*.58;ellipse(p.x,p.y,1.2+s*2.1,1+s*1.4,i%3===0?'#fff0b0':'#f2a65c')}ctx.globalAlpha=1;
  // asphalt flecks are stable and restrained
  for(let i=0;i<48;i++){const z=((i/48+time*.12)%1),x=((i*37)%89)/44-1,p=roadPoint(x,z);ctx.globalAlpha=.08+z*.08;ellipse(p.x,p.y,Math.max(.6,p.scale*.65),Math.max(.5,p.scale*.35),i%2?'#fff':'#0c1112')}ctx.globalAlpha=1;
- // Side scenery is built from faceted mesh sculptures instead of repetitive shop blocks.
+ // Each world gets its own recognizable low-poly landmark silhouettes.
  for(const side of [-1,1])for(let i=0;i<4;i++){
-  const z=((i/4+time*.055)%1),p=roadPoint(side*1.78,z),sc=p.scale;
+  const z=((i/4+time*.055)%1),p=roadPoint(side*(1.78+(i%2)*.12),z),sc=p.scale;
   ctx.save();ctx.translate(p.x,p.y);ctx.scale(sc,sc);
-  const h=66+(i%3)*17,w=22+(i%2)*9;
-  const base='#263c4a',lit=palette.accent;
-  poly([[-w,0],[-w*.58,-h*.58],[0,-h], [w*.2,-h*.48],[w,0]],base);
-  poly([[-w*.58,-h*.58],[0,-h],[w*.2,-h*.48],[0,0]],lit+'55');
-  poly([[0,-h],[w*.2,-h*.48],[w,0],[0,0]],'#11182755');
-  poly([[-w*.55,-h*.18],[0,-h*.43],[w*.48,-h*.18]],'#ffffff30');
-  if(i%2===0){ctx.strokeStyle=palette.lamp;ctx.globalAlpha=.6;ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(0,-h*.55);ctx.lineTo(0,-h*.16);ctx.stroke();ctx.globalAlpha=1}
+  const h=68+(i%3)*19,w=25+(i%2)*10;
+  if(biome===0){ // city: angular towers and lit windows
+   poly([[-w,0],[-w,-h*.72],[-w*.35,-h*.72],[-w*.35,-h],[w*.42,-h],[w*.42,-h*.55],[w,0]],'#27364b');
+   poly([[-w*.35,-h*.72],[-w*.35,-h],[w*.42,-h],[w*.42,-h*.55]],'#53647d');
+   for(let q=0;q<3;q++)for(let v=0;v<3;v++)roundRect(-w*.18+q*10,-h*.82+v*15,4,7,1,palette.lamp);
+  }else if(biome===1){ // sunset: layered mesa cliffs
+   poly([[-w,0],[-w*.92,-h*.45],[-w*.35,-h*.45],[-w*.12,-h*.78],[w*.62,-h*.78],[w*.78,-h*.34],[w,0]],'#68475a');
+   poly([[-w*.12,-h*.78],[w*.62,-h*.78],[w*.78,-h*.34],[0,-h*.2]],'#d58a68');
+   poly([[-w,-h*.08],[0,-h*.2],[w,0]],'#f0b47a55');
+  }else if(biome===2){ // candy: giant wrapped sweets
+   roundRect(-w*.42,-h*.58,w*.84,h*.58,12,'#e879ad');
+   poly([[-w*.42,-h*.45],[-w*.9,-h*.7],[-w*.82,-h*.25],[-w*.42,-h*.08]],'#7de3d4');
+   poly([[w*.42,-h*.45],[w*.9,-h*.7],[w*.82,-h*.25],[w*.42,-h*.08]],'#ffe58c');
+   for(let q=-1;q<=1;q++)poly([[q*9-5,-h*.55],[q*9+5,-h*.55],[q*9+13,-h*.08],[q*9+3,-h*.08]],'#fff2d7aa');
+  }else if(biome===3){ // forest: faceted broadleaf canopy
+   roundRect(-4,-h*.42,8,h*.42,2,'#70523b');
+   poly([[-w,-h*.12],[-w*.8,-h*.55],[-w*.25,-h*.82],[w*.1,-h],[w*.78,-h*.62],[w,-h*.12]],'#28694d');
+   poly([[-w*.25,-h*.82],[w*.1,-h],[w*.78,-h*.62],[0,-h*.2]],'#79bd79');
+   poly([[-w,-h*.12],[-w*.25,-h*.82],[0,-h*.2]],'#3b9361');
+  }else if(biome===4){ // coast: lighthouse and sail shapes
+   poly([[-w*.45,0],[-w*.3,-h*.8],[w*.3,-h*.8],[w*.45,0]],'#f5e8c8');
+   roundRect(-w*.36,-h*.82,w*.72,8,2,'#d96e54');roundRect(-w*.2,-h*.65,w*.4,12,2,'#6cb8c3');
+   poly([[w*.55,0],[w*.55,-h*.72],[w*.95,-h*.12]],'#f8f0d8');
+  }else{ // snow: crystalline ice peaks
+   poly([[-w,0],[-w*.48,-h*.72],[0,-h],[w*.48,-h*.72],[w,0]],'#6f9db9');
+   poly([[-w*.48,-h*.72],[0,-h],[w*.05,-h*.24],[0,0]],'#e4f7ff');
+   poly([[0,-h],[w*.48,-h*.72],[w,0],[w*.05,-h*.24]],'#9bc9df');
+  }
   ctx.restore();
  }
  // street lamps, bollards and small street trees use same perspective scale
@@ -309,8 +330,12 @@ function drawBackground(dt){
    roundRect(-3,-25,6,28,2,'#9b7044');ctx.strokeStyle='#398d7c';ctx.lineWidth=5;ctx.beginPath();ctx.moveTo(0,-24);ctx.quadraticCurveTo(0,-48,-18,-56);ctx.moveTo(0,-24);ctx.quadraticCurveTo(8,-49,18,-55);ctx.moveTo(0,-24);ctx.quadraticCurveTo(-2,-51,0,-63);ctx.stroke();ellipse(-17,-57,9,3,'#48aa8c');ellipse(17,-56,9,3,'#48aa8c');ellipse(0,-64,9,3,'#65c49b');
   }else if(biome===5){
    roundRect(-3,-17,6,20,2,'#7b6d66');poly([[-20,-10],[0,-67],[20,-10]],'#7bb5d0');poly([[-16,-27],[0,-57],[16,-27]],'#dff7ff');poly([[-11,-43],[0,-65],[11,-43]],'#f7ffff');
+  }else if(biome===1){
+   roundRect(-4,-31,8,34,3,'#8c6249');roundRect(-11,-45,7,22,3,'#79a66c');roundRect(4,-53,7,22,3,'#79a66c');ellipse(0,-59,12,8,'#8bb879');poly([[-15,-1],[0,-9],[15,-1]],'#c77b64');
+  }else if(biome===0){
+   roundRect(-17,-10,34,10,3,'#596477');poly([[-15,-10],[-8,-42],[9,-42],[16,-10]],'#71849a');roundRect(-7,-34,5,8,1,'#ffe29a');roundRect(3,-34,5,8,1,'#ffe29a');
   }else{
-   roundRect(-3,-37,6,39,2,'#795239');ellipse(0,-45,17,18,biome===3?'#347c55':'#397c54');ellipse(-10,-48,11,12,biome===3?'#5bb879':'#5a9a5e');ellipse(9,-55,11,12,biome===3?'#68c58b':'#478c55');ellipse(5,-39,9,8,biome===3?'#287b50':'#2d704a');
+   roundRect(-3,-37,6,39,2,'#795239');ellipse(0,-45,17,18,'#397c54');ellipse(-10,-48,11,12,'#5a9a5e');ellipse(9,-55,11,12,'#478c55');ellipse(5,-39,9,8,'#2d704a');
   }
   ctx.restore();
  }
@@ -408,7 +433,7 @@ function drawPlayer(){const p=roadPoint(laneOffset(visualLane),.68);if(invulnera
 function burst(x,y,color){for(let i=0;i<12;i++)particles.push({x,y,vx:rand(-2,2),vy:rand(-4,-.5),life:1,color})}
 function drawParticles(dt){for(const p of particles){p.x+=p.vx*dt*3;p.y+=p.vy*dt*3;p.vy+=.12*dt;p.life-=.025*dt;ctx.globalAlpha=Math.max(0,p.life);ellipse(p.x,p.y,4,4,p.color)}ctx.globalAlpha=1;particles=particles.filter(p=>p.life>0)}
 function add(type,l,z=.02){const candidate=roadPoint(laneX[l],z);const pickup=['coin','shield','magnet'].includes(type);const near=objects.some(o=>{if(o.hit||o.type==='spark')return false;const sameLane=o.lane===l;const dz=Math.abs(o.z-z);if(sameLane&&dz<.34)return true;const other=roadPoint(laneX[o.lane],o.z);const minX=(pickup?19:34)*candidate.scale+( ['coin','shield','magnet'].includes(o.type)?19:34)*other.scale;const minY=(pickup?20:27)*candidate.scale+( ['coin','shield','magnet'].includes(o.type)?20:27)*other.scale;return Math.abs(candidate.x-other.x)<minX*.72&&Math.abs(candidate.y-other.y)<minY*.58});if(near)return false;objects.push({type,lane:l,z,prevZ:z,hit:false});return true}
-function wave(){waveCount++;const danger=Math.floor(Math.random()*3),safe=danger===0?2:danger===2?0:Math.random()<.5?0:2;const r=Math.random();if(r<.58){add(['cone','bin','barrier'][Math.floor(Math.random()*3)],danger,.02);for(let k=0;k<5;k++)add('coin',safe,.13+k*.105)}else{const other=3-danger-safe;add(Math.random()<.34?'sign':'barrier',danger,.02);add('bin',other,.02);for(let k=0;k<4;k++)add('coin',safe,.16+k*.12)}if(waveCount%4===0)add(Math.random()<.5?'shield':'magnet',safe,.38)}
+function wave(){waveCount++;const danger=Math.floor(Math.random()*3),safe=danger===0?2:danger===2?0:Math.random()<.5?0:2;const r=Math.random();const obstacle=r<.42?'cone':r<.68?'bin':r<.88?'barrier':'sign';add(obstacle,danger,.02);for(let k=0;k<5;k++)add('coin',safe,.14+k*.105);if(waveCount%4===0)add(Math.random()<.5?'shield':'magnet',safe,.38)}
 let dailyMissions={day:'',coins:0,seconds:0,boosts:0,claimed:[]};
 function loadDailyMissions(){const day=new Date().toLocaleDateString('sv-SE');try{dailyMissions=JSON.parse(localStorage.getItem('shawarmaDailyMissions')||'{}')}catch(e){dailyMissions={}}if(!dailyMissions||dailyMissions.day!==day)dailyMissions={day,coins:0,seconds:0,boosts:0,claimed:[]};if(!Array.isArray(dailyMissions.claimed))dailyMissions.claimed=[];saveDailyMissions()}
 function saveDailyMissions(){try{localStorage.setItem('shawarmaDailyMissions',JSON.stringify(dailyMissions))}catch(e){}}
