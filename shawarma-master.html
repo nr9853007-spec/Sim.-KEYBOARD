@@ -119,6 +119,12 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.16;ba
 .top-left-controls #endShift:hover{transform:translateY(-1px);filter:brightness(1.12);box-shadow:0 4px 0 #160c08,0 0 20px #ffb64b35}
 .top-left-controls #endShift:active{transform:translateY(2px);box-shadow:0 1px 0 #160c08}
 @media(max-width:620px){.top{grid-template-columns:1fr auto!important;gap:8px!important}.top-left-controls{grid-column:1/-1;grid-row:1;flex-direction:row;align-items:center;justify-content:space-between;width:100%;min-width:0}.top-left-controls #endShift{font-size:9px;padding:7px 9px}.game-brand{grid-column:1;grid-row:2}.stats{grid-column:2;grid-row:2}}
+/* Expanded centered kitchen title */
+.game-brand{position:relative!important;left:auto!important;top:auto!important;transform:none!important;flex:1 1 auto!important;min-width:0!important;margin:0 12px!important;justify-content:center!important;min-height:52px!important;padding:8px 16px!important;border-radius:17px!important}
+.game-brand span{text-align:center}
+.game-brand b{font-size:14px!important;letter-spacing:1.7px}
+.game-brand small{font-size:8px!important;letter-spacing:2.2px}
+@media(max-width:620px){.game-brand{grid-column:1!important;grid-row:2!important;width:100%!important;margin:0!important;min-height:44px!important}.game-brand b{font-size:12px!important}}
 </style><script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
 </head><body><main class="wrap">
 <div class="top"><div class="top-left-controls"><a class="back" href="index.html#games">← В ИГРОВОЙ ХАБ</a><button class="btn alt" id="endShift" type="button">■ ЗАКОНЧИТЬ СМЕНУ</button></div><div class="game-brand"><span><b>SHAWARMA</b><small>MASTER KITCHEN</small></span></div><div class="stats"><div class="stat">⭐ <span id="score">0</span></div><div class="stat">🔥 x<span id="combo">0</span></div><div class="stat">🏆 <span id="best">0</span></div></div></div>
