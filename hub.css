@@ -46,3 +46,57 @@
 .popular-foot{margin-top:10px;padding-top:8px;border-top:1px solid #b7ecf326;text-align:center;color:#8ebacb;font-size:6px;font-weight:1000;letter-spacing:1.25px}
 @media(max-width:600px){.popular-board{width:88%;padding:14px 13px 11px}.popular-head strong{font-size:17px}.popular-list{gap:5px}.popular-list li{padding:6px}.popular-game-name{font-size:8px}.popular-foot{font-size:5.5px}}
 @media(prefers-reduced-motion:reduce){.popular-board,.popular-live{animation:none!important}}
+
+/* Premium animated mobile navigation drawer */
+.mobile-menu{width:44px;height:44px;border:1px solid #d99a5144!important;border-radius:14px!important;background:linear-gradient(145deg,#4a281b,#21120f)!important;display:none;position:relative;box-shadow:0 5px 20px #0004, inset 0 1px #ffe0a022;transition:transform .25s,border-color .25s}
+.mobile-menu:hover{transform:translateY(-2px);border-color:#ffc56c!important}
+.mobile-menu span{width:19px!important;height:2px!important;margin:5px auto!important;background:#ffd18a!important;transition:transform .28s,opacity .2s}
+.mobile-menu[aria-expanded="true"] span:first-child{transform:translateY(3.5px) rotate(45deg)}
+.mobile-menu[aria-expanded="true"] span:last-child{transform:translateY(-3.5px) rotate(-45deg)}
+.hub-drawer-backdrop{position:fixed;inset:0;z-index:90;background:#080605b8;backdrop-filter:blur(7px);opacity:0;transition:opacity .32s}
+.hub-drawer-backdrop.is-visible{opacity:1}
+.hub-drawer{position:fixed;z-index:91;right:0;top:0;height:100dvh;width:min(410px,90vw);padding:25px 23px 20px;background:radial-gradient(ellipse at 100% 0,#70401e66,transparent 45%),linear-gradient(160deg,#2c190f,#160e0b 68%,#100b09);border-left:1px solid #d79b534d;box-shadow:-25px 0 80px #0009;color:#ffe4b5;display:flex;flex-direction:column;gap:17px;overflow-y:auto;transform:translateX(105%);visibility:hidden;transition:transform .42s cubic-bezier(.2,.8,.2,1),visibility .42s}
+.hub-drawer.is-open{transform:translateX(0);visibility:visible}
+.hub-drawer-head{display:flex;align-items:center;justify-content:space-between}
+.hub-drawer-brand{display:flex;align-items:center;gap:11px;color:#ffe2b1;text-decoration:none}
+.hub-drawer-logo,.hub-avatar{display:grid;place-items:center;border-radius:50%;background:radial-gradient(circle at 35% 25%,#ffe7a4,#bd702d 58%,#653015);color:#4a220e;font-weight:1000;box-shadow:0 0 24px #ffbd5b35,inset 0 2px 5px #fff8}
+.hub-drawer-logo{width:42px;height:42px;font-size:22px}
+.hub-drawer-brand b,.hub-drawer-profile b{display:block;font-size:14px;letter-spacing:.4px}
+.hub-drawer-brand small,.hub-drawer-profile small{display:block;margin-top:4px;color:#b9936d;font-size:8px;letter-spacing:1.4px}
+.hub-drawer-close{width:38px;height:38px;border:1px solid #c88d4c55;border-radius:12px;background:#ffffff08;color:#ffcf83;font-size:25px;cursor:pointer;transition:.2s}
+.hub-drawer-close:hover{background:#f5a94322;transform:rotate(90deg)}
+.hub-drawer-profile{display:flex;align-items:center;gap:13px;padding:15px;border:1px solid #d49b5540;border-radius:18px;background:linear-gradient(110deg,#ffffff0c,#d48b3010);box-shadow:inset 0 1px #fff1}
+.hub-avatar{width:48px;height:48px;font-size:24px}
+.hub-drawer-profile small{font-size:10px;letter-spacing:0;color:#c9aa8c}
+.hub-crown{margin-left:auto;color:#ffc66e;font-size:23px;text-shadow:0 0 14px #ffc66e}
+.hub-drawer-caption{font-size:9px;font-weight:900;letter-spacing:2px;color:#bd946b;margin:2px 0 -8px}
+.hub-drawer-links{display:grid;gap:8px}
+.hub-drawer-links a{display:flex;align-items:center;gap:13px;padding:13px 14px;border:1px solid #c58a4a35;border-radius:14px;background:linear-gradient(100deg,#ffffff0b,#ffffff04);color:#f8dfbc;text-decoration:none;font-size:12px;font-weight:800;transition:transform .22s,border-color .22s,background .22s}
+.hub-drawer-links a:hover{transform:translateX(-4px);border-color:#ffc36b99;background:#d88b301b}
+.hub-drawer-links a span{width:28px;height:28px;display:grid;place-items:center;border-radius:9px;background:#eaa44920;color:#ffca78;font-size:19px}
+.hub-drawer-links a i{margin-left:auto;color:#e9b86e;font-style:normal}
+.hub-support-card{padding:17px;border:1px solid #ffbe5c88;border-radius:19px;background:radial-gradient(circle at 95% 5%,#ffc05a24,transparent 42%),linear-gradient(135deg,#573018,#2a160e);box-shadow:0 0 30px #ff9e3020,inset 0 1px #fff2;position:relative;overflow:hidden}
+.hub-support-card:after{content:"✦";position:absolute;right:17px;top:42px;font-size:54px;color:#ffcc7640;animation:hubTwinkle 2.8s ease-in-out infinite}
+.hub-support-top{display:flex;align-items:center;gap:9px}
+.hub-heart{color:#ff8b66;font-size:23px;text-shadow:0 0 14px #ff7955}
+.hub-support-tag{font-size:8px;font-weight:1000;letter-spacing:1.5px;color:#ffc778}
+.hub-support-card h3{margin:7px 0 5px;font-size:19px;color:#ffe4b5}
+.hub-support-card p{max-width:285px;margin:0 0 13px;color:#d2b69a;font-size:11px;line-height:1.6}
+.hub-support-profile{display:flex;justify-content:space-between;align-items:center;padding:11px 13px;border-radius:12px;background:linear-gradient(100deg,#ffd77d,#e99a3e);color:#351a0b;text-decoration:none;font-size:11px;font-weight:1000;box-shadow:0 5px 18px #0004;transition:transform .2s}
+.hub-support-profile:hover{transform:translateY(-2px)}
+.hub-nft-card{display:flex;align-items:center;gap:13px;padding:14px;border:1px solid #d49a5748;border-radius:16px;background:linear-gradient(110deg,#ffffff0d,#d18a3210);color:#ffe5c0;text-decoration:none;transition:.22s}
+.hub-nft-card:hover{transform:translateY(-3px);border-color:#ffd17b;box-shadow:0 10px 30px #0004}
+.hub-nft-icon{width:43px;height:43px;display:grid;place-items:center;border-radius:13px;background:#e8a34420;font-size:27px}
+.hub-nft-card b,.hub-nft-card small{display:block}
+.hub-nft-card b{font-size:12px}
+.hub-nft-card small{margin-top:5px;color:#c2a080;font-size:9px;line-height:1.4}
+.hub-nft-card i{margin-left:auto;font-style:normal;color:#ffc66e;font-size:19px}
+.hub-drawer-foot{margin-top:auto;padding-top:13px;border-top:1px solid #d49a572b;display:flex;align-items:center;gap:8px;color:#b48e6b;font-size:8px;font-weight:900;letter-spacing:1.5px}
+.hub-drawer-foot span:last-child{margin-left:auto;letter-spacing:0}
+.hub-online-dot{width:7px;height:7px;border-radius:50%;background:#8ee2b5;box-shadow:0 0 10px #8ee2b5;animation:hubPulse 1.8s infinite}
+@keyframes hubPulse{50%{opacity:.4;transform:scale(.8)}}
+@keyframes hubTwinkle{50%{opacity:.4;transform:rotate(18deg) scale(.8)}}
+body.hub-menu-lock{overflow:hidden}
+@media(max-width:600px){.mobile-menu{display:block}.main-nav{display:none!important}}
+@media(min-width:601px){.hub-drawer{width:420px}}
+@media(prefers-reduced-motion:reduce){.hub-drawer,.hub-drawer-backdrop,.hub-drawer-links a,.hub-nft-card,.hub-support-profile{transition:none!important;animation:none!important}}
