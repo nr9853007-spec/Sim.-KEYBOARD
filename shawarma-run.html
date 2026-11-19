@@ -479,6 +479,7 @@ function add(type,l,z=.02){
   if(o.lane===l){
    const minGap=pickup&&otherPickup?.065:pickup||otherPickup?.22:.30;
    if(dz<minGap)return true;
+   return false;
   }
   const other=roadPoint(laneCenter(o.lane),o.z);
   const radiusA=(pickup?19:38)*candidate.scale;
@@ -505,12 +506,12 @@ function wave(){
  add(obstacle,danger,.02);
  // A clear route always remains. Extra obstacles are placed only in the other blocked lane.
  if(level>=3&&waveCount%5===0){
-  const second=safeOptions.find(x=>x!==danger);
+  const second=safeOptions.find(x=>x!==safe);
   if(second!==undefined)add(Math.random()<.5?'cone':'bin',second,.50);
  }
  // A full coin trail occupies the guaranteed safe lane.
  for(let k=0;k<5;k++)add('coin',safe,.13+k*.105);
- if(waveCount%Math.max(4,7-Math.floor(level/3))===0)add(Math.random()<.5?'shield':'magnet',safe,.43);
+ if(waveCount%Math.max(4,7-Math.floor(level/3))===0)add(Math.random()<.5?'shield':'magnet',safe,.64);
 }
 let dailyMissions={day:'',coins:0,seconds:0,boosts:0,claimed:[]};
 function loadDailyMissions(){const day=new Date().toLocaleDateString('sv-SE');try{dailyMissions=JSON.parse(localStorage.getItem('shawarmaDailyMissions')||'{}')}catch(e){dailyMissions={}}if(!dailyMissions||dailyMissions.day!==day)dailyMissions={day,coins:0,seconds:0,boosts:0,claimed:[]};if(!Array.isArray(dailyMissions.claimed))dailyMissions.claimed=[];saveDailyMissions()}
