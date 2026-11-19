@@ -192,7 +192,7 @@ addEventListener('resize',resize);resize();
 function poly(points,fill,stroke){ctx.beginPath();ctx.moveTo(points[0][0],points[0][1]);for(let i=1;i<points.length;i++)ctx.lineTo(points[i][0],points[i][1]);ctx.closePath();ctx.fillStyle=fill;ctx.fill();if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=2;ctx.stroke()}}
 function ellipse(x,y,rx,ry,color){ctx.beginPath();ctx.ellipse(x,y,rx,ry,0,0,Math.PI*2);ctx.fillStyle=color;ctx.fill()}
 function roundRect(x,y,w,h,r,color){ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fillStyle=color;ctx.fill()}
-function roadPoint(x,z){const depth=Math.max(0,Math.min(1,z));const horizon=H*.34;const y=horizon+depth*depth*(H*.66);const roadWidth=Math.min(W*.94,H*(W<700?1.08:1.42));const half=roadWidth*.5*(.25+.75*depth);const worldScale=Math.min(1.3,Math.max(.82,roadWidth/720));return{x:W/2+x*half,y,scale:(.44+depth*.68)*worldScale,half,roadWidth}}
+function roadPoint(x,z){const depth=Math.max(0,Math.min(1,z));const horizon=H*.34;const y=horizon+depth*depth*(H*.66);const roadWidth=Math.min(W*.78,H*(W<700?.90:1.18));const half=roadWidth*.5*(.25+.75*depth);const worldScale=Math.min(1.3,Math.max(.82,roadWidth/720));return{x:W/2+x*half,y,scale:(.44+depth*.68)*worldScale,half,roadWidth}}
 function laneCenter(laneIndex){return laneX[Math.max(0,Math.min(2,laneIndex|0))]}
 function laneWorldWidth(z){return roadPoint(0,z).half*2/3}
 function drawBackground(dt){
@@ -258,7 +258,7 @@ function drawBackground(dt){
  ctx.globalAlpha=1;
  // main road and wide pedestrian sidewalks in a single consistent perspective
  const farL=roadPoint(-1,0),farR=roadPoint(1,0),nearL=roadPoint(-1,1),nearR=roadPoint(1,1);
- poly([[farSL.x,farSL.y],[farL.x,farL.y],[nearL.x,bottom],[nearSL.x,bottom]],palette.side);
+ // Green verge fills the space outside the raised sidewalk.\n const grass=ctx.createLinearGradient(0,horizon,0,bottom);grass.addColorStop(0,'#789b62');grass.addColorStop(1,'#315d3b');\n poly([[0,horizon],[farSL.x,farSL.y],[nearSL.x,bottom],[0,bottom]],grass);\n poly([[W,horizon],[farSR.x,farSR.y],[nearSR.x,bottom],[W,bottom]],grass);\n poly([[farSL.x,farSL.y],[farL.x,farL.y],[nearL.x,bottom],[nearSL.x,bottom]],palette.side);
  poly([[farR.x,farR.y],[farSR.x,farSR.y],[nearSR.x,bottom],[nearR.x,bottom]],palette.side);
  // sidewalk slabs
  for(const side of [-1,1])for(let i=0;i<7;i++){const z=((i/7+time*.14)%1),a=roadPoint(side*1.08,z),b=roadPoint(side*1.32,z);ctx.strokeStyle='#342b2738';ctx.lineWidth=1+z*1.8;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke()}
@@ -435,7 +435,7 @@ function drawShawarma(x,y,s,tilt=0){
  else if(selectedSkin==='rainbow'){ctx.strokeStyle=c.aura;ctx.lineWidth=3;ctx.beginPath();ctx.arc(0,-20,28+Math.sin(time*6)*2,Math.PI*1.05,Math.PI*1.95);ctx.stroke()}
  ctx.restore();
 }
-function drawObstacle(o){const offset=o.offset||0,p=roadPoint(laneX[o.lane]+offset,o.z);const widths={cone:22,bin:24,barrier:40,sign:43,puddle:34,truck:47,coin:18,shield:18,magnet:18};const halfWidth=widths[o.type]||30;const available=p.half*(1-Math.abs(laneX[o.lane]+offset))-5;if(available<=0)return;const s=Math.min(p.scale,available/halfWidth);ctx.save();ctx.translate(p.x,p.y);ctx.scale(s,s);ellipse(0,5,27,9,'#1d120d66');
+function drawObstacle(o){const offset=o.offset||0;const requested=laneX[o.lane]+offset;const widths={cone:25,bin:27,barrier:43,sign:46,puddle:37,truck:52,coin:20,shield:22,magnet:22};const halfWidth=widths[o.type]||34;const edgeLimit=Math.max(0,p.half-halfWidth*p.scale-8);const clampedX=Math.max(-edgeLimit,Math.min(edgeLimit,requested*p.half));const p=roadPoint(0,o.z);p.x=W/2+clampedX;const available=Math.max(0,p.half-Math.abs(clampedX)-8);if(available<2)return;const s=Math.min(p.scale,available/halfWidth);ctx.save();ctx.translate(p.x,p.y);ctx.scale(s,s);ellipse(0,5,27,9,'#1d120d66');
 if(o.type==='cone'){ellipse(0,-2,21,5,'#71351f');poly([[-17,-2],[-2,-47],[3,-47],[18,-2]],'#f07832','#9b3f1d');poly([[-11,-17],[11,-17],[14,-9],[-14,-9]],'#fff0d2');poly([[-6,-32],[6,-32],[9,-24],[-9,-24]],'#ffe7bd');ellipse(-2,-46,4,2,'#ffd39b');roundRect(-22,-5,44,7,3,'#b84f27');}
 else if(o.type==='bin'){roundRect(-20,-38,40,39,7,'#477b67');roundRect(-24,-44,48,9,4,'#294c40');roundRect(-15,-49,30,5,3,'#6f9b7c');roundRect(-11,-30,22,16,3,'#315c50');ctx.strokeStyle='#a8c8a8';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(-8,-26);ctx.lineTo(-8,-17);ctx.moveTo(0,-26);ctx.lineTo(0,-17);ctx.moveTo(8,-26);ctx.lineTo(8,-17);ctx.stroke();ellipse(-14,3,5,3,'#202b25');ellipse(14,3,5,3,'#202b25');}
 else if(o.type==='barrier'){roundRect(-37,-27,74,26,5,'#e8c65e');roundRect(-40,-31,80,7,3,'#fff0c0');for(let k=-28;k<30;k+=20)poly([[k,-25],[k+9,-25],[k+22,-2],[k+13,-2]],'#a94a31');roundRect(-31,-1,8,13,2,'#5a4030');roundRect(23,-1,8,13,2,'#5a4030');ellipse(-30,-28,3,3,'#fff6d3');ellipse(30,-28,3,3,'#fff6d3');}
@@ -487,13 +487,21 @@ function wave(){
  else obstacle=r<.28?'cone':r<.55?'bin':r<.82?'barrier':'sign';
  add(obstacle,danger,.02);
  // A clear route always remains. Extra obstacles are placed only in the other blocked lane.
- if(level>=3&&waveCount%5===0){
+ if(level>=3&&waveCount%Math.max(2,5-Math.floor(level/5))===0){
   const second=safeOptions.find(x=>x!==safe);
-  if(second!==undefined)add(Math.random()<.5?'cone':'bin',second,.50);
+  if(second!==undefined)add(Math.random()<.5?'cone':'bin',second,.43);
  }
- // Coins follow a staggered, gently weaving path instead of a rigid straight line.
- const coinPath=[{z:.13,x:-.12},{z:.245,x:.08},{z:.375,x:.16},{z:.515,x:-.07},{z:.66,x:.11}];
- for(const point of coinPath)add('coin',safe,point.z,point.x);
+ if(level>=5&&waveCount%4===0){
+  const third=safeOptions.find(x=>x!==safe&&x!==Math.floor(Math.random()*3));
+  if(third!==undefined)add(level>=8&&Math.random()<.35?'sign':'cone',third,.70);
+ }
+ // Coins are scattered in small, irregular clusters across both open lanes, not in a stripe.
+ const coinSpots=[
+  {lane:safe,z:.12,x:-.14},{lane:safeOptions[0],z:.29,x:.09},
+  {lane:safeOptions[1],z:.43,x:-.05},{lane:safe,z:.61,x:.15},
+  {lane:safeOptions[Math.floor(Math.random()*2)],z:.76,x:-.11}
+ ];
+ for(const spot of coinSpots)add('coin',spot.lane,spot.z,spot.x);
  if(waveCount%Math.max(4,7-Math.floor(level/3))===0)add(Math.random()<.5?'shield':'magnet',safe,.64);
 }
 let dailyMissions={day:'',coins:0,seconds:0,boosts:0,claimed:[]};
@@ -514,12 +522,12 @@ function update(dt){
  jump=Math.max(0,jump-dt/60);
  slide=Math.max(0,slide-dt/60);
  // Continuous progression avoids the speed drop that used to happen at each level boundary.
- speed=Math.min(.68,.28+time*.0027);
+ speed=Math.min(.82,.28+time*.0042);
  if(level>oldLevel)announce('🏁 УРОВЕНЬ '+level+'! СКОРОСТЬ И СЛОЖНОСТЬ ВЫШЕ');
  score+=dt*(.23+speed*.38);
  spawn+=dt;
  const rush=time<eventModeUntil&&eventType==='rush';
- const spawnInterval=rush?Math.max(44,62-(level-1)*1.15-time*.025):Math.max(48,82-(level-1)*2.2-time*.035);
+ const spawnInterval=rush?Math.max(30,62-(level-1)*2.0-time*.07):Math.max(34,82-(level-1)*3.0-time*.085);
  if(spawn>=spawnInterval){
   spawn-=spawnInterval;
   wave();
