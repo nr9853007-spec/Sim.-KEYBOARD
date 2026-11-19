@@ -167,7 +167,9 @@ const shopItems=[
 {id:'city',kind:'bg',name:'Ночной город',icon:'🌃',cost:0},
 {id:'sunset',kind:'bg',name:'Закат',icon:'🌇',cost:22},
 {id:'candy',kind:'bg',name:'Конфетный мир',icon:'🍬',cost:35},
-{id:'forest',kind:'bg',name:'Зелёный парк',icon:'🌳',cost:48}
+{id:'forest',kind:'bg',name:'Зелёный парк',icon:'🌳',cost:48},
+{id:'coast',kind:'bg',name:'Морское побережье',icon:'🏖️',cost:62},
+{id:'snow',kind:'bg',name:'Снежные вершины',icon:'❄️',cost:75}
 ];
 let owned=['classic','city'],selectedSkin='classic',selectedBg='city';
 try{wallet=+(localStorage.getItem('shawarmaWallet')||0);owned=JSON.parse(localStorage.getItem('shawarmaOwned')||'[\"classic\",\"city\"]');selectedSkin=localStorage.getItem('shawarmaSkin')||'classic';selectedBg=localStorage.getItem('shawarmaBg')||'city';}catch(e){wallet=0;owned=['classic','city'];}
@@ -182,31 +184,15 @@ function roundRect(x,y,w,h,r,color){ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx
 function roadPoint(x,z){const depth=Math.max(0,Math.min(1,z));const horizon=H*.34;const y=horizon+depth*depth*(H*.60);const half=W*(.15+depth*.30);return{x:W/2+x*half,y,scale:.44+depth*.68,half}}
 function drawBackground(dt){
  const horizon=H*.34, bottom=H;
- const bgIds=['city','sunset','candy','forest'];const biome=Math.max(0,bgIds.indexOf(selectedBg));
+ const bgIds=['city','sunset','candy','forest','coast','snow'];const biome=Math.max(0,bgIds.indexOf(selectedBg));
  const palette=[
   {sky1:'#77c9ee',sky2:'#f5d6a0',far:'#6d7e87',mid:'#45545c',road:'#34383c',side:'#b8a38b',curb:'#ead9bd',lamp:'#ffe9a8',accent:'#e45c36'},
   {sky1:'#394c78',sky2:'#f2a06c',far:'#654e69',mid:'#503e4a',road:'#39353a',side:'#bb8b70',curb:'#f3c79a',lamp:'#ffe3a1',accent:'#f2c45e'},
   {sky1:'#8b70b8',sky2:'#f4c0d4',far:'#8c75a0',mid:'#645274',road:'#484052',side:'#b9a1c7',curb:'#f4d8ee',lamp:'#fff0c7',accent:'#62d7d1'},
-  {sky1:'#4e9c91',sky2:'#e4dca0',far:'#557c67',mid:'#42634e',road:'#39483e',side:'#a4ad79',curb:'#e4dfa9',lamp:'#fff0b3',accent:'#e5b75a'}
+  {sky1:'#4e9c91',sky2:'#e4dca0',far:'#557c67',mid:'#42634e',road:'#39483e',side:'#a4ad79',curb:'#e4dfa9',lamp:'#fff0b3',accent:'#e5b75a'},
+  {sky1:'#63c7dc',sky2:'#f8d8a6',far:'#438c9a',mid:'#2f777e',road:'#59636a',side:'#d9bd82',curb:'#fff0c9',lamp:'#fff3c4',accent:'#f1a95b'},
+  {sky1:'#9bc9e8',sky2:'#e9f6ff',far:'#91b5ce',mid:'#6f9bb8',road:'#657887',side:'#e4f0f5',curb:'#ffffff',lamp:'#e6f8ff',accent:'#83d8f0'}
  ][Math.max(0,biome)];
- // Every shawarma skin also gives the world its own lighting and accent treatment.
- const skinWorld={
-  classic:{sky1:'#83c9e9',sky2:'#f5d8aa',accent:'#f3ad58',lamp:'#fff0c4'},
-  gold:{sky1:'#b68b45',sky2:'#ffe4a0',accent:'#ffd45d',lamp:'#fff5b8'},
-  neon:{sky1:'#332c72',sky2:'#b05cae',accent:'#c77bff',lamp:'#b8f8ff'},
-  pepper:{sky1:'#a34e32',sky2:'#f3a65d',accent:'#ff684b',lamp:'#ffe1a0'},
-  lava:{sky1:'#612d39',sky2:'#f07843',accent:'#ff553b',lamp:'#ffd078'},
-  galaxy:{sky1:'#20254f',sky2:'#7654a6',accent:'#a99aff',lamp:'#d8caff'},
-  mint:{sky1:'#397e78',sky2:'#c4e6ad',accent:'#8de0b1',lamp:'#efffc7'},
-  chef:{sky1:'#8e765b',sky2:'#f0d6a4',accent:'#d9b17b',lamp:'#fff0cf'},
-  rainbow:{sky1:'#8d72b6',sky2:'#f1b8d0',accent:'#ff8fca',lamp:'#fff0a8'},
-  cyber:{sky1:'#183e5c',sky2:'#388ba0',accent:'#54eaff',lamp:'#d5ffff'},
-  pixel:{sky1:'#51458e',sky2:'#b6a3df',accent:'#b6a2ff',lamp:'#f2eaff'},
-  frost:{sky1:'#548aa8',sky2:'#d8f5ff',accent:'#9cecff',lamp:'#ffffff'},
-  royal:{sky1:'#54406d',sky2:'#d2a65d',accent:'#f4d27a',lamp:'#fff0bd'}
- };
- const mood=skinWorld[selectedSkin]||skinWorld.classic;
- palette.sky1=mood.sky1;palette.sky2=mood.sky2;palette.accent=mood.accent;palette.lamp=mood.lamp;
  const sky=ctx.createLinearGradient(0,0,0,horizon*1.5);sky.addColorStop(0,palette.sky1);sky.addColorStop(1,palette.sky2);ctx.fillStyle=sky;ctx.fillRect(0,0,W,H);
  // distant haze and soft sun
  const haze=ctx.createLinearGradient(0,horizon*.45,0,horizon*1.2);haze.addColorStop(0,'#ffffff00');haze.addColorStop(1,'#fff2d044');ctx.fillStyle=haze;ctx.fillRect(0,horizon*.4,W,horizon*.9);
@@ -218,6 +204,8 @@ function drawBackground(dt){
  else if(biome===1){ctx.globalAlpha=.28;for(let i=0;i<5;i++){const yy=sunY+Math.sin(i*1.4)*H*.035;ctx.strokeStyle='#ffe0a0';ctx.lineWidth=2;ctx.beginPath();ctx.arc(sunX,yy,Math.min(W,H)*(.07+i*.018),Math.PI*1.08,Math.PI*1.92);ctx.stroke()}ctx.globalAlpha=1}
  else if(biome===2){for(let i=0;i<8;i++){const x=(i*137%101)/101*W,y=H*(.08+(i*19%20)/100),r=4+(i%3)*3;ctx.globalAlpha=.48;ellipse(x,y,r,r,i%3===0?'#ff8fbe':i%3===1?'#fff0a0':'#77e5d4');ctx.globalAlpha=.18;ellipse(x,y,r*2.1,r*2.1,'#fff')}ctx.globalAlpha=1}
  else if(biome===3){for(let i=0;i<7;i++){const x=(i*149%103)/103*W,y=horizon-H*(.025+(i%3)*.018);ctx.globalAlpha=.55;ellipse(x,y,18+(i%2)*9,7+(i%3)*2,'#b8e2a0')}ctx.globalAlpha=1}
+ else if(biome===4){for(let i=0;i<5;i++){const x=W*(.12+i*.2),y=horizon+H*(.02+(i%2)*.035);ctx.globalAlpha=.42;ellipse(x,y,28,5,'#d9fff1');ctx.globalAlpha=1;}}
+ else if(biome===5){for(let i=0;i<32;i++){const x=(i*71%101)/101*W,y=(i*37%47)/47*H*.42;ctx.globalAlpha=.28+(i%4)*.12;ellipse(x,y,1.2+(i%3),1.2+(i%3),'#ffffff')}ctx.globalAlpha=1}
 
  // Procedural low-poly horizon mesh: layered terrain, sculpted crystal forms and no boxy buildings.
  const ridgeY=horizon+H*.018;
@@ -239,9 +227,23 @@ function drawBackground(dt){
   if(biome===2){ellipse(x,topY-high*.12,wide*.36,wide*.36,palette.accent)}
   if(biome===3){poly([[x-wide*.8,base],[x,topY-high*.12],[x+wide*.8,base]],'#8bc78a55')}
  }
+ // Main ground plane: broad grassy terrain beyond the pavement, with layered mesh facets.
+ const farSL=roadPoint(-1.38,0),farSR=roadPoint(1.38,0),nearSL=roadPoint(-1.38,1),nearSR=roadPoint(1.38,1);
+ const groundTop=biome===4?'#d8c18f':biome===5?'#dceef5':biome===3?'#70aa68':'#79a66c';
+ const groundBottom=biome===4?'#b99a69':biome===5?'#a9cbdc':biome===3?'#397d50':'#477e50';
+ const ground=ctx.createLinearGradient(0,horizon,0,bottom);ground.addColorStop(0,groundTop);ground.addColorStop(1,groundBottom);
+ poly([[0,horizon+H*.04],[farSL.x,farSL.y],[nearSL.x,bottom],[0,bottom]],ground);
+ poly([[W,horizon+H*.04],[farSR.x,farSR.y],[nearSR.x,bottom],[W,bottom]],ground);
+ for(const side of [-1,1])for(let i=0;i<22;i++){
+  const z=((i/22+time*.035)%1),p=roadPoint(side*(1.55+(i%4)*.23),z),size=(1.5+z*4)*(i%3===0?1.5:1);
+  const grass=biome===5?(i%2?'#ffffff88':'#b8dce9aa'):biome===4?(i%2?'#f3d99b99':'#fff0c088'):(i%2?'#b5d98299':'#286b4399');
+  ctx.globalAlpha=.35+z*.45;
+  poly([[p.x-size,p.y],[p.x,p.y-size*1.7],[p.x+size,p.y]],grass);
+  if(biome===3&&i%4===0){ellipse(p.x+size*1.8,p.y-size,1.8+z,1.8+z,'#ffe58a')}
+ }
+ ctx.globalAlpha=1;
  // main road and wide pedestrian sidewalks in a single consistent perspective
  const farL=roadPoint(-1,0),farR=roadPoint(1,0),nearL=roadPoint(-1,1),nearR=roadPoint(1,1);
- const farSL=roadPoint(-1.38,0),farSR=roadPoint(1.38,0),nearSL=roadPoint(-1.38,1),nearSR=roadPoint(1.38,1);
  poly([[farSL.x,farSL.y],[farL.x,farL.y],[nearL.x,bottom],[nearSL.x,bottom]],palette.side);
  poly([[farR.x,farR.y],[farSR.x,farSR.y],[nearSR.x,bottom],[nearR.x,bottom]],palette.side);
  // sidewalk slabs
@@ -275,7 +277,7 @@ function drawBackground(dt){
   ctx.restore();
  }
  // trees set back from the pavement, not intruding into the running lanes
- for(const side of [-1,1])for(let i=0;i<3;i++){const z=((i/3+time*.07+.57)%1),p=roadPoint(side*2.18,z),s=p.scale;ctx.save();ctx.translate(p.x,p.y);ctx.scale(s,s);roundRect(-3,-37,6,39,2,'#795239');ellipse(0,-45,17,18,biome===3?'#347c55':'#397c54');ellipse(-10,-48,11,12,'#5a9a5e');ellipse(9,-55,11,12,'#478c55');ellipse(5,-39,9,8,'#2d704a');ctx.restore()}
+ for(const side of [-1,1])for(let i=0;i<3;i++){const z=((i/3+time*.07+.57)%1),p=roadPoint(side*2.18,z),s=p.scale;ctx.save();ctx.translate(p.x,p.y);ctx.scale(s,s);roundRect(-3,-37,6,39,2,'#795239');ellipse(0,-45,17,18,biome===5?'#d9f2ff':biome===4?'#3d967e':biome===3?'#347c55':'#397c54');ellipse(-10,-48,11,12,biome===5?'#ffffff':biome===4?'#5bb99a':'#5a9a5e');ellipse(9,-55,11,12,biome===5?'#c5e8f8':biome===4?'#68c5a1':'#478c55');ellipse(5,-39,9,8,biome===5?'#a7d3e8':biome===4?'#287b72':'#2d704a');ctx.restore()}
  // occasional tiny street details: bins and hydrants, always on sidewalks
  for(const side of [-1,1])for(let i=0;i<2;i++){const z=((i/2+time*.09+.35)%1),p=roadPoint(side*1.48,z),s=p.scale;ctx.save();ctx.translate(p.x,p.y);ctx.scale(s,s);roundRect(-8,-25,16,25,3,'#4f7668');roundRect(-10,-28,20,5,2,'#344e45');ellipse(0,-18,3,3,'#a6d6bb');ctx.restore()}
  // tiny drifting clouds, slow and soft
