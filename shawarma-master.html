@@ -12,8 +12,8 @@
 <script>
 (()=>{const $=id=>document.getElementById(id);
 const items=[['Лаваш','🫓'],['Курица','🍗'],['Мясо','🥩'],['Капуста','🥬'],['Помидор','🍅'],['Огурец','🥒'],['Соус','🥣'],['Сыр','🧀']];
-const recipes=[['Классическая','🫓🍗🥬🍅🥣'],['Сырная','🫓🍗🧀🥬🥣'],['Мясная','🫓🥩🍅🥒🥣'],['Летняя','🫓🍗🥒🍅🥣'],['Двойное мясо','🫓🥩🥩🥬🥣'],['Острая','🫓🍗🍅🥬🌶️']];
-const map={'🫓':'Лаваш','🍗':'Курица','🥩':'Мясо','🥬':'Капуста','🍅':'Помидор','🥒':'Огурец','🥣':'Соус','🧀':'Сыр','🌶️':'Перец'};
+const recipes=[['Классическая','🫓🍗🥬🍅🥣'],['Сырная','🫓🍗🧀🥬🥣'],['Мясная','🫓🥩🍅🥒🥣'],['Летняя','🫓🍗🥒🍅🥣'],['Двойное мясо','🫓🥩🥩🥬🥣'],['Овощная','🫓🥬🍅🥒🥣']];
+const map={'🫓':'Лаваш','🍗':'Курица','🥩':'Мясо','🥬':'Капуста','🍅':'Помидор','🥒':'Огурец','🥣':'Соус','🧀':'Сыр'};
 let order=[],stack=[],score=0,combo=0,time=60,timer=null,active=false,served=0;
 let best=0;try{best=+(localStorage.getItem('shawarmaMasterBest')||0)}catch(e){}$('best').textContent=best;
 function drawItems(){$('ingredients').innerHTML=items.map(([name,icon])=>'<button class="ingredient" data-icon="'+icon+'"><b>'+icon+'</b>'+name+'</button>').join('');document.querySelectorAll('.ingredient').forEach(b=>b.addEventListener('click',()=>{if(!active||stack.length>=5)return;stack.push(b.dataset.icon);drawStack()}))}
