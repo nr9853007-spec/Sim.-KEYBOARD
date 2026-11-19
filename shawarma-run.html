@@ -241,7 +241,7 @@ function drawBackground(dt){
   if(biome===3){poly([[x-wide*.8,base],[x,topY-high*.12],[x+wide*.8,base]],'#8bc78a55')}
  }
  // Main ground plane: broad grassy terrain beyond the pavement, with layered mesh facets.
- const sideExtent=W<700?1.08:1.38;
+ const sideExtent=W<700?1.08:1.12;
  const farSL=roadPoint(-sideExtent,0),farSR=roadPoint(sideExtent,0),nearSL=roadPoint(-sideExtent,1),nearSR=roadPoint(sideExtent,1);
  const groundTop=biome===4?'#d8c18f':biome===5?'#dceef5':biome===3?'#70aa68':'#79a66c';
  const groundBottom=biome===4?'#b99a69':biome===5?'#a9cbdc':biome===3?'#397d50':'#477e50';
