@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img" aria-label="Объёмная раскрытая книга с зелёной mesh-подсветкой">
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d7f7d9"/><stop offset=".48" stop-color="#65c88c"/><stop offset="1" stop-color="#176b52"/></linearGradient>
+ <radialGradient id="meshA" cx="25%" cy="20%" r="85%"><stop stop-color="#e5ffd9"/><stop offset=".42" stop-color="#8ce3a5"/><stop offset="1" stop-color="#278b68"/></radialGradient>
+ <radialGradient id="meshB" cx="80%" cy="75%" r="90%"><stop stop-color="#c7f5a6"/><stop offset=".45" stop-color="#52bd91"/><stop offset="1" stop-color="#174f4c"/></radialGradient>
+ <linearGradient id="page" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fffef0"/><stop offset="1" stop-color="#d7f1d7"/></linearGradient>
+ <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%"><feGaussianBlur stdDeviation="12"/></filter>
+ <pattern id="mesh" width="18" height="18" patternUnits="userSpaceOnUse"><path d="M0 9L9 0L18 9L9 18Z" fill="none" stroke="#eaffdf" stroke-opacity=".24" stroke-width="1"/><circle cx="9" cy="9" r="1.5" fill="#f2ffe9" fill-opacity=".45"/></pattern>
+</defs>
+<circle cx="160" cy="155" r="132" fill="url(#bg)" opacity=".24"/>
+<circle cx="160" cy="155" r="112" fill="none" stroke="#baf2c8" stroke-opacity=".5" stroke-dasharray="3 10"><animateTransform attributeName="transform" type="rotate" from="0 160 155" to="360 160 155" dur="36s" repeatCount="indefinite"/></circle>
+<ellipse cx="160" cy="263" rx="100" ry="18" fill="#073e32" opacity=".3" filter="url(#shadow)"/>
+<g class="book"><animateTransform attributeName="transform" type="translate" values="0 2;0 -5;0 2" dur="4.5s" repeatCount="indefinite"/>
+ <path d="M42 102Q94 77 157 112V245Q98 211 42 235Z" fill="url(#meshA)" stroke="#e4ffe1" stroke-width="4" stroke-linejoin="round"/>
+ <path d="M278 102Q226 77 163 112V245Q222 211 278 235Z" fill="url(#meshB)" stroke="#e4ffe1" stroke-width="4" stroke-linejoin="round"/>
+ <path d="M42 102Q94 77 157 112V245Q98 211 42 235Z" fill="url(#mesh)" opacity=".75"/><path d="M278 102Q226 77 163 112V245Q222 211 278 235Z" fill="url(#mesh)" opacity=".75"/>
+ <path d="M157 112Q160 106 163 112V245Q160 239 157 245Z" fill="#14594b" opacity=".85"/>
+ <g fill="none" stroke="#efffe7" stroke-width="3" stroke-linecap="round" opacity=".88"><path d="M65 133Q105 119 137 137M65 153Q105 139 137 157M65 173Q105 159 137 177M65 193Q105 179 137 197"/><path d="M183 137Q215 119 255 133M183 157Q215 139 255 153M183 177Q215 159 255 173M183 197Q215 179 255 193"/></g>
+ <path d="M42 235Q100 210 157 245Q160 250 163 245Q220 210 278 235L278 250Q220 226 163 260Q160 263 157 260Q100 226 42 250Z" fill="#124d42" opacity=".9"/>
+ <path d="M54 103Q102 82 147 111" fill="none" stroke="#fff" stroke-opacity=".65" stroke-width="4" stroke-linecap="round"/>
+</g>
+<path d="M160 64L166 80L183 84L166 89L160 106L154 89L137 84L154 80Z" fill="#f3ffd9"><animate attributeName="opacity" values=".4;1;.4" dur="2.8s" repeatCount="indefinite"/></path>
+<circle cx="65" cy="72" r="4" fill="#eaffd9"><animate attributeName="r" values="2;5;2" dur="2.1s" repeatCount="indefinite"/></circle><circle cx="258" cy="76" r="3" fill="#eaffd9"><animate attributeName="opacity" values=".2;1;.2" dur="1.7s" repeatCount="indefinite"/></circle>
+</svg>
