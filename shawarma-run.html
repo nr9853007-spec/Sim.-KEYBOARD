@@ -419,7 +419,7 @@ function wave(){
   {lane:safeOptions[Math.floor(Math.random()*2)],z:.76,x:-.11}
  ];
  for(const spot of coinSpots)add('coin',spot.lane,spot.z,spot.x);
- if(waveCount%Math.max(4,7-Math.floor(level/3))===0)add(['shield','magnet','turbo','double'][Math.floor(Math.random()*4)],safe,.64);
+ if(waveCount%Math.max(4,7-Math.floor(level/3))===0)add(['shield','magnet','turbo','double'][Math.floor(Math.random()*4)],safe,.90);
 }
 let dailyMissions={day:'',coins:0,seconds:0,boosts:0,claimed:[]};
 function loadDailyMissions(){const day=new Date().toLocaleDateString('sv-SE');try{dailyMissions=JSON.parse(localStorage.getItem('shawarmaDailyMissions')||'{}')}catch(e){dailyMissions={}}if(!dailyMissions||dailyMissions.day!==day)dailyMissions={day,coins:0,seconds:0,boosts:0,claimed:[]};if(!Array.isArray(dailyMissions.claimed))dailyMissions.claimed=[];saveDailyMissions()}
