@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360">
+<defs>
+ <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#18394b"/><stop offset="1" stop-color="#091b2b"/></linearGradient>
+ <linearGradient id="tortilla" x1="0" y1="0" x2=".9" y2="1"><stop stop-color="#fff0bd"/><stop offset=".42" stop-color="#e7b66c"/><stop offset="1" stop-color="#a95c32"/></linearGradient>
+ <linearGradient id="fold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff3ca"/><stop offset="1" stop-color="#c47a40"/></linearGradient>
+ <linearGradient id="meat" x2="1" y2="1"><stop stop-color="#e98d4c"/><stop offset=".55" stop-color="#8b3b25"/><stop offset="1" stop-color="#492019"/></linearGradient>
+ <linearGradient id="leaf" x2="1" y2="1"><stop stop-color="#d8ed8a"/><stop offset=".6" stop-color="#4b9954"/><stop offset="1" stop-color="#23543a"/></linearGradient>
+ <filter id="shadow" x="-40%" y="-40%" width="180%" height="190%"><feGaussianBlur stdDeviation="11"/></filter>
+</defs>
+<rect x="12" y="12" width="336" height="336" rx="88" fill="url(#bg)" stroke="#8dd8dc" stroke-opacity=".45" stroke-width="3"/>
+<circle cx="180" cy="166" r="139" fill="#5bc7c8" opacity=".08"/>
+<path d="M68 284Q176 326 292 273" stroke="#020d18" stroke-width="22" opacity=".7" fill="none" filter="url(#shadow)"/>
+<g transform="rotate(-28 180 178)">
+ <path d="M108 53Q153 27 201 57L273 235Q223 294 154 268Q112 251 97 205L67 113Q66 77 108 53Z" fill="#5c2c20" opacity=".75" transform="translate(6 9)"/>
+ <path d="M105 50Q151 26 197 54L265 226Q222 280 156 258Q115 245 101 202L69 111Q68 76 105 50Z" fill="url(#tortilla)" stroke="#8c4a29" stroke-width="5"/>
+ <path d="M104 57Q148 35 190 62L245 217Q206 255 159 239Q124 228 112 194L82 111Q80 79 104 57Z" fill="#fff1c7" opacity=".34"/>
+ <path d="M81 108Q105 75 136 94Q157 69 181 93Q208 77 228 111Q245 111 246 138Q221 156 200 138Q178 160 155 139Q128 158 108 137Q87 145 81 108Z" fill="url(#leaf)" stroke="#2d663c" stroke-width="4"/>
+ <path d="M96 111q18-21 36 0q18-20 35 0q18-19 36 2" fill="none" stroke="#e7f5a5" stroke-width="7" stroke-linecap="round"/>
+ <path d="M101 143q23-23 45-2l13 25q-24 19-47 1Z" fill="#e94e39" stroke="#a32d28" stroke-width="4"/>
+ <path d="M157 140q23-21 43 0l13 25q-23 19-46 1Z" fill="#f2764c" stroke="#a32d28" stroke-width="4"/>
+ <path d="M95 176q23-25 46-8t43-2q23-19 43 6l12 25q-27 19-49 2t-45 4q-27 16-43-4Z" fill="url(#meat)" stroke="#5a281e" stroke-width="4"/>
+ <path d="M110 183q16-12 30 2m21 1q17-12 30 1" fill="none" stroke="#ffc17c" stroke-width="6" stroke-linecap="round"/>
+ <path d="M100 216q39 30 86 18q25-7 45-26l17 27q-47 49-104 30q-35-11-44-49Z" fill="url(#fold)" stroke="#a65e31" stroke-width="4"/>
+ <path d="M112 224q48 30 103 0" fill="none" stroke="#fff3d0" stroke-width="7" stroke-linecap="round"/>
+</g>
+<path d="M82 77q25-20 53-10" stroke="#fff8df" stroke-width="7" fill="none" stroke-linecap="round" opacity=".9"/>
+<g fill="#f8d58e"><path d="M285 73l7 17 17 7-17 7-7 17-7-17-17-7 17-7z"/><path d="M68 224l5 11 11 5-11 5-5 11-5-11-11-5 11-5z"/></g>
+</svg>
