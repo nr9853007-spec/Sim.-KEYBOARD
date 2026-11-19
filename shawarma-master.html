@@ -2,6 +2,57 @@
 <html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="theme-color" content="#21130d"><title>SHAWARMA MASTER — Повелитель лаваша</title>
 <style>
 *{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% 0,#704329,#21130d 68%);color:#fff4df;font-family:system-ui,Arial,sans-serif}.wrap{width:min(100% - 24px,760px);margin:auto;padding:18px 0 30px}.top{display:flex;justify-content:space-between;align-items:center;gap:10px}.back{color:#ffd47b;text-decoration:none;font-weight:900}.stats{display:flex;gap:8px}.stat{padding:8px 12px;border:1px solid #ffffff24;border-radius:12px;background:#ffffff12;font-weight:900}.hero{text-align:center;padding:15px 0 8px}.hero h1{margin:5px 0;color:#ffd36f;font-size:clamp(34px,8vw,58px);line-height:1;text-shadow:0 4px #8b421c}.hero p{color:#f1cda4;margin:10px 0}.counter{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}.counter span{padding:7px 12px;border-radius:99px;background:#ffffff12;font-size:13px;font-weight:800}.card{border:1px solid #f7c97966;border-radius:24px;padding:clamp(15px,4vw,25px);background:linear-gradient(145deg,#56321f,#2c1b14);box-shadow:0 20px 55px #0006;margin-top:14px}.order-head{display:flex;justify-content:space-between;align-items:center;gap:8px}.order-head h2{margin:0;font-size:21px}.timer{font-size:22px;font-weight:1000;color:#ffd36f}.ticket{margin:14px 0;padding:14px;border-radius:17px;background:#fff0d9;color:#492817;box-shadow:inset 0 0 0 2px #e9b96c}.ticket-title{font-size:12px;font-weight:1000;letter-spacing:1.5px;color:#98602c}.recipe{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}.recipe span{padding:7px 10px;border-radius:10px;background:#e8c28a;font-weight:900}.stack{min-height:88px;display:flex;align-items:center;justify-content:center;gap:4px;flex-wrap:wrap;padding:14px;border:2px dashed #ffd47b66;border-radius:17px;background:#17100c66}.stack span{font-size:29px;animation:pop .18s ease}.stack .empty{font-size:13px;color:#bfa78f}@keyframes pop{from{transform:scale(.5)}to{transform:scale(1)}}.label{margin:18px 0 9px;font-size:12px;font-weight:1000;letter-spacing:1.4px;color:#ffd47b}.ingredients{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.ingredient{min-height:88px;border:1px solid #ffffff26;border-radius:15px;background:linear-gradient(145deg,#795036,#43291b);color:white;font-size:12px;font-weight:900;cursor:pointer;box-shadow:0 4px #1a100b;touch-action:manipulation}.ingredient b{display:block;font-size:30px;margin-bottom:4px}.ingredient:active{transform:translateY(3px);box-shadow:0 1px #1a100b}.actions{display:flex;gap:9px;margin-top:14px}.btn{flex:1;padding:13px;border:0;border-radius:13px;background:linear-gradient(#ffe69a,#f4a743);color:#49240f;font-weight:1000;font-size:15px;cursor:pointer}.btn.alt{background:#ffffff18;color:#ffe6bf;border:1px solid #ffffff30}.message{min-height:26px;margin:12px 0 0;text-align:center;font-weight:900;color:#ffe19b}.overlay{position:fixed;inset:0;z-index:5;display:grid;place-items:center;padding:18px;background:#100a08dd}.modal{width:min(100%,420px);padding:26px;border:1px solid #ffd47b;border-radius:25px;background:linear-gradient(145deg,#70452b,#24160f);text-align:center;box-shadow:0 20px 70px #000b}.modal h2{font-size:32px;color:#ffd36f;margin:0 0 8px}.modal p{line-height:1.6;color:#f0d0aa}.modal .btn{width:100%;margin-top:8px}.hidden{display:none!important}.small{font-size:12px;color:#cbb39a;text-align:center;margin-top:14px}@media(max-width:430px){.ingredients{grid-template-columns:repeat(4,1fr);gap:6px}.ingredient{min-height:78px;font-size:10px}.ingredient b{font-size:25px}.stat{font-size:12px;padding:7px 9px}.order-head h2{font-size:18px}}
+
+/* SHAWARMA MASTER — premium animated street-kitchen art direction */
+:root{color-scheme:dark}
+body{background:radial-gradient(ellipse at 50% -15%,#ffbd5c55 0,transparent 42%),radial-gradient(ellipse at 0 55%,#d85d2b26 0,transparent 34%),radial-gradient(ellipse at 100% 70%,#e2a13b20 0,transparent 35%),linear-gradient(145deg,#170d0a,#30170f 48%,#160c09);background-attachment:fixed}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.16;background-image:radial-gradient(#ffd99b 1px,transparent 1.5px),radial-gradient(#fff 1px,transparent 1.5px);background-size:37px 37px,61px 61px;background-position:0 0,19px 25px;mask-image:linear-gradient(transparent,#000 25%,#000 80%,transparent);animation:spiceDrift 28s linear infinite}
+@keyframes spiceDrift{to{background-position:160px 220px,-130px 180px}}
+.wrap{position:relative;z-index:1;width:min(100% - 24px,820px);padding-top:22px}
+.top{padding:10px 13px;border:1px solid #ffd38a30;border-radius:18px;background:#170d0bcc;backdrop-filter:blur(14px);box-shadow:0 12px 35px #0005}
+.back{color:#ffe0a1}.stat{border-color:#ffd48a40;background:linear-gradient(145deg,#8e431f88,#4d241b88);box-shadow:inset 0 1px #fff3}
+.hero{position:relative;overflow:hidden;padding:30px 12px 24px;border:1px solid #ffcc7650;border-radius:26px;margin-top:15px;background:radial-gradient(ellipse at 50% 110%,#f4a43c3b,transparent 55%),linear-gradient(120deg,#512718d9,#24120eeb 60%,#67351bd9);box-shadow:0 22px 65px #0007,inset 0 1px #fff3}
+.hero:before{content:"🌯";position:absolute;right:-8px;top:8px;font-size:clamp(100px,22vw,190px);opacity:.12;transform:rotate(24deg);filter:blur(.3px);animation:wrapFloat 5s ease-in-out infinite}
+.hero:after{content:"✦  ✧  ✦";position:absolute;left:5%;bottom:12px;color:#ffd47b88;letter-spacing:30px;font-size:20px;pointer-events:none}
+@keyframes wrapFloat{50%{transform:translateY(-12px) rotate(16deg)}}
+.hero h1{position:relative;font-size:clamp(38px,9vw,68px);letter-spacing:1px;color:#ffe09a;background:linear-gradient(180deg,#fff2bd 0%,#ffc65f 52%,#e87932 100%);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 5px 0 #7b3218);text-shadow:none}
+.hero p{position:relative;color:#f7d7b1;font-weight:650}
+.counter span{border:1px solid #ffdc9b35;background:#1b100dcc;box-shadow:inset 0 1px #fff2}
+.card{position:relative;overflow:hidden;margin-top:18px;border:1px solid #ffc76b66;border-radius:28px;padding:clamp(16px,4vw,28px);background:linear-gradient(145deg,#63351fdc,#2a1712f2 58%,#442116f2);box-shadow:0 28px 75px #0008,inset 0 1px #fff3}
+.card:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,#fff0 25%,#fff1 48%,#fff0 68%);transform:translateX(-100%);animation:shineSweep 8s ease-in-out infinite}
+@keyframes shineSweep{0%,55%{transform:translateX(-100%)}75%,100%{transform:translateX(100%)}}
+.order-head h2{color:#ffe1a0;font-size:clamp(19px,4vw,24px)}
+.timer{padding:7px 13px;border-radius:14px;background:#1a0e0b;border:1px solid #ffb34a55;color:#ffd36f;box-shadow:0 0 24px #ff9f2a20}
+.ticket{position:relative;overflow:hidden;border:1px solid #ffcf7b;background:linear-gradient(135deg,#fff0d4,#f1c98e);box-shadow:0 10px 24px #12080455,inset 0 0 0 4px #fff8}
+.ticket:after{content:"🥙";position:absolute;right:12px;top:4px;font-size:55px;opacity:.18;transform:rotate(-18deg)}
+.ticket-title{color:#a14d22;letter-spacing:2px}
+#orderName{position:relative;z-index:1;color:#532813}
+.recipe span{border:1px solid #b77b3e;background:linear-gradient(#ffdfa7,#e9b66e);box-shadow:0 2px 0 #b47a43;color:#512b16;font-size:18px}
+.stack{position:relative;min-height:108px;border:2px dashed #ffc96b99;background:radial-gradient(ellipse at center,#7b421e66,#1b100e);box-shadow:inset 0 5px 18px #0006}
+.stack span{display:inline-flex;align-items:center;justify-content:center;width:45px;height:45px;border-radius:50%;font-size:27px;background:linear-gradient(145deg,#fff0d3,#d99550);box-shadow:0 4px 0 #85431f,0 7px 15px #0006;animation:ingredientDrop .25s cubic-bezier(.2,1.4,.5,1)}
+.stack .empty{width:auto;height:auto;background:none;box-shadow:none;color:#e4c4a0;font-size:13px}
+@keyframes ingredientDrop{from{transform:translateY(-18px) scale(.5) rotate(-18deg);opacity:0}to{transform:translateY(0) scale(1) rotate(0);opacity:1}}
+.label{color:#ffd68b;letter-spacing:1.8px}
+.ingredient{position:relative;overflow:hidden;min-height:102px;border:1px solid #ffd38a55;border-radius:19px;background:linear-gradient(145deg,#9c5a31,#58301e 68%,#3a2018);box-shadow:0 6px 0 #1c100c,0 12px 20px #0004,inset 0 1px #fff4;transition:transform .16s,border-color .16s,filter .16s}
+.ingredient:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 0,#ffe5a833,transparent 65%);pointer-events:none}
+.ingredient:hover{transform:translateY(-4px);border-color:#ffe0a0;filter:brightness(1.15)}
+.ingredient:active{transform:translateY(3px) scale(.97);box-shadow:0 2px 0 #1a100b}
+.ingredient b{position:relative;font-size:36px;filter:drop-shadow(0 4px 3px #2b120b88)}
+.actions{gap:10px}
+.btn{border-radius:15px;background:linear-gradient(180deg,#fff0b4,#ffc45e 55%,#e78a32);box-shadow:0 5px 0 #8c431c,0 10px 18px #0004,inset 0 1px #fff9;transition:transform .15s,filter .15s}
+.btn:hover{filter:brightness(1.1);transform:translateY(-2px)}
+.btn:active{transform:translateY(3px);box-shadow:0 2px 0 #8c431c}
+.btn.alt{background:linear-gradient(145deg,#75432c,#42251b);border:1px solid #e8b36a66;box-shadow:0 4px 0 #1b100c;color:#ffe4bd}
+.message{padding:9px;border-radius:12px;background:#1b100c77;color:#ffe5a9}
+.overlay{background:#100805dd;backdrop-filter:blur(9px)}
+.modal{border:1px solid #ffcf78;background:radial-gradient(circle at 50% 0,#a85c2d,#472519 62%,#21120d);box-shadow:0 30px 100px #000c,inset 0 1px #fff4}
+.modal h2{background:linear-gradient(#fff0b2,#ffc45d,#e98237);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.modal>div:first-child{filter:drop-shadow(0 8px 12px #160903);animation:chefBob 3s ease-in-out infinite}
+@keyframes chefBob{50%{transform:translateY(-8px) rotate(4deg)}}
+.small{color:#d9b997}
+@media(max-width:520px){.hero{padding:24px 8px 20px}.ingredient{min-height:88px;border-radius:15px}.ingredient b{font-size:31px}.actions{flex-wrap:wrap}.actions .btn:last-child{flex-basis:100%}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+
 </style></head><body><main class="wrap">
 <div class="top"><a class="back" href="index.html#games">← В ИГРОВОЙ ХАБ</a><div class="stats"><div class="stat">⭐ <span id="score">0</span></div><div class="stat">🔥 x<span id="combo">0</span></div></div></div>
 <header class="hero"><h1>🌯 SHAWARMA<br>MASTER</h1><p>Собери заказ быстрее всех и стань легендой кухни!</p><div class="counter"><span>⏱ 60 секунд</span><span>🥙 Точные рецепты</span><span>🏆 Рекорд: <b id="best">0</b></span></div></header>
