@@ -70,6 +70,67 @@ html,body,#game{background:#10121d;color:#f7f4ff}
 .shop-item button{background:linear-gradient(180deg,#ffe6a0,#ffad50);color:#352039}
 .event{top:22%;border:1px solid #ffffff30;background:#171a2bed;color:#fff3d7;backdrop-filter:blur(12px)}
 @media(prefers-reduced-motion:reduce){.hub-menu-link{transition:none}}
+
+/* Warm gold-orange menu theme and a complete frame around the full menu. */
+#menu .panel{
+  max-height:calc(100dvh - 28px);
+  overflow-y:auto;
+  overflow-x:hidden;
+  padding:25px 23px 28px;
+  border:2px solid #ffc66a;
+  background:linear-gradient(145deg,#49301f 0%,#302018 48%,#1d1720 100%);
+  box-shadow:0 22px 70px #000b,inset 0 0 0 5px #ffbf4b12,inset 0 1px #fff5;
+  scrollbar-width:thin;
+  scrollbar-color:#eaa64b #2b1c19;
+}
+#menu .panel:before{display:none}
+#menu .btn{
+  border:1px solid #ffe1a0;
+  background:linear-gradient(115deg,#fff0a6 0%,#ffc34f 48%,#f28a32 100%);
+  color:#45240f;
+  box-shadow:0 5px #a95620,0 9px 22px #0005,inset 0 1px #fff9;
+}
+#menu #openShop{
+  background:linear-gradient(115deg,#fff0a6 0%,#ffc34f 48%,#f28a32 100%)!important;
+  color:#45240f!important;
+  box-shadow:0 5px #a95620,0 9px 22px #0005,inset 0 1px #fff9!important;
+}
+#menu .mini-btn{
+  border:1px solid #ffd27a;
+  background:linear-gradient(135deg,#ffe49a 0%,#ffb94e 52%,#e98232 100%);
+  color:#48240f;
+  box-shadow:inset 0 1px #fff9,0 4px 12px #0004;
+  text-shadow:0 1px #fff5;
+}
+#menu .mini-btn:hover{filter:brightness(1.12);box-shadow:inset 0 1px #fff9,0 6px 16px #0005}
+#menu .tag{color:#ffe0a0}
+#menu .hint{color:#f2d5ad}
+#menu .logo{
+  color:transparent;
+  background:linear-gradient(90deg,#ff5d5d,#ffb347,#fff06a,#64e58b,#54cfff,#a77bff,#ff72c6,#ff5d5d);
+  background-size:300% 100%;
+  -webkit-background-clip:text;
+  background-clip:text;
+  text-shadow:0 0 12px #ffb34766,0 0 26px #bd7bff55;
+  animation:rainbowTitle 5s linear infinite,logoGlow 3s ease-in-out infinite alternate;
+  filter:drop-shadow(0 0 7px #ffb34b55);
+}
+#menu .logo small{
+  color:#fff0d1;
+  -webkit-text-fill-color:#fff0d1;
+  text-shadow:0 0 12px #ffbd6a88;
+}
+@keyframes rainbowTitle{to{background-position:300% 0}}
+@media(max-height:760px){
+  #menu .panel{padding-top:18px;padding-bottom:20px}
+  #menu .food{font-size:56px;margin:10px 0 5px}
+  #menu .tag{margin:8px 0}
+  #menu .menu-grid{gap:7px;margin-top:12px}
+  #menu .mini-btn{padding:10px 5px;font-size:12px}
+  #menu .hint{margin-top:10px;font-size:12px}
+}
+@media(prefers-reduced-motion:reduce){#menu .logo{animation:none;background-position:50% 0}}
+
 </style>
 </head>
 <body><main id="game">
@@ -77,7 +138,7 @@ html,body,#game{background:#10121d;color:#f7f4ff}
 <div class="hud hidden" id="hud"><div class="pill">⭐ <b id="score">0</b></div><div class="pill">🌯 <b id="coins">0</b></div><div class="pill">⚡ <b id="speed">1.0</b>x</div><div class="pill">❤️ <b id="lives">3</b></div></div><div class="progress hidden" id="progress"><i id="progressFill"></i></div>
 <div class="event hidden" id="event"></div><button class="pause-btn hidden" id="pauseBtn" aria-label="Пауза">Ⅱ ПАУЗА</button>
 <div class="controls hidden" id="controls"><button id="left">◀</button><button id="right">▶</button></div>
-<div class="screen" id="menu"><section class="panel"><div class="logo">ШАВУХА<small>RUN · 3D-ПОБЕГ</small></div><a class="hub-menu-link" href="./index.html">← ВЕРНУТЬСЯ В HUB</a><div class="food">🌯</div><p class="tag">ОДНА ШАВУХА. ТРИ ПОЛОСЫ. БЕСКОНЕЧНЫЙ ЗАБЕГ!</p><button class="btn" id="play">НАЧАТЬ ПОБЕГ</button><button class="btn" id="openShop" style="margin-top:14px;background:linear-gradient(#b8edff,#55b5df);box-shadow:0 6px #286d94">🛒 МАГАЗИН</button><div class="menu-grid"><button class="mini-btn" id="dailyBtn">🎁 БОНУС ДНЯ</button><button class="mini-btn" id="missionsBtn">📜 ЗАДАНИЯ</button><button class="mini-btn" id="achievementsBtn">🏆 ДОСТИЖЕНИЯ</button><button class="mini-btn" id="statsBtn">📊 СТАТИСТИКА</button><button class="mini-btn" id="settingsBtn">⚙️ НАСТРОЙКИ</button><button class="mini-btn" id="supportBtn">⭐ TELEGRAM STARS</button><button class="mini-btn" id="helpBtn">❔ КАК ИГРАТЬ</button><button class="mini-btn" id="ideasBtn">💡 ИДЕИ ОБНОВЛЕНИЙ</button><button class="mini-btn" id="modeBtn">🎮 РЕЖИМЫ</button><button class="mini-btn" id="randomSkinBtn">🎲 СЛУЧАЙНЫЙ СКИН</button><button class="mini-btn" id="collectionBtn">🗂 КОЛЛЕКЦИЯ</button><button class="mini-btn" id="secretBtn">🥚 СЕКРЕТ</button></div><p class="hint">← → / A D — поворот между полосами<br>Телефон: свайп или кнопки<br><br>Собирай монеты, щиты и магниты, уворачивайся от препятствий. Каждые 25 секунд — новое событие!</p></section></div>
+<div class="screen" id="menu"><section class="panel"><div class="logo">SHAVERMA<small>RUN · 3D-ПОБЕГ</small></div><a class="hub-menu-link" href="./index.html">← ВЕРНУТЬСЯ В HUB</a><div class="food">🌯</div><p class="tag">ОДНА ШАВУХА. ТРИ ПОЛОСЫ. БЕСКОНЕЧНЫЙ ЗАБЕГ!</p><button class="btn" id="play">НАЧАТЬ ПОБЕГ</button><button class="btn" id="openShop" style="margin-top:14px;background:linear-gradient(#b8edff,#55b5df);box-shadow:0 6px #286d94">🛒 МАГАЗИН</button><div class="menu-grid"><button class="mini-btn" id="dailyBtn">🎁 БОНУС ДНЯ</button><button class="mini-btn" id="missionsBtn">📜 ЗАДАНИЯ</button><button class="mini-btn" id="achievementsBtn">🏆 ДОСТИЖЕНИЯ</button><button class="mini-btn" id="statsBtn">📊 СТАТИСТИКА</button><button class="mini-btn" id="settingsBtn">⚙️ НАСТРОЙКИ</button><button class="mini-btn" id="supportBtn">⭐ TELEGRAM STARS</button><button class="mini-btn" id="helpBtn">❔ КАК ИГРАТЬ</button><button class="mini-btn" id="ideasBtn">💡 ИДЕИ ОБНОВЛЕНИЙ</button><button class="mini-btn" id="modeBtn">🎮 РЕЖИМЫ</button><button class="mini-btn" id="randomSkinBtn">🎲 СЛУЧАЙНЫЙ СКИН</button><button class="mini-btn" id="collectionBtn">🗂 КОЛЛЕКЦИЯ</button><button class="mini-btn" id="secretBtn">🥚 СЕКРЕТ</button></div><p class="hint">← → / A D — поворот между полосами<br>Телефон: свайп или кнопки<br><br>Собирай монеты, щиты и магниты, уворачивайся от препятствий. Каждые 25 секунд — новое событие!</p></section></div>
 <div class="screen hidden" id="pausePanel"><section class="panel"><div class="logo" style="font-size:48px">ПАУЗА</div><a class="hub-menu-link" href="./index.html">← ВЕРНУТЬСЯ В HUB</a><div class="food">⏸️</div><p class="tag">Шаурма отдыхает. Забег ждёт!</p><button class="btn" id="resumeBtn">▶ ПРОДОЛЖИТЬ</button><button class="btn" id="pauseMenuBtn" style="margin-top:12px;background:linear-gradient(#b8edff,#55b5df);box-shadow:0 6px #286d94">⌂ В ГЛАВНОЕ МЕНЮ</button></section></div><div class="screen hidden" id="shop"><section class="panel"><div class="logo" style="font-size:42px">ЛАВКА ШАВЕРМЫ</div><p class="tag">🌯 ТВОИ МОНЕТЫ: <b id="wallet">0</b></p><div class="shop-tabs"><button class="shop-tab active" id="skinTab" type="button">🌯 СКИНЫ ШАУРМЫ</button><button class="shop-tab" id="bgTab" type="button">🌆 ФОНЫ</button></div><div class="shop-grid" id="shopGrid"></div><button class="btn" id="shopBack">НАЗАД</button><p class="hint">Покупки и выбранные предметы сохраняются на этом устройстве.</p></section></div>
 <div class="screen hidden" id="extraPanel"><section class="panel"><div class="logo" id="extraTitle" style="font-size:38px">РАЗДЕЛ</div><div id="extraContent" class="extra-content"></div><button class="btn" id="extraBack">НАЗАД</button></section></div>
 <div class="screen hidden" id="over"><section class="panel"><div class="logo" style="font-size:48px">ВОТ ЭТО ПОГОНЯ!</div><div class="food">🥙💨</div><p class="tag">Забег окончен!</p><p>Очки: <b id="finalScore">0</b><br>Шавух собрано: <b id="finalCoins">0</b><br>Рекорд: <b id="best">0</b></p><button class="btn" id="again">ЕЩЁ ОДИН ЗАБЕГ</button><button class="btn" id="overShop" style="margin-top:14px;background:linear-gradient(#b8edff,#55b5df);box-shadow:0 6px #286d94">🛒 МАГАЗИН</button><p class="hint">Подсказка: магнит притягивает монеты даже с соседних полос!</p></section></div>
@@ -310,63 +371,3 @@ function intro(){let t=performance.now();function frame(now){if(playing)return;r
 intro();setTimeout(()=>{const l=$('loader');if(l){l.style.opacity='0';setTimeout(()=>l.remove(),450)}},1350);
 })();
 </script></main></body></html>
-
-/* Warm gold-orange menu theme and a complete frame around the full menu. */
-#menu .panel{
-  max-height:calc(100dvh - 28px);
-  overflow-y:auto;
-  overflow-x:hidden;
-  padding:25px 23px 28px;
-  border:2px solid #ffc66a;
-  background:linear-gradient(145deg,#49301f 0%,#302018 48%,#1d1720 100%);
-  box-shadow:0 22px 70px #000b,inset 0 0 0 5px #ffbf4b12,inset 0 1px #fff5;
-  scrollbar-width:thin;
-  scrollbar-color:#eaa64b #2b1c19;
-}
-#menu .panel:before{display:none}
-#menu .btn{
-  border:1px solid #ffe1a0;
-  background:linear-gradient(115deg,#fff0a6 0%,#ffc34f 48%,#f28a32 100%);
-  color:#45240f;
-  box-shadow:0 5px #a95620,0 9px 22px #0005,inset 0 1px #fff9;
-}
-#menu #openShop{
-  background:linear-gradient(115deg,#fff0a6 0%,#ffc34f 48%,#f28a32 100%)!important;
-  color:#45240f!important;
-  box-shadow:0 5px #a95620,0 9px 22px #0005,inset 0 1px #fff9!important;
-}
-#menu .mini-btn{
-  border:1px solid #ffd27a;
-  background:linear-gradient(135deg,#ffe49a 0%,#ffb94e 52%,#e98232 100%);
-  color:#48240f;
-  box-shadow:inset 0 1px #fff9,0 4px 12px #0004;
-  text-shadow:0 1px #fff5;
-}
-#menu .mini-btn:hover{filter:brightness(1.12);box-shadow:inset 0 1px #fff9,0 6px 16px #0005}
-#menu .tag{color:#ffe0a0}
-#menu .hint{color:#f2d5ad}
-#menu .logo{
-  color:transparent;
-  background:linear-gradient(90deg,#ff5d5d,#ffb347,#fff06a,#64e58b,#54cfff,#a77bff,#ff72c6,#ff5d5d);
-  background-size:300% 100%;
-  -webkit-background-clip:text;
-  background-clip:text;
-  text-shadow:0 0 12px #ffb34766,0 0 26px #bd7bff55;
-  animation:rainbowTitle 5s linear infinite,logoGlow 3s ease-in-out infinite alternate;
-  filter:drop-shadow(0 0 7px #ffb34b55);
-}
-#menu .logo small{
-  color:#fff0d1;
-  -webkit-text-fill-color:#fff0d1;
-  text-shadow:0 0 12px #ffbd6a88;
-}
-@keyframes rainbowTitle{to{background-position:300% 0}}
-@media(max-height:760px){
-  #menu .panel{padding-top:18px;padding-bottom:20px}
-  #menu .food{font-size:56px;margin:10px 0 5px}
-  #menu .tag{margin:8px 0}
-  #menu .menu-grid{gap:7px;margin-top:12px}
-  #menu .mini-btn{padding:10px 5px;font-size:12px}
-  #menu .hint{margin-top:10px;font-size:12px}
-}
-@media(prefers-reduced-motion:reduce){#menu .logo{animation:none;background-position:50% 0}}
