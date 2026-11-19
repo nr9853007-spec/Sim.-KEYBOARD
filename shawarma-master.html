@@ -53,6 +53,12 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.16;ba
 @media(max-width:520px){.hero{padding:24px 8px 20px}.ingredient{min-height:88px;border-radius:15px}.ingredient b{font-size:31px}.actions{flex-wrap:wrap}.actions .btn:last-child{flex-basis:100%}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
 
+
+/* Pointer drag support: mouse + touch */
+.ingredient{touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab}.ingredient.is-dragging{opacity:.35;transform:scale(.94)}
+.drag-ghost{position:fixed;z-index:20;pointer-events:none;transform:translate(-50%,-50%) scale(1.08);width:94px;min-height:88px;display:grid;place-content:center;text-align:center;border:2px solid #ffe2a0;border-radius:18px;background:linear-gradient(145deg,#a65f32,#4b281a);color:#fff4df;font-weight:900;box-shadow:0 16px 40px #000a,0 0 28px #ffc76b88}
+.drag-ghost b{display:block;font-size:34px}.stack{transition:border-color .15s,background .15s,transform .15s}.stack.drop-target{border:2px solid #ffe18e;background:radial-gradient(ellipse at center,#d18a3c66,#29160e);transform:scale(1.015);box-shadow:inset 0 0 25px #ffc66b33,0 0 25px #ffc66b55}
+@media(prefers-reduced-motion:reduce){.drag-ghost{transition:none}}
 </style></head><body><main class="wrap">
 <div class="top"><a class="back" href="index.html#games">← В ИГРОВОЙ ХАБ</a><div class="stats"><div class="stat">⭐ <span id="score">0</span></div><div class="stat">🔥 x<span id="combo">0</span></div></div></div>
 <header class="hero"><h1>🌯 SHAWARMA<br>MASTER</h1><p>Собери заказ быстрее всех и стань легендой кухни!</p><div class="counter"><span>⏱ 60 секунд</span><span>🥙 Точные рецепты</span><span>🏆 Рекорд: <b id="best">0</b></span></div></header>
@@ -67,7 +73,15 @@ const recipes=[['Классическая','🫓🍗🥬🍅🥣'],['Сырна�
 const map={'🫓':'Лаваш','🍗':'Курица','🥩':'Мясо','🥬':'Капуста','🍅':'Помидор','🥒':'Огурец','🥣':'Соус','🧀':'Сыр'};
 let order=[],stack=[],score=0,combo=0,time=60,timer=null,active=false,served=0;
 let best=0;try{best=+(localStorage.getItem('shawarmaMasterBest')||0)}catch(e){}$('best').textContent=best;
-function drawItems(){$('ingredients').innerHTML=items.map(([name,icon])=>'<button class="ingredient" data-icon="'+icon+'"><b>'+icon+'</b>'+name+'</button>').join('');document.querySelectorAll('.ingredient').forEach(b=>b.addEventListener('click',()=>{if(!active||stack.length>=5)return;stack.push(b.dataset.icon);drawStack()}))}
+function addIngredient(icon){if(!active||stack.length>=5)return;stack.push(icon);drawStack()}
+function drawItems(){$('ingredients').innerHTML=items.map(([name,icon])=>'<button class="ingredient" data-icon="'+icon+'" aria-label="Перетащить: '+name+'"><b>'+icon+'</b>'+name+'</button>').join('');document.querySelectorAll('.ingredient').forEach(b=>{
+let startX=0,startY=0,dragging=false,ghost=null;
+b.addEventListener('pointerdown',e=>{if(!active||e.button!==0&&e.pointerType==='mouse')return;startX=e.clientX;startY=e.clientY;dragging=false;b.setPointerCapture(e.pointerId)});
+b.addEventListener('pointermove',e=>{if(!active||!b.hasPointerCapture(e.pointerId))return;if(!dragging&&Math.hypot(e.clientX-startX,e.clientY-startY)>7){dragging=true;ghost=b.cloneNode(true);ghost.className='drag-ghost';ghost.style.left=e.clientX+'px';ghost.style.top=e.clientY+'px';document.body.appendChild(ghost);b.classList.add('is-dragging')}if(dragging&&ghost){ghost.style.left=e.clientX+'px';ghost.style.top=e.clientY+'px';const r=$('stack').getBoundingClientRect();$('stack').classList.toggle('drop-target',e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom)}});
+const finish=e=>{if(dragging){const r=$('stack').getBoundingClientRect();if(e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom)addIngredient(b.dataset.icon);ghost?.remove();ghost=null;b.classList.remove('is-dragging');$('stack').classList.remove('drop-target');b.dataset.dragged='1';setTimeout(()=>delete b.dataset.dragged,0)}};
+b.addEventListener('pointerup',finish);b.addEventListener('pointercancel',()=>{ghost?.remove();ghost=null;b.classList.remove('is-dragging');$('stack').classList.remove('drop-target')});
+b.addEventListener('click',()=>{if(b.dataset.dragged)return;addIngredient(b.dataset.icon)});
+})}
 function newOrder(){const r=recipes[Math.floor(Math.random()*recipes.length)];$('orderName').textContent=r[0];order=Array.from(r[1]);$('recipe').innerHTML=order.map(x=>'<span>'+x+'</span>').join('');stack=[];drawStack()}
 function drawStack(){$('count').textContent=stack.length;$('stack').innerHTML=stack.length?stack.map(x=>'<span>'+x+'</span>').join(''):'<span class="empty">Нажимай на ингредиенты ниже</span>'}
 function updateStats(){$('score').textContent=score;$('combo').textContent=combo}
