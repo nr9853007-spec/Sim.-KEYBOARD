@@ -24,32 +24,3 @@
 
 .literature-cover{background:radial-gradient(ellipse at 50% 42%,#75c995 0,#28694f 43%,#15382e 100%)}.literature-emblem{position:absolute;left:50%;top:22px;width:190px;height:190px;transform:translateX(-50%) rotate(-4deg);filter:drop-shadow(0 18px 15px #071d14aa);transition:transform .3s}.literature-emblem img{display:block;width:100%;height:100%;object-fit:contain}.game-card:hover .literature-emblem{transform:translateX(-50%) translateY(-8px) rotate(2deg) scale(1.06)}
 
-/* HOW TO USE — animated mini-cartoon onboarding */
-.how-section{padding:72px 0 78px;border-top:1px solid #a5e5ed1b}
-.how-heading{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:26px}
-.how-heading h2{font-size:clamp(30px,4vw,43px);line-height:1.15;letter-spacing:-2px;margin:12px 0 0}
-.how-heading h2 span{background:linear-gradient(95deg,#b5f0e3,#a7ddff 55%,#ffe0a0);-webkit-background-clip:text;background-clip:text;color:transparent}
-.how-heading>p{max-width:330px;margin:0 0 4px;color:#b3cfe9;font-size:12px;line-height:1.8}
-.how-stage{position:relative;min-height:300px;display:grid;grid-template-columns:.8fr 1.2fr;align-items:center;gap:28px;padding:28px 34px;border:1px solid #7edbff42;border-radius:26px;overflow:hidden;background:radial-gradient(ellipse at 24% 50%,#2586a855,transparent 44%),linear-gradient(130deg,#102b48,#0b1b32 58%,#142d40);box-shadow:0 22px 60px #0005,inset 0 1px #d5f7ff1c}
-.how-stage:before{content:"";position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(2px 2px at 15% 18%,#d8f8ff 98%,transparent),radial-gradient(1px 1px at 77% 27%,#fff 98%,transparent),radial-gradient(2px 2px at 45% 82%,#8deaff 98%,transparent);background-size:170px 130px;opacity:.48}
-.how-stars{position:absolute;top:17px;left:24px;color:#ffe0a0;font-size:16px;letter-spacing:5px;animation:guideTwinkle 3s ease-in-out infinite}
-.how-mascot{position:relative;z-index:1;display:grid;place-items:center;min-height:220px}
-.how-mascot img{position:relative;z-index:1;width:min(100%,230px);filter:drop-shadow(0 20px 18px #020b18aa);animation:guideMascot 3.2s ease-in-out infinite}
-.mascot-orbit{position:absolute;width:220px;height:220px;border:1px solid #8eeaff66;border-radius:50%;box-shadow:0 0 0 17px #7edbff0b,0 0 0 37px #7edbff08;animation:guideOrbit 12s linear infinite}
-.mascot-wave{position:absolute;z-index:2;right:3%;top:10%;padding:9px 13px;border:1px solid #a9eaff66;border-radius:14px 14px 14px 3px;background:#0b263beF;color:#d9f7ff;font-size:11px;font-weight:1000;animation:waveBubble 2.8s ease-in-out infinite}
-.how-steps{position:relative;z-index:1;display:grid;gap:11px}
-.how-step{display:grid;grid-template-columns:38px 44px 1fr 22px;align-items:center;gap:12px;padding:14px 15px;border:1px solid #8bdff033;border-radius:17px;background:linear-gradient(110deg,#123957eF,#102541eF);box-shadow:0 10px 25px #0002;animation:guideStep 5.4s ease-in-out infinite}
-.how-step.step-two{animation-delay:1.8s}.how-step.step-three{animation-delay:3.6s}
-.step-number{font-size:10px;font-weight:1000;letter-spacing:1px;color:#8ee7ff}
-.step-icon{width:42px;height:42px;display:grid;place-items:center;border-radius:13px;background:#8bdff01a;font-size:21px}
-.how-step strong{display:block;color:#f0fbff;font-size:13px}.how-step small{display:block;margin-top:4px;color:#a9cce0;font-size:10px;line-height:1.5}
-.step-arrow{color:#ffe0a0;font-size:20px}
-.how-caption{position:absolute;left:34px;bottom:17px;display:flex;align-items:center;gap:9px;color:#91c9dd;font-size:8px;font-weight:1000;letter-spacing:1.6px}
-.caption-dot{width:7px;height:7px;border-radius:50%;background:#76e1b8;box-shadow:0 0 12px #76e1b8}
-@keyframes guideMascot{0%,100%{transform:translateY(3px) rotate(-5deg)}50%{transform:translateY(-12px) rotate(5deg)}}
-@keyframes guideOrbit{to{transform:rotate(360deg)}}
-@keyframes guideTwinkle{50%{opacity:.35;transform:scale(.8)}}
-@keyframes waveBubble{0%,100%{transform:translateY(0) rotate(2deg)}50%{transform:translateY(-6px) rotate(-2deg)}}
-@keyframes guideStep{0%,28%,100%{transform:translateX(0);border-color:#8bdff033}10%,18%{transform:translateX(5px);border-color:#8ee7ff99;box-shadow:0 0 22px #37bde522}}
-@media(max-width:700px){.how-heading{display:block}.how-heading>p{margin-top:12px}.how-stage{grid-template-columns:1fr;gap:4px;padding:20px 16px 44px}.how-mascot{min-height:175px}.how-mascot img{width:170px}.mascot-orbit{width:165px;height:165px}.mascot-wave{right:15%;top:2%}.how-steps{gap:8px}.how-step{grid-template-columns:29px 38px 1fr 16px;gap:8px;padding:11px}.step-icon{width:36px;height:36px;font-size:18px}.how-step strong{font-size:12px}.how-step small{font-size:9px}.how-caption{left:17px;bottom:15px;font-size:7px}}
-@media(prefers-reduced-motion:reduce){.how-stars,.how-mascot img,.mascot-orbit,.mascot-wave,.how-step{animation:none!important}}
