@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+<defs>
+ <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#ffdf8a"/><stop offset=".48" stop-color="#e87932"/><stop offset="1" stop-color="#682817"/></linearGradient>
+ <linearGradient id="wrap" x2=".8" y2="1"><stop stop-color="#fff0b4"/><stop offset=".55" stop-color="#e8a94e"/><stop offset="1" stop-color="#a94f22"/></linearGradient>
+ <radialGradient id="glow"><stop stop-color="#fff2b8" stop-opacity=".85"/><stop offset="1" stop-color="#ffb44c" stop-opacity="0"/></radialGradient>
+ <filter id="shadow"><feGaussianBlur stdDeviation="5"/></filter>
+</defs>
+<rect x="9" y="9" width="238" height="238" rx="58" fill="#28130d" stroke="#ffd47b" stroke-width="4"/>
+<rect x="17" y="17" width="222" height="222" rx="51" fill="url(#bg)"/>
+<circle cx="128" cy="112" r="98" fill="url(#glow)"/>
+<g fill="none" stroke="#fff0bc" stroke-linecap="round" opacity=".75">
+ <path d="M73 63q-13-15 0-29" stroke-width="5"><animate attributeName="d" values="M73 63q-13-15 0-29;M73 63q13-15 0-29;M73 63q-13-15 0-29" dur="2.2s" repeatCount="indefinite"/></path>
+ <path d="M180 58q13-15 0-29" stroke-width="5"><animate attributeName="d" values="M180 58q13-15 0-29;M180 58q-13-15 0-29;M180 58q13-15 0-29" dur="2.6s" repeatCount="indefinite"/></path>
+</g>
+<ellipse cx="128" cy="207" rx="68" ry="13" fill="#35170d" opacity=".55" filter="url(#shadow)"/>
+<g transform="rotate(-12 128 130)">
+ <path d="M83 55Q103 42 139 55L177 179Q142 208 103 190Z" fill="url(#wrap)" stroke="#7a371a" stroke-width="5"/>
+ <path d="M91 67Q119 79 151 63L163 105Q127 122 102 104Z" fill="#5c9c42" stroke="#32612d" stroke-width="3"/>
+ <path d="M101 99q23-18 51 0l13 27q-31 19-53 1Z" fill="#c84c2d"/>
+ <path d="M111 119q24-17 48 2l9 25q-29 18-48 2Z" fill="#f3d16b"/>
+ <path d="M104 146q29-17 57 0l11 30q-31 17-57 4Z" fill="#8e3e20"/>
+ <path d="M101 70q28 12 54-1" fill="none" stroke="#fff4c8" stroke-width="6" stroke-linecap="round" opacity=".8"/>
+</g>
+<g fill="#fff1b8"><path d="M48 115l5 12 12 5-12 5-5 12-5-12-12-5 12-5z"><animateTransform attributeName="transform" type="rotate" from="0 48 134" to="360 48 134" dur="8s" repeatCount="indefinite"/></path><path d="M204 88l4 9 9 4-9 4-4 9-4-9-9-4 9-4z"><animate attributeName="opacity" values=".35;1;.35" dur="1.8s" repeatCount="indefinite"/></path></g>
+<rect x="48" y="202" width="160" height="29" rx="14" fill="#2b160f" stroke="#ffda88" stroke-width="2"/>
+<text x="128" y="222" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" font-weight="900" letter-spacing="1" fill="#ffe5a6">MASTER</text>
+</svg>
