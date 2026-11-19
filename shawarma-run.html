@@ -192,7 +192,7 @@ addEventListener('resize',resize);resize();
 function poly(points,fill,stroke){ctx.beginPath();ctx.moveTo(points[0][0],points[0][1]);for(let i=1;i<points.length;i++)ctx.lineTo(points[i][0],points[i][1]);ctx.closePath();ctx.fillStyle=fill;ctx.fill();if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=2;ctx.stroke()}}
 function ellipse(x,y,rx,ry,color){ctx.beginPath();ctx.ellipse(x,y,rx,ry,0,0,Math.PI*2);ctx.fillStyle=color;ctx.fill()}
 function roundRect(x,y,w,h,r,color){ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fillStyle=color;ctx.fill()}
-function roadPoint(x,z){const depth=Math.max(0,Math.min(1,z));const horizon=H*.34;const y=horizon+depth*depth*(H*.66);const roadWidth=Math.min(W*(W<700?.90:.96),H*(W<700?1.12:1.48));const half=roadWidth*.5*(.25+.75*depth);const worldScale=Math.min(1.3,Math.max(.82,roadWidth/720));return{x:W/2+x*half,y,scale:(.44+depth*.68)*worldScale,half,roadWidth}}
+function roadPoint(x,z){const depth=Math.max(0,Math.min(1,z));const horizon=H*.34;const y=horizon+depth*depth*(H*.66);const roadWidth=Math.min(W*(W<700?.94:.98),H*(W<700?1.25:1.9));const half=roadWidth*.5*(.25+.75*depth);const worldScale=Math.min(1.3,Math.max(.82,roadWidth/720));return{x:W/2+x*half,y,scale:(.44+depth*.68)*worldScale,half,roadWidth}}
 function laneCenter(laneIndex){return laneX[Math.max(0,Math.min(2,laneIndex|0))]}
 function laneWorldWidth(z){return roadPoint(0,z).half*2/3}
 function drawBackground(dt){
@@ -268,7 +268,7 @@ function drawBackground(dt){
  poly([[farSL.x,farSL.y],[farL.x,farL.y],[nearL.x,bottom],[nearSL.x,bottom]],palette.side);
  poly([[farR.x,farR.y],[farSR.x,farSR.y],[nearSR.x,bottom],[nearR.x,bottom]],palette.side);
  // sidewalk slabs
- for(const side of [-1,1])for(let i=0;i<7;i++){const z=((i/7+time*.14)%1),a=roadPoint(side*1.08,z),b=roadPoint(side*1.32,z);ctx.strokeStyle='#342b2738';ctx.lineWidth=1+z*1.8;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke()}
+ for(const side of [-1,1])for(let i=0;i<9;i++){const z=((i/9+time*.14)%1),a=roadPoint(side*1.015,z),b=roadPoint(side*1.075,z);ctx.strokeStyle='#342b2766';ctx.lineWidth=1.2+z*2;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke()}
  const asphalt=ctx.createLinearGradient(0,horizon,0,bottom);asphalt.addColorStop(0,'#606a78');asphalt.addColorStop(.4,palette.road);asphalt.addColorStop(1,'#171c28');
  poly([[farL.x,farL.y],[farR.x,farR.y],[nearR.x,bottom],[nearL.x,bottom]],asphalt);
  // Procedural triangular mesh is clipped to the road and follows its perspective.
