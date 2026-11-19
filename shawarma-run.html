@@ -192,195 +192,29 @@ addEventListener('resize',resize);resize();
 function poly(points,fill,stroke){ctx.beginPath();ctx.moveTo(points[0][0],points[0][1]);for(let i=1;i<points.length;i++)ctx.lineTo(points[i][0],points[i][1]);ctx.closePath();ctx.fillStyle=fill;ctx.fill();if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=2;ctx.stroke()}}
 function ellipse(x,y,rx,ry,color){ctx.beginPath();ctx.ellipse(x,y,rx,ry,0,0,Math.PI*2);ctx.fillStyle=color;ctx.fill()}
 function roundRect(x,y,w,h,r,color){ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fillStyle=color;ctx.fill()}
-function roadPoint(x,z){const depth=Math.max(0,Math.min(1,z));const horizon=H*.34;const y=horizon+depth*depth*(H*.66);const roadWidth=Math.min(W*(W<700?.94:.98),H*(W<700?1.25:1.9));const half=roadWidth*.5*(.25+.75*depth);const worldScale=Math.min(1.3,Math.max(.82,roadWidth/720));return{x:W/2+x*half,y,scale:(.44+depth*.68)*worldScale,half,roadWidth}}
+function roadPoint(x,z){const d=Math.max(0,Math.min(1,z)),h=H*.32,y=h+d*d*H*.68,roadWidth=Math.min(W*(W<700?.84:.78),H*(W<700?1.55:1.75)),half=roadWidth*.5*(.18+.82*d),worldScale=Math.min(1.35,Math.max(.78,roadWidth/720));return{x:W/2+x*half,y,scale:(.40+d*.76)*worldScale,half,roadWidth}}
 function laneCenter(laneIndex){return laneX[Math.max(0,Math.min(2,laneIndex|0))]}
 function laneWorldWidth(z){return roadPoint(0,z).half*2/3}
 function drawBackground(dt){
- const horizon=H*.34, bottom=H;
- const bgIds=['city','sunset','candy','forest','coast','snow'];const biome=Math.max(0,bgIds.indexOf(selectedBg));
- const palette=[
-  {sky1:'#77c9ee',sky2:'#f5d6a0',far:'#6d7e87',mid:'#45545c',road:'#34383c',side:'#b8a38b',curb:'#ead9bd',lamp:'#ffe9a8',accent:'#e45c36'},
-  {sky1:'#394c78',sky2:'#f2a06c',far:'#654e69',mid:'#503e4a',road:'#39353a',side:'#bb8b70',curb:'#f3c79a',lamp:'#ffe3a1',accent:'#f2c45e'},
-  {sky1:'#8b70b8',sky2:'#f4c0d4',far:'#8c75a0',mid:'#645274',road:'#484052',side:'#b9a1c7',curb:'#f4d8ee',lamp:'#fff0c7',accent:'#62d7d1'},
-  {sky1:'#4e9c91',sky2:'#e4dca0',far:'#557c67',mid:'#42634e',road:'#39483e',side:'#a4ad79',curb:'#e4dfa9',lamp:'#fff0b3',accent:'#e5b75a'},
-  {sky1:'#63c7dc',sky2:'#f8d8a6',far:'#438c9a',mid:'#2f777e',road:'#59636a',side:'#d9bd82',curb:'#fff0c9',lamp:'#fff3c4',accent:'#f1a95b'},
-  {sky1:'#9bc9e8',sky2:'#e9f6ff',far:'#91b5ce',mid:'#6f9bb8',road:'#657887',side:'#e4f0f5',curb:'#ffffff',lamp:'#e6f8ff',accent:'#83d8f0'}
- ][Math.max(0,biome)];
- const sky=ctx.createLinearGradient(0,0,0,horizon*1.5);sky.addColorStop(0,palette.sky1);sky.addColorStop(1,palette.sky2);ctx.fillStyle=sky;ctx.fillRect(0,0,W,H);
- // distant haze and soft sun
- const haze=ctx.createLinearGradient(0,horizon*.45,0,horizon*1.2);haze.addColorStop(0,'#ffffff00');haze.addColorStop(1,'#fff2d044');ctx.fillStyle=haze;ctx.fillRect(0,horizon*.4,W,horizon*.9);
- const sunX=W*(biome===1?.76:.82),sunY=H*.14;
- const glow=ctx.createRadialGradient(sunX,sunY,4,sunX,sunY,Math.min(W,H)*.17);glow.addColorStop(0,'#fff6d6aa');glow.addColorStop(1,'#fff6d600');ctx.fillStyle=glow;ctx.fillRect(sunX-Math.min(W,H)*.18,sunY-Math.min(W,H)*.18,Math.min(W,H)*.36,Math.min(W,H)*.36);
- ellipse(sunX,sunY,Math.min(W,H)*.027,Math.min(W,H)*.027,'#fff1c5');
- // Clear visual landmarks make each purchased environment immediately recognizable.
- if(biome===0){for(let i=0;i<24;i++){const x=(i*83%97)/97*W,y=H*(.035+(i*29%23)/100);ctx.globalAlpha=.25+(i%3)*.12;ellipse(x,y,1.2,1.2,'#e8f4ff')}ctx.globalAlpha=1}
- else if(biome===1){ctx.globalAlpha=.28;for(let i=0;i<5;i++){const yy=sunY+Math.sin(i*1.4)*H*.035;ctx.strokeStyle='#ffe0a0';ctx.lineWidth=2;ctx.beginPath();ctx.arc(sunX,yy,Math.min(W,H)*(.07+i*.018),Math.PI*1.08,Math.PI*1.92);ctx.stroke()}ctx.globalAlpha=1}
- else if(biome===2){for(let i=0;i<8;i++){const x=(i*137%101)/101*W,y=H*(.08+(i*19%20)/100),r=4+(i%3)*3;ctx.globalAlpha=.48;ellipse(x,y,r,r,i%3===0?'#ff8fbe':i%3===1?'#fff0a0':'#77e5d4');ctx.globalAlpha=.18;ellipse(x,y,r*2.1,r*2.1,'#fff')}ctx.globalAlpha=1}
- else if(biome===3){for(let i=0;i<7;i++){const x=(i*149%103)/103*W,y=horizon-H*(.025+(i%3)*.018);ctx.globalAlpha=.55;ellipse(x,y,18+(i%2)*9,7+(i%3)*2,'#b8e2a0')}ctx.globalAlpha=1}
- else if(biome===4){for(let i=0;i<5;i++){const x=W*(.12+i*.2),y=horizon+H*(.02+(i%2)*.035);ctx.globalAlpha=.42;ellipse(x,y,28,5,'#d9fff1');ctx.globalAlpha=1;}}
- else if(biome===5){for(let i=0;i<32;i++){const x=(i*71%101)/101*W,y=(i*37%47)/47*H*.42;ctx.globalAlpha=.28+(i%4)*.12;ellipse(x,y,1.2+(i%3),1.2+(i%3),'#ffffff')}ctx.globalAlpha=1}
-
- // Procedural low-poly horizon mesh: layered terrain, sculpted crystal forms and no boxy buildings.
- const ridgeY=horizon+H*.018;
- const points=[];
- for(let i=0;i<=12;i++){const x=i*W/12;const y=ridgeY-H*(.035+((i*17+biome*11)%9)*.009);points.push([x,y])}
- poly([[0,H*.58],...points,[W,H*.58]],palette.far);
- for(let i=0;i<12;i++){
-  const a=points[i],b=points[i+1],mid=(a[0]+b[0])/2;
-  poly([[a[0],a[1]],[mid,Math.min(a[1],b[1])-H*(.012+(i%3)*.008)],[b[0],b[1]]],i%2?'#ffffff16':'#101b2630');
- }
- // Triangular landmark meshes vary by selected world; silhouettes stay behind the road.
- for(let i=0;i<7;i++){
-  const x=W*(.07+i*.143),base=horizon+H*.045,wide=W*(.018+(i%3)*.006),high=H*(.09+(i*13%5)*.018);
-  const topY=base-high,midX=x+(i%2?wide*.22:-wide*.22);
-  const shade=i%2?palette.mid:palette.far;
-  poly([[x-wide,base],[x-wide*.42,topY+high*.24],[midX,topY],[x+wide*.48,topY+high*.3],[x+wide,base]],shade);
-  poly([[x-wide*.42,topY+high*.24],[midX,topY],[midX,base]],'#ffffff20');
-  poly([[midX,topY],[x+wide*.48,topY+high*.3],[x+wide,base],[midX,base]],'#11182724');
-  if(biome===2){ellipse(x,topY-high*.12,wide*.36,wide*.36,palette.accent)}
-  if(biome===3){poly([[x-wide*.8,base],[x,topY-high*.12],[x+wide*.8,base]],'#8bc78a55')}
- }
- // Main ground plane: broad grassy terrain beyond the pavement, with layered mesh facets.
- const sideExtent=W<700?1.08:1.12;
- const farSL=roadPoint(-sideExtent,0),farSR=roadPoint(sideExtent,0),nearSL=roadPoint(-sideExtent,1),nearSR=roadPoint(sideExtent,1);
- const groundTop=biome===4?'#d8c18f':biome===5?'#dceef5':biome===3?'#70aa68':'#79a66c';
- const groundBottom=biome===4?'#b99a69':biome===5?'#a9cbdc':biome===3?'#397d50':'#477e50';
- const ground=ctx.createLinearGradient(0,horizon,0,bottom);ground.addColorStop(0,groundTop);ground.addColorStop(1,groundBottom);
- poly([[0,horizon+H*.04],[farSL.x,farSL.y],[nearSL.x,bottom],[0,bottom]],ground);
- poly([[W,horizon+H*.04],[farSR.x,farSR.y],[nearSR.x,bottom],[W,bottom]],ground);
- // Low-poly 2D terrain facets frame the track without entering its playable lanes.
- for(let side of [-1,1])for(let i=0;i<9;i++){const z0=i/9,z1=(i+1)/9,p0=roadPoint(side*1.42,z0),p1=roadPoint(side*2.75,z0),p2=roadPoint(side*2.75,z1),p3=roadPoint(side*1.42,z1);const midX=(p0.x+p1.x+p2.x+p3.x)/4,midY=(p0.y+p1.y+p2.y+p3.y)/4;poly([[p0.x,p0.y],[p1.x,p1.y],[midX,midY]],i%2?'#ffffff0b':'#102a2830');poly([[p1.x,p1.y],[p2.x,p2.y],[midX,midY]],i%2?'#102a2825':'#ffffff0a');poly([[p2.x,p2.y],[p3.x,p3.y],[midX,midY]],i%2?'#ffffff0b':'#102a2830');}
- // Small ground texture remains separate from the larger roadside models.
- for(const side of [-1,1])for(let i=0;i<22;i++){
-  const z=((i/22+time*.035)%1),p=roadPoint(side*(1.55+(i%4)*.23),z),size=(1.5+z*4)*(i%3===0?1.5:1);
-  const grass=biome===5?(i%2?'#ffffff88':'#b8dce9aa'):biome===4?(i%2?'#f3d99b99':'#fff0c088'):(i%2?'#b5d98299':'#286b4399');
-  ctx.globalAlpha=.35+z*.45;
-  poly([[p.x-size,p.y],[p.x,p.y-size*1.7],[p.x+size,p.y]],grass);
-  if(biome===3&&i%4===0){ellipse(p.x+size*1.8,p.y-size,1.8+z,1.8+z,'#ffe58a')}
- }
- ctx.globalAlpha=1;
- // main road and wide pedestrian sidewalks in a single consistent perspective
- const farL=roadPoint(-1,0),farR=roadPoint(1,0),nearL=roadPoint(-1,1),nearR=roadPoint(1,1);
- // Green verge fills the space outside the raised sidewalk.
- const grass=ctx.createLinearGradient(0,horizon,0,bottom);grass.addColorStop(0,'#789b62');grass.addColorStop(1,'#315d3b');
- poly([[0,horizon],[farSL.x,farSL.y],[nearSL.x,bottom],[0,bottom]],grass);
- poly([[W,horizon],[farSR.x,farSR.y],[nearSR.x,bottom],[W,bottom]],grass);
- poly([[farSL.x,farSL.y],[farL.x,farL.y],[nearL.x,bottom],[nearSL.x,bottom]],palette.side);
- poly([[farR.x,farR.y],[farSR.x,farSR.y],[nearSR.x,bottom],[nearR.x,bottom]],palette.side);
- // sidewalk slabs
- for(const side of [-1,1])for(let i=0;i<9;i++){const z=((i/9+time*.14)%1),a=roadPoint(side*1.015,z),b=roadPoint(side*1.075,z);ctx.strokeStyle='#342b2766';ctx.lineWidth=1.2+z*2;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke()}
- const asphalt=ctx.createLinearGradient(0,horizon,0,bottom);asphalt.addColorStop(0,'#606a78');asphalt.addColorStop(.4,palette.road);asphalt.addColorStop(1,'#171c28');
- poly([[farL.x,farL.y],[farR.x,farR.y],[nearR.x,bottom],[nearL.x,bottom]],asphalt);
- // Procedural triangular mesh is clipped to the road and follows its perspective.
- ctx.save();ctx.beginPath();ctx.moveTo(farL.x,farL.y);ctx.lineTo(farR.x,farR.y);ctx.lineTo(nearR.x,bottom);ctx.lineTo(nearL.x,bottom);ctx.closePath();ctx.clip();
- const meshX=[-1,-1/3,1/3,1],meshRows=10;
- for(let row=0;row<meshRows;row++){const z0=row/meshRows,z1=(row+1)/meshRows;
-  for(let col=0;col<3;col++){const a=roadPoint(meshX[col],z0),b=roadPoint(meshX[col+1],z0),c=roadPoint(meshX[col+1],z1),d=roadPoint(meshX[col],z1);
-   const flip=(row+col)%2===0;
-   if(flip){poly([[a.x,a.y],[b.x,b.y],[c.x,c.y]],'#d9e5ff0c');poly([[a.x,a.y],[c.x,c.y],[d.x,d.y]],'#07101d18')}
-   else{poly([[a.x,a.y],[b.x,b.y],[d.x,d.y]],'#ffffff08');poly([[b.x,b.y],[c.x,c.y],[d.x,d.y]],'#07101d1b')}
-  }
- }
+ const h=H*.32,biome=Math.max(0,['city','sunset','candy','forest','coast','snow'].indexOf(selectedBg));
+ const p=[['#75c7e8','#ffe3b2','#71879a','#527d58','#9ab879','#303944','#c8b99e','#f0dfbd'],['#394b76','#f5a06b','#76516a','#6d6851','#b48a61','#35343d','#c49a7d','#f3c99a'],['#9b79bd','#ffd0d9','#967aa0','#8a7890','#c4a1b5','#454052','#c8accb','#f8dfef'],['#65aaa0','#e8e0ad','#547d69','#3f8457','#83b86c','#35463d','#b5b783','#e9e3b0'],['#69c9dc','#ffe0ad','#478d9c','#8caa70','#c7b17c','#56616a','#d9c49b','#fff0ce'],['#a5d5ed','#f4fbff','#8baec4','#b4d2dd','#e2f0f3','#617687','#dcebf0','#fff']][biome];
+ const sky=ctx.createLinearGradient(0,0,0,h*1.8);sky.addColorStop(0,p[0]);sky.addColorStop(1,p[1]);ctx.fillStyle=sky;ctx.fillRect(0,0,W,H);
+ const sx=W*.8,sy=H*.14,g=ctx.createRadialGradient(sx,sy,2,sx,sy,Math.min(W,H)*.2);g.addColorStop(0,'#fff9dfaa');g.addColorStop(1,'#fff9df00');ctx.fillStyle=g;ctx.fillRect(sx-Math.min(W,H)*.2,sy-Math.min(W,H)*.2,Math.min(W,H)*.4,Math.min(W,H)*.4);ellipse(sx,sy,Math.min(W,H)*.026,Math.min(W,H)*.026,'#fff4d2');
+ const ridge=[];for(let i=0;i<=10;i++){const x=i*W/10,y=h-H*(.025+((i*19+biome*7)%7)*.012);ridge.push([x,y])}poly([[0,h+H*.15],...ridge,[W,h+H*.15]],p[2]);
+ const land=ctx.createLinearGradient(0,h,0,H);land.addColorStop(0,p[4]);land.addColorStop(1,p[3]);ctx.fillStyle=land;ctx.fillRect(0,h,W,H-h);
+ // Faceted terrain and a continuous raised sidewalk.
+ for(let side of [-1,1])for(let i=0;i<10;i++){const z=i/10,q=roadPoint(side*(1.4+(i%3)*.3),z);ctx.globalAlpha=.14;poly([[q.x-5,q.y],[q.x,q.y-10-z*5],[q.x+5,q.y]],'#e4f0b5')}ctx.globalAlpha=1;
+ for(let side of [-1,1]){const a=roadPoint(side,0),b=roadPoint(side*1.18,0),c=roadPoint(side*1.18,1),d=roadPoint(side,1),e=roadPoint(side*1.045,0),f=roadPoint(side*1.045,1);poly([[a.x,a.y],[b.x,b.y],[c.x,H],[d.x,H]],p[6]);poly([[a.x,a.y],[e.x,e.y],[f.x,H],[d.x,H]],p[7]);for(let i=0;i<10;i++){const z=((i/10+time*.12)%1),l=roadPoint(side*1.06,z),r=roadPoint(side*1.16,z);ctx.strokeStyle='#51483d55';ctx.lineWidth=1+z*2;ctx.beginPath();ctx.moveTo(l.x,l.y);ctx.lineTo(r.x,r.y);ctx.stroke()}}
+ const L=roadPoint(-1,0),R=roadPoint(1,0),BL=roadPoint(-1,1),BR=roadPoint(1,1),as=ctx.createLinearGradient(0,h,0,H);as.addColorStop(0,'#687582');as.addColorStop(.3,p[5]);as.addColorStop(1,'#171d27');poly([[L.x,L.y],[R.x,R.y],[BR.x,H],[BL.x,H]],as);
+ ctx.save();ctx.beginPath();ctx.moveTo(L.x,L.y);ctx.lineTo(R.x,R.y);ctx.lineTo(BR.x,H);ctx.lineTo(BL.x,H);ctx.closePath();ctx.clip();
+ for(let row=0;row<10;row++){const z0=row/10,z1=(row+1)/10;for(let col=0;col<3;col++){const xs=[-1,-1/3,1/3,1],a=roadPoint(xs[col],z0),b=roadPoint(xs[col+1],z0),c=roadPoint(xs[col+1],z1),d=roadPoint(xs[col],z1);poly([[a.x,a.y],[b.x,b.y],[c.x,c.y]],'#ffffff09');poly([[a.x,a.y],[c.x,c.y],[d.x,d.y]],'#07111b18')}}
  ctx.restore();
- // Fine edge rails and reflective shoulders define a clean, readable track.
- for(const side of [-1,1]){const f=roadPoint(side,0),n=roadPoint(side,1);ctx.strokeStyle='#fff0d7aa';ctx.lineWidth=1.6;ctx.beginPath();ctx.moveTo(f.x,f.y);ctx.lineTo(n.x,n.y);ctx.stroke();ctx.strokeStyle='#ffb66b88';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(f.x+side*2,f.y);ctx.lineTo(n.x+side*2,n.y);ctx.stroke()}
- // Faceted asphalt mesh: longitudinal panels and alternating triangular reflections.
- for(let band=0;band<7;band++){const z0=band/7,z1=(band+1)/7;const l0=roadPoint(-1,z0),r0=roadPoint(1,z0),l1=roadPoint(-1,z1),r1=roadPoint(1,z1);const mid0=roadPoint(0,z0),mid1=roadPoint(0,z1);const tint=band%2?'#ffffff08':'#07111b12';poly([[l0.x,l0.y],[mid0.x,mid0.y],[mid1.x,mid1.y],[l1.x,l1.y]],tint);poly([[mid0.x,mid0.y],[r0.x,r0.y],[r1.x,r1.y],[mid1.x,mid1.y]],band%2?'#0000000b':'#ffffff06');}
- // Raised bevelled curbs and crisp outer edge highlights.
- for(const side of [-1,1]){const f=roadPoint(side*1,0),n=roadPoint(side*1,1),fo=roadPoint(side*1.035,0),no=roadPoint(side*1.035,1);poly([[f.x,f.y],[fo.x,fo.y],[no.x,bottom],[n.x,bottom]],palette.curb);const edge=roadPoint(side*.985,0),edgeNear=roadPoint(side*.985,1);ctx.strokeStyle='#ffffff88';ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(edge.x,edge.y);ctx.lineTo(edgeNear.x,bottom);ctx.stroke();}
- // Subtle recessed lane guides follow the exact road projection; no bright white dash marks.
- for(const divider of [-1/3,1/3]){
-  const f=roadPoint(divider,0),n=roadPoint(divider,1);
-  ctx.strokeStyle='#10172270';ctx.lineWidth=1.2;
-  ctx.beginPath();ctx.moveTo(f.x,f.y);ctx.lineTo(n.x,bottom);ctx.stroke();
-  ctx.strokeStyle='#d9b58a20';ctx.lineWidth=.8;
-  ctx.beginPath();ctx.moveTo(f.x+1.2,f.y);ctx.lineTo(n.x+1.2,bottom);ctx.stroke();
- }
- // Reflective studs and warm curb lights add depth without blocking the lanes.
- for(const side of [-1,1])for(let i=0;i<12;i++){const z=((i/12+time*speed*.16)%1),p=roadPoint(side*.985,z),s=p.scale;ctx.globalAlpha=.28+z*.58;ellipse(p.x,p.y,1.2+s*2.1,1+s*1.4,i%3===0?'#fff0b0':'#f2a65c')}ctx.globalAlpha=1;
- // asphalt flecks are stable and restrained
- for(let i=0;i<48;i++){const z=((i/48+time*.12)%1),x=((i*37)%89)/44-1,p=roadPoint(x,z);ctx.globalAlpha=.08+z*.08;ellipse(p.x,p.y,Math.max(.6,p.scale*.65),Math.max(.5,p.scale*.35),i%2?'#fff':'#0c1112')}ctx.globalAlpha=1;
- // Shared screen-space spacing prevents large decorations from intersecting.
- const decorOccupied=[];
- const decorClear=(p,rx,ry)=>{if(decorOccupied.some(q=>Math.abs(p.x-q.x)<rx+q.rx+10&&Math.abs(p.y-q.y)<ry+q.ry+12))return false;decorOccupied.push({x:p.x,y:p.y,rx,ry});return true};
- // Each world gets its own recognizable low-poly landmark silhouettes.
- for(const side of [-1,1])for(let i=0;i<4;i++){
-  const z=((i/4+time*.055)%1),p=roadPoint(side*(1.78+(i%2)*.12),z),sc=p.scale;
-  const h=68+(i%3)*19,w=25+(i%2)*10;if(!decorClear(p,w*sc,h*sc))continue;
-  ctx.save();ctx.translate(p.x,p.y);ctx.scale(sc,sc);
-  if(biome===0){ // city: angular towers and lit windows
-   poly([[-w,0],[-w,-h*.72],[-w*.35,-h*.72],[-w*.35,-h],[w*.42,-h],[w*.42,-h*.55],[w,0]],'#27364b');
-   poly([[-w*.35,-h*.72],[-w*.35,-h],[w*.42,-h],[w*.42,-h*.55]],'#53647d');
-   for(let q=0;q<3;q++)for(let v=0;v<3;v++)roundRect(-w*.18+q*10,-h*.82+v*15,4,7,1,palette.lamp);
-  }else if(biome===1){ // sunset: layered mesa cliffs
-   poly([[-w,0],[-w*.92,-h*.45],[-w*.35,-h*.45],[-w*.12,-h*.78],[w*.62,-h*.78],[w*.78,-h*.34],[w,0]],'#68475a');
-   poly([[-w*.12,-h*.78],[w*.62,-h*.78],[w*.78,-h*.34],[0,-h*.2]],'#d58a68');
-   poly([[-w,-h*.08],[0,-h*.2],[w,0]],'#f0b47a55');
-  }else if(biome===2){ // candy: giant wrapped sweets
-   roundRect(-w*.42,-h*.58,w*.84,h*.58,12,'#e879ad');
-   poly([[-w*.42,-h*.45],[-w*.9,-h*.7],[-w*.82,-h*.25],[-w*.42,-h*.08]],'#7de3d4');
-   poly([[w*.42,-h*.45],[w*.9,-h*.7],[w*.82,-h*.25],[w*.42,-h*.08]],'#ffe58c');
-   for(let q=-1;q<=1;q++)poly([[q*9-5,-h*.55],[q*9+5,-h*.55],[q*9+13,-h*.08],[q*9+3,-h*.08]],'#fff2d7aa');
-  }else if(biome===3){ // forest: faceted broadleaf canopy
-   roundRect(-4,-h*.42,8,h*.42,2,'#70523b');
-   poly([[-w,-h*.12],[-w*.8,-h*.55],[-w*.25,-h*.82],[w*.1,-h],[w*.78,-h*.62],[w,-h*.12]],'#28694d');
-   poly([[-w*.25,-h*.82],[w*.1,-h],[w*.78,-h*.62],[0,-h*.2]],'#79bd79');
-   poly([[-w,-h*.12],[-w*.25,-h*.82],[0,-h*.2]],'#3b9361');
-  }else if(biome===4){ // coast: lighthouse and sail shapes
-   poly([[-w*.45,0],[-w*.3,-h*.8],[w*.3,-h*.8],[w*.45,0]],'#f5e8c8');
-   roundRect(-w*.36,-h*.82,w*.72,8,2,'#d96e54');roundRect(-w*.2,-h*.65,w*.4,12,2,'#6cb8c3');
-   poly([[w*.55,0],[w*.55,-h*.72],[w*.95,-h*.12]],'#f8f0d8');
-  }else{ // snow: crystalline ice peaks
-   poly([[-w,0],[-w*.48,-h*.72],[0,-h],[w*.48,-h*.72],[w,0]],'#6f9db9');
-   poly([[-w*.48,-h*.72],[0,-h],[w*.05,-h*.24],[0,0]],'#e4f7ff');
-   poly([[0,-h],[w*.48,-h*.72],[w,0],[w*.05,-h*.24]],'#9bc9df');
-  }
-  ctx.restore();
- }
- // street lamps, bollards and small street trees use same perspective scale
- for(const side of [-1,1])for(let i=0;i<3;i++){const z=((i/3+time*.11)%1),p=roadPoint(side*1.43,z),s=p.scale;if(!decorClear(p,22*s,88*s))continue;ctx.save();ctx.translate(p.x,p.y);ctx.scale(s,s);
-  ellipse(0,3,10,3,'#1d171344');roundRect(-2,-75,4,76,2,'#46413d');roundRect(-2,-75,19,4,2,'#46413d');roundRect(12,-80,8,6,3,'#5a5048');ellipse(16,-77,5,5,palette.lamp);ctx.globalAlpha=.16;ellipse(16,-74,15,15,palette.lamp);ctx.globalAlpha=1;
-  if(i===1){roundRect(-18,-12,8,12,2,'#d5d1c4');roundRect(11,-12,8,12,2,'#d5d1c4')}
-  ctx.restore();
- }
- // World-specific landmark plants: candy trees, forest canopies, palms and snowy pines.
- for(const side of [-1,1])for(let i=0;i<3;i++){
-  const z=((i/3+time*.07+.57)%1),p=roadPoint(side*2.18,z),sc=p.scale;
-  if(!decorClear(p,25*sc,72*sc))continue;
-  ctx.save();ctx.translate(p.x,p.y);ctx.scale(sc,sc);
-  if(biome===2){
-   roundRect(-3,-34,6,36,2,'#a66a79');ellipse(0,-44,17,17,i%2?'#ff8fbe':'#73e4d0');ellipse(-8,-48,7,7,'#fff0a0');ellipse(8,-40,6,6,'#fff0a0');ellipse(0,-61,5,5,'#fff');
-  }else if(biome===4){
-   roundRect(-3,-25,6,28,2,'#9b7044');ctx.strokeStyle='#398d7c';ctx.lineWidth=5;ctx.beginPath();ctx.moveTo(0,-24);ctx.quadraticCurveTo(0,-48,-18,-56);ctx.moveTo(0,-24);ctx.quadraticCurveTo(8,-49,18,-55);ctx.moveTo(0,-24);ctx.quadraticCurveTo(-2,-51,0,-63);ctx.stroke();ellipse(-17,-57,9,3,'#48aa8c');ellipse(17,-56,9,3,'#48aa8c');ellipse(0,-64,9,3,'#65c49b');
-  }else if(biome===5){
-   roundRect(-3,-17,6,20,2,'#7b6d66');poly([[-20,-10],[0,-67],[20,-10]],'#7bb5d0');poly([[-16,-27],[0,-57],[16,-27]],'#dff7ff');poly([[-11,-43],[0,-65],[11,-43]],'#f7ffff');
-  }else if(biome===1){
-   roundRect(-4,-31,8,34,3,'#8c6249');roundRect(-11,-45,7,22,3,'#79a66c');roundRect(4,-53,7,22,3,'#79a66c');ellipse(0,-59,12,8,'#8bb879');poly([[-15,-1],[0,-9],[15,-1]],'#c77b64');
-  }else if(biome===0){
-   roundRect(-17,-10,34,10,3,'#596477');poly([[-15,-10],[-8,-42],[9,-42],[16,-10]],'#71849a');roundRect(-7,-34,5,8,1,'#ffe29a');roundRect(3,-34,5,8,1,'#ffe29a');
-  }else{
-   roundRect(-3,-37,6,39,2,'#795239');ellipse(0,-45,17,18,'#397c54');ellipse(-10,-48,11,12,'#5a9a5e');ellipse(9,-55,11,12,'#478c55');ellipse(5,-39,9,8,'#2d704a');
-  }
-  ctx.restore();
- }
- // occasional tiny street details: bins and hydrants, always on sidewalks
- for(const side of [-1,1])for(let i=0;i<2;i++){const z=((i/2+time*.09+.35)%1),p=roadPoint(side*1.48,z),s=p.scale;if(!decorClear(p,12*s,30*s))continue;ctx.save();ctx.translate(p.x,p.y);ctx.scale(s,s);roundRect(-8,-25,16,25,3,'#4f7668');roundRect(-10,-28,20,5,2,'#344e45');ellipse(0,-18,3,3,'#a6d6bb');ctx.restore()}
- // Soft clouds and weather particles are tied to the purchased world.
- ctx.globalAlpha=biome===1?.10:.19;
- for(let i=0;i<3;i++){const x=(i*W*.43+time*4)%(W*1.25)-W*.1,y=H*(.085+i%2*.065);ellipse(x,y,31,9,'#fff');ellipse(x-16,y+2,17,7,'#fff');ellipse(x+17,y+1,20,8,'#fff')}
- ctx.globalAlpha=1;
- for(let i=0;i<42;i++){
-  const drift=(time*(biome===5?18:biome===0?34:biome===1?8:biome===2?13:biome===3?5:10)+i*47)%(H*.78);
-  const x=(i*83+Math.sin(time*(biome===5?1.2:2)+i)*24+time*(biome===4?8:biome===2?4:0))%W;
-  const y=(drift+H*.08)%(H*.86);
-  if(biome===5){ctx.globalAlpha=.35+(i%4)*.12;ellipse(x,y,1.5+i%3,3+i%3,'#ffffff')}
-  else if(biome===0){ctx.globalAlpha=.18+(i%3)*.08;ctx.strokeStyle='#d8efff';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x-3,y+9);ctx.stroke()}
-  else if(biome===1){ctx.globalAlpha=.35;ellipse(x,y,1.8,1.8,i%2?'#ffb36b':'#ffe39b')}
-  else if(biome===2){ctx.globalAlpha=.55;ellipse(x,y,2.5,2.5,['#ff8fbe','#fff0a0','#77e5d4'][i%3])}
-  else if(biome===3){ctx.globalAlpha=.55;ellipse(x,y,1.8,1.8,i%2?'#e5ff9c':'#fff2a6')}
-  else{ctx.globalAlpha=.38;ellipse(x,y,2+i%2,2+i%2,'#d8ffff')}
- }
- ctx.globalAlpha=1;
+ for(let side of [-1,1]){const a=roadPoint(side*.985,0),b=roadPoint(side*.985,1);ctx.strokeStyle='#fff0d8bb';ctx.lineWidth=2.2;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,H);ctx.stroke()}
+ for(const x of [-1/3,1/3]){const a=roadPoint(x,0),b=roadPoint(x,1);ctx.strokeStyle='#111a25a8';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,H);ctx.stroke()}
+ // New silhouettes are positioned beyond the curb with spacing checks.
+ const used=[];const free=q=>{if(used.some(v=>Math.abs(q.x-v.x)<48&&Math.abs(q.y-v.y)<72))return false;used.push(q);return true};
+ for(let side of [-1,1])for(let i=0;i<4;i++){const z=((i/4+time*.05)%1),q=roadPoint(side*1.52,z),sc=q.scale;if(!free(q))continue;ctx.save();ctx.translate(q.x,q.y);ctx.scale(sc,sc);if(biome===0){roundRect(-17,-58,34,58,3,'#34445a');for(let k=0;k<3;k++)roundRect(-12+k*10,-40,4,7,1,'#ffe5a0')}else if(biome===1){poly([[-22,0],[-16,-28],[-5,-28],[0,-48],[18,-48],[23,0]],'#80566a')}else if(biome===2){roundRect(-12,-30,24,30,7,'#e978ac');ellipse(0,-38,12,8,'#fff0a0')}else if(biome===5){poly([[-20,0],[0,-52],[20,0]],'#78b4d0');poly([[-12,-17],[0,-42],[12,-17]],'#f0fcff')}else{roundRect(-3,-26,6,28,2,'#76513a');ellipse(0,-39,19,18,'#347d55');ellipse(-9,-43,11,11,'#62a96b');ellipse(9,-48,11,12,'#458e5a')}ctx.restore()}
+ for(let side of [-1,1])for(let i=0;i<3;i++){const z=((i/3+time*.08+.2)%1),q=roadPoint(side*2.05,z),sc=q.scale;if(!free(q))continue;ctx.save();ctx.translate(q.x,q.y);ctx.scale(sc,sc);roundRect(-3,-23,6,26,2,'#795239');ellipse(0,-42,17,18,'#3e8b58');ellipse(-9,-46,10,11,'#62aa69');ellipse(9,-50,10,11,'#4b985d');ctx.restore()}
 }
 function drawShawarma(x,y,s,tilt=0){
  ctx.save();ctx.translate(x,y);ctx.rotate(tilt);ctx.scale(s,s);
