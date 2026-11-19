@@ -494,6 +494,12 @@ function update(dt){
     announce(lives>0?'💥 СТОЛКНОВЕНИЕ! ОСТАЛОСЬ ЖИЗНЕЙ: '+lives:'💨 ПОСЛЕДНЯЯ ЖИЗНЬ!');
     if(lives<=0){finish();return}
    }
+   // Reward a close, clean dodge once the obstacle passes the runner.
+   if(!pickup&&!o.hit&&!o.nearMiss&&o.z>=.78&&laneGap<hitWidth+.58&&laneGap>=hitWidth){
+    o.nearMiss=true;score+=35;
+    const cp=roadPoint(laneCenter(o.lane),o.z);burst(cp.x,cp.y-18,'#ffe08a');
+    announce('✨ ИДЕАЛЬНЫЙ УВОРОТ! +35 ОЧКОВ');
+   }
   }
  }
  objects=objects.filter(o=>o.z<1.0);
