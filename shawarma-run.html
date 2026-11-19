@@ -223,7 +223,7 @@ function laneCenter(laneIndex){return laneX[Math.max(0,Math.min(2,laneIndex|0))]
 function laneWorldWidth(z){return roadPoint(0,z).half*2/3}
 function drawBackground(dt){
  const biome=Math.max(0,['city','sunset','candy','forest','coast','snow'].indexOf(selectedBg));
- const skies=[['#72c5e9','#ffd6a0','#426b83'],['#4a527d','#ffad75','#5c4b68'],['#a77fc2','#ffd0dc','#78617f'],['#69b7a2','#f0dfa9','#456e60'],['#63b9cf','#ffe0ad','#397b89'],['#a8d9f0','#f4fbff','#819eae']][biome];
+ const skies=[['#8bc8d6','#f3c99a','#385c5a'],['#414b72','#f2a16f','#4e526f'],['#9671ae','#f4c1d7','#61506e'],['#5f9b77','#dfd39c','#355c48'],['#4c9eb4','#f5d7a0','#28677b'],['#9bcde5','#eaf8ff','#718e9c']][biome];
  const h=H*.32, roadTop=roadPoint(0,0), roadBottom=roadPoint(0,1);
  const sky=ctx.createLinearGradient(0,0,0,H*.62);sky.addColorStop(0,skies[0]);sky.addColorStop(.72,skies[1]);sky.addColorStop(1,'#f4b783');
  ctx.fillStyle=sky;ctx.fillRect(0,0,W,H);
@@ -251,7 +251,7 @@ function drawBackground(dt){
  }
  // Deep asphalt with a subtle warm-to-cool light falloff.
  const L=roadPoint(-1,0),R=roadPoint(1,0),BL=roadPoint(-1,1),BR=roadPoint(1,1);
- const asphalt=ctx.createLinearGradient(0,h,0,H);asphalt.addColorStop(0,'#59616a');asphalt.addColorStop(.42,'#454b50');asphalt.addColorStop(1,'#282d32');
+ const asphalt=ctx.createLinearGradient(0,h,0,H);asphalt.addColorStop(0,'#59665f');asphalt.addColorStop(.42,'#3d4843');asphalt.addColorStop(1,'#202b27');
  poly([[L.x,L.y],[R.x,R.y],[BR.x,H],[BL.x,H]],asphalt);
  ctx.save();ctx.beginPath();ctx.moveTo(L.x,L.y);ctx.lineTo(R.x,R.y);ctx.lineTo(BR.x,H);ctx.lineTo(BL.x,H);ctx.closePath();ctx.clip();
  // Fine road grain and faint worn patches.
@@ -290,6 +290,29 @@ function drawBackground(dt){
   const z=((i/3+time*.09+.3)%1),q=roadPoint(side*1.2,z),s=q.scale;if(!free(q))continue;
   ctx.save();ctx.translate(q.x,q.y);ctx.scale(s,s);roundRect(-2,-78,4,80,2,'#39424a');roundRect(-17,-78,34,4,2,'#39424a');ctx.shadowColor='#ffd47c';ctx.shadowBlur=12;ellipse(-16,-77,5,4,'#ffe5a1');ellipse(16,-77,5,4,'#ffe5a1');ctx.restore();
  }
+ // Low-poly roadside meshes: curbside planters, faceted shrubs and shop signs.
+ for(const side of [-1,1])for(let i=0;i<5;i++){
+  const z=((i/5+time*.105+.18)%1),p=roadPoint(side*1.16,z),sc=p.scale;
+  if(!free(p))continue;
+  ctx.save();ctx.translate(p.x,p.y);ctx.scale(sc,sc);
+  // Concrete planter base.
+  poly([[-24,0],[-18,-13],[18,-13],[24,0]],'#53645a','#283a34');
+  // Three faceted leaves form one compact mesh, kept outside the road edge.
+  poly([[-18,-12],[-12,-35],[-3,-16]],'#397c57');
+  poly([[-7,-13],[2,-45],[10,-15]],'#559768');
+  poly([[4,-14],[17,-34],[20,-12]],'#2d684d');
+  poly([[-3,-17],[2,-31],[8,-17]],'#83b879');
+  ctx.restore();
+ }
+ // Shopfront glow and distant window grid add depth without moving the road.
+ ctx.save();
+ for(let side of [-1,1])for(let i=0;i<4;i++){
+  const x=side<0?W*(.025+i*.075):W*(.975-i*.075),y=H*(.235+(i%2)*.035);
+  ctx.fillStyle=i%2?'#ffd78b88':'#a7e8d888';
+  ctx.shadowColor=i%2?'#ffd78b':'#a7e8d8';ctx.shadowBlur=7;
+  ctx.fillRect(x,y,Math.max(3,W*.012),Math.max(5,H*.025));
+ }
+ ctx.restore();
  // Overhead festoon lights: a signature SHAVERMA night-market detail.
  ctx.save();ctx.strokeStyle='#6b4540';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(0,0);ctx.quadraticCurveTo(W*.5,H*.12,W,H*.015);ctx.stroke();
  for(let i=0;i<9;i++){const x=W*i/8,y=H*.055+Math.sin(i/8*Math.PI)*H*.045;ctx.shadowColor=i%2?'#8ce6d3':'#ffd47b';ctx.shadowBlur=10;ellipse(x,y+7,3,5,i%2?'#8ce6d3':'#ffd47b')}
