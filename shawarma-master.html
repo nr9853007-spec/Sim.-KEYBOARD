@@ -86,7 +86,7 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.16;ba
 .wrap-animation .wrap-caption{position:absolute;top:calc(50% + 54px);color:#ffe5a5;font-size:12px;font-weight:1000;letter-spacing:2px;text-shadow:0 3px 8px #000;animation:captionPop .9s ease both}
 @keyframes wrapFold{0%{transform:rotate(-8deg) scaleX(.04) scaleY(.78);opacity:.15}30%{transform:rotate(5deg) scaleX(.72) scaleY(1.08);opacity:1}58%{transform:rotate(-3deg) scaleX(1.04) scaleY(.94)}78%{transform:rotate(0) scaleX(1) scaleY(1)}100%{transform:rotate(0) scaleX(1) scaleY(1);opacity:0}}
 @keyframes captionPop{0%,100%{opacity:0;transform:translateY(8px)}35%,75%{opacity:1;transform:translateY(0)}}
-.stack.wrapping{border-color:#ffdc8a;background:radial-gradient(ellipse,#e99b3d66,#26140d);overflow:hidden}
+.stack{position:relative}.stack.wrapping{border-color:#ffdc8a;background:radial-gradient(ellipse,#e99b3d66,#26140d);overflow:hidden}
 .stack.wrapping>span:not(.empty){animation:ingredientFold .72s cubic-bezier(.4,0,.2,1) forwards}
 @keyframes ingredientFold{0%{transform:translateY(0) rotate(0) scale(1);opacity:1}45%{transform:translateY(-20px) rotate(20deg) scale(.9);opacity:1}100%{transform:translateY(10px) rotate(160deg) scale(.05);opacity:0}}
 @media(max-width:560px){.top{min-height:58px;padding:7px}.game-brand{gap:5px;padding:4px 8px 4px 4px}.game-brand img{width:32px;height:32px}.game-brand b{font-size:9px;letter-spacing:1px}.game-brand small{font-size:6px}.back{font-size:9px}.stats{gap:4px}.stat{padding:6px 7px;font-size:10px}.guide-grid{grid-template-columns:1fr;gap:6px}.guide-grid>div{grid-template-columns:26px 1fr;align-items:center}.guide-grid small{grid-column:2}.start-modal{padding:17px}}
@@ -122,7 +122,7 @@ let serving=false;
 function serve(){if(!active||serving)return;if(stack.length!==order.length||stack.some((x,i)=>x!==order[i])){combo=0;updateStats();$('message').textContent='❌ Не тот рецепт! Проверь порядок ингредиентов.';return}
 serving=true;combo++;served++;const points=100+Math.min(combo-1,10)*25;score+=points;updateStats();$('message').textContent='🌯 Лаваш заворачивается… заказ уходит клиенту!';$('stack').classList.add('wrapping');
 const wrap=document.createElement('div');wrap.className='wrap-animation';wrap.innerHTML='<div class="wrap-shell"></div><div class="wrap-caption">ЗАКАЗ ГОТОВ!</div>';$('stack').appendChild(wrap);
-setTimeout(()=>{if(wrap.isConnected)wrap.remove();$('stack').classList.remove('wrapping');serving=false;$('message').textContent='✅ Клиент забрал заказ! +'+points+' очков'+(combo>1?' · КОМБО x'+combo+' 🔥':'');newOrder()},920)}
+setTimeout(()=>{if(wrap.isConnected)wrap.remove();$('stack').classList.remove('wrapping');serving=false;if(!active)return;$('message').textContent='✅ Клиент забрал заказ! +'+points+' очков'+(combo>1?' · КОМБО x'+combo+' 🔥':'');newOrder()},920)}
 function end(){active=false;clearInterval(timer);best=Math.max(best,score);try{localStorage.setItem('shawarmaMasterBest',String(best))}catch(e){}$('best').textContent=best;$('result').textContent='Твой результат: '+score+' очков. Заказов выполнено: '+served+'. Рекорд: '+best+'.';$('finish').classList.remove('hidden')}
 $('play').addEventListener('click',start);$('again').addEventListener('click',start);$('serve').addEventListener('click',serve);$('undo').addEventListener('click',()=>{if(active){stack.pop();drawStack()}});$('clear').addEventListener('click',()=>{if(active){stack=[];drawStack()}});drawItems();
 })();
