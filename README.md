@@ -1,19 +1,17 @@
-# N1kmeL — Demo Marketplace
+# N1kmeL Hub
 
-This repository hosts a **static, demonstration-only** marketplace interface on GitHub Pages.
+N1kmeL Hub is a responsive home page for a growing collection of browser games.
 
-## Demo features
-- Responsive marketplace layout inspired by the visual structure of StarPets.
-- Game selector, search, category filters, sorting, item preview, favorites, and profile-style demo screens.
-- All catalog items, balances, accounts, and prices are fictional examples.
+## Current games
+- **Shaverma Run** — open `shawarma-run.html` from the hub.
 
-## Disabled by design
-- No real purchases, payments, deposits, withdrawals, sales, or swaps.
-- No account linking, game credentials, or live inventory access.
-- No backend API, user registration, or real data storage.
+## Project structure
+- `index.html` — games hub homepage.
+- `hub.css` / `hub.js` — hub styles and navigation.
+- `assets/games/shawarma-run.svg` — Shaverma Run game artwork.
+- `shawarma-run.html` — standalone game.
 
-The site is static HTML/CSS/JavaScript and can be hosted directly on GitHub Pages. It does not use Node.js, Supabase, Cloudflare, or Google Apps Script.
+The hub is a static HTML/CSS/JavaScript site and can be hosted on GitHub Pages. The older marketplace demo files remain in the repository but are no longer used by the homepage.
 
 ## Local preview
-
 Open `index.html` in a browser or serve the repository with any static file server.
