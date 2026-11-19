@@ -184,15 +184,15 @@ const shopItems=[
 ];
 let owned=['classic','city'],selectedSkin='classic',selectedBg='city';
 try{wallet=+(localStorage.getItem('shawarmaWallet')||0);owned=JSON.parse(localStorage.getItem('shawarmaOwned')||'[\"classic\",\"city\"]');selectedSkin=localStorage.getItem('shawarmaSkin')||'classic';selectedBg=localStorage.getItem('shawarmaBg')||'city';}catch(e){wallet=0;owned=['classic','city'];}
-const laneX=[-.62,0,.62],rand=(a,b)=>a+Math.random()*(b-a);
-function laneOffset(value){return value<1?-.62*(1-value):.62*(value-1)}
+const laneX=[-.66,0,.66],rand=(a,b)=>a+Math.random()*(b-a);
+function laneOffset(value){return value<1?-.66*(1-value):.66*(value-1)}
 try{best=+(localStorage.getItem('shawarmaRunBest')||0)}catch(e){}
 function resize(){DPR=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;canvas.width=Math.round(W*DPR);canvas.height=Math.round(H*DPR);ctx.setTransform(DPR,0,0,DPR,0,0)}
 addEventListener('resize',resize);resize();
 function poly(points,fill,stroke){ctx.beginPath();ctx.moveTo(points[0][0],points[0][1]);for(let i=1;i<points.length;i++)ctx.lineTo(points[i][0],points[i][1]);ctx.closePath();ctx.fillStyle=fill;ctx.fill();if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=2;ctx.stroke()}}
 function ellipse(x,y,rx,ry,color){ctx.beginPath();ctx.ellipse(x,y,rx,ry,0,0,Math.PI*2);ctx.fillStyle=color;ctx.fill()}
 function roundRect(x,y,w,h,r,color){ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fillStyle=color;ctx.fill()}
-function roadPoint(x,z){const depth=Math.max(0,Math.min(1,z));const horizon=H*.34;const y=horizon+depth*depth*(H*.66);const expansion=1-Math.exp(-Math.max(0,time)*.045);const half=W*(.075+depth*(.105+.055*expansion));return{x:W/2+x*half,y,scale:.44+depth*.68,half}}
+function roadPoint(x,z){const depth=Math.max(0,Math.min(1,z));const horizon=H*.34;const y=horizon+depth*depth*(H*.66);const expansion=1-Math.exp(-Math.max(0,time)*.045);const half=W*(.10+depth*(.27+.06*expansion));return{x:W/2+x*half,y,scale:.44+depth*.68,half}}
 function drawBackground(dt){
  const horizon=H*.34, bottom=H;
  const bgIds=['city','sunset','candy','forest','coast','snow'];const biome=Math.max(0,bgIds.indexOf(selectedBg));
