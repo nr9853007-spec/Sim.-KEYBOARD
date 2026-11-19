@@ -169,8 +169,8 @@ html,body,#game{background:#10121d;color:#f7f4ff}
 <canvas id="world" aria-label="Игра SHAVERMA"></canvas>
 <div class="hud hidden" id="hud"><div class="pill score-pill"><span class="hud-icon star-icon">★</span><span class="hud-label">СЧЁТ</span><b id="score">0</b></div><div class="pill coin-pill"><span class="hud-icon">🌯</span><span class="hud-label">ШАВУХИ</span><b id="coins">0</b></div><div class="pill speed-pill"><span class="hud-icon">⚡</span><span class="hud-label">ТЕМП</span><b><span id="speed">1.0</span><small>x</small></b></div><div class="pill lives-pill"><span class="hud-icon">♥</span><span class="hud-label">ЖИЗНИ</span><b id="lives">3</b></div></div><div class="progress hidden" id="progress"><i id="progressFill"></i></div>
 <div class="event hidden" id="event"></div><button class="pause-btn hidden" id="pauseBtn" aria-label="Пауза">Ⅱ ПАУЗА</button>
-<div class="controls hidden" id="controls"><button id="left" aria-label="Влево">◀</button><button id="jump" aria-label="Прыжок">⬆</button><button id="slide" aria-label="Подкат">⬇</button><button id="right" aria-label="Вправо">▶</button></div>
-<div class="screen" id="menu"><section class="panel"><div class="logo">SHAVERMA<small>3D RUNNER</small></div><a class="hub-menu-link" href="./index.html">← ВЕРНУТЬСЯ В HUB</a><div class="food">🌯</div><p class="tag">ОДНА ШАВУХА. ТРИ ПОЛОСЫ. БЕСКОНЕЧНЫЙ ЗАБЕГ!</p><button class="btn" id="play">НАЧАТЬ ПОБЕГ</button><button class="btn" id="openShop" style="margin-top:14px;background:linear-gradient(#b8edff,#55b5df);box-shadow:0 6px #286d94">🛒 МАГАЗИН</button><div class="menu-grid"><button class="mini-btn" id="statsBtn">📊 СТАТИСТИКА</button><button class="mini-btn" id="supportBtn">✦ TELEGRAM-ПОДДЕРЖКА</button><button class="mini-btn" id="helpBtn">❔ ГАЙД ПО ИГРЕ</button><button class="mini-btn" id="promoBtn">🎟 ПРОМОКОДЫ</button></div><p class="hint">← → / A D — полосы · ↑ / W — прыжок · ↓ / S — подкат<br>Телефон: свайпы вверх/вниз и кнопки<br><br>Собирай монеты, щиты и магниты, уворачивайся от препятствий. Каждые 25 секунд — новое событие!</p></section></div>
+<div class="controls hidden" id="controls"><button id="left" aria-label="Влево">◀</button><button id="right" aria-label="Вправо">▶</button></div>
+<div class="screen" id="menu"><section class="panel"><div class="logo">SHAVERMA<small>3D RUNNER</small></div><a class="hub-menu-link" href="./index.html">← ВЕРНУТЬСЯ В HUB</a><div class="food">🌯</div><p class="tag">ОДНА ШАВУХА. ТРИ ПОЛОСЫ. БЕСКОНЕЧНЫЙ ЗАБЕГ!</p><button class="btn" id="play">НАЧАТЬ ПОБЕГ</button><button class="btn" id="openShop" style="margin-top:14px;background:linear-gradient(#b8edff,#55b5df);box-shadow:0 6px #286d94">🛒 МАГАЗИН</button><div class="menu-grid"><button class="mini-btn" id="statsBtn">📊 СТАТИСТИКА</button><button class="mini-btn" id="supportBtn">✦ TELEGRAM-ПОДДЕРЖКА</button><button class="mini-btn" id="helpBtn">❔ ГАЙД ПО ИГРЕ</button><button class="mini-btn" id="promoBtn">🎟 ПРОМОКОДЫ</button></div><p class="hint">← → / A D — движение по полосам<br>Телефон: свайп влево/вправо или две кнопки<br><br>Собирай монеты, щиты и магниты, уворачивайся от препятствий. Каждые 25 секунд — новое событие!</p></section></div>
 <div class="screen hidden" id="pausePanel"><section class="panel"><div class="logo" style="font-size:48px">ПАУЗА</div><a class="hub-menu-link" href="./index.html">← ВЕРНУТЬСЯ В HUB</a><div class="food">⏸️</div><p class="tag">Шаурма отдыхает. Забег ждёт!</p><button class="btn" id="resumeBtn">▶ ПРОДОЛЖИТЬ</button><button class="btn" id="pauseMenuBtn" style="margin-top:12px;background:linear-gradient(#b8edff,#55b5df);box-shadow:0 6px #286d94">⌂ В ГЛАВНОЕ МЕНЮ</button></section></div><div class="screen hidden" id="shop"><section class="panel"><div class="logo" style="font-size:42px">ЛАВКА SHAVERMA</div><p class="tag">🌯 ТВОИ МОНЕТЫ: <b id="wallet">0</b></p><div class="shop-tabs"><button class="shop-tab active" id="skinTab" type="button">🌯 СКИНЫ ШАУРМЫ</button><button class="shop-tab" id="bgTab" type="button">🌆 ФОНЫ</button></div><div class="shop-grid" id="shopGrid"></div><button class="btn" id="shopBack">НАЗАД</button><p class="hint">Покупки и выбранные предметы сохраняются на этом устройстве.</p></section></div>
 <div class="screen hidden" id="extraPanel"><section class="panel"><div class="logo" id="extraTitle" style="font-size:38px">РАЗДЕЛ</div><div id="extraContent" class="extra-content"></div><button class="btn" id="extraBack">НАЗАД</button></section></div>
 <div class="screen hidden" id="over"><section class="panel"><div class="logo" style="font-size:48px">ВОТ ЭТО ПОГОНЯ!</div><div class="food">🥙💨</div><p class="tag">Забег окончен!</p><p>Очки: <b id="finalScore">0</b><br>Шавух собрано: <b id="finalCoins">0</b><br>Рекорд: <b id="best">0</b></p><button class="btn" id="again">ЕЩЁ ОДИН ЗАБЕГ</button><button class="btn" id="overShop" style="margin-top:14px;background:linear-gradient(#b8edff,#55b5df);box-shadow:0 6px #286d94">🛒 МАГАЗИН</button><p class="hint">Подсказка: магнит притягивает монеты даже с соседних полос!</p></section></div>
@@ -181,7 +181,7 @@ html,body,#game{background:#10121d;color:#f7f4ff}
 'use strict';
 const canvas=document.getElementById('world'),ctx=canvas.getContext('2d',{alpha:false});
 const $=id=>document.getElementById(id);
-let W=0,H=0,DPR=1,raf=0,last=0,playing=false,lane=1,visualLane=1,score=0,coins=0,wallet=0,lives=3,invulnerable=0,speed=0.28,time=0,spawn=0,waveCount=0,objects=[],particles=[],shield=0,magnet=0,eventUntil=0,eventModeUntil=0,eventType='',shake=0,best=0,jump=0,slide=0;
+let W=0,H=0,DPR=1,raf=0,last=0,playing=false,lane=1,visualLane=1,score=0,coins=0,wallet=0,lives=3,invulnerable=0,speed=0.28,time=0,spawn=0,waveCount=0,objects=[],particles=[],shield=0,magnet=0,eventUntil=0,eventModeUntil=0,eventType='',shake=0,best=0,turbo=0,doubleScore=0;
 const shopItems=[
 {id:'classic',kind:'skin',name:'Классик Поп',icon:'🌯',cost:0},
 {id:'gold',kind:'skin',name:'Золотой блик',icon:'🌟',cost:18},
@@ -213,7 +213,7 @@ addEventListener('resize',resize);resize();
 function poly(points,fill,stroke){ctx.beginPath();ctx.moveTo(points[0][0],points[0][1]);for(let i=1;i<points.length;i++)ctx.lineTo(points[i][0],points[i][1]);ctx.closePath();ctx.fillStyle=fill;ctx.fill();if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=2;ctx.stroke()}}
 function ellipse(x,y,rx,ry,color){ctx.beginPath();ctx.ellipse(x,y,rx,ry,0,0,Math.PI*2);ctx.fillStyle=color;ctx.fill()}
 function roundRect(x,y,w,h,r,color){ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fillStyle=color;ctx.fill()}
-function roadPoint(x,z){const d=Math.max(0,Math.min(1,z)),h=H*.32,y=h+d*d*H*.68,roadWidth=Math.min(W*(W<700?.84:.78),H*(W<700?1.55:1.75)),half=roadWidth*.5*(.18+.82*d),worldScale=Math.min(1.35,Math.max(.78,roadWidth/720));return{x:W/2+x*half,y,scale:(.40+d*.76)*worldScale,half,roadWidth}}
+function roadPoint(x,z){const d=Math.max(0,Math.min(1,z)),h=H*.32,y=h+d*d*H*.68,roadWidth=Math.min(W*(W<700?.84:.78),H*(W<700?1.55:1.75)),half=roadWidth*.5*(.18+.82*d),worldScale=Math.min(1.35,Math.max(.78,roadWidth/720)),curve=Math.min(1,Math.max(0,time/8)),center=W/2+Math.sin(time*.14+(1-d)*2.25)*W*.065*Math.pow(d,1.35)*curve;return{x:center+x*half,y,scale:(.40+d*.76)*worldScale,half,roadWidth}}
 function laneCenter(laneIndex){return laneX[Math.max(0,Math.min(2,laneIndex|0))]}
 function laneWorldWidth(z){return roadPoint(0,z).half*2/3}
 function drawBackground(dt){
@@ -250,7 +250,7 @@ function drawBackground(dt){
  poly([[L.x,L.y],[R.x,R.y],[BR.x,H],[BL.x,H]],asphalt);
  ctx.save();ctx.beginPath();ctx.moveTo(L.x,L.y);ctx.lineTo(R.x,R.y);ctx.lineTo(BR.x,H);ctx.lineTo(BL.x,H);ctx.closePath();ctx.clip();
  // Fine road grain and faint worn patches.
- for(let i=0;i<115;i++){const z=((i*37%113)/113),x=((i*61%101)/100-.5)*roadPoint(0,z).half*1.72+W/2,y=h+z*z*H*.68;ctx.globalAlpha=.035+(i%4)*.012;ellipse(x,y,1+z*2,1+z*1.4,i%2?'#f8d7a0':'#080e16')}
+ for(let i=0;i<115;i++){const z=((i*37%113)/113),x=((i*61%101)/100-.5)*roadPoint(0,z).half*1.72+roadPoint(0,z).x,y=h+z*z*H*.68;ctx.globalAlpha=.035+(i%4)*.012;ellipse(x,y,1+z*2,1+z*1.4,i%2?'#f8d7a0':'#080e16')}
  ctx.globalAlpha=1;
  // Dashed lane guides stream toward the runner.
  for(const boundary of [-1/3,1/3])for(let i=0;i<12;i++){
@@ -272,6 +272,8 @@ function drawBackground(dt){
   roundRect(-29,-15,58,9,3,'#f4c36e');ctx.fillStyle='#513b35';ctx.font='bold 7px system-ui';ctx.textAlign='center';ctx.fillText(i%2?'КАФЕ':'ШАУРМА',0,-8);
   ctx.restore();
  }
+ // Sculpted roadside mesh props: planters, neon pylons and market sign frames.
+ for(const side of [-1,1])for(let i=0;i<4;i++){const z=((i/4+time*.062+.08)%1),q=roadPoint(side*1.72,z),sc=q.scale;if(q.x< -45||q.x>W+45)continue;ctx.save();ctx.translate(q.x,q.y);ctx.scale(sc,sc);roundRect(-24,-5,48,10,4,'#51423b');roundRect(-20,-25,40,20,5,biome===5?'#dce8e8':'#7a5b43');poly([[-18,-25],[-12,-42],[-3,-35],[4,-45],[15,-25]],biome===5?'#b9e5e8':'#4b9a62');ctx.strokeStyle='#f7c86d';ctx.lineWidth=2;ctx.strokeRect(-23,-49,46,46);ctx.restore();}
  // Trees and lamps create depth without cluttering the playable lanes.
  for(const side of [-1,1])for(let i=0;i<5;i++){
   const z=((i/5+time*.075+.12)%1),q=roadPoint(side*1.34,z),s=q.scale;if(!free(q))continue;
@@ -348,7 +350,7 @@ function drawShawarma(x,y,s,tilt=0){
  else if(selectedSkin==='rainbow'){ctx.strokeStyle=c.aura;ctx.lineWidth=3;ctx.beginPath();ctx.arc(0,-20,28+Math.sin(time*6)*2,Math.PI*1.05,Math.PI*1.95);ctx.stroke()}
  ctx.restore();
 }
-function drawObstacle(o){const offset=o.offset||0;const requested=laneX[o.lane]+offset;const widths={cone:25,bin:27,barrier:43,sign:46,puddle:37,truck:52,coin:20,shield:22,magnet:22};const halfWidth=widths[o.type]||34;const p=roadPoint(0,o.z);const edgeLimit=Math.max(0,p.half-halfWidth*p.scale-8);const clampedX=Math.max(-edgeLimit,Math.min(edgeLimit,requested*p.half));p.x=W/2+clampedX;const available=Math.max(0,p.half-Math.abs(clampedX)-8);if(available<2)return;const s=Math.min(p.scale,available/halfWidth);ctx.save();ctx.translate(p.x,p.y);ctx.scale(s,s);ellipse(0,5,27,9,'#1d120d66');
+function drawObstacle(o){const offset=o.offset||0;const requested=laneX[o.lane]+offset;const widths={cone:25,bin:27,barrier:43,sign:46,puddle:37,truck:52,coin:20,shield:22,magnet:22,turbo:23,double:23};const halfWidth=widths[o.type]||34;const p=roadPoint(0,o.z);const edgeLimit=Math.max(0,p.half-halfWidth*p.scale-8);const clampedX=Math.max(-edgeLimit,Math.min(edgeLimit,requested*p.half));p.x+=clampedX;const available=Math.max(0,p.half-Math.abs(clampedX)-8);if(available<2)return;const s=Math.min(p.scale,available/halfWidth);ctx.save();ctx.translate(p.x,p.y);ctx.scale(s,s);ellipse(0,5,27,9,'#1d120d66');
 if(o.type==='cone'){ellipse(0,-2,21,5,'#71351f');poly([[-17,-2],[-2,-47],[3,-47],[18,-2]],'#f07832','#9b3f1d');poly([[-11,-17],[11,-17],[14,-9],[-14,-9]],'#fff0d2');poly([[-6,-32],[6,-32],[9,-24],[-9,-24]],'#ffe7bd');ellipse(-2,-46,4,2,'#ffd39b');roundRect(-22,-5,44,7,3,'#b84f27');}
 else if(o.type==='bin'){roundRect(-20,-38,40,39,7,'#477b67');roundRect(-24,-44,48,9,4,'#294c40');roundRect(-15,-49,30,5,3,'#6f9b7c');roundRect(-11,-30,22,16,3,'#315c50');ctx.strokeStyle='#a8c8a8';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(-8,-26);ctx.lineTo(-8,-17);ctx.moveTo(0,-26);ctx.lineTo(0,-17);ctx.moveTo(8,-26);ctx.lineTo(8,-17);ctx.stroke();ellipse(-14,3,5,3,'#202b25');ellipse(14,3,5,3,'#202b25');}
 else if(o.type==='barrier'){roundRect(-37,-27,74,26,5,'#e8c65e');roundRect(-40,-31,80,7,3,'#fff0c0');for(let k=-28;k<30;k+=20)poly([[k,-25],[k+9,-25],[k+22,-2],[k+13,-2]],'#a94a31');roundRect(-31,-1,8,13,2,'#5a4030');roundRect(23,-1,8,13,2,'#5a4030');ellipse(-30,-28,3,3,'#fff6d3');ellipse(30,-28,3,3,'#fff6d3');}
@@ -357,19 +359,19 @@ else if(o.type==='puddle'){ellipse(0,-3,34,9,'#347f9c');ellipse(-6,-6,24,5,'#65c
 else if(o.type==='truck'){roundRect(-42,-49,84,49,8,'#d88c35');roundRect(-34,-43,68,22,5,'#f4c45c');roundRect(-29,-39,58,15,3,'#8ac6d6');ctx.fillStyle='#31536a';ctx.fillRect(-2,-38,3,13);roundRect(-34,-17,68,11,3,'#8c3c24');ctx.fillStyle='#fff2d2';ctx.font='bold 9px system-ui';ctx.textAlign='center';ctx.fillText('ШАВЕРМА',0,-21);roundRect(-47,-12,8,20,3,'#4a3024');roundRect(39,-12,8,20,3,'#4a3024');ellipse(-27,1,9,9,'#24252a');ellipse(27,1,9,9,'#24252a');ellipse(-27,1,4,4,'#c7cbd0');ellipse(27,1,4,4,'#c7cbd0');roundRect(-37,-46,10,5,2,'#fff2ae');roundRect(27,-46,10,5,2,'#fff2ae');}
 else if(o.type==='coin'){const coinPalettes={neon:['#e66bff','#8d45d2'],cyber:['#63efff','#2875b6'],galaxy:['#b4a0ff','#6551b9'],frost:['#e6ffff','#75c8ed'],mint:['#b9f58c','#5cba87'],lava:['#ffbd58','#e35a32'],pepper:['#ffe16b','#ef743b'],rainbow:['#ff9fd0','#8a83ff'],gold:['#fff0a0','#e6a52b'],royal:['#ffe28b','#ad71d5'],pixel:['#c5a8ff','#6a55b8'],chef:['#ffe2a4','#d69a5a']};const cc=coinPalettes[selectedSkin]||['#ffe16b','#e6a52b'];const spin=.78+Math.abs(Math.sin(time*8+o.z*5))*.22;ctx.save();ctx.translate(0,-18);ctx.scale(spin,1);ctx.shadowColor=cc[0];ctx.shadowBlur=14;ellipse(0,0,18,18,cc[1]);ctx.shadowBlur=0;ellipse(0,0,13,13,cc[0]);ctx.fillStyle='#71421e';ctx.font='bold 15px system-ui';ctx.textAlign='center';ctx.fillText(selectedSkin==='cyber'?'⚡':selectedSkin==='galaxy'?'✦':selectedSkin==='frost'?'❄':selectedSkin==='mint'?'✿':selectedSkin==='royal'?'♛':'★',0,5);ctx.restore()}
 else if(o.type==='shield'){ctx.save();ctx.shadowColor='#7beaff';ctx.shadowBlur=20;poly([[-1,-39],[18,-30],[16,-11],[0,-1],[-16,-11],[-18,-30]],'#67d9ef','#d9fbff');ctx.shadowBlur=0;poly([[-1,-32],[10,-27],[9,-14],[0,-7],[-9,-14],[-10,-27]],'#174f7a');ctx.fillStyle='#fff';ctx.font='bold 13px system-ui';ctx.textAlign='center';ctx.fillText('★',0,-18);ctx.restore()}
-else if(o.type==='magnet'){ctx.save();ctx.shadowColor='#ff8bc1';ctx.shadowBlur=16;ctx.strokeStyle='#f06ca8';ctx.lineWidth=9;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(-12,-32);ctx.lineTo(-12,-17);ctx.quadraticCurveTo(-12,-3,0,-3);ctx.quadraticCurveTo(12,-3,12,-17);ctx.lineTo(12,-32);ctx.stroke();ctx.shadowBlur=0;ctx.strokeStyle='#fff';ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(-12,-32);ctx.lineTo(-12,-25);ctx.moveTo(12,-32);ctx.lineTo(12,-25);ctx.stroke();ctx.restore()}
+else if(o.type==='turbo'){ctx.save();ctx.shadowColor='#ffb347';ctx.shadowBlur=18;poly([[-2,-39],[17,-20],[5,-20],[12,-2],[-16,-25],[-4,-25]],'#ffad42','#fff0b0');ctx.restore()}\nelse if(o.type==='double'){ctx.save();ctx.shadowColor='#c49aff';ctx.shadowBlur=18;ellipse(-8,-20,10,14,'#a77bff');ellipse(8,-20,10,14,'#e4b5ff');ctx.fillStyle='#fff';ctx.font='bold 16px system-ui';ctx.textAlign='center';ctx.fillText('×2',0,-16);ctx.restore()}\nelse if(o.type==='magnet'){ctx.save();ctx.shadowColor='#ff8bc1';ctx.shadowBlur=16;ctx.strokeStyle='#f06ca8';ctx.lineWidth=9;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(-12,-32);ctx.lineTo(-12,-17);ctx.quadraticCurveTo(-12,-3,0,-3);ctx.quadraticCurveTo(12,-3,12,-17);ctx.lineTo(12,-32);ctx.stroke();ctx.shadowBlur=0;ctx.strokeStyle='#fff';ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(-12,-32);ctx.lineTo(-12,-25);ctx.moveTo(12,-32);ctx.lineTo(12,-25);ctx.stroke();ctx.restore()}
 ctx.restore()}
-function drawPlayer(){const p=roadPoint(laneOffset(visualLane),.68);if(invulnerable>0&&Math.floor(time*18)%2===0)return;const jumpLift=jump>0?Math.sin((1-jump/.72)*Math.PI)*76:0;const crouch=slide>0?.64:1;const laneWidth=laneWorldWidth(.68);const desiredScale=W>=1000?1.98:W>=800?1.82:W>=600?1.34:1.02;const safeScale=Math.max(.82,Math.min(desiredScale,laneWidth*.58/38));const heroScale=safeScale*crouch;drawShawarma(p.x,p.y-12-jumpLift,heroScale+Math.sin(time*12)*.018,Math.sin(time*8)*.025);if(jump>0){ctx.globalAlpha=.24;ellipse(p.x,p.y+7,25,7,'#fff');ctx.globalAlpha=1}if(shield>0){ctx.strokeStyle='#70eaff';ctx.lineWidth=4;ctx.globalAlpha=.65+Math.sin(time*14)*.2;ctx.beginPath();ctx.ellipse(p.x,p.y-22,39,49,0,0,Math.PI*2);ctx.stroke();ctx.globalAlpha=1}if(magnet>0){ctx.strokeStyle='#ff8bc1';ctx.lineWidth=3;ctx.globalAlpha=.55+Math.sin(time*10)*.18;ctx.beginPath();ctx.ellipse(p.x,p.y-20,49,57,0,0,Math.PI*2);ctx.stroke();ctx.globalAlpha=1}}
+function drawPlayer(){const p=roadPoint(laneOffset(visualLane),.68);if(invulnerable>0&&Math.floor(time*18)%2===0)return;const laneWidth=laneWorldWidth(.68);const desiredScale=W>=1000?1.98:W>=800?1.82:W>=600?1.34:1.02;const safeScale=Math.max(.82,Math.min(desiredScale,laneWidth*.58/38));const heroScale=safeScale;drawShawarma(p.x,p.y-12,heroScale+Math.sin(time*12)*.018,Math.sin(time*8)*.025);if(shield>0){ctx.strokeStyle='#70eaff';ctx.lineWidth=4;ctx.globalAlpha=.65+Math.sin(time*14)*.2;ctx.beginPath();ctx.ellipse(p.x,p.y-22,39,49,0,0,Math.PI*2);ctx.stroke();ctx.globalAlpha=1}if(magnet>0){ctx.strokeStyle='#ff8bc1';ctx.lineWidth=3;ctx.globalAlpha=.55+Math.sin(time*10)*.18;ctx.beginPath();ctx.ellipse(p.x,p.y-20,49,57,0,0,Math.PI*2);ctx.stroke();ctx.globalAlpha=1}}
 function burst(x,y,color){for(let i=0;i<12;i++)particles.push({x,y,vx:rand(-2,2),vy:rand(-4,-.5),life:1,color})}
 function drawParticles(dt){for(const p of particles){p.x+=p.vx*dt*3;p.y+=p.vy*dt*3;p.vy+=.12*dt;p.life-=.025*dt;ctx.globalAlpha=Math.max(0,p.life);ellipse(p.x,p.y,4,4,p.color)}ctx.globalAlpha=1;particles=particles.filter(p=>p.life>0)}
 function add(type,l,z=.02,offset=0){
  if(!Number.isInteger(l)||l<0||l>2)return false;
  const safeOffset=Math.max(-.16,Math.min(.16,offset));
  const candidate=roadPoint(laneCenter(l)+safeOffset,z);
- const pickup=['coin','shield','magnet'].includes(type);
+ const pickup=['coin','shield','magnet','turbo','double'].includes(type);
  const near=objects.some(o=>{
   if(o.hit||o.type==='spark')return false;
-  const otherPickup=['coin','shield','magnet'].includes(o.type);
+  const otherPickup=['coin','shield','magnet','turbo','double'].includes(o.type);
   const dz=Math.abs(o.z-z);
   if(o.lane===l){
    const minGap=(pickup&&otherPickup)?0.065:((pickup||otherPickup)?0.22:0.30);
@@ -415,7 +417,7 @@ function wave(){
   {lane:safeOptions[Math.floor(Math.random()*2)],z:.76,x:-.11}
  ];
  for(const spot of coinSpots)add('coin',spot.lane,spot.z,spot.x);
- if(waveCount%Math.max(4,7-Math.floor(level/3))===0)add(Math.random()<.5?'shield':'magnet',safe,.64);
+ if(waveCount%Math.max(4,7-Math.floor(level/3))===0)add(['shield','magnet','turbo','double'][Math.floor(Math.random()*4)],safe,.64);
 }
 let dailyMissions={day:'',coins:0,seconds:0,boosts:0,claimed:[]};
 function loadDailyMissions(){const day=new Date().toLocaleDateString('sv-SE');try{dailyMissions=JSON.parse(localStorage.getItem('shawarmaDailyMissions')||'{}')}catch(e){dailyMissions={}}if(!dailyMissions||dailyMissions.day!==day)dailyMissions={day,coins:0,seconds:0,boosts:0,claimed:[]};if(!Array.isArray(dailyMissions.claimed))dailyMissions.claimed=[];saveDailyMissions()}
@@ -424,7 +426,7 @@ function updateDailyMissions(kind,amount=1){const previousWholeSeconds=Math.floo
 function dailyMissionText(){const tasks=[['coins',10,'Собери 10 монет',25],['seconds',45,'Продержись 45 секунд',30],['boosts',2,'Подбери 2 усиления',35]];return 'ЕЖЕДНЕВНЫЕ ЗАДАНИЯ\n\n'+tasks.map(t=>(dailyMissions.claimed.includes(t[0])?'✅ ':'⬜ ')+t[2]+' — '+Math.min(dailyMissions[t[0]]||0,t[1])+'/'+t[1]+'\nНаграда: '+t[3]+' монет').join('\n\n')+'\n\nПрогресс сохраняется между забегами и обновляется каждый день.'}
 function announce(txt){const e=$('event');e.textContent=txt;e.classList.remove('hidden');eventUntil=performance.now()+2100}
 function specialEvent(){const stage=Math.floor(time/25)%3;eventModeUntil=time+8;if(stage===0){eventType='rush';announce('🚦 ЧАС ПИК! ДВОЙНОЙ ПОТОК!')}else if(stage===1){eventType='coins';announce('✨ ЗОЛОТОЙ МАРШРУТ! БОЛЬШЕ ШАВУХ!')}else{eventType='truck';announce('🚚 ФУРГОН ШАВЕРМЫ НА ДОРОГЕ!');add('truck',Math.floor(Math.random()*3),.08)}}
-function start(){loadDailyMissions();cancelAnimationFrame(raf);objects=[];particles=[];lane=1;visualLane=1;score=0;coins=0;lives=3;invulnerable=0;jump=0;slide=0;speed=.28;time=0;spawn=0;waveCount=0;shield=0;magnet=0;last=0;playing=true;$('lives').textContent='3';$('menu').classList.add('hidden');$('over').classList.add('hidden');$('hud').classList.remove('hidden');$('progress').classList.remove('hidden');$('controls').classList.remove('hidden');$('pauseBtn').classList.remove('hidden');paused=false;$('score').textContent='0';$('coins').textContent='0';$('speed').textContent='1.0';raf=requestAnimationFrame(loop)}
+function start(){loadDailyMissions();cancelAnimationFrame(raf);objects=[];particles=[];lane=1;visualLane=1;score=0;coins=0;lives=3;invulnerable=0;turbo=0;doubleScore=0;speed=.28;time=0;spawn=0;waveCount=0;shield=0;magnet=0;last=0;playing=true;$('lives').textContent='3';$('menu').classList.add('hidden');$('over').classList.add('hidden');$('hud').classList.remove('hidden');$('progress').classList.remove('hidden');$('controls').classList.remove('hidden');$('pauseBtn').classList.remove('hidden');paused=false;$('score').textContent='0';$('coins').textContent='0';$('speed').textContent='1.0';raf=requestAnimationFrame(loop)}
 function finish(){if(!playing)return;playing=false;cancelAnimationFrame(raf);best=Math.max(best,Math.floor(score));try{localStorage.setItem('shawarmaRunBest',String(best));localStorage.setItem('shawarmaRuns',String(+(localStorage.getItem('shawarmaRuns')||0)+1));localStorage.setItem('shawarmaLifetimeCoins',String(+(localStorage.getItem('shawarmaLifetimeCoins')||0)+coins));const history=JSON.parse(localStorage.getItem('shawarmaRunHistory')||'[]');history.unshift({score:Math.floor(score),coins,time:Math.floor(time),date:new Date().toLocaleDateString('sv-SE')});localStorage.setItem('shawarmaRunHistory',JSON.stringify(history.slice(0,10)))}catch(e){}$('finalScore').textContent=Math.floor(score);$('finalCoins').textContent=coins;$('best').textContent=best;$('over').classList.remove('hidden');$('controls').classList.add('hidden');$('pauseBtn').classList.add('hidden')}
 function update(dt){
  const oldLevel=Math.floor(time/30)+1;
@@ -432,12 +434,12 @@ function update(dt){
  time+=dt/60;
  const level=Math.floor(time/30)+1;
  visualLane+=(lane-visualLane)*Math.min(1,dt*.32);
- jump=Math.max(0,jump-dt/60);
- slide=Math.max(0,slide-dt/60);
+ turbo=Math.max(0,turbo-dt/60);
+ doubleScore=Math.max(0,doubleScore-dt/60);
  // Continuous progression avoids the speed drop that used to happen at each level boundary.
- speed=Math.min(.82,.28+time*.0042);
+ speed=Math.min(.82,.28+time*.0042)+(turbo>0?.13:0);
  if(level>oldLevel)announce('🏁 УРОВЕНЬ '+level+'! СКОРОСТЬ И СЛОЖНОСТЬ ВЫШЕ');
- score+=dt*(.23+speed*.38);
+ score+=dt*(.23+speed*.38)*(doubleScore>0?2:1);
  spawn+=dt;
  const rush=time<eventModeUntil&&eventType==='rush';
  const spawnInterval=rush?Math.max(30,62-(level-1)*2.0-time*.07):Math.max(34,82-(level-1)*3.0-time*.085);
@@ -459,13 +461,11 @@ function update(dt){
   o.z+=dt*(.0026+speed*.0042);
   const crossed=o.prevZ<.68&&o.z>=.68;
   const laneGap=Math.abs(o.lane-visualLane);
-  const pickup=o.type==='coin'||o.type==='shield'||o.type==='magnet';
+  const pickup=['coin','shield','magnet','turbo','double'].includes(o.type);
   const hitWidth=pickup?(o.type==='coin'&&magnet>0?1.08:.37):(o.type==='barrier'||o.type==='truck'||o.type==='sign'?.39:.32);
-  const actionDodged=(o.type==='barrier'&&jump>.12)||(o.type==='sign'&&slide>.08);
   const magnetPickup=o.type==='coin'&&magnet>0&&o.z>=.52&&o.z<=.78&&laneGap<1.6;
   if((crossed||magnetPickup)&&!o.hit&&(magnetPickup||laneGap<hitWidth)){
    o.hit=true;
-   if(actionDodged){o.type='spark';continue;}
    if(o.type==='coin'){
     coins++;wallet++;
     try{localStorage.setItem('shawarmaWallet',String(wallet))}catch(e){}
@@ -477,6 +477,10 @@ function update(dt){
    }else if(o.type==='magnet'){
     magnet=7;const cp=roadPoint(laneCenter(o.lane),o.z);burst(cp.x,cp.y-20,'#ff8bc1');
     announce('🧲 МАГНИТ! МОНЕТЫ ПРИТЯГИВАЮТСЯ');o.type='spark';
+   }else if(o.type==='turbo'){
+    turbo=5;const cp=roadPoint(laneCenter(o.lane),o.z);burst(cp.x,cp.y-20,'#ffb347');announce('⚡ ТУРБО! +СКОРОСТЬ НА 5 СЕКУНД');o.type='spark';
+   }else if(o.type==='double'){
+    doubleScore=8;const cp=roadPoint(laneCenter(o.lane),o.z);burst(cp.x,cp.y-20,'#c49aff');announce('✨ ДВОЙНЫЕ ОЧКИ НА 8 СЕКУНД');o.type='spark';
    }else if(shield>0){
     shield=0;const cp=roadPoint(laneCenter(o.lane),o.z);burst(cp.x,cp.y-20,'#70eaff');
     announce('💥 ЩИТ СПАС!');o.type='spark';
@@ -501,7 +505,7 @@ function loop(ts){if(!playing)return;const dt=Math.min((ts-last)/16.667||1,2.2);
 let shopTab='skin';function renderShop(){ $('wallet').textContent=wallet;const grid=$('shopGrid');grid.innerHTML='';for(const item of shopItems.filter(x=>x.kind===shopTab)){const isOwned=owned.includes(item.id),isSelected=item.kind==='skin'?selectedSkin===item.id:selectedBg===item.id;const card=document.createElement('div');card.className='shop-item';const title=document.createElement('div');title.textContent=item.name;const icon=document.createElement('strong');icon.textContent=item.icon;const cost=document.createElement('small');cost.textContent=isOwned?(isSelected?'✓ Выбрано':'Куплено'):'🪙 '+item.cost;const button=document.createElement('button');button.textContent=isSelected?'Выбрано':isOwned?'Выбрать':'Купить';button.disabled=isSelected||(!isOwned&&wallet<item.cost);button.addEventListener('click',()=>{if(!owned.includes(item.id)){if(wallet<item.cost)return;wallet-=item.cost;owned.push(item.id);try{localStorage.setItem('shawarmaWallet',String(wallet));localStorage.setItem('shawarmaOwned',JSON.stringify(owned))}catch(e){}}if(item.kind==='skin'){selectedSkin=item.id;try{localStorage.setItem('shawarmaSkin',selectedSkin)}catch(e){}}else{selectedBg=item.id;try{localStorage.setItem('shawarmaBg',selectedBg)}catch(e){}}renderShop()});card.append(title,icon,cost,button);grid.append(card)}}
 function setShopTab(tab){shopTab=tab;$('skinTab').classList.toggle('active',tab==='skin');$('bgTab').classList.toggle('active',tab==='bg');renderShop()}$('skinTab').addEventListener('click',()=>setShopTab('skin'));$('bgTab').addEventListener('click',()=>setShopTab('bg'));
 let shopReturn='menu',paused=false;
-function pauseGame(){if(!playing||paused)return;jump=0;slide=0;paused=true;playing=false;cancelAnimationFrame(raf);$('pausePanel').classList.remove('hidden');$('controls').classList.add('hidden');$('pauseBtn').classList.add('hidden')}
+function pauseGame(){if(!playing||paused)return;paused=true;playing=false;cancelAnimationFrame(raf);$('pausePanel').classList.remove('hidden');$('controls').classList.add('hidden');$('pauseBtn').classList.add('hidden')}
 function resumeGame(){if(!paused)return;paused=false;playing=true;last=0;$('pausePanel').classList.add('hidden');$('controls').classList.remove('hidden');$('pauseBtn').classList.remove('hidden');raf=requestAnimationFrame(loop)}
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&playing)pauseGame()});
 $('pauseBtn').addEventListener('click',pauseGame);$('resumeBtn').addEventListener('click',resumeGame);$('pauseMenuBtn').addEventListener('click',()=>{paused=false;$('pausePanel').classList.add('hidden');$('hud').classList.add('hidden');$('progress').classList.add('hidden');$('menu').classList.remove('hidden');$('pauseBtn').classList.add('hidden')});function openShop(from='menu'){shopReturn=from;renderShop();$('shop').classList.remove('hidden');$('menu').classList.add('hidden');$('over').classList.add('hidden')}
@@ -523,15 +527,15 @@ $('supportBtn').addEventListener('click',()=>{
   $('extraContent').append(b);
 });
 $('helpBtn').addEventListener('click',()=>{
-  openExtra('❔ КАК ИГРАТЬ','ТРИ ПОЛОСЫ. ОДНА ЦЕЛЬ.\n\n01 · УВОРАЧИВАЙСЯ\nПереключайся между тремя полосами, чтобы обходить препятствия.\n\n02 · СОБИРАЙ\n🌯 Монеты пополняют кошелёк.\n🛡️ Щит защищает от одного столкновения.\n🧲 Магнит притягивает монеты рядом.\n\n03 · ДЕРЖИ ТЕМП\nСкорость постепенно растёт, а каждые 25 секунд начинается новое событие.\n\nУПРАВЛЕНИЕ\nКомпьютер: ← → или A / D.\nТелефон: свайп влево/вправо или экранные кнопки.\nПауза: кнопка II или клавиша P.');
+  openExtra('❔ КАК ИГРАТЬ','ТРИ ПОЛОСЫ. ОДНА ЦЕЛЬ.\n\n01 · УВОРАЧИВАЙСЯ\nПереключайся между тремя полосами, чтобы обходить препятствия. Только влево и вправо — без прыжков и подкатов.\n\n02 · СОБИРАЙ\n🌯 Монеты пополняют кошелёк.\n🛡️ Щит защищает от одного столкновения.\n🧲 Магнит притягивает монеты рядом.\n⚡ Турбо ускоряет на 5 секунд.\n✨ Удвоитель даёт x2 очков на 8 секунд.\n\n03 · ДЕРЖИ ТЕМП\nСкорость постепенно растёт, а каждые 25 секунд начинается новое событие.\n\nУПРАВЛЕНИЕ\nКомпьютер: ← → или A / D.\nТелефон: свайп влево/вправо или две кнопки.\nПауза: кнопка II или клавиша P.');
 });
 $('promoBtn').addEventListener('click',()=>{openExtra('🎟 ПРОМОКОДЫ','Введи промокод, чтобы получить игровые монеты.');const wrap=document.createElement('div');wrap.style.cssText='display:flex;flex-direction:column;gap:10px;margin-top:12px';const field=document.createElement('input');field.type='text';field.autocomplete='off';field.placeholder='ВВЕДИ ПРОМОКОД';field.maxLength=32;field.style.cssText='width:100%;padding:14px;border-radius:12px;border:1px solid #ffe1a0;background:#171a2b;color:#fff;font-size:16px;text-align:center;text-transform:none';const submit=document.createElement('button');submit.className='btn';submit.type='button';submit.textContent='АКТИВИРОВАТЬ';const result=document.createElement('p');result.className='hint';result.style.margin='4px 0';submit.addEventListener('click',()=>{const code=field.value.trim();if(code!=='N1kmeL'){result.textContent='Промокод не найден. Проверь написание.';return}let used=[];try{used=JSON.parse(localStorage.getItem('shawarmaPromoCodes')||'[]')}catch(e){}if(used.includes(code)){result.textContent='Этот промокод уже использован на этом устройстве.';return}wallet+=1000;used.push(code);try{localStorage.setItem('shawarmaWallet',String(wallet));localStorage.setItem('shawarmaPromoCodes',JSON.stringify(used))}catch(e){}$('wallet').textContent=wallet;result.textContent='Успешно! +1000 монет добавлено в кошелёк. 💰';submit.disabled=true;field.disabled=true});field.addEventListener('keydown',e=>{if(e.key==='Enter')submit.click()});wrap.append(field,submit,result);$('extraContent').append(wrap);field.focus()});
 
 
 $('openShop').addEventListener('click',()=>openShop('menu'));$('overShop').addEventListener('click',()=>openShop('over'));$('shopBack').addEventListener('click',()=>{$('shop').classList.add('hidden');$(shopReturn).classList.remove('hidden')});
-$('play').addEventListener('click',start);$('again').addEventListener('click',start);$('left').addEventListener('click',()=>{if(playing)lane=Math.max(0,lane-1)});$('right').addEventListener('click',()=>{if(playing)lane=Math.min(2,lane+1)});$('jump').addEventListener('click',()=>{if(playing&&jump<=0&&slide<=0)jump=.72});$('slide').addEventListener('click',()=>{if(playing&&slide<=0&&jump<=0)slide=.58});
-addEventListener('keydown',e=>{if(['ArrowLeft','a','A'].includes(e.key)){e.preventDefault();if(playing)lane=Math.max(0,lane-1)}if(['ArrowRight','d','D'].includes(e.key)){e.preventDefault();if(playing)lane=Math.min(2,lane+1)}if(['ArrowUp','w','W'].includes(e.key)){e.preventDefault();if(playing&&jump<=0&&slide<=0)jump=.72}if(['ArrowDown','s','S'].includes(e.key)){e.preventDefault();if(playing&&slide<=0&&jump<=0)slide=.58}if((e.key==='p'||e.key==='P'||e.key==='Escape')&&playing){pauseGame();return}if(e.key===' '&&paused){resumeGame();return}if(e.key===' '&&!playing&&!$('over').classList.contains('hidden'))start()});
-let sx=0,sy=0;canvas.addEventListener('touchstart',e=>{sx=e.changedTouches[0].clientX;sy=e.changedTouches[0].clientY},{passive:true});canvas.addEventListener('touchend',e=>{const t=e.changedTouches[0],dx=t.clientX-sx,dy=t.clientY-sy;if(!playing)return;if(Math.abs(dx)>22&&Math.abs(dx)>Math.abs(dy)){lane=Math.max(0,Math.min(2,lane+(dx>0?1:-1)))}else if(Math.abs(dy)>22&&Math.abs(dy)>Math.abs(dx)){if(dy<0&&jump<=0&&slide<=0)jump=.72;else if(dy>0&&slide<=0&&jump<=0)slide=.58}else if(Math.abs(dx)<18&&Math.abs(dy)<24){lane=Math.max(0,Math.min(2,lane+(t.clientX<W/2?-1:1)))}},{passive:true});
+$('play').addEventListener('click',start);$('again').addEventListener('click',start);$('left').addEventListener('click',()=>{if(playing)lane=Math.max(0,lane-1)});$('right').addEventListener('click',()=>{if(playing)lane=Math.min(2,lane+1)});
+addEventListener('keydown',e=>{if(['ArrowLeft','a','A'].includes(e.key)){e.preventDefault();if(playing)lane=Math.max(0,lane-1)}if(['ArrowRight','d','D'].includes(e.key)){e.preventDefault();if(playing)lane=Math.min(2,lane+1)}if((e.key==='p'||e.key==='P'||e.key==='Escape')&&playing){pauseGame();return}if(e.key===' '&&paused){resumeGame();return}if(e.key===' '&&!playing&&!$('over').classList.contains('hidden'))start()});
+let sx=0;canvas.addEventListener('touchstart',e=>{sx=e.changedTouches[0].clientX},{passive:true});canvas.addEventListener('touchend',e=>{const t=e.changedTouches[0],dx=t.clientX-sx;if(!playing)return;if(Math.abs(dx)>22){lane=Math.max(0,Math.min(2,lane+(dx>0?1:-1)))}else if(Math.abs(dx)<18){lane=Math.max(0,Math.min(2,lane+(t.clientX<W/2?-1:1)))}},{passive:true});
 function intro(){const started=performance.now();let previous=started;function frame(now){if(playing)return;const dt=Math.min((now-previous)/16.667,2.2);previous=now;time=(now-started)/1000;render(dt);requestAnimationFrame(frame)}requestAnimationFrame(frame)}
 intro();setTimeout(()=>{const l=$('loader');if(l){l.style.opacity='0';setTimeout(()=>l.remove(),450)}},1350);
 })();
