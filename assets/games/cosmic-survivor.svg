@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="Космический корабль">
+<defs>
+ <linearGradient id="hull" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e6fbff"/><stop offset=".42" stop-color="#70dfff"/><stop offset="1" stop-color="#4779ff"/></linearGradient>
+ <linearGradient id="wing" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#69dfff"/><stop offset="1" stop-color="#174b9b"/></linearGradient>
+ <radialGradient id="glow"><stop stop-color="#6be5ff" stop-opacity=".65"/><stop offset="1" stop-color="#2c8fff" stop-opacity="0"/></radialGradient>
+ <filter id="blur"><feGaussianBlur stdDeviation="5"/></filter>
+</defs>
+<circle cx="120" cy="118" r="108" fill="url(#glow)"/>
+<g fill="none" stroke="#78dfff" opacity=".55"><ellipse cx="120" cy="120" rx="96" ry="37" transform="rotate(-28 120 120)" stroke-width="2"><animateTransform attributeName="transform" type="rotate" from="-28 120 120" to="332 120 120" dur="16s" repeatCount="indefinite"/></ellipse></g>
+<g fill="#d9f8ff"><circle cx="33" cy="56" r="2"><animate attributeName="opacity" values=".25;1;.25" dur="2.4s" repeatCount="indefinite"/></circle><circle cx="196" cy="48" r="2.5"><animate attributeName="opacity" values="1;.2;1" dur="1.8s" repeatCount="indefinite"/></circle><circle cx="202" cy="175" r="1.8"><animate attributeName="opacity" values=".2;1;.2" dur="2.1s" repeatCount="indefinite"/></circle><circle cx="48" cy="183" r="1.7"/></g>
+<g transform="translate(0 3)">
+ <path d="M108 148 L74 184 L91 125 L107 108Z" fill="url(#wing)" stroke="#b8f4ff" stroke-width="3"/>
+ <path d="M132 148 L166 184 L149 125 L133 108Z" fill="url(#wing)" stroke="#b8f4ff" stroke-width="3"/>
+ <path d="M120 31 C101 55 92 92 93 132 L120 169 L147 132 C148 92 139 55 120 31Z" fill="url(#hull)" stroke="#e1fbff" stroke-width="3"/>
+ <path d="M120 47 C108 72 106 98 108 121 L120 137 L132 121 C134 98 132 72 120 47Z" fill="#173f82" stroke="#b6f3ff" stroke-width="2"/>
+ <path d="M120 54 L120 119" stroke="#8beaff" stroke-width="3" stroke-linecap="round"/>
+ <ellipse cx="120" cy="95" rx="10" ry="17" fill="#e8ffff" opacity=".9"/>
+ <path d="M105 147 L120 170 L135 147 L130 178 L120 192 L110 178Z" fill="#4dbfff" opacity=".9"/>
+ <path d="M111 169 L120 209 L129 169Z" fill="#66dfff" filter="url(#blur)" opacity=".9">
+  <animate attributeName="opacity" values=".45;1;.45" dur=".7s" repeatCount="indefinite"/>
+  <animate attributeName="d" values="M111 169 L120 209 L129 169Z;M111 169 L120 220 L129 169Z;M111 169 L120 209 L129 169Z" dur=".7s" repeatCount="indefinite"/>
+ </path>
+ <path d="M111 169 L120 199 L129 169Z" fill="#e4fbff">
+  <animate attributeName="d" values="M111 169 L120 199 L129 169Z;M111 169 L120 211 L129 169Z;M111 169 L120 199 L129 169Z" dur=".7s" repeatCount="indefinite"/>
+ </path>
+</g>
+</svg>
