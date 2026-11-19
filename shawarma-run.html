@@ -192,7 +192,7 @@ addEventListener('resize',resize);resize();
 function poly(points,fill,stroke){ctx.beginPath();ctx.moveTo(points[0][0],points[0][1]);for(let i=1;i<points.length;i++)ctx.lineTo(points[i][0],points[i][1]);ctx.closePath();ctx.fillStyle=fill;ctx.fill();if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=2;ctx.stroke()}}
 function ellipse(x,y,rx,ry,color){ctx.beginPath();ctx.ellipse(x,y,rx,ry,0,0,Math.PI*2);ctx.fillStyle=color;ctx.fill()}
 function roundRect(x,y,w,h,r,color){ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fillStyle=color;ctx.fill()}
-function roadPoint(x,z){const depth=Math.max(0,Math.min(1,z));const horizon=H*.34;const y=horizon+depth*depth*(H*.66);const expansion=1-Math.exp(-Math.max(0,time)*.045);const half=W*(.04+depth*(.12+.25*expansion));return{x:W/2+x*half,y,scale:.44+depth*.68,half}}
+function roadPoint(x,z){const depth=Math.max(0,Math.min(1,z));const horizon=H*.34;const y=horizon+depth*depth*(H*.66);const expansion=1-Math.exp(-Math.max(0,time)*.045);const half=W*(.075+depth*(.105+.055*expansion));return{x:W/2+x*half,y,scale:.44+depth*.68,half}}
 function drawBackground(dt){
  const horizon=H*.34, bottom=H;
  const bgIds=['city','sunset','candy','forest','coast','snow'];const biome=Math.max(0,bgIds.indexOf(selectedBg));
@@ -299,12 +299,39 @@ function drawBackground(dt){
   if(i===1){roundRect(-18,-12,8,12,2,'#d5d1c4');roundRect(11,-12,8,12,2,'#d5d1c4')}
   ctx.restore();
  }
- // trees set back from the pavement, not intruding into the running lanes
- for(const side of [-1,1])for(let i=0;i<3;i++){const z=((i/3+time*.07+.57)%1),p=roadPoint(side*2.18,z),s=p.scale;ctx.save();ctx.translate(p.x,p.y);ctx.scale(s,s);roundRect(-3,-37,6,39,2,'#795239');ellipse(0,-45,17,18,biome===5?'#d9f2ff':biome===4?'#3d967e':biome===3?'#347c55':'#397c54');ellipse(-10,-48,11,12,biome===5?'#ffffff':biome===4?'#5bb99a':'#5a9a5e');ellipse(9,-55,11,12,biome===5?'#c5e8f8':biome===4?'#68c5a1':'#478c55');ellipse(5,-39,9,8,biome===5?'#a7d3e8':biome===4?'#287b72':'#2d704a');ctx.restore()}
+ // World-specific landmark plants: candy trees, forest canopies, palms and snowy pines.
+ for(const side of [-1,1])for(let i=0;i<3;i++){
+  const z=((i/3+time*.07+.57)%1),p=roadPoint(side*2.18,z),sc=p.scale;
+  ctx.save();ctx.translate(p.x,p.y);ctx.scale(sc,sc);
+  if(biome===2){
+   roundRect(-3,-34,6,36,2,'#a66a79');ellipse(0,-44,17,17,i%2?'#ff8fbe':'#73e4d0');ellipse(-8,-48,7,7,'#fff0a0');ellipse(8,-40,6,6,'#fff0a0');ellipse(0,-61,5,5,'#fff');
+  }else if(biome===4){
+   roundRect(-3,-25,6,28,2,'#9b7044');ctx.strokeStyle='#398d7c';ctx.lineWidth=5;ctx.beginPath();ctx.moveTo(0,-24);ctx.quadraticCurveTo(0,-48,-18,-56);ctx.moveTo(0,-24);ctx.quadraticCurveTo(8,-49,18,-55);ctx.moveTo(0,-24);ctx.quadraticCurveTo(-2,-51,0,-63);ctx.stroke();ellipse(-17,-57,9,3,'#48aa8c');ellipse(17,-56,9,3,'#48aa8c');ellipse(0,-64,9,3,'#65c49b');
+  }else if(biome===5){
+   roundRect(-3,-17,6,20,2,'#7b6d66');poly([[-20,-10],[0,-67],[20,-10]],'#7bb5d0');poly([[-16,-27],[0,-57],[16,-27]],'#dff7ff');poly([[-11,-43],[0,-65],[11,-43]],'#f7ffff');
+  }else{
+   roundRect(-3,-37,6,39,2,'#795239');ellipse(0,-45,17,18,biome===3?'#347c55':'#397c54');ellipse(-10,-48,11,12,biome===3?'#5bb879':'#5a9a5e');ellipse(9,-55,11,12,biome===3?'#68c58b':'#478c55');ellipse(5,-39,9,8,biome===3?'#287b50':'#2d704a');
+  }
+  ctx.restore();
+ }
  // occasional tiny street details: bins and hydrants, always on sidewalks
  for(const side of [-1,1])for(let i=0;i<2;i++){const z=((i/2+time*.09+.35)%1),p=roadPoint(side*1.48,z),s=p.scale;ctx.save();ctx.translate(p.x,p.y);ctx.scale(s,s);roundRect(-8,-25,16,25,3,'#4f7668');roundRect(-10,-28,20,5,2,'#344e45');ellipse(0,-18,3,3,'#a6d6bb');ctx.restore()}
- // tiny drifting clouds, slow and soft
- ctx.globalAlpha=.19;for(let i=0;i<3;i++){const x=(i*W*.43+time*4)%(W*1.25)-W*.1,y=H*(.085+i%2*.065);ellipse(x,y,31,9,'#fff');ellipse(x-16,y+2,17,7,'#fff');ellipse(x+17,y+1,20,8,'#fff')}ctx.globalAlpha=1;
+ // Soft clouds and weather particles are tied to the purchased world.
+ ctx.globalAlpha=biome===1?.10:.19;
+ for(let i=0;i<3;i++){const x=(i*W*.43+time*4)%(W*1.25)-W*.1,y=H*(.085+i%2*.065);ellipse(x,y,31,9,'#fff');ellipse(x-16,y+2,17,7,'#fff');ellipse(x+17,y+1,20,8,'#fff')}
+ ctx.globalAlpha=1;
+ for(let i=0;i<42;i++){
+  const drift=(time*(biome===5?18:biome===0?34:biome===1?8:biome===2?13:biome===3?5:10)+i*47)%(H*.78);
+  const x=(i*83+Math.sin(time*(biome===5?1.2:2)+i)*24+time*(biome===4?8:biome===2?4:0))%W;
+  const y=(drift+H*.08)%(H*.86);
+  if(biome===5){ctx.globalAlpha=.35+(i%4)*.12;ellipse(x,y,1.5+i%3,3+i%3,'#ffffff')}
+  else if(biome===0){ctx.globalAlpha=.18+(i%3)*.08;ctx.strokeStyle='#d8efff';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x-3,y+9);ctx.stroke()}
+  else if(biome===1){ctx.globalAlpha=.35;ellipse(x,y,1.8,1.8,i%2?'#ffb36b':'#ffe39b')}
+  else if(biome===2){ctx.globalAlpha=.55;ellipse(x,y,2.5,2.5,['#ff8fbe','#fff0a0','#77e5d4'][i%3])}
+  else if(biome===3){ctx.globalAlpha=.55;ellipse(x,y,1.8,1.8,i%2?'#e5ff9c':'#fff2a6')}
+  else{ctx.globalAlpha=.38;ellipse(x,y,2+i%2,2+i%2,'#d8ffff')}
+ }
+ ctx.globalAlpha=1;
 }
 function drawShawarma(x,y,s,tilt=0){
  ctx.save();ctx.translate(x,y);ctx.rotate(tilt);ctx.scale(s,s);
