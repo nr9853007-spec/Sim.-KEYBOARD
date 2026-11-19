@@ -247,7 +247,9 @@ function drawBackground(dt){
  const ground=ctx.createLinearGradient(0,horizon,0,bottom);ground.addColorStop(0,groundTop);ground.addColorStop(1,groundBottom);
  poly([[0,horizon+H*.04],[farSL.x,farSL.y],[nearSL.x,bottom],[0,bottom]],ground);
  poly([[W,horizon+H*.04],[farSR.x,farSR.y],[nearSR.x,bottom],[W,bottom]],ground);
- // Low-poly 2D terrain facets frame the track without entering its playable lanes.\n for(let side of [-1,1])for(let i=0;i<9;i++){const z0=i/9,z1=(i+1)/9,p0=roadPoint(side*1.42,z0),p1=roadPoint(side*2.75,z0),p2=roadPoint(side*2.75,z1),p3=roadPoint(side*1.42,z1);const midX=(p0.x+p1.x+p2.x+p3.x)/4,midY=(p0.y+p1.y+p2.y+p3.y)/4;poly([[p0.x,p0.y],[p1.x,p1.y],[midX,midY]],i%2?'#ffffff0b':'#102a2830');poly([[p1.x,p1.y],[p2.x,p2.y],[midX,midY]],i%2?'#102a2825':'#ffffff0a');poly([[p2.x,p2.y],[p3.x,p3.y],[midX,midY]],i%2?'#ffffff0b':'#102a2830');}\n // Small ground texture remains separate from the larger roadside models.
+ // Low-poly 2D terrain facets frame the track without entering its playable lanes.
+ for(let side of [-1,1])for(let i=0;i<9;i++){const z0=i/9,z1=(i+1)/9,p0=roadPoint(side*1.42,z0),p1=roadPoint(side*2.75,z0),p2=roadPoint(side*2.75,z1),p3=roadPoint(side*1.42,z1);const midX=(p0.x+p1.x+p2.x+p3.x)/4,midY=(p0.y+p1.y+p2.y+p3.y)/4;poly([[p0.x,p0.y],[p1.x,p1.y],[midX,midY]],i%2?'#ffffff0b':'#102a2830');poly([[p1.x,p1.y],[p2.x,p2.y],[midX,midY]],i%2?'#102a2825':'#ffffff0a');poly([[p2.x,p2.y],[p3.x,p3.y],[midX,midY]],i%2?'#ffffff0b':'#102a2830');}
+ // Small ground texture remains separate from the larger roadside models.
  for(const side of [-1,1])for(let i=0;i<22;i++){
   const z=((i/22+time*.035)%1),p=roadPoint(side*(1.55+(i%4)*.23),z),size=(1.5+z*4)*(i%3===0?1.5:1);
   const grass=biome===5?(i%2?'#ffffff88':'#b8dce9aa'):biome===4?(i%2?'#f3d99b99':'#fff0c088'):(i%2?'#b5d98299':'#286b4399');
@@ -258,7 +260,11 @@ function drawBackground(dt){
  ctx.globalAlpha=1;
  // main road and wide pedestrian sidewalks in a single consistent perspective
  const farL=roadPoint(-1,0),farR=roadPoint(1,0),nearL=roadPoint(-1,1),nearR=roadPoint(1,1);
- // Green verge fills the space outside the raised sidewalk.\n const grass=ctx.createLinearGradient(0,horizon,0,bottom);grass.addColorStop(0,'#789b62');grass.addColorStop(1,'#315d3b');\n poly([[0,horizon],[farSL.x,farSL.y],[nearSL.x,bottom],[0,bottom]],grass);\n poly([[W,horizon],[farSR.x,farSR.y],[nearSR.x,bottom],[W,bottom]],grass);\n poly([[farSL.x,farSL.y],[farL.x,farL.y],[nearL.x,bottom],[nearSL.x,bottom]],palette.side);
+ // Green verge fills the space outside the raised sidewalk.
+ const grass=ctx.createLinearGradient(0,horizon,0,bottom);grass.addColorStop(0,'#789b62');grass.addColorStop(1,'#315d3b');
+ poly([[0,horizon],[farSL.x,farSL.y],[nearSL.x,bottom],[0,bottom]],grass);
+ poly([[W,horizon],[farSR.x,farSR.y],[nearSR.x,bottom],[W,bottom]],grass);
+ poly([[farSL.x,farSL.y],[farL.x,farL.y],[nearL.x,bottom],[nearSL.x,bottom]],palette.side);
  poly([[farR.x,farR.y],[farSR.x,farSR.y],[nearSR.x,bottom],[nearR.x,bottom]],palette.side);
  // sidewalk slabs
  for(const side of [-1,1])for(let i=0;i<7;i++){const z=((i/7+time*.14)%1),a=roadPoint(side*1.08,z),b=roadPoint(side*1.32,z);ctx.strokeStyle='#342b2738';ctx.lineWidth=1+z*1.8;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke()}
