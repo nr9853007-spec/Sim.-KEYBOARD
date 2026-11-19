@@ -1,10 +1,35 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Бегущая мультяшная шаурма">
-<defs><linearGradient id="wrap" x2=".8" y2="1"><stop stop-color="#ffe59a"/><stop offset="1" stop-color="#e99a42"/></linearGradient><linearGradient id="fill" x2="0" y2="1"><stop stop-color="#78d66f"/><stop offset="1" stop-color="#36a66c"/></linearGradient><filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="9" stdDeviation="7" flood-color="#20152e" flood-opacity=".35"/></filter></defs>
-<rect width="256" height="256" rx="54" fill="#392447"/><circle cx="128" cy="128" r="100" fill="#f6a34f" opacity=".13"/>
-<g fill="none" stroke="#ffd36c" stroke-width="6" stroke-linecap="round" opacity=".9"><path d="M39 91l-13-8m20-10-5-14M211 76l13-10m-18 28 17 1"><animate attributeName="opacity" values=".25;1;.25" dur="1s" repeatCount="indefinite"/></path></g>
-<g filter="url(#shadow)"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -8;0 0" dur=".48s" repeatCount="indefinite"/>
-<path d="M94 57c-22 8-35 28-28 50l31 91c5 15 21 23 36 18l17-6c15-5 23-21 18-36l-31-91c-8-24-24-35-43-26Z" fill="url(#wrap)" stroke="#fff0c0" stroke-width="7"/>
-<path d="M82 91c12-13 27-11 36 2 8 11 17 12 29 4l13 27c-15 12-29 11-41 1-9-8-18-8-29 1Z" fill="url(#fill)"/><path d="M92 130c13-10 26-8 36 3 9 9 18 8 27 0l12 25c-14 11-28 11-40 1-9-8-18-8-28 0Z" fill="#ed6651"/><path d="M87 67c16-10 32-1 39 16l7 17-37 15-12-25c-5-10-4-18 3-23Z" fill="#ffd36c"/>
-<ellipse cx="111" cy="119" rx="5" ry="7" fill="#392447"/><ellipse cx="140" cy="115" rx="5" ry="7" fill="#392447"/><path d="M115 139q13 13 25-1" fill="none" stroke="#392447" stroke-width="5" stroke-linecap="round"/><path d="M98 132q-9-7-15 1m65-8q9-7 15 0" fill="none" stroke="#ff9a9c" stroke-width="6" stroke-linecap="round"/></g></g>
-<g stroke="#392447" stroke-width="9" stroke-linecap="round" fill="none"><path d="M93 177q-24 13-34 3"><animate attributeName="d" values="M93 177q-24 13-34 3;M93 177q-21 -4-31 -18;M93 177q-24 13-34 3" dur=".48s" repeatCount="indefinite"/></path><path d="M160 174q24 9 33-7"><animate attributeName="d" values="M160 174q24 9 33-7;M160 174q18 19 31 12;M160 174q24 9 33-7" dur=".48s" repeatCount="indefinite"/></path><path d="M104 209l-10 15m43-13 11 14"><animate attributeName="d" values="M104 209l-10 15m43-13 11 14;M104 209l-16 7m49-5 17 7;M104 209l-10 15m43-13 11 14" dur=".48s" repeatCount="indefinite"/></path></g>
-<g fill="#ffe08a"><circle cx="48" cy="153" r="4"><animate attributeName="cy" values="153;143;153" dur=".8s" repeatCount="indefinite"/></circle><circle cx="208" cy="139" r="5"><animate attributeName="cy" values="139;128;139" dur=".7s" repeatCount="indefinite"/></circle></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Бегущая мультяшная шавуха">
+<defs>
+ <linearGradient id="bread" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffe7a5"/><stop offset=".58" stop-color="#e8a04c"/><stop offset="1" stop-color="#a95c32"/></linearGradient>
+ <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff6df"/><stop offset="1" stop-color="#e7c99d"/></linearGradient>
+ <clipPath id="inside"><path d="M77 82Q126 48 178 82L164 174Q127 195 91 174Z"/></clipPath>
+ <filter id="shade" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="10" stdDeviation="8" flood-color="#080a18" flood-opacity=".45"/></filter>
+</defs>
+<rect width="256" height="256" rx="54" fill="#24233a"/>
+<circle cx="128" cy="128" r="100" fill="#9b86ff" opacity=".1"/>
+<g fill="none" stroke="#ffd17a" stroke-width="6" stroke-linecap="round"><path d="M43 88l-14-8m23-12-4-14M209 77l14-10m-19 31 17 2"><animate attributeName="opacity" values=".2;1;.2" dur=".9s" repeatCount="indefinite"/></path></g>
+<g filter="url(#shade)">
+ <g>
+  <animateTransform attributeName="transform" type="translate" values="0 0;0 -6;0 0" dur=".5s" repeatCount="indefinite"/>
+  <path d="M77 82Q126 48 178 82L164 174Q127 195 91 174Z" fill="url(#bread)" stroke="#ffe9bb" stroke-width="7" stroke-linejoin="round"/>
+  <g clip-path="url(#inside)">
+   <path d="M72 91Q91 72 109 91T145 90T185 90L182 119Q162 130 145 116T108 120T74 116Z" fill="#61c878"/>
+   <path d="M74 109Q96 95 112 111T146 111T180 107L177 137Q156 145 139 133T105 137T76 133Z" fill="#ec6252"/>
+   <path d="M76 130Q95 119 111 134T145 134T178 129L174 153Q151 160 136 149T103 153T80 151Z" fill="#f4d36f"/>
+   <path d="M82 91Q97 84 110 96T138 95T171 92" fill="none" stroke="#a9e77c" stroke-width="7" stroke-linecap="round"/>
+  </g>
+  <path d="M77 82Q126 48 178 82" fill="none" stroke="#fff0c8" stroke-width="8" stroke-linecap="round"/>
+  <path d="M91 150Q126 164 166 149L160 185Q127 199 96 184Z" fill="url(#paper)" stroke="#b88b61" stroke-width="3"/>
+  <path d="M106 169Q128 176 151 168" fill="none" stroke="#d4b184" stroke-width="3" stroke-linecap="round"/>
+  <ellipse cx="111" cy="125" rx="5" ry="7" fill="#30233d"/><ellipse cx="145" cy="125" rx="5" ry="7" fill="#30233d"/>
+  <path d="M117 140Q128 151 140 139" fill="none" stroke="#30233d" stroke-width="5" stroke-linecap="round"/>
+  <ellipse cx="99" cy="139" rx="7" ry="4" fill="#ff9b9e"/><ellipse cx="158" cy="139" rx="7" ry="4" fill="#ff9b9e"/>
+ </g>
+</g>
+<g fill="none" stroke="#30233d" stroke-width="10" stroke-linecap="round">
+ <path d="M101 187Q80 202 62 194"><animate attributeName="d" values="M101 187Q80 202 62 194;M101 187Q82 177 63 181;M101 187Q80 202 62 194" dur=".5s" repeatCount="indefinite"/></path>
+ <path d="M151 187Q176 197 193 180"><animate attributeName="d" values="M151 187Q176 197 193 180;M151 187Q171 211 190 207;M151 187Q176 197 193 180" dur=".5s" repeatCount="indefinite"/></path>
+ <path d="M94 204L84 221M156 205L167 220"><animate attributeName="d" values="M94 204L84 221M156 205L167 220;M94 204L101 223M156 205L148 223;M94 204L84 221M156 205L167 220" dur=".5s" repeatCount="indefinite"/></path>
+</g>
+<g fill="#ffd77b"><circle cx="47" cy="151" r="4"><animate attributeName="cy" values="151;140;151" dur=".8s" repeatCount="indefinite"/></circle><circle cx="207" cy="138" r="5"><animate attributeName="cy" values="138;126;138" dur=".7s" repeatCount="indefinite"/></circle></g>
+</svg>
