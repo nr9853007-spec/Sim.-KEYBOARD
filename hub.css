@@ -9,3 +9,8 @@
 .shawarma-emoji{animation:hubRun .52s ease-in-out infinite alternate!important;transform-origin:50% 80%}.cover-food{animation:hubRun .52s ease-in-out infinite alternate!important;transform-origin:50% 80%}
 @keyframes hubRun{from{translate:0 0;rotate:-5deg}to{translate:0 -8px;rotate:5deg}}
 @media(prefers-reduced-motion:reduce){.shawarma-emoji,.cover-food{animation:none!important}}
+
+
+/* Keep the artwork frame completely still; the mascot animates inside its SVG. */
+.shawarma-emoji,.cover-food{animation:none!important;translate:none!important;rotate:none!important;transform:none!important;}
+.game-card:hover .cover-food{transform:none!important;}
