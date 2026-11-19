@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360">
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffdc91"/><stop offset=".48" stop-color="#e9853e"/><stop offset="1" stop-color="#7b321e"/></linearGradient>
+ <linearGradient id="lav" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff7d5"/><stop offset=".42" stop-color="#f2ce82"/><stop offset="1" stop-color="#c47a3e"/></linearGradient>
+ <linearGradient id="meat" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffb45f"/><stop offset=".5" stop-color="#a74727"/><stop offset="1" stop-color="#57251b"/></linearGradient>
+ <linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#c9ed76"/><stop offset=".55" stop-color="#4e9b4b"/><stop offset="1" stop-color="#23603a"/></linearGradient>
+ <filter id="ds" x="-40%" y="-40%" width="180%" height="190%"><feGaussianBlur stdDeviation="10"/></filter>
+</defs>
+<rect x="10" y="10" width="340" height="340" rx="88" fill="#30150f" stroke="#ffe2a6" stroke-width="5"/>
+<rect x="19" y="19" width="322" height="322" rx="80" fill="url(#bg)"/>
+<circle cx="180" cy="158" r="142" fill="#ffe9b0" opacity=".16"/>
+<path d="M80 276q90 35 198-8" stroke="#572316" stroke-width="18" opacity=".35" fill="none" filter="url(#ds)"/>
+<g transform="rotate(-32 180 175)">
+ <path d="M105 59Q152 31 201 62L269 229Q221 292 153 268Q112 250 100 207L67 112Q68 78 105 59Z" fill="#74341e" opacity=".6" transform="translate(7 9)"/>
+ <path d="M101 58Q148 30 197 60L264 222Q220 277 155 258Q113 245 99 202L67 111Q66 77 101 58Z" fill="url(#lav)" stroke="#8c4728" stroke-width="5"/>
+ <path d="M102 65Q146 42 190 69L246 213Q207 253 159 238Q124 227 112 194L81 112Q78 82 102 65Z" fill="#fff0bd" opacity=".42"/>
+ <path d="M81 108Q108 72 140 94Q164 67 186 94Q214 77 230 112Q247 113 248 140Q221 157 202 139Q180 161 158 139Q131 160 110 137Q88 146 81 108Z" fill="url(#leaf)" stroke="#2c6a38" stroke-width="4"/>
+ <path d="M96 113q21-22 37 0q18-21 35-1q19-20 36 2" fill="none" stroke="#e1f58d" stroke-width="7" stroke-linecap="round"/>
+ <path d="M103 143q24-23 46-2l13 25q-24 20-48 2Z" fill="#e94f37" stroke="#9c3022" stroke-width="4"/>
+ <path d="M158 140q23-22 44 0l13 26q-24 20-47 1Z" fill="#fa7950" stroke="#9c3022" stroke-width="4"/>
+ <path d="M97 176q23-26 46-8t44-2q24-20 44 6l11 25q-27 20-50 2t-46 4q-28 17-43-4Z" fill="url(#meat)" stroke="#632719" stroke-width="4"/>
+ <path d="M112 183q17-13 31 2m21 1q17-13 31 1" fill="none" stroke="#ffbf78" stroke-width="6" stroke-linecap="round"/>
+ <path d="M102 217q39 30 87 18q25-7 45-26l17 27q-47 51-105 31q-36-12-44-50Z" fill="#d99a54" stroke="#9a542c" stroke-width="4"/>
+ <path d="M112 225q48 31 105 0" fill="none" stroke="#fff1c6" stroke-width="7" stroke-linecap="round"/>
+</g>
+<path d="M83 74q28-22 55-11" fill="none" stroke="#fff8dc" stroke-width="7" stroke-linecap="round" opacity=".9"/>
+<path d="M280 73l7 17 17 7-17 7-7 17-7-17-17-7 17-7z" fill="#fff0b4"/>
+<path d="M70 226l5 11 11 5-11 5-5 11-5-11-11-5 11-5z" fill="#ffe7a5"/>
+<rect x="108" y="296" width="144" height="30" rx="15" fill="#512318" stroke="#ffdf9b" stroke-width="2"/>
+<text x="180" y="317" font-family="Arial,sans-serif" font-size="16" font-weight="900" letter-spacing="2" text-anchor="middle" fill="#fff0c8">SHAWARMA</text>
+</svg>
