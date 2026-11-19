@@ -26,8 +26,5 @@
  <g fill="#9d542a" opacity=".35"><ellipse cx="118" cy="87" rx="8" ry="4"/><ellipse cx="205" cy="91" rx="7" ry="4"/><ellipse cx="238" cy="190" rx="8" ry="5"/><ellipse cx="139" cy="250" rx="7" ry="4"/></g>
 </g>
 <path d="M95 91q27-22 57-14" fill="none" stroke="#fff8dc" stroke-width="7" stroke-linecap="round" opacity=".85"/>
-<g fill="#ffe7a5"><path d="M sixty 0"/></g>
-<g fill="#ffe2a0"><path d="M sixty 0"/></g>
-<g fill="#fff0b6"><path d="M sixty 0"/></g>
 <g fill="#ffe4a1"><path d="M55 174l7 16 16 7-16 7-7 16-7-16-16-7 16-7z"><animateTransform attributeName="transform" type="rotate" from="0 55 197" to="360 55 197" dur="10s" repeatCount="indefinite"/></path><path d="M292 83l5 11 11 5-11 5-5 11-5-11-11-5 11-5z"><animate attributeName="opacity" values=".25;1;.25" dur="2.2s" repeatCount="indefinite"/></path></g>
 </svg>
