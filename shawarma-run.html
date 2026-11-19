@@ -477,7 +477,7 @@ function add(type,l,z=.02){
   const otherPickup=['coin','shield','magnet'].includes(o.type);
   const dz=Math.abs(o.z-z);
   if(o.lane===l){
-   const minGap=pickup&&otherPickup?.065:pickup||otherPickup?.22:.30;
+   const minGap=(pickup&&otherPickup)?0.065:((pickup||otherPickup)?0.22:0.30);
    if(dz<minGap)return true;
    return false;
   }
