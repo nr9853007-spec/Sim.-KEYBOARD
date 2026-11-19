@@ -14,3 +14,10 @@
 /* Keep the artwork frame completely still; the mascot animates inside its SVG. */
 .shawarma-emoji,.cover-food{animation:none!important;translate:none!important;rotate:none!important;transform:none!important;}
 .game-card:hover .cover-food{transform:none!important;}
+
+/* 3D mesh-inspired running mascot on the game entrance card */
+.game-cover{perspective:1000px;transform-style:preserve-3d}
+.cover-food{transform-style:preserve-3d;backface-visibility:visible;filter:drop-shadow(0 19px 15px #171021aa)!important;transition:filter .35s,transform .35s!important}
+.game-card:hover .cover-food{transform:translate3d(0,-8px,18px) rotateY(-13deg) rotateZ(-7deg) scale(1.06)!important;filter:drop-shadow(0 26px 18px #171021bb)!important}
+.game-cover:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(135deg,#ffffff12,transparent 38%,#130d2530);mix-blend-mode:screen}
+@media(prefers-reduced-motion:reduce){.game-card:hover .cover-food{transform:none!important}}
