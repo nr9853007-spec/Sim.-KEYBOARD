@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#101018">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#0b1c2b">
 <meta name="description" content="N1kmeL Hub — место, где начинаются игровые приключения.">
 <title>N1kmeL Hub — Играй во что нравится</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,9 +34,57 @@
 .space-cover .cover-play{z-index:3;background:linear-gradient(145deg,#d2f8ff,#59caff);color:#062347;box-shadow:0 0 22px #46caff77}
 .game-card:has(.space-cover):hover{border-color:#55caff80;box-shadow:0 22px 55px #0005,0 0 28px #168bdf1c}
 @media(prefers-reduced-motion:reduce){.space-cover:before,.space-cover .cover-orbit,.space-emblem img,.space-cover .cover-spark{animation:none!important}}
+
+/* N1KMEL HUB — HOLIDAY / WINTER EDITION */
+:root{--winter-ice:#bceeff;--winter-blue:#5bbce9;--winter-gold:#ffd58a;--winter-green:#75d6b0}
+body{background:radial-gradient(ellipse at 12% 8%,#17436a55 0,transparent 34%),radial-gradient(ellipse at 92% 44%,#174e6250 0,transparent 38%),#081522}
+.ambient-one{background:#258acb;opacity:.17}.ambient-two{background:#2b9b85;opacity:.12}
+.winter-snow{position:fixed;inset:-100vh 0 0;z-index:15;pointer-events:none;opacity:.48;background-repeat:repeat;background-image:radial-gradient(2px 2px at 20px 30px,#eafaff 98%,transparent),radial-gradient(1.5px 1.5px at 90px 120px,#d7f4ff 98%,transparent),radial-gradient(2.5px 2.5px at 160px 70px,#fff 98%,transparent);background-size:220px 190px;animation:snowFall 22s linear infinite}
+.snow-b{opacity:.28;background-size:310px 270px;background-position:80px 30px;animation-duration:34s;transform:scale(1.15)}
+.snow-c{opacity:.2;background-size:150px 160px;background-position:30px 90px;animation-duration:15s;transform:scale(.9)}
+@keyframes snowFall{from{translate:0 0}to{translate:0 100vh}}
+.site-header{background:#091827e8;border-bottom-color:#a5dfff20;box-shadow:0 8px 35px #020b1580}
+.site-header:before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:linear-gradient(90deg,#69d6c0,#a8e9ff,#f7d58d,#8bd8c4,#83cfff);opacity:.9}
+.site-header:after{content:"";position:absolute;left:0;right:0;top:0;height:12px;pointer-events:none;background:radial-gradient(circle at 5% 3px,#a9f2e0 0 3px,transparent 4px),radial-gradient(circle at 15% 3px,#ffe09b 0 3px,transparent 4px),radial-gradient(circle at 25% 3px,#8edaff 0 3px,transparent 4px),radial-gradient(circle at 35% 3px,#b9f2dc 0 3px,transparent 4px),radial-gradient(circle at 45% 3px,#ffe09b 0 3px,transparent 4px),radial-gradient(circle at 55% 3px,#8edaff 0 3px,transparent 4px),radial-gradient(circle at 65% 3px,#b9f2dc 0 3px,transparent 4px),radial-gradient(circle at 75% 3px,#ffe09b 0 3px,transparent 4px),radial-gradient(circle at 85% 3px,#8edaff 0 3px,transparent 4px),radial-gradient(circle at 95% 3px,#b9f2dc 0 3px,transparent 4px);filter:drop-shadow(0 0 5px #9deaff);animation:garlandGlow 3s ease-in-out infinite alternate}
+@keyframes garlandGlow{from{opacity:.55}to{opacity:1}}
+.brand-mark{position:relative;background:linear-gradient(145deg,#7fd9d0,#5aaee7)!important;box-shadow:0 5px 22px #4ebedb55!important}
+.brand-name>span{color:#9de5e4!important}
+.winter-tag{display:inline-flex;align-items:center;gap:9px;margin-top:16px;padding:7px 12px;border:1px solid #a8eaff35;border-radius:999px;background:linear-gradient(100deg,#b9eaff12,#ffe0a012);color:#bfeaff;font-size:8px;font-weight:1000;letter-spacing:2px;box-shadow:0 0 22px #54bfe91a}
+.winter-tag span{color:var(--winter-gold);animation:winterTwinkle 2.4s ease-in-out infinite}
+.winter-tag span:last-child{animation-delay:1.2s}
+@keyframes winterTwinkle{50%{opacity:.35;transform:scale(.72) rotate(40deg)}}
+.hero h1 span,.section-heading h2 span,.about-section h2 span{background:linear-gradient(95deg,#b5f0e3 0%,#a7ddff 48%,#ffe0a0 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.eyebrow{color:#a9dce8}.eyebrow i{background:#80dec2;box-shadow:0 0 13px #80dec2}
+.button-primary{background:linear-gradient(110deg,#b7f0df,#9bdfff 55%,#f4d69a);color:#0d2935;box-shadow:0 9px 28px #55c7c02c}
+.button-quiet{border-color:#a7dff02c;background:#a9e9ff09}
+.hero-glow{background:#398acb38}
+.orbit{border-color:#8bd9e82c}
+.hero-game-art{background:radial-gradient(circle at 50% 35%,#80c9cf 0,#286a82 38%,#15334e 76%,#0c1c30 100%);border-color:#b6e9ef55;box-shadow:0 30px 90px #0008,0 0 65px #43badb27}
+.art-ring{border-color:#c3f2ec66;box-shadow:0 0 0 18px #baf7f00a,0 0 0 38px #baf7f007}
+.art-caption small{color:#c8f3e8}.art-spark,.hero-star{color:#ffe1a0}
+.float-chip{background:#0c2637e8;border-color:#9de8e33d;color:#d8f7f1}
+.winter-chip span{color:#a9eaff}
+.games-section{border-top-color:#a5e5ed1b}
+.section-topline{color:#a4cdd5}.section-line{background:#a5e5ed24}
+.game-card,.next-game-card{background:linear-gradient(145deg,#122b3a,#0d1e2c);border-color:#9cd9df25}
+.game-card:hover{border-color:#8de5d0a0;box-shadow:0 22px 55px #0005,0 0 28px #5bd4bf18}
+.game-info h3{color:#effaff}
+.game-category{color:#9ce4d7}
+.game-info-bottom{border-top-color:#a5e5ed1c}
+.game-status i{background:#8be0c2;box-shadow:0 0 10px #8be0c2}
+.play-link{color:#aee9de}
+.next-game-card{background:radial-gradient(circle at 90% 10%,#246052 0,transparent 45%),linear-gradient(145deg,#163343,#0c1d2b)}
+.next-icon{border-color:#a7ead166;background:#8de5d01a;color:#aaf0dc}
+.next-game-card h3 span{color:#a7e8dc}
+.about-section{border-top-color:#a5e5ed1b}
+.about-icon{background:linear-gradient(145deg,#75ddc52a,#8bd5ff24);border-color:#a8e8e52c;color:#a9eddb}
+.site-footer{border-top-color:#a5e5ed1b}
+@media(max-width:600px){.winter-tag{margin-top:12px}.site-header:after{height:9px;background-size:auto}}
+@media(prefers-reduced-motion:reduce){.winter-snow,.site-header:after,.winter-tag span{animation:none!important}}
 </style></head>
 <body>
 <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+<div class="winter-snow snow-a" aria-hidden="true"></div><div class="winter-snow snow-b" aria-hidden="true"></div><div class="winter-snow snow-c" aria-hidden="true"></div>
 <header class="site-header">
 <a class="brand" href="#" aria-label="N1kmeL Hub — главная"><span class="brand-mark"><img src="assets/logo-mark.svg" alt=""></span><span class="brand-name">N1kmeL<span>HUB</span></span></a>
 <nav class="main-nav" aria-label="Главная навигация"><a class="nav-link active" href="#home">Главная</a><a class="nav-link" href="#games">Игры</a><a class="nav-link" href="#about">О хабе</a></nav>
@@ -44,12 +92,12 @@
 </header>
 <main>
 <section class="hero page-wrap" id="home">
-<div class="hero-copy"><div class="eyebrow"><i></i> ТВОЯ ИГРОВАЯ ВСЕЛЕННАЯ</div><h1>Больше игр.<br><span>Больше впечатлений.</span></h1>
+<div class="hero-copy"><div class="eyebrow"><i></i> ТВОЯ ИГРОВАЯ ВСЕЛЕННАЯ</div><div class="winter-tag"><span>✦</span> ЗИМНИЙ ВЫПУСК <span>✦</span></div><h1>Больше игр.<br><span>Больше впечатлений.</span></h1>
 <p class="hero-description">Все твои любимые игровые приключения — в одном месте. Выбирай игру и отправляйся навстречу новым рекордам.</p>
 <div class="hero-actions"><a class="button button-primary" href="#games">Смотреть игры <span>↗</span></a><a class="button button-quiet" href="#about">Узнать о хабе <span>↓</span></a></div>
 <div class="hero-meta"><span class="meta-dot"></span><strong>03</strong> игры в каталоге <span class="meta-divider"></span><span>НОВЫЕ ИГРЫ БУДУТ ПОЯВЛЯТЬСЯ</span></div></div>
 <div class="hero-art" aria-label="Иллюстрация игрового приключения"><div class="orbit orbit-a"></div><div class="orbit orbit-b"></div><div class="hero-glow"></div>
-<div class="float-chip chip-top"><span>✦</span> PLAY YOUR WAY</div><div class="hero-game-art"><div class="art-spark spark-one">✦</div><div class="art-spark spark-two">✧</div><div class="art-ring"></div><img class="shawarma-emoji" src="assets/games/shawarma-run.svg?v=4" alt=""><div class="art-caption"><small>ПЕРВОЕ ПРИКЛЮЧЕНИЕ</small><strong>SHAVERMA</strong></div></div>
+<div class="float-chip chip-top winter-chip"><span>❄</span> WINTER GAME NIGHT</div><div class="hero-game-art"><div class="art-spark spark-one">✦</div><div class="art-spark spark-two">✧</div><div class="art-ring"></div><img class="shawarma-emoji" src="assets/games/shawarma-run.svg?v=4" alt=""><div class="art-caption"><small>ПЕРВОЕ ПРИКЛЮЧЕНИЕ</small><strong>SHAVERMA</strong></div></div>
 <div class="float-chip chip-bottom"><span class="live-pulse"></span> GAME HUB ONLINE</div><div class="hero-star star-a">✳</div><div class="hero-star star-b">✦</div></div><div class="hero-scroll"><span></span> ЛИСТАЙ ВНИЗ</div>
 </section>
 <section class="games-section page-wrap" id="games"><div class="section-topline"><span>КАТАЛОГ</span><span class="section-line"></span><span>03 / 03</span></div>
