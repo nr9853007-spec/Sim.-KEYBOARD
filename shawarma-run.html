@@ -189,6 +189,24 @@ function drawBackground(dt){
   {sky1:'#8b70b8',sky2:'#f4c0d4',far:'#8c75a0',mid:'#645274',road:'#484052',side:'#b9a1c7',curb:'#f4d8ee',lamp:'#fff0c7',accent:'#62d7d1'},
   {sky1:'#4e9c91',sky2:'#e4dca0',far:'#557c67',mid:'#42634e',road:'#39483e',side:'#a4ad79',curb:'#e4dfa9',lamp:'#fff0b3',accent:'#e5b75a'}
  ][Math.max(0,biome)];
+ // Every shawarma skin also gives the world its own lighting and accent treatment.
+ const skinWorld={
+  classic:{sky1:'#83c9e9',sky2:'#f5d8aa',accent:'#f3ad58',lamp:'#fff0c4'},
+  gold:{sky1:'#b68b45',sky2:'#ffe4a0',accent:'#ffd45d',lamp:'#fff5b8'},
+  neon:{sky1:'#332c72',sky2:'#b05cae',accent:'#c77bff',lamp:'#b8f8ff'},
+  pepper:{sky1:'#a34e32',sky2:'#f3a65d',accent:'#ff684b',lamp:'#ffe1a0'},
+  lava:{sky1:'#612d39',sky2:'#f07843',accent:'#ff553b',lamp:'#ffd078'},
+  galaxy:{sky1:'#20254f',sky2:'#7654a6',accent:'#a99aff',lamp:'#d8caff'},
+  mint:{sky1:'#397e78',sky2:'#c4e6ad',accent:'#8de0b1',lamp:'#efffc7'},
+  chef:{sky1:'#8e765b',sky2:'#f0d6a4',accent:'#d9b17b',lamp:'#fff0cf'},
+  rainbow:{sky1:'#8d72b6',sky2:'#f1b8d0',accent:'#ff8fca',lamp:'#fff0a8'},
+  cyber:{sky1:'#183e5c',sky2:'#388ba0',accent:'#54eaff',lamp:'#d5ffff'},
+  pixel:{sky1:'#51458e',sky2:'#b6a3df',accent:'#b6a2ff',lamp:'#f2eaff'},
+  frost:{sky1:'#548aa8',sky2:'#d8f5ff',accent:'#9cecff',lamp:'#ffffff'},
+  royal:{sky1:'#54406d',sky2:'#d2a65d',accent:'#f4d27a',lamp:'#fff0bd'}
+ };
+ const mood=skinWorld[selectedSkin]||skinWorld.classic;
+ palette.sky1=mood.sky1;palette.sky2=mood.sky2;palette.accent=mood.accent;palette.lamp=mood.lamp;
  const sky=ctx.createLinearGradient(0,0,0,horizon*1.5);sky.addColorStop(0,palette.sky1);sky.addColorStop(1,palette.sky2);ctx.fillStyle=sky;ctx.fillRect(0,0,W,H);
  // distant haze and soft sun
  const haze=ctx.createLinearGradient(0,horizon*.45,0,horizon*1.2);haze.addColorStop(0,'#ffffff00');haze.addColorStop(1,'#fff2d044');ctx.fillStyle=haze;ctx.fillRect(0,horizon*.4,W,horizon*.9);
@@ -201,9 +219,25 @@ function drawBackground(dt){
  else if(biome===2){for(let i=0;i<8;i++){const x=(i*137%101)/101*W,y=H*(.08+(i*19%20)/100),r=4+(i%3)*3;ctx.globalAlpha=.48;ellipse(x,y,r,r,i%3===0?'#ff8fbe':i%3===1?'#fff0a0':'#77e5d4');ctx.globalAlpha=.18;ellipse(x,y,r*2.1,r*2.1,'#fff')}ctx.globalAlpha=1}
  else if(biome===3){for(let i=0;i<7;i++){const x=(i*149%103)/103*W,y=horizon-H*(.025+(i%3)*.018);ctx.globalAlpha=.55;ellipse(x,y,18+(i%2)*9,7+(i%3)*2,'#b8e2a0')}ctx.globalAlpha=1}
 
- // distant skyline: quiet silhouettes, fixed geometry, no flicker
- for(let i=0;i<13;i++){const bw=W*(.045+(i%4)*.012),bx=i*W/11-W*.04,bh=H*(.10+(i*17%7)*.018);ctx.fillStyle=palette.far;ctx.globalAlpha=.38;ctx.fillRect(bx,horizon-bh,bw,bh);ctx.globalAlpha=1;
-  if(i%3===0){ctx.fillStyle=palette.far;poly([[bx-4,horizon-bh],[bx+bw/2,horizon-bh-H*.025],[bx+bw+4,horizon-bh]],palette.far)}
+ // Procedural low-poly horizon mesh: layered terrain, sculpted crystal forms and no boxy buildings.
+ const ridgeY=horizon+H*.018;
+ const points=[];
+ for(let i=0;i<=12;i++){const x=i*W/12;const y=ridgeY-H*(.035+((i*17+biome*11)%9)*.009);points.push([x,y])}
+ poly([[0,H*.58],...points,[W,H*.58]],palette.far);
+ for(let i=0;i<12;i++){
+  const a=points[i],b=points[i+1],mid=(a[0]+b[0])/2;
+  poly([[a[0],a[1]],[mid,Math.min(a[1],b[1])-H*(.012+(i%3)*.008)],[b[0],b[1]]],i%2?'#ffffff16':'#101b2630');
+ }
+ // Triangular landmark meshes vary by selected world; silhouettes stay behind the road.
+ for(let i=0;i<7;i++){
+  const x=W*(.07+i*.143),base=horizon+H*.045,wide=W*(.018+(i%3)*.006),high=H*(.09+(i*13%5)*.018);
+  const topY=base-high,midX=x+(i%2?wide*.22:-wide*.22);
+  const shade=i%2?palette.mid:palette.far;
+  poly([[x-wide,base],[x-wide*.42,topY+high*.24],[midX,topY],[x+wide*.48,topY+high*.3],[x+wide,base]],shade);
+  poly([[x-wide*.42,topY+high*.24],[midX,topY],[midX,base]],'#ffffff20');
+  poly([[midX,topY],[x+wide*.48,topY+high*.3],[x+wide,base],[midX,base]],'#11182724');
+  if(biome===2){ellipse(x,topY-high*.12,wide*.36,wide*.36,palette.accent)}
+  if(biome===3){poly([[x-wide*.8,base],[x,topY-high*.12],[x+wide*.8,base]],'#8bc78a55')}
  }
  // main road and wide pedestrian sidewalks in a single consistent perspective
  const farL=roadPoint(-1,0),farR=roadPoint(1,0),nearL=roadPoint(-1,1),nearR=roadPoint(1,1);
@@ -221,16 +255,17 @@ function drawBackground(dt){
  for(const side of [-1,1])for(let i=0;i<12;i++){const z=((i/12+time*speed*.16)%1),p=roadPoint(side*.985,z),s=p.scale;ctx.globalAlpha=.28+z*.58;ellipse(p.x,p.y,1.2+s*2.1,1+s*1.4,i%3===0?'#fff0b0':'#f2a65c')}ctx.globalAlpha=1;
  // asphalt flecks are stable and restrained
  for(let i=0;i<48;i++){const z=((i/48+time*.12)%1),x=((i*37)%89)/44-1,p=roadPoint(x,z);ctx.globalAlpha=.08+z*.08;ellipse(p.x,p.y,Math.max(.6,p.scale*.65),Math.max(.5,p.scale*.35),i%2?'#fff':'#0c1112')}ctx.globalAlpha=1;
- // storefront blocks with clear silhouettes, windows and awnings
- for(const side of [-1,1])for(let i=0;i<4;i++){const z=((i/4+time*.075)%1),p=roadPoint(side*1.72,z),s=p.scale;ctx.save();ctx.translate(p.x,p.y);ctx.scale(s,s);
-  const bw=side===-1?68:74,bh=116+(i%2)*18;ctx.globalAlpha=.97;
-  roundRect(-bw/2+3,-bh+4,bw,bh,5,'#302a2b');roundRect(-bw/2,-bh,bw,bh,4,i%2?'#bd7958':'#9e6650');
-  roundRect(-bw/2+7,-bh+12,bw-14,30,3,'#59423a');
-  for(let w=0;w<2;w++){roundRect(-bw/2+9+w*27,-bh+51,21,31,2,'#314d59');roundRect(-bw/2+11+w*27,-bh+53,17,27,1,'#f5d39a');ctx.strokeStyle='#694a3a';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(-bw/2+19+w*27,-bh+53);ctx.lineTo(-bw/2+19+w*27,-bh+80);ctx.stroke()}
-  roundRect(-bw/2+5,-bh+37,bw-10,7,2,palette.accent);roundRect(-bw/2+12,-bh+87,bw-24,25,3,'#5b392d');
-  ctx.fillStyle='#fff1ce';ctx.font='bold 8px system-ui';ctx.textAlign='center';ctx.fillText(i%2?'КАФЕ':'ШАУРМА',0,-bh+24);
-  // warm interior light
-  ctx.globalAlpha=.18;roundRect(-bw/2+9,-bh+51,bw-18,31,2,'#ffd88b');ctx.globalAlpha=1;
+ // Side scenery is built from faceted mesh sculptures instead of repetitive shop blocks.
+ for(const side of [-1,1])for(let i=0;i<4;i++){
+  const z=((i/4+time*.055)%1),p=roadPoint(side*1.78,z),sc=p.scale;
+  ctx.save();ctx.translate(p.x,p.y);ctx.scale(sc,sc);
+  const h=66+(i%3)*17,w=22+(i%2)*9;
+  const base='#263c4a',lit=palette.accent;
+  poly([[-w,0],[-w*.58,-h*.58],[0,-h], [w*.2,-h*.48],[w,0]],base);
+  poly([[-w*.58,-h*.58],[0,-h],[w*.2,-h*.48],[0,0]],lit+'55');
+  poly([[0,-h],[w*.2,-h*.48],[w,0],[0,0]],'#11182755');
+  poly([[-w*.55,-h*.18],[0,-h*.43],[w*.48,-h*.18]],'#ffffff30');
+  if(i%2===0){ctx.strokeStyle=palette.lamp;ctx.globalAlpha=.6;ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(0,-h*.55);ctx.lineTo(0,-h*.16);ctx.stroke();ctx.globalAlpha=1}
   ctx.restore();
  }
  // street lamps, bollards and small street trees use same perspective scale
