@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#12394a"/><stop offset=".55" stop-color="#0b2639"/><stop offset="1" stop-color="#071a2b"/></linearGradient>
+ <linearGradient id="bread" x1=".1" y1="0" x2=".85" y2="1"><stop stop-color="#fff5d5"/><stop offset=".28" stop-color="#f5d28a"/><stop offset=".68" stop-color="#d99a51"/><stop offset="1" stop-color="#9c542d"/></linearGradient>
+ <linearGradient id="inner" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffe9b2"/><stop offset="1" stop-color="#b96c36"/></linearGradient>
+ <linearGradient id="greens" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d7f58b"/><stop offset=".5" stop-color="#70b94f"/><stop offset="1" stop-color="#246343"/></linearGradient>
+ <linearGradient id="tomato" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ff9a69"/><stop offset=".55" stop-color="#e64b37"/><stop offset="1" stop-color="#9d2c29"/></linearGradient>
+ <linearGradient id="meat" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f5b36a"/><stop offset=".35" stop-color="#a84e2b"/><stop offset="1" stop-color="#4a211b"/></linearGradient>
+ <filter id="shadow" x="-40%" y="-40%" width="180%" height="190%"><feGaussianBlur stdDeviation="14"/></filter>
+ <filter id="glow"><feGaussianBlur stdDeviation="7"/></filter>
+</defs>
+<rect x="14" y="14" width="484" height="484" rx="132" fill="url(#bg)" stroke="#8ee5e4" stroke-opacity=".5" stroke-width="3"/>
+<circle cx="256" cy="238" r="205" fill="#5ccfd0" opacity=".07"/>
+<circle cx="256" cy="238" r="172" fill="none" stroke="#b8f5ec" stroke-opacity=".12" stroke-width="2"/>
+<ellipse cx="263" cy="400" rx="148" ry="29" fill="#020b13" opacity=".7" filter="url(#shadow)"/>
+<g transform="rotate(-28 255 246)">
+ <!-- One continuous, sculpted shawarma silhouette -->
+ <path d="M168 70Q220 39 278 68Q305 82 319 117L401 327Q355 402 265 391Q194 382 170 321L107 145Q102 97 168 70Z" fill="#57271b" opacity=".8" transform="translate(8 12)"/>
+ <path d="M163 63Q218 34 274 64Q300 78 315 113L393 319Q355 386 270 378Q201 370 176 313L107 141Q101 94 163 63Z" fill="url(#bread)" stroke="#a35f34" stroke-width="8"/>
+ <path d="M159 73Q213 48 267 76Q290 88 305 121L374 310Q341 360 273 357Q215 351 193 302L126 137Q121 99 159 73Z" fill="#fff1c7" opacity=".37"/>
+ <path d="M119 139Q147 91 185 116Q213 84 244 113Q277 91 302 132Q337 126 346 165Q320 194 287 169Q260 198 229 171Q195 199 166 171Q132 184 119 139Z" fill="url(#greens)" stroke="#316d42" stroke-width="6"/>
+ <path d="M143 137Q166 113 187 137Q210 111 233 137Q257 113 281 139" fill="none" stroke="#e9f8a8" stroke-width="10" stroke-linecap="round"/>
+ <path d="M147 180Q179 145 207 179L225 213Q192 239 160 208Z" fill="url(#tomato)" stroke="#a42f28" stroke-width="5"/>
+ <path d="M228 176Q258 146 285 179L302 213Q270 239 240 208Z" fill="#f06d4d" stroke="#a42f28" stroke-width="5"/>
+ <path d="M132 231Q162 195 202 224T274 222Q309 193 341 238L357 271Q319 303 283 276T209 283Q170 309 145 272Z" fill="url(#meat)" stroke="#57291f" stroke-width="6"/>
+ <path d="M158 242Q181 223 204 246M226 253Q250 232 275 251M293 247Q315 228 334 249" fill="none" stroke="#ffc47b" stroke-width="9" stroke-linecap="round"/>
+ <path d="M158 302Q218 351 289 334Q332 325 361 293L384 329Q334 397 260 384Q202 375 177 333Z" fill="url(#inner)" stroke="#a75f34" stroke-width="6"/>
+ <path d="M181 319Q244 363 348 317" fill="none" stroke="#fff2ce" stroke-width="10" stroke-linecap="round"/>
+</g>
+<path d="M117 111Q154 76 194 80" fill="none" stroke="#fff8df" stroke-width="11" stroke-linecap="round" opacity=".9"/>
+<path d="M385 98l12 28 28 12-28 12-12 28-12-28-28-12 28-12z" fill="#ffe2a0"/>
+<path d="M105 318l8 18 18 8-18 8-8 18-8-18-18-8 18-8z" fill="#8ce6d8"/>
+<path d="M354 416q21-18 42 0" fill="none" stroke="#b5f3e6" stroke-opacity=".7" stroke-width="5" stroke-linecap="round"/>
+</svg>
