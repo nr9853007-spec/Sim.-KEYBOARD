@@ -142,11 +142,32 @@ html,body,#game{background:#10121d;color:#f7f4ff}
 #extraPanel .support-info span{font-size:11px;color:#c8c1df}
 #extraPanel .support-action{margin-top:4px;font-size:15px}
 @media(max-width:420px){#menu .panel{padding-inline:17px}#menu .mini-btn{font-size:11px}}
+
+/* SHAVERMA street-world and premium run HUD */
+.hud{z-index:7;top:max(12px,env(safe-area-inset-top));left:12px;right:12px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;pointer-events:none}
+.hud .pill{position:relative;display:grid;grid-template-columns:28px 1fr;grid-template-rows:auto auto;align-items:center;column-gap:7px;min-width:0;padding:9px 11px;border:1px solid #ffe1b34d;border-radius:15px;background:linear-gradient(145deg,#332a2beF,#171a26ed);box-shadow:0 8px 22px #090b12a6,inset 0 1px #ffffff20;backdrop-filter:blur(12px);text-align:left}
+.hud .hud-icon{grid-row:1/3;display:grid;place-items:center;width:28px;height:28px;border-radius:9px;background:#ffffff12;font-size:19px;color:#ffe08a;text-shadow:0 0 12px #ffc45b88}
+.hud .star-icon{font-size:23px;color:#ffd45e;background:linear-gradient(145deg,#80532c,#493124)}
+.hud .hud-label{font-size:8px;font-weight:1000;letter-spacing:1.1px;color:#c8c1bd;line-height:1.2}
+.hud .pill b{font-size:clamp(14px,2.5vw,20px);font-weight:1000;color:#fff4df;line-height:1.15;font-variant-numeric:tabular-nums}
+.hud .coin-pill .hud-icon{background:#5c3d22;color:#ffe18a}
+.hud .speed-pill .hud-icon{background:#294a59;color:#8ee7f3}
+.hud .lives-pill .hud-icon{background:#5a3038;color:#ff9b9b}
+.hud .speed-pill small{font-size:10px;color:#ffd28a;margin-left:2px}
+.hud .score-pill{border-color:#ffd66d77;box-shadow:0 8px 22px #090b12a6,0 0 16px #f3b64b20,inset 0 1px #ffffff20}
+.progress{top:76px;width:min(42vw,230px);height:6px;border:1px solid #ffffff35;background:#171a26cc;box-shadow:0 3px 12px #0005}
+.progress i{background:linear-gradient(90deg,#f7d36d,#f18b4b,#ee6d61);box-shadow:0 0 10px #ffc35c99}
+.pause-btn{z-index:8;top:max(88px,calc(env(safe-area-inset-top) + 75px));right:12px;padding:9px 12px;border:1px solid #ffe0a066;background:linear-gradient(145deg,#34303eeF,#171a26ef);color:#fff1d8}
+.event{z-index:8;border:1px solid #ffe0a077;border-radius:16px;background:linear-gradient(145deg,#393047f2,#171a26f2);color:#ffe5a7;box-shadow:0 12px 32px #0007,0 0 20px #ffbd5722;backdrop-filter:blur(12px)}
+@media(max-width:520px){.hud{left:7px;right:7px;gap:5px}.hud .pill{grid-template-columns:22px 1fr;column-gap:5px;padding:8px 6px;border-radius:12px}.hud .hud-icon{width:22px;height:22px;font-size:15px;border-radius:7px}.hud .star-icon{font-size:19px}.hud .hud-label{font-size:7px;letter-spacing:.55px}.hud .pill b{font-size:14px}.progress{top:68px}.pause-btn{top:max(78px,calc(env(safe-area-inset-top) + 66px));font-size:11px;padding:8px 10px}}
+@media(max-width:360px){.hud .pill{grid-template-columns:1fr;justify-items:center;text-align:center;padding:5px 2px;row-gap:2px}.hud .hud-icon{grid-row:auto}.hud .hud-label{display:none}.hud .pill b{font-size:13px}}
+@media(prefers-reduced-motion:reduce){.hud .pill{scroll-behavior:auto}}
+
 </style>
 </head>
 <body><main id="game">
 <canvas id="world" aria-label="Игра SHAVERMA"></canvas>
-<div class="hud hidden" id="hud"><div class="pill">⭐ <b id="score">0</b></div><div class="pill">🌯 <b id="coins">0</b></div><div class="pill">⚡ <b id="speed">1.0</b>x</div><div class="pill">❤️ <b id="lives">3</b></div></div><div class="progress hidden" id="progress"><i id="progressFill"></i></div>
+<div class="hud hidden" id="hud"><div class="pill score-pill"><span class="hud-icon star-icon">★</span><span class="hud-label">СЧЁТ</span><b id="score">0</b></div><div class="pill coin-pill"><span class="hud-icon">🌯</span><span class="hud-label">ШАВУХИ</span><b id="coins">0</b></div><div class="pill speed-pill"><span class="hud-icon">⚡</span><span class="hud-label">ТЕМП</span><b><span id="speed">1.0</span><small>x</small></b></div><div class="pill lives-pill"><span class="hud-icon">♥</span><span class="hud-label">ЖИЗНИ</span><b id="lives">3</b></div></div><div class="progress hidden" id="progress"><i id="progressFill"></i></div>
 <div class="event hidden" id="event"></div><button class="pause-btn hidden" id="pauseBtn" aria-label="Пауза">Ⅱ ПАУЗА</button>
 <div class="controls hidden" id="controls"><button id="left" aria-label="Влево">◀</button><button id="jump" aria-label="Прыжок">⬆</button><button id="slide" aria-label="Подкат">⬇</button><button id="right" aria-label="Вправо">▶</button></div>
 <div class="screen" id="menu"><section class="panel"><div class="logo">SHAVERMA<small>3D RUNNER</small></div><a class="hub-menu-link" href="./index.html">← ВЕРНУТЬСЯ В HUB</a><div class="food">🌯</div><p class="tag">ОДНА ШАВУХА. ТРИ ПОЛОСЫ. БЕСКОНЕЧНЫЙ ЗАБЕГ!</p><button class="btn" id="play">НАЧАТЬ ПОБЕГ</button><button class="btn" id="openShop" style="margin-top:14px;background:linear-gradient(#b8edff,#55b5df);box-shadow:0 6px #286d94">🛒 МАГАЗИН</button><div class="menu-grid"><button class="mini-btn" id="statsBtn">📊 СТАТИСТИКА</button><button class="mini-btn" id="supportBtn">✦ TELEGRAM-ПОДДЕРЖКА</button><button class="mini-btn" id="helpBtn">❔ ГАЙД ПО ИГРЕ</button><button class="mini-btn" id="promoBtn">🎟 ПРОМОКОДЫ</button></div><p class="hint">← → / A D — полосы · ↑ / W — прыжок · ↓ / S — подкат<br>Телефон: свайпы вверх/вниз и кнопки<br><br>Собирай монеты, щиты и магниты, уворачивайся от препятствий. Каждые 25 секунд — новое событие!</p></section></div>
@@ -196,25 +217,76 @@ function roadPoint(x,z){const d=Math.max(0,Math.min(1,z)),h=H*.32,y=h+d*d*H*.68,
 function laneCenter(laneIndex){return laneX[Math.max(0,Math.min(2,laneIndex|0))]}
 function laneWorldWidth(z){return roadPoint(0,z).half*2/3}
 function drawBackground(dt){
- const h=H*.32,biome=Math.max(0,['city','sunset','candy','forest','coast','snow'].indexOf(selectedBg));
- const p=[['#75c7e8','#ffe3b2','#71879a','#527d58','#9ab879','#303944','#c8b99e','#f0dfbd'],['#394b76','#f5a06b','#76516a','#6d6851','#b48a61','#35343d','#c49a7d','#f3c99a'],['#9b79bd','#ffd0d9','#967aa0','#8a7890','#c4a1b5','#454052','#c8accb','#f8dfef'],['#65aaa0','#e8e0ad','#547d69','#3f8457','#83b86c','#35463d','#b5b783','#e9e3b0'],['#69c9dc','#ffe0ad','#478d9c','#8caa70','#c7b17c','#56616a','#d9c49b','#fff0ce'],['#a5d5ed','#f4fbff','#8baec4','#b4d2dd','#e2f0f3','#617687','#dcebf0','#fff']][biome];
- const sky=ctx.createLinearGradient(0,0,0,h*1.8);sky.addColorStop(0,p[0]);sky.addColorStop(1,p[1]);ctx.fillStyle=sky;ctx.fillRect(0,0,W,H);
- const sx=W*.8,sy=H*.14,g=ctx.createRadialGradient(sx,sy,2,sx,sy,Math.min(W,H)*.2);g.addColorStop(0,'#fff9dfaa');g.addColorStop(1,'#fff9df00');ctx.fillStyle=g;ctx.fillRect(sx-Math.min(W,H)*.2,sy-Math.min(W,H)*.2,Math.min(W,H)*.4,Math.min(W,H)*.4);ellipse(sx,sy,Math.min(W,H)*.026,Math.min(W,H)*.026,'#fff4d2');
- const ridge=[];for(let i=0;i<=10;i++){const x=i*W/10,y=h-H*(.025+((i*19+biome*7)%7)*.012);ridge.push([x,y])}poly([[0,h+H*.15],...ridge,[W,h+H*.15]],p[2]);
- const land=ctx.createLinearGradient(0,h,0,H);land.addColorStop(0,p[4]);land.addColorStop(1,p[3]);ctx.fillStyle=land;ctx.fillRect(0,h,W,H-h);
- // Faceted terrain and a continuous raised sidewalk.
- for(let side of [-1,1])for(let i=0;i<10;i++){const z=i/10,q=roadPoint(side*(1.4+(i%3)*.3),z);ctx.globalAlpha=.14;poly([[q.x-5,q.y],[q.x,q.y-10-z*5],[q.x+5,q.y]],'#e4f0b5')}ctx.globalAlpha=1;
- for(let side of [-1,1]){const a=roadPoint(side,0),b=roadPoint(side*1.18,0),c=roadPoint(side*1.18,1),d=roadPoint(side,1),e=roadPoint(side*1.045,0),f=roadPoint(side*1.045,1);poly([[a.x,a.y],[b.x,b.y],[c.x,H],[d.x,H]],p[6]);poly([[a.x,a.y],[e.x,e.y],[f.x,H],[d.x,H]],p[7]);for(let i=0;i<10;i++){const z=((i/10+time*.12)%1),l=roadPoint(side*1.06,z),r=roadPoint(side*1.16,z);ctx.strokeStyle='#51483d55';ctx.lineWidth=1+z*2;ctx.beginPath();ctx.moveTo(l.x,l.y);ctx.lineTo(r.x,r.y);ctx.stroke()}}
- const L=roadPoint(-1,0),R=roadPoint(1,0),BL=roadPoint(-1,1),BR=roadPoint(1,1),as=ctx.createLinearGradient(0,h,0,H);as.addColorStop(0,'#687582');as.addColorStop(.3,p[5]);as.addColorStop(1,'#171d27');poly([[L.x,L.y],[R.x,R.y],[BR.x,H],[BL.x,H]],as);
+ const biome=Math.max(0,['city','sunset','candy','forest','coast','snow'].indexOf(selectedBg));
+ const skies=[['#72c5e9','#ffd6a0','#426b83'],['#4a527d','#ffad75','#5c4b68'],['#a77fc2','#ffd0dc','#78617f'],['#69b7a2','#f0dfa9','#456e60'],['#63b9cf','#ffe0ad','#397b89'],['#a8d9f0','#f4fbff','#819eae']][biome];
+ const h=H*.32, roadTop=roadPoint(0,0), roadBottom=roadPoint(0,1);
+ const sky=ctx.createLinearGradient(0,0,0,H*.62);sky.addColorStop(0,skies[0]);sky.addColorStop(.72,skies[1]);sky.addColorStop(1,'#f4b783');
+ ctx.fillStyle=sky;ctx.fillRect(0,0,W,H);
+ const glow=ctx.createRadialGradient(W*.52,H*.22,2,W*.52,H*.22,Math.min(W,H)*.46);glow.addColorStop(0,'#fff4d2aa');glow.addColorStop(1,'#fff4d200');ctx.fillStyle=glow;ctx.fillRect(0,0,W,H*.7);
+ // Distant city blocks and a warm market-street gateway.
+ poly([[0,h+H*.12],[0,h-H*.08],[W*.12,h-H*.16],[W*.2,h+H*.04],[W*.34,h-H*.1],[W*.43,h+H*.04],[W*.58,h-H*.13],[W*.7,h+.02*H],[W*.83,h-H*.11],[W,h-H*.02],[W,h+H*.14]],skies[2]);
+ for(let side of [-1,1])for(let i=0;i<4;i++){
+  const x=side===-1?i*W*.075:W-i*W*.075-W*.075, y=h-H*(.10+(i%2)*.045), bw=W*.075,bh=H*(.16+(i%3)*.045);
+  ctx.fillStyle=['#d87855','#e8ad70','#557f83','#bb745b'][((i+(side===1?1:0)+biome)%4)];ctx.fillRect(x,y,bw,bh);
+  ctx.fillStyle='#f8d9a0';for(let wx=0;wx<2;wx++)for(let wy=0;wy<3;wy++)ctx.fillRect(x+8+wx*(bw*.42),y+10+wy*17,Math.max(3,bw*.16),7);
+ }
+ // Distant arch gives the road a clear vanishing point.
+ ctx.save();ctx.globalAlpha=.72;ctx.strokeStyle=biome===5?'#e8f8ff':'#f8c18d';ctx.lineWidth=Math.max(5,W*.012);ctx.beginPath();ctx.arc(W*.5,h+H*.055,W*.105,Math.PI,Math.PI*2);ctx.stroke();ctx.fillStyle='#36515b55';ctx.fillRect(W*.395,h+H*.055,W*.21,H*.11);ctx.restore();
+ const ground=ctx.createLinearGradient(0,h,0,H);ground.addColorStop(0,biome===5?'#b9d5dc':'#b98b61');ground.addColorStop(1,biome===5?'#e7f2ed':'#4a5b43');ctx.fillStyle=ground;ctx.fillRect(0,h,W,H-h);
+ // Sidewalks, raised curbs and painted curb blocks.
+ for(const side of [-1,1]){
+  const a=roadPoint(side,0),b=roadPoint(side*1.24,0),c=roadPoint(side*1.24,1),d=roadPoint(side,1);
+  poly([[a.x,a.y],[b.x,b.y],[c.x,H],[d.x,H]],biome===5?'#dce8e8':'#d8b58a');
+  const e=roadPoint(side*1.045,0),f=roadPoint(side*1.045,1);
+  poly([[a.x,a.y],[e.x,e.y],[f.x,H],[d.x,H]],'#f6d6a6');
+  for(let i=0;i<13;i++){
+   const z=((i/13+time*.15)%1),p=roadPoint(side*1.055,z),q=roadPoint(side*1.105,z);
+   ctx.strokeStyle=i%2?'#f5ead3':'#d56b4c';ctx.lineWidth=1+z*5;ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke();
+  }
+ }
+ // Deep asphalt with a subtle warm-to-cool light falloff.
+ const L=roadPoint(-1,0),R=roadPoint(1,0),BL=roadPoint(-1,1),BR=roadPoint(1,1);
+ const asphalt=ctx.createLinearGradient(0,h,0,H);asphalt.addColorStop(0,'#59616a');asphalt.addColorStop(.42,'#454b50');asphalt.addColorStop(1,'#282d32');
+ poly([[L.x,L.y],[R.x,R.y],[BR.x,H],[BL.x,H]],asphalt);
  ctx.save();ctx.beginPath();ctx.moveTo(L.x,L.y);ctx.lineTo(R.x,R.y);ctx.lineTo(BR.x,H);ctx.lineTo(BL.x,H);ctx.closePath();ctx.clip();
- for(let row=0;row<10;row++){const z0=row/10,z1=(row+1)/10;for(let col=0;col<3;col++){const xs=[-1,-1/3,1/3,1],a=roadPoint(xs[col],z0),b=roadPoint(xs[col+1],z0),c=roadPoint(xs[col+1],z1),d=roadPoint(xs[col],z1);poly([[a.x,a.y],[b.x,b.y],[c.x,c.y]],'#ffffff09');poly([[a.x,a.y],[c.x,c.y],[d.x,d.y]],'#07111b18')}}
+ // Fine road grain and faint worn patches.
+ for(let i=0;i<115;i++){const z=((i*37%113)/113),x=((i*61%101)/100-.5)*roadPoint(0,z).half*1.72+W/2,y=h+z*z*H*.68;ctx.globalAlpha=.035+(i%4)*.012;ellipse(x,y,1+z*2,1+z*1.4,i%2?'#f8d7a0':'#080e16')}
+ ctx.globalAlpha=1;
+ // Dashed lane guides stream toward the runner.
+ for(const boundary of [-1/3,1/3])for(let i=0;i<12;i++){
+  const z=((i/12+time*.19)%1),z2=Math.min(1,z+.035+.035*z),p=roadPoint(boundary,z),q=roadPoint(boundary,z2);
+  ctx.strokeStyle='#f7e6c1';ctx.globalAlpha=.22+z*.46;ctx.lineWidth=1+z*4;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke();
+ }
+ ctx.globalAlpha=1;ctx.restore();
+ // Side storefronts, awnings and warm windows slide past at the edge of the street.
+ const used=[];
+ const free=q=>{if(used.some(v=>Math.abs(q.x-v.x)<W*.075&&Math.abs(q.y-v.y)<H*.12))return false;used.push(q);return true};
+ for(const side of [-1,1])for(let i=0;i<5;i++){
+  const z=((i/5+time*.055)%1),q=roadPoint(side*1.55,z),s=q.scale;if(!free(q))continue;
+  ctx.save();ctx.translate(q.x,q.y);ctx.scale(s,s);
+  const wall=['#bd684b','#d28a58','#4f7b7b','#8c5b55'][((i+biome)%4)];
+  roundRect(-34,-76,68,76,5,wall);roundRect(-30,-71,60,9,3,'#f6d49c');
+  roundRect(-25,-54,50,29,3,'#253c4a');roundRect(-21,-50,42,21,2,'#f8c77d');
+  ctx.fillStyle='#fff0c2';ctx.fillRect(-18,-47,3,15);ctx.fillRect(0,-47,3,15);ctx.fillRect(18,-47,3,15);
+  poly([[-38,-55],[0,-70],[38,-55],[34,-48],[-34,-48]],biome===2?'#9a6ad0':'#e85f3e');
+  roundRect(-29,-15,58,9,3,'#f4c36e');ctx.fillStyle='#513b35';ctx.font='bold 7px system-ui';ctx.textAlign='center';ctx.fillText(i%2?'КАФЕ':'ШАУРМА',0,-8);
+  ctx.restore();
+ }
+ // Trees and lamps create depth without cluttering the playable lanes.
+ for(const side of [-1,1])for(let i=0;i<5;i++){
+  const z=((i/5+time*.075+.12)%1),q=roadPoint(side*1.34,z),s=q.scale;if(!free(q))continue;
+  ctx.save();ctx.translate(q.x,q.y);ctx.scale(s,s);
+  roundRect(-3,-35,6,38,2,'#70482f');ellipse(0,-48,22,20,biome===5?'#e5f5f5':'#277a51');ellipse(-12,-46,13,14,biome===5?'#f5ffff':'#43a565');ellipse(12,-55,14,15,biome===5?'#e9ffff':'#55b96c');ellipse(3,-62,10,11,biome===5?'#fff':'#79c96e');
+  ctx.restore();
+ }
+ for(const side of [-1,1])for(let i=0;i<3;i++){
+  const z=((i/3+time*.09+.3)%1),q=roadPoint(side*1.2,z),s=q.scale;if(!free(q))continue;
+  ctx.save();ctx.translate(q.x,q.y);ctx.scale(s,s);roundRect(-2,-78,4,80,2,'#39424a');roundRect(-17,-78,34,4,2,'#39424a');ctx.shadowColor='#ffd47c';ctx.shadowBlur=12;ellipse(-16,-77,5,4,'#ffe5a1');ellipse(16,-77,5,4,'#ffe5a1');ctx.restore();
+ }
+ // Overhead festoon lights: a signature SHAVERMA night-market detail.
+ ctx.save();ctx.strokeStyle='#6b4540';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(0,0);ctx.quadraticCurveTo(W*.5,H*.12,W,H*.015);ctx.stroke();
+ for(let i=0;i<9;i++){const x=W*i/8,y=H*.055+Math.sin(i/8*Math.PI)*H*.045;ctx.shadowColor=i%2?'#8ce6d3':'#ffd47b';ctx.shadowBlur=10;ellipse(x,y+7,3,5,i%2?'#8ce6d3':'#ffd47b')}
  ctx.restore();
- for(let side of [-1,1]){const a=roadPoint(side*.985,0),b=roadPoint(side*.985,1);ctx.strokeStyle='#fff0d8bb';ctx.lineWidth=2.2;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,H);ctx.stroke()}
- for(const x of [-1/3,1/3]){const a=roadPoint(x,0),b=roadPoint(x,1);ctx.strokeStyle='#111a25a8';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,H);ctx.stroke()}
- // New silhouettes are positioned beyond the curb with spacing checks.
- const used=[];const free=q=>{if(used.some(v=>Math.abs(q.x-v.x)<48&&Math.abs(q.y-v.y)<72))return false;used.push(q);return true};
- for(let side of [-1,1])for(let i=0;i<4;i++){const z=((i/4+time*.05)%1),q=roadPoint(side*1.52,z),sc=q.scale;if(!free(q))continue;ctx.save();ctx.translate(q.x,q.y);ctx.scale(sc,sc);if(biome===0){roundRect(-17,-58,34,58,3,'#34445a');for(let k=0;k<3;k++)roundRect(-12+k*10,-40,4,7,1,'#ffe5a0')}else if(biome===1){poly([[-22,0],[-16,-28],[-5,-28],[0,-48],[18,-48],[23,0]],'#80566a')}else if(biome===2){roundRect(-12,-30,24,30,7,'#e978ac');ellipse(0,-38,12,8,'#fff0a0')}else if(biome===5){poly([[-20,0],[0,-52],[20,0]],'#78b4d0');poly([[-12,-17],[0,-42],[12,-17]],'#f0fcff')}else{roundRect(-3,-26,6,28,2,'#76513a');ellipse(0,-39,19,18,'#347d55');ellipse(-9,-43,11,11,'#62a96b');ellipse(9,-48,11,12,'#458e5a')}ctx.restore()}
- for(let side of [-1,1])for(let i=0;i<3;i++){const z=((i/3+time*.08+.2)%1),q=roadPoint(side*2.05,z),sc=q.scale;if(!free(q))continue;ctx.save();ctx.translate(q.x,q.y);ctx.scale(sc,sc);roundRect(-3,-23,6,26,2,'#795239');ellipse(0,-42,17,18,'#3e8b58');ellipse(-9,-46,10,11,'#62aa69');ellipse(9,-50,10,11,'#4b985d');ctx.restore()}
 }
 function drawShawarma(x,y,s,tilt=0){
  ctx.save();ctx.translate(x,y);ctx.rotate(tilt);ctx.scale(s,s);
