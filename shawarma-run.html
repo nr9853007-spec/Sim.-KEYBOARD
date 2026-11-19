@@ -31,10 +31,17 @@
 @media(prefers-reduced-motion:reduce){.screen,.panel,.logo,.food{animation:none!important;transition:none!important}}
 
 .shop-tabs{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:12px 0 5px}.shop-tab{border:1px solid #ffe1a36b;border-radius:12px;padding:12px 7px;background:linear-gradient(145deg,#ffffff17,#170c0a88);color:#ffe9c4;font-weight:950;font-size:12px;letter-spacing:.2px;cursor:pointer;transition:transform .18s,background .18s,border-color .18s}.shop-tab.active{background:linear-gradient(180deg,#ffe99a,#e98c36);color:#49230f;border-color:#fff0b8;box-shadow:0 4px #91451d,0 7px 16px #0005}.shop-tab:active{transform:translateY(2px)}#shop .panel{width:min(94vw,500px);max-height:94dvh;padding:clamp(16px,3.5vw,24px);display:flex;flex-direction:column;gap:7px}#shop .shop-grid{max-height:min(45dvh,390px);min-height:150px;overflow-y:auto;overscroll-behavior:contain;padding:4px 3px 8px;scrollbar-width:thin;scrollbar-color:#e6ad62 #3a2118}#shop .shop-item{display:flex;flex-direction:column;align-items:center;justify-content:space-between;min-height:138px;padding:12px 8px;gap:4px}#shop .shop-item button{min-width:100px;padding:9px 12px;border:1px solid #fff1bd;background:linear-gradient(#ffe99b,#f5a43d);box-shadow:0 3px #8e451e}#shop .hint{margin:4px 0 0}
+
+/* Mascot refresh + always-available route back to the hub */
+.hub-return{position:fixed;z-index:9;top:max(12px,env(safe-area-inset-top));left:12px;padding:10px 13px;border:1px solid #ffffff55;border-radius:12px;background:linear-gradient(145deg,#33224bdf,#21140fe8);color:#fff1d2;text-decoration:none;font-size:11px;font-weight:1000;letter-spacing:.4px;box-shadow:0 5px 18px #0006;backdrop-filter:blur(8px);transition:transform .18s,filter .18s}.hub-return:hover{transform:translateY(-2px);filter:brightness(1.2)}
+#shop .shop-item strong{font-size:30px;filter:drop-shadow(0 4px 5px #0005);animation:skinPreview 2s ease-in-out infinite alternate}
+#shop .shop-item:nth-child(3n) strong{animation-delay:.35s}#shop .shop-item:nth-child(3n + 1) strong{animation-delay:.7s}
+@keyframes skinPreview{from{transform:translateY(0) rotate(-7deg)}to{transform:translateY(-5px) rotate(7deg)}}
+@media(prefers-reduced-motion:reduce){#shop .shop-item strong{animation:none}}
 </style>
 </head>
 <body><main id="game">
-<canvas id="world" aria-label="Игра Шавуха Run"></canvas>
+<canvas id="world" aria-label="Игра Шавуха Run"></canvas><a class="hub-return" href="./index.html" aria-label="Вернуться в N1kmeL Hub">← ВЕРНУТЬСЯ В HUB</a>
 <div class="hud hidden" id="hud"><div class="pill">⭐ <b id="score">0</b></div><div class="pill">🌯 <b id="coins">0</b></div><div class="pill">⚡ <b id="speed">1.0</b>x</div><div class="pill">❤️ <b id="lives">3</b></div></div><div class="progress hidden" id="progress"><i id="progressFill"></i></div>
 <div class="event hidden" id="event"></div><button class="pause-btn hidden" id="pauseBtn" aria-label="Пауза">Ⅱ ПАУЗА</button>
 <div class="controls hidden" id="controls"><button id="left">◀</button><button id="right">▶</button></div>
@@ -50,7 +57,25 @@
 const canvas=document.getElementById('world'),ctx=canvas.getContext('2d',{alpha:false});
 const $=id=>document.getElementById(id);
 let W=0,H=0,DPR=1,raf=0,last=0,playing=false,lane=1,visualLane=1,score=0,coins=0,wallet=0,lives=3,invulnerable=0,speed=0.28,time=0,spawn=0,waveCount=0,objects=[],particles=[],shield=0,magnet=0,eventUntil=0,eventModeUntil=0,eventType='',shake=0,best=0;
-const shopItems=[{id:'classic',kind:'skin',name:'Классика',icon:'🌯',cost:0},{id:'gold',kind:'skin',name:'Золотая',icon:'✨',cost:18},{id:'neon',kind:'skin',name:'Неоновая',icon:'💜',cost:30},{id:'pepper',kind:'skin',name:'Острая',icon:'🌶️',cost:42},{id:'lava',kind:'skin',name:'Лава',icon:'🌋',cost:55},{id:'galaxy',kind:'skin',name:'Космос',icon:'🌌',cost:65},{id:'mint',kind:'skin',name:'Мятная',icon:'🍃',cost:58},{id:'chef',kind:'skin',name:'Шеф-повар',icon:'👨‍🍳',cost:72},{id:'rainbow',kind:'skin',name:'Радужная',icon:'🌈',cost:85},{id:'cyber',kind:'skin',name:'Кибер',icon:'🤖',cost:95},{id:'city',kind:'bg',name:'Ночной город',icon:'🌃',cost:0},{id:'sunset',kind:'bg',name:'Закат',icon:'🌇',cost:22},{id:'candy',kind:'bg',name:'Конфетный мир',icon:'🍬',cost:35},{id:'forest',kind:'bg',name:'Зелёный парк',icon:'🌳',cost:48}];
+const shopItems=[
+{id:'classic',kind:'skin',name:'Классик Поп',icon:'🌯',cost:0},
+{id:'gold',kind:'skin',name:'Золотой блик',icon:'🌟',cost:18},
+{id:'neon',kind:'skin',name:'Неон-рейвер',icon:'💜',cost:30},
+{id:'pepper',kind:'skin',name:'Чили-чемпион',icon:'🌶️',cost:42},
+{id:'lava',kind:'skin',name:'Лавовый ролл',icon:'🔥',cost:55},
+{id:'galaxy',kind:'skin',name:'Космо-шава',icon:'🌌',cost:65},
+{id:'mint',kind:'skin',name:'Мятный бриз',icon:'🍃',cost:58},
+{id:'chef',kind:'skin',name:'Шеф-ролл',icon:'🧑‍🍳',cost:72},
+{id:'rainbow',kind:'skin',name:'Радужный поп',icon:'🌈',cost:85},
+{id:'cyber',kind:'skin',name:'Кибер-бит',icon:'🤖',cost:95},
+{id:'pixel',kind:'skin',name:'Пиксель-бит',icon:'👾',cost:105},
+{id:'frost',kind:'skin',name:'Ледяной ролл',icon:'❄️',cost:115},
+{id:'royal',kind:'skin',name:'Королевский',icon:'👑',cost:130},
+{id:'city',kind:'bg',name:'Ночной город',icon:'🌃',cost:0},
+{id:'sunset',kind:'bg',name:'Закат',icon:'🌇',cost:22},
+{id:'candy',kind:'bg',name:'Конфетный мир',icon:'🍬',cost:35},
+{id:'forest',kind:'bg',name:'Зелёный парк',icon:'🌳',cost:48}
+];
 let owned=['classic','city'],selectedSkin='classic',selectedBg='city';
 try{wallet=+(localStorage.getItem('shawarmaWallet')||0);owned=JSON.parse(localStorage.getItem('shawarmaOwned')||'[\"classic\",\"city\"]');selectedSkin=localStorage.getItem('shawarmaSkin')||'classic';selectedBg=localStorage.getItem('shawarmaBg')||'city';}catch(e){wallet=0;owned=['classic','city'];}
 const laneX=[-.62,0,.62],rand=(a,b)=>a+Math.random()*(b-a);
@@ -130,30 +155,48 @@ function drawBackground(dt){
 }
 function drawShawarma(x,y,s,tilt=0){
  ctx.save();ctx.translate(x,y);ctx.rotate(tilt);ctx.scale(s,s);
- // grounded shadow and warm rim light
- ellipse(0,22,29,8,'#21140e66');
- const skins={classic:['#c88943','#f0c77c','#6e9b48','#d95d36'],gold:['#dcae35','#ffe58b','#f4b52d','#fff0bd'],neon:['#7445a8','#c49bff','#47e0d2','#ef66ce'],pepper:['#a94a27','#f2b65c','#4e9b45','#e63d22'],lava:['#8e2d1c','#ff9b42','#ffd044','#e33a22'],galaxy:['#34305f','#8c79d9','#42d7db','#ef78c8'],mint:['#b2c987','#e3f0ad','#3c9b75','#e5a65c'],chef:['#e6b66b','#fff3d8','#5d9c4e','#d94d35'],rainbow:['#e879b2','#ffe18a','#6ed9a5','#7a8cff'],cyber:['#263c66','#53d9e9','#e45dcb','#e8ff72']};
- const skin=skins[selectedSkin]||skins.classic;
- // tortilla body with shaded side and folded bottom
- ctx.save();ctx.rotate(-.18);
- ellipse(0,-8,22,35,'#754526');roundRect(-20,-39,40,65,17,skin[0]);roundRect(-16,-36,32,57,14,skin[1]);
- // toasted edge and visible layered filling
- ctx.strokeStyle='#9a6135';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(-15,-34);ctx.quadraticCurveTo(-5,-42,13,-34);ctx.stroke();
- roundRect(-15,-30,30,12,6,skin[2]);roundRect(-14,-18,28,10,5,skin[3]);roundRect(-12,-8,24,8,4,'#f3d17c');
- // crisp grill marks
- ctx.strokeStyle='#a96832';ctx.lineWidth=1.6;ctx.beginPath();ctx.moveTo(-14,-31);ctx.quadraticCurveTo(-3,-25,-13,-18);ctx.moveTo(13,-34);ctx.quadraticCurveTo(3,-26,14,-19);ctx.stroke();
- // herbs, tomato and sauce visible at the wrap opening
- for(let k=0;k<8;k++){const xx=-11+(k%4)*7,yy=-27+Math.floor(k/4)*12;ellipse(xx,yy,2.5,1.7,k%2?skin[2]:skin[3])}
- ctx.strokeStyle='#fff0c2';ctx.lineWidth=2.2;ctx.beginPath();ctx.moveTo(-8,-38);ctx.quadraticCurveTo(0,-32,8,-37);ctx.stroke();
- // paper sleeve
- poly([[-15,-2],[15,-2],[10,19],[-10,19]],'#f5e4bf','#c5a77d');
- ctx.fillStyle='#9e4f2c';ctx.font='bold 6px system-ui';ctx.textAlign='center';ctx.fillText('SHAURMA',0,10);
- ctx.restore();
- // expressive little face
- ellipse(-7,-7,3,3,'#27180f');ellipse(7,-7,3,3,'#27180f');ctx.strokeStyle='#27180f';ctx.lineWidth=2;ctx.beginPath();ctx.arc(0,0,7,.15,Math.PI-.15);ctx.stroke();
- // cheek highlights
- ellipse(-13,1,3,2,'#e98b72');ellipse(13,1,3,2,'#e98b72');
- ctx.restore();
+ const palettes={
+ classic:['#f5c96d','#e69a43','#6bc477','#f06e55','#fff0bf'],
+ gold:['#ffe17a','#dca52f','#fff1a0','#f5a72f','#fff8d5'],
+ neon:['#a66bff','#633bd0','#55f0d6','#ff68c8','#f6eaff'],
+ pepper:['#ffc06a','#e35b35','#79c95c','#f04436','#fff0c5'],
+ lava:['#ffad57','#b83b2d','#ffd34e','#ed4c2d','#fff0c5'],
+ galaxy:['#9d91ff','#5141a2','#5de2e7','#ed7bd5','#f3eaff'],
+ mint:['#d7ed9c','#8bbf73','#48c69b','#f0a36b','#f5ffdf'],
+ chef:['#ffe0a0','#d49b62','#75b86c','#e95b4b','#fff9e9'],
+ rainbow:['#ff9dca','#f5b74e','#6ed9a0','#8a83ff','#fff1dc'],
+ cyber:['#7fe6f0','#4164a6','#f16bc9','#e7ff75','#e8fbff'],
+ pixel:['#b8a4ff','#6a55b8','#6be6a2','#ffb65f','#f5efff'],
+ frost:['#d8f5ff','#75bde0','#9cf2e5','#ffffff','#f2fcff'],
+ royal:['#ffe08c','#9b65c9','#79d8b3','#e36e87','#fff3c4']
+ };
+ const c=palettes[selectedSkin]||palettes.classic;
+ const phase=time*10,step=Math.sin(phase)*5;
+ // Tiny feet make the wrap read as a playful runner, not a realistic food model.
+ roundRect(-16,17+step,12,9,4,'#49305b');roundRect(4,17-step,12,9,4,'#49305b');
+ ellipse(0,22,27,7,'#21140e44');
+ // Simple soft-edged tortilla silhouette.
+ ctx.beginPath();ctx.moveTo(-18,-31);ctx.quadraticCurveTo(-24,-43,-10,-48);ctx.quadraticCurveTo(10,-54,20,-38);ctx.lineTo(17,12);ctx.quadraticCurveTo(0,26,-17,12);ctx.closePath();
+ ctx.fillStyle=c[0];ctx.fill();ctx.lineWidth=3;ctx.strokeStyle='#70462f';ctx.stroke();
+ // Folded top and three bright filling layers.
+ ctx.beginPath();ctx.moveTo(-16,-35);ctx.quadraticCurveTo(0,-49,17,-34);ctx.quadraticCurveTo(7,-26,0,-31);ctx.quadraticCurveTo(-9,-25,-16,-35);ctx.fillStyle=c[1];ctx.fill();
+ roundRect(-16,-25,32,9,5,c[2]);roundRect(-14,-16,28,8,4,c[3]);roundRect(-12,-8,24,6,3,c[4]);
+ // A small paper wrapper with a bold badge.
+ poly([[-15,1],[15,1],[11,17],[-11,17]],'#fff1d2','#d7b98c');
+ roundRect(-8,5,16,7,3,c[1]);ctx.fillStyle='#583525';ctx.font='bold 5px system-ui';ctx.textAlign='center';ctx.fillText('SHAWA',0,10);
+ // Friendly face, cheeks and a confident smile.
+ ellipse(-7,-2,2.8,3.4,'#30203a');ellipse(7,-2,2.8,3.4,'#30203a');
+ ctx.strokeStyle='#30203a';ctx.lineWidth=2;ctx.beginPath();ctx.arc(0,3,6,.18,Math.PI-.18);ctx.stroke();
+ ellipse(-13,5,3.2,2,'#ff8c9a');ellipse(13,5,3.2,2,'#ff8c9a');
+ // Animated skin aura: every rarity has its own visual identity.
+ ctx.globalAlpha=.75;
+ if(selectedSkin==='gold'||selectedSkin==='royal'){ctx.strokeStyle=c[1];ctx.lineWidth=2;ctx.beginPath();ctx.arc(0,-13,31+Math.sin(time*5)*3,Math.PI*1.1,Math.PI*1.9);ctx.stroke();for(let i=0;i<3;i++){const a=time*2+i*2.1;ellipse(Math.cos(a)*30,Math.sin(a)*24-12,2.4,2.4,'#fff2a0')}}
+ else if(selectedSkin==='neon'||selectedSkin==='cyber'){ctx.shadowColor=c[2];ctx.shadowBlur=17;ctx.strokeStyle=c[2];ctx.lineWidth=2;ctx.beginPath();ctx.arc(0,-10,29+Math.sin(time*8)*2,0,Math.PI*2);ctx.stroke();ctx.shadowBlur=0}
+ else if(selectedSkin==='galaxy'||selectedSkin==='pixel'){for(let i=0;i<4;i++){const a=time*1.8+i*Math.PI/2;ellipse(Math.cos(a)*31,Math.sin(a)*25-10,2.5,2.5,c[(i%3)+1])}}
+ else if(selectedSkin==='frost'||selectedSkin==='mint'){for(let i=0;i<3;i++){const a=time*1.5+i*2.1;ellipse(Math.cos(a)*29,Math.sin(a)*23-12,2.5,3,c[2])}}
+ else if(selectedSkin==='lava'||selectedSkin==='pepper'){for(let i=0;i<3;i++){const a=time*2+i*2;ellipse(Math.cos(a)*28,Math.sin(a)*22-13,2.5,3,c[3])}}
+ else if(selectedSkin==='rainbow'){ctx.strokeStyle=c[3];ctx.lineWidth=3;ctx.beginPath();ctx.arc(0,-12,31+Math.sin(time*6)*2,Math.PI*1.05,Math.PI*1.95);ctx.stroke()}
+ ctx.globalAlpha=1;ctx.restore();
 }
 function drawObstacle(o){const p=roadPoint(laneX[o.lane],o.z),s=p.scale;ctx.save();ctx.translate(p.x,p.y);ctx.scale(s,s);ellipse(0,5,27,9,'#1d120d66');
 if(o.type==='cone'){ellipse(0,-2,21,5,'#71351f');poly([[-17,-2],[-2,-47],[3,-47],[18,-2]],'#f07832','#9b3f1d');poly([[-11,-17],[11,-17],[14,-9],[-14,-9]],'#fff0d2');poly([[-6,-32],[6,-32],[9,-24],[-9,-24]],'#ffe7bd');ellipse(-2,-46,4,2,'#ffd39b');roundRect(-22,-5,44,7,3,'#b84f27');}
@@ -161,7 +204,7 @@ else if(o.type==='bin'){roundRect(-20,-38,40,39,7,'#477b67');roundRect(-24,-44,4
 else if(o.type==='barrier'){roundRect(-37,-27,74,26,5,'#e8c65e');roundRect(-40,-31,80,7,3,'#fff0c0');for(let k=-28;k<30;k+=20)poly([[k,-25],[k+9,-25],[k+22,-2],[k+13,-2]],'#a94a31');roundRect(-31,-1,8,13,2,'#5a4030');roundRect(23,-1,8,13,2,'#5a4030');ellipse(-30,-28,3,3,'#fff6d3');ellipse(30,-28,3,3,'#fff6d3');}
 else if(o.type==='puddle'){ellipse(0,-3,34,9,'#347f9c');ellipse(-6,-6,24,5,'#65c8d5');ellipse(-10,-7,9,2,'#d5ffff');ellipse(15,-2,8,2,'#b7f4ef');}
 else if(o.type==='truck'){roundRect(-42,-49,84,49,8,'#d88c35');roundRect(-34,-43,68,22,5,'#f4c45c');roundRect(-29,-39,58,15,3,'#8ac6d6');ctx.fillStyle='#31536a';ctx.fillRect(-2,-38,3,13);roundRect(-34,-17,68,11,3,'#8c3c24');ctx.fillStyle='#fff2d2';ctx.font='bold 9px system-ui';ctx.textAlign='center';ctx.fillText('ШАВЕРМА',0,-21);roundRect(-47,-12,8,20,3,'#4a3024');roundRect(39,-12,8,20,3,'#4a3024');ellipse(-27,1,9,9,'#24252a');ellipse(27,1,9,9,'#24252a');ellipse(-27,1,4,4,'#c7cbd0');ellipse(27,1,4,4,'#c7cbd0');roundRect(-37,-46,10,5,2,'#fff2ae');roundRect(27,-46,10,5,2,'#fff2ae');}
-else if(o.type==='coin'){ctx.save();ctx.shadowColor='#ffe45c';ctx.shadowBlur=18;ellipse(0,-18,20,20,'#ffdb4d');ctx.shadowBlur=0;ellipse(0,-18,15,15,'#f6a92e');ellipse(0,-18,11,11,'#fff0a0');ctx.strokeStyle='#b76a19';ctx.lineWidth=2;ctx.beginPath();ctx.arc(0,-18,13,0,Math.PI*2);ctx.stroke();ctx.fillStyle='#a35b16';ctx.font='bold 17px system-ui';ctx.textAlign='center';ctx.fillText('₽',0,-12);ctx.restore()}
+else if(o.type==='coin'){const coinPalettes={neon:['#e66bff','#8d45d2'],cyber:['#63efff','#2875b6'],galaxy:['#b4a0ff','#6551b9'],frost:['#e6ffff','#75c8ed'],mint:['#b9f58c','#5cba87'],lava:['#ffbd58','#e35a32'],pepper:['#ffe16b','#ef743b'],rainbow:['#ff9fd0','#8a83ff'],gold:['#fff0a0','#e6a52b'],royal:['#ffe28b','#ad71d5'],pixel:['#c5a8ff','#6a55b8'],chef:['#ffe2a4','#d69a5a']};const cc=coinPalettes[selectedSkin]||['#ffe16b','#e6a52b'];const spin=.78+Math.abs(Math.sin(time*8+o.z*5))*.22;ctx.save();ctx.translate(0,-18);ctx.scale(spin,1);ctx.shadowColor=cc[0];ctx.shadowBlur=14;ellipse(0,0,18,18,cc[1]);ctx.shadowBlur=0;ellipse(0,0,13,13,cc[0]);ctx.fillStyle='#71421e';ctx.font='bold 15px system-ui';ctx.textAlign='center';ctx.fillText(selectedSkin==='cyber'?'⚡':selectedSkin==='galaxy'?'✦':selectedSkin==='frost'?'❄':selectedSkin==='mint'?'✿':selectedSkin==='royal'?'♛':'★',0,5);ctx.restore()}
 else if(o.type==='shield'){ctx.save();ctx.shadowColor='#7beaff';ctx.shadowBlur=20;poly([[-1,-39],[18,-30],[16,-11],[0,-1],[-16,-11],[-18,-30]],'#67d9ef','#d9fbff');ctx.shadowBlur=0;poly([[-1,-32],[10,-27],[9,-14],[0,-7],[-9,-14],[-10,-27]],'#174f7a');ctx.fillStyle='#fff';ctx.font='bold 13px system-ui';ctx.textAlign='center';ctx.fillText('★',0,-18);ctx.restore()}
 else if(o.type==='magnet'){ctx.save();ctx.shadowColor='#ff8bc1';ctx.shadowBlur=16;ctx.strokeStyle='#f06ca8';ctx.lineWidth=9;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(-12,-32);ctx.lineTo(-12,-17);ctx.quadraticCurveTo(-12,-3,0,-3);ctx.quadraticCurveTo(12,-3,12,-17);ctx.lineTo(12,-32);ctx.stroke();ctx.shadowBlur=0;ctx.strokeStyle='#fff';ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(-12,-32);ctx.lineTo(-12,-25);ctx.moveTo(12,-32);ctx.lineTo(12,-25);ctx.stroke();ctx.restore()}
 ctx.restore()}
