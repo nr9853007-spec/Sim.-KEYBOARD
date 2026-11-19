@@ -1,5 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Бегущая мультяшная шавуха">
 <defs>
+ <linearGradient id="depth" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff4c9"/><stop offset=".45" stop-color="#e7a04c"/><stop offset="1" stop-color="#8f452d"/></linearGradient>
+ <linearGradient id="shine" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#ffffff" stop-opacity=".55"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></linearGradient>
  <linearGradient id="bread" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffe7a5"/><stop offset=".58" stop-color="#e8a04c"/><stop offset="1" stop-color="#a95c32"/></linearGradient>
  <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff6df"/><stop offset="1" stop-color="#e7c99d"/></linearGradient>
  <clipPath id="inside"><path d="M77 82Q126 48 178 82L164 174Q127 195 91 174Z"/></clipPath>
@@ -11,6 +13,7 @@
 <g filter="url(#shade)">
  <g>
   <animateTransform attributeName="transform" type="translate" values="0 0;0 -6;0 0" dur=".5s" repeatCount="indefinite"/>
+  <path d="M81 86Q130 55 183 87L170 179Q132 202 96 180Z" fill="#713c2b" opacity=".72" transform="translate(2 5)"/>
   <path d="M77 82Q126 48 178 82L164 174Q127 195 91 174Z" fill="url(#bread)" stroke="#ffe9bb" stroke-width="7" stroke-linejoin="round"/>
   <g clip-path="url(#inside)">
    <path d="M72 91Q91 72 109 91T145 90T185 90L182 119Q162 130 145 116T108 120T74 116Z" fill="#61c878"/>
@@ -18,18 +21,22 @@
    <path d="M76 130Q95 119 111 134T145 134T178 129L174 153Q151 160 136 149T103 153T80 151Z" fill="#f4d36f"/>
    <path d="M82 91Q97 84 110 96T138 95T171 92" fill="none" stroke="#a9e77c" stroke-width="7" stroke-linecap="round"/>
   </g>
+  <g clip-path="url(#inside)" fill="none" stroke="#fff1cb" stroke-width="1.4" opacity=".42"><path d="M78 94L160 170M93 75L175 145M72 130L151 190M104 62L181 128M82 165L160 95M108 184L177 116"/><path d="M78 112L178 112M82 142L170 142M100 76L100 180M130 61L130 188M157 75L157 180" stroke="#8d4a31" opacity=".35"/></g>
   <path d="M77 82Q126 48 178 82" fill="none" stroke="#fff0c8" stroke-width="8" stroke-linecap="round"/>
   <path d="M91 150Q126 164 166 149L160 185Q127 199 96 184Z" fill="url(#paper)" stroke="#b88b61" stroke-width="3"/>
   <path d="M106 169Q128 176 151 168" fill="none" stroke="#d4b184" stroke-width="3" stroke-linecap="round"/>
+  <path d="M88 89Q126 60 168 87" fill="none" stroke="url(#shine)" stroke-width="8" stroke-linecap="round"/>
+  <path d="M111 111L122 100L139 111L151 102" fill="none" stroke="#fff7df" stroke-width="2" opacity=".25"/>
   <ellipse cx="111" cy="125" rx="5" ry="7" fill="#30233d"/><ellipse cx="145" cy="125" rx="5" ry="7" fill="#30233d"/>
   <path d="M117 140Q128 151 140 139" fill="none" stroke="#30233d" stroke-width="5" stroke-linecap="round"/>
   <ellipse cx="99" cy="139" rx="7" ry="4" fill="#ff9b9e"/><ellipse cx="158" cy="139" rx="7" ry="4" fill="#ff9b9e"/>
  </g>
 </g>
-<g fill="none" stroke="#30233d" stroke-width="10" stroke-linecap="round">
+<g fill="none" stroke="#30233d" stroke-width="11" stroke-linecap="round" stroke-linejoin="round">
  <path d="M101 187Q80 202 62 194"><animate attributeName="d" values="M101 187Q80 202 62 194;M101 187Q82 177 63 181;M101 187Q80 202 62 194" dur=".5s" repeatCount="indefinite"/></path>
  <path d="M151 187Q176 197 193 180"><animate attributeName="d" values="M151 187Q176 197 193 180;M151 187Q171 211 190 207;M151 187Q176 197 193 180" dur=".5s" repeatCount="indefinite"/></path>
  <path d="M94 204L84 221M156 205L167 220"><animate attributeName="d" values="M94 204L84 221M156 205L167 220;M94 204L101 223M156 205L148 223;M94 204L84 221M156 205L167 220" dur=".5s" repeatCount="indefinite"/></path>
 </g>
+<g fill="#30233d"><ellipse cx="79" cy="224" rx="12" ry="5" transform="rotate(-15 79 224)"/><ellipse cx="171" cy="224" rx="12" ry="5" transform="rotate(15 171 224)"/></g>
 <g fill="#ffd77b"><circle cx="47" cy="151" r="4"><animate attributeName="cy" values="151;140;151" dur=".8s" repeatCount="indefinite"/></circle><circle cx="207" cy="138" r="5"><animate attributeName="cy" values="138;126;138" dur=".7s" repeatCount="indefinite"/></circle></g>
 </svg>
