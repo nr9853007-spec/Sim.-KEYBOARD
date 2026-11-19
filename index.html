@@ -7,7 +7,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="hub.css?v=8"><script src="hub.js?v=2" defer></script>
-</head>
+<style>
+.maintenance-status{color:#ffc77a!important}.maintenance-status i{background:#e6a84f!important;box-shadow:0 0 10px #e6a84f!important}
+.play-link.is-disabled{opacity:.65;cursor:not-allowed;pointer-events:none}
+.space-cover{background:radial-gradient(circle at 50% 45%,#343d83 0,#171b42 48%,#101322 100%)!important}
+.space-cover .cover-orbit{border-color:#9b9dff55!important}
+.space-emblem{position:absolute;inset:22% 0 23%;display:grid;place-items:center;font-size:clamp(76px,12vw,118px);filter:drop-shadow(0 0 25px #91a2ff);transform:rotate(-18deg)}
+.space-cover .cover-title{font-size:clamp(20px,3vw,29px);text-shadow:0 3px 15px #080b22}
+</style></head>
 <body>
 <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
 <header class="site-header">
@@ -20,15 +27,15 @@
 <div class="hero-copy"><div class="eyebrow"><i></i> ТВОЯ ИГРОВАЯ ВСЕЛЕННАЯ</div><h1>Больше игр.<br><span>Больше впечатлений.</span></h1>
 <p class="hero-description">Все твои любимые игровые приключения — в одном месте. Выбирай игру и отправляйся навстречу новым рекордам.</p>
 <div class="hero-actions"><a class="button button-primary" href="#games">Смотреть игры <span>↗</span></a><a class="button button-quiet" href="#about">Узнать о хабе <span>↓</span></a></div>
-<div class="hero-meta"><span class="meta-dot"></span><strong>02</strong> игры уже доступны <span class="meta-divider"></span><span>НОВЫЕ ИГРЫ БУДУТ ПОЯВЛЯТЬСЯ</span></div></div>
+<div class="hero-meta"><span class="meta-dot"></span><strong>03</strong> игры в каталоге <span class="meta-divider"></span><span>НОВЫЕ ИГРЫ БУДУТ ПОЯВЛЯТЬСЯ</span></div></div>
 <div class="hero-art" aria-label="Иллюстрация игрового приключения"><div class="orbit orbit-a"></div><div class="orbit orbit-b"></div><div class="hero-glow"></div>
 <div class="float-chip chip-top"><span>✦</span> PLAY YOUR WAY</div><div class="hero-game-art"><div class="art-spark spark-one">✦</div><div class="art-spark spark-two">✧</div><div class="art-ring"></div><img class="shawarma-emoji" src="assets/games/shawarma-run.svg?v=4" alt=""><div class="art-caption"><small>ПЕРВОЕ ПРИКЛЮЧЕНИЕ</small><strong>SHAVERMA</strong></div></div>
 <div class="float-chip chip-bottom"><span class="live-pulse"></span> GAME HUB ONLINE</div><div class="hero-star star-a">✳</div><div class="hero-star star-b">✦</div></div><div class="hero-scroll"><span></span> ЛИСТАЙ ВНИЗ</div>
 </section>
-<section class="games-section page-wrap" id="games"><div class="section-topline"><span>КАТАЛОГ</span><span class="section-line"></span><span>02 / 02</span></div>
-<div class="section-heading"><div><div class="eyebrow"><i></i> ВЫБИРАЙ СВОЁ ПРИКЛЮЧЕНИЕ</div><h2>Игровая <span>библиотека</span></h2></div><p>Выбирай аркадный забег или проверь, насколько хорошо ты знаешь русскую литературу.</p></div>
+<section class="games-section page-wrap" id="games"><div class="section-topline"><span>КАТАЛОГ</span><span class="section-line"></span><span>03 / 03</span></div>
+<div class="section-heading"><div><div class="eyebrow"><i></i> ВЫБИРАЙ СВОЁ ПРИКЛЮЧЕНИЕ</div><h2>Игровая <span>библиотека</span></h2></div><p>Выбирай аркаду, литературную викторину или отправляйся в космическое приключение.</p></div>
 <div class="game-grid"><article class="game-card"><a class="game-cover" href="shawarma-run.html" aria-label="Играть в SHAVERMA"><div class="cover-noise"></div><div class="cover-orbit"></div><span class="cover-label">N1KMEL ORIGINAL</span><span class="cover-spark spark-left">✦</span><span class="cover-spark spark-right">✧</span><img class="cover-food" src="assets/games/shawarma-run.svg?v=4" alt=""><div class="cover-title">SHAVERMA</div><span class="cover-play">▶</span></a>
-<div class="game-info"><div class="game-info-main"><div class="game-category">АРКАДА <span>·</span> РАННЕР</div><h3>SHAVERMA</h3><p>Уворачивайся, собирай и доберись как можно дальше!</p></div><div class="game-info-bottom"><span class="game-status"><i></i> Доступна</span><a class="play-link" href="shawarma-run.html">Играть <span>↗</span></a></div></div></article>
+<div class="game-info"><div class="game-info-main"><div class="game-category">АРКАДА <span>·</span> РАННЕР</div><h3>SHAVERMA</h3><p>Уворачивайся, собирай и доберись как можно дальше!</p></div><div class="game-info-bottom"><span class="game-status maintenance-status"><i></i> Технические работы</span><span class="play-link is-disabled" aria-disabled="true">Скоро вернёмся</span></div></div></article>
 <article class="game-card"><a class="game-cover literature-cover" href="literary-expert.html" aria-label="Играть в Литературный знаток"><div class="cover-noise"></div><div class="cover-orbit"></div><span class="cover-label">N1KMEL ORIGINAL</span><span class="cover-spark spark-left">✦</span><span class="cover-spark spark-right">✧</span><div class="literature-emblem" aria-hidden="true"><img src="assets/games/literary-expert.svg?v=1" alt=""></div><div class="cover-title">ЛИТЕРАТУРНЫЙ<br><b>ЗНАТОК</b></div><span class="cover-play">▶</span></a><div class="game-info"><div class="game-info-main"><div class="game-category">ВИКТОРИНА <span>·</span> ЛИТЕРАТУРА</div><h3>Литературный знаток</h3><p>Проверь знания писателей, героев и известных произведений.</p></div><div class="game-info-bottom"><span class="game-status"><i></i> Доступна</span><a class="play-link" href="literary-expert.html">Играть <span>↗</span></a></div></div></article></div>
 </section>
 <section class="about-section page-wrap" id="about"><div class="about-icon">✦</div><div><div class="eyebrow"><i></i> О N1KMEL HUB</div><h2>Одна точка входа.<br><span>Целый мир игр.</span></h2></div><p>Мы собираем разные игровые проекты в одном удобном пространстве. Выбирай, запускай и возвращайся за следующими приключениями.</p></section>
