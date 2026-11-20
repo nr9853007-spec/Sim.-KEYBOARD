@@ -16,7 +16,7 @@ if(menu&&drawer&&backdrop&&close){
 const year=document.querySelector('#year');if(year)year.textContent=new Date().getFullYear();
 const root=document.querySelector('#popularGames');
 if(root){
- const games=[{id:'keystorm',name:'KeyStorm',icon:'⌨️',url:'keystorm.html'},{id:'literary',name:'Литературный знаток',icon:'📚',url:'literary-expert.html'},{id:'cosmic',name:'Космический выживальщик',icon:'🚀',url:'cosmic-survivor.html'},{id:'shawarma',name:'Shawarma Master',icon:'🌯',url:'shawarma-master.html'}],key='n1kmelGameVisitsV2';
+ const games=[{id:'keystorm',name:'KeyStorm',icon:'⌨️',url:'keystorm.html'},{id:'literary',name:'Литературный знаток',icon:'📚',url:'literary-expert.html'},{id:'cosmic',name:'Космический выживальщик',icon:'🚀',url:'cosmic-survivor.html'},{id:'shawarma',name:'Shawarma Master',icon:'🌯',url:'shawarma-master.html'},{id:'classics',name:'Классики',icon:'🪁',url:'classics.html'}],key='n1kmelGameVisitsV2';
  let visits={};try{visits=JSON.parse(localStorage.getItem(key)||'{}')||{}}catch{}
  const paint=()=>{const ranked=games.map((g,i)=>({...g,count:Math.max(0,Number(visits[g.id])||0),order:i})).sort((a,b)=>b.count-a.count||a.order-b.order);root.innerHTML=ranked.map((g,i)=>'<li><span class="popular-place">'+String(i+1).padStart(2,'0')+'</span><span class="popular-game-icon">'+g.icon+'</span><span class="popular-game-name">'+g.name+'</span><b>'+g.count+'</b></li>').join('')};
  document.querySelectorAll('a[href]').forEach(a=>{const href=(a.getAttribute('href')||'').split('?')[0],game=games.find(g=>href===g.url||href.endsWith('/'+g.url));if(game)a.addEventListener('click',()=>{visits[game.id]=(Number(visits[game.id])||0)+1;try{localStorage.setItem(key,JSON.stringify(visits))}catch{}paint()})});paint();
