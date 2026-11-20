@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#090d20">
+<title>KeyStorm — Неоновый клавиатурный шторм</title>
+<style>
+:root{color-scheme:dark;--bg:#090d20;--panel:#111a35;--cyan:#6cf4ff;--pink:#ff69c8;--muted:#9ba9ca}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% 0,#1b3262 0,transparent 55%),var(--bg);color:#f4f7ff;font-family:Inter,system-ui,Arial,sans-serif;display:grid;place-items:center;padding:22px}
+.shell{width:min(920px,100%)}header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:22px}.brand{font-weight:950;letter-spacing:2px;color:var(--cyan);text-shadow:0 0 18px #6cf4ff66}.back{color:var(--muted);text-decoration:none;border:1px solid #ffffff20;padding:10px 14px;border-radius:12px}
+h1{font-size:clamp(32px,6vw,58px);line-height:1;margin:10px 0;background:linear-gradient(90deg,#fff,var(--cyan),var(--pink));color:transparent;background-clip:text}.intro{color:var(--muted);margin-bottom:24px}
+.panel{background:linear-gradient(145deg,#172447ed,#10172eed);border:1px solid #8eeeff2b;border-radius:24px;padding:clamp(18px,4vw,32px);box-shadow:0 24px 80px #0007}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px}.stat{background:#080f25;border:1px solid #ffffff12;border-radius:14px;padding:12px}.stat small{display:block;color:var(--muted);font-size:11px;letter-spacing:1px}.stat b{font-size:25px}
+.arena{min-height:185px;border:1px solid #6cf4ff35;border-radius:18px;background:radial-gradient(ellipse at center,#1c3c5c88,#080f25);display:grid;place-items:center;text-align:center;padding:20px;position:relative;overflow:hidden}.arena:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 27px,#6cf4ff09 28px);pointer-events:none}
+.word{font-size:clamp(30px,7vw,58px);font-weight:900;letter-spacing:3px;position:relative;text-shadow:0 0 24px #6cf4ff66;overflow-wrap:anywhere}.hint{color:var(--muted);font-size:13px;position:relative;margin-top:8px}
+.entry{display:flex;gap:10px;margin:18px 0}.entry input{flex:1;min-width:0;background:#080f25;border:1px solid #6cf4ff55;border-radius:13px;padding:16px;color:white;font-size:20px;outline:none}.entry input:focus{box-shadow:0 0 0 3px #6cf4ff20}.btn{border:0;border-radius:13px;padding:14px 20px;font-weight:850;cursor:pointer;background:linear-gradient(120deg,var(--cyan),#9b9aff);color:#071426}.btn.secondary{background:#ffffff12;color:#eaf5ff;border:1px solid #ffffff20}
+.controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.status{color:var(--muted);font-size:13px;margin-top:15px;min-height:20px}.progress{height:7px;background:#ffffff12;border-radius:9px;overflow:hidden;margin-top:18px}.progress span{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--cyan),var(--pink));transform-origin:left}
+footer{text-align:center;color:#66779e;font-size:12px;margin-top:18px}
+@media(max-width:560px){.stats{grid-template-columns:repeat(2,1fr)}.entry{flex-direction:column}.entry .btn{width:100%}header{align-items:flex-start}}
+</style>
+</head>
+<body><main class="shell">
+<header><div class="brand">N1KMEL / ARCADE</div><a class="back" href="index.html">← В игровую</a></header>
+<h1>KEYSTORM</h1><div class="intro">Неоновый клавиатурный шторм. Печатай слова быстрее, собирай комбо и побей свой рекорд!</div>
+<section class="panel">
+<div class="stats"><div class="stat"><small>ОЧКИ</small><b id="score">0</b></div><div class="stat"><small>РЕКОРД</small><b id="best">0</b></div><div class="stat"><small>КОМБО</small><b id="combo">0×</b></div><div class="stat"><small>ВРЕМЯ</small><b id="time">45</b></div></div>
+<div class="arena"><div><div class="word" id="word">ГОТОВ?</div><div class="hint" id="hint">Нажми «Старт», чтобы начать раунд</div></div></div>
+<div class="entry"><input id="typing" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Введи слово здесь…" disabled><button class="btn" id="submit">ВВОД ↵</button></div>
+<div class="controls"><button class="btn" id="start">▶ Старт</button><button class="btn secondary" id="reset">Сбросить</button><span class="status" id="status" aria-live="polite">45 секунд на максимальный результат.</span></div>
+<div class="progress"><span id="bar"></span></div>
+</section><footer>KEYSTORM · N1KMEL HUB · Тренируй скорость и точность</footer>
+</main>
+<script>
+(()=>{
+const words=['КОСМОС','МОЛНИЯ','ПИКСЕЛЬ','КЛАВИША','РАКЕТА','НЕОН','ИМПУЛЬС','ГАЛАКТИКА','ЭНЕРГИЯ','КОД','ИСКРА','ОРБИТА','БИТЫ','СКОРОСТЬ','ЗВЕЗДА','ПРОТОН','СИГНАЛ','МЕТЕОР','ПЛАНЕТА','ТУРБО','МАГИЯ','ШТОРМ','ДРАЙВ','КИБЕР'];
+const $=id=>document.getElementById(id);let score=0,combo=0,time=45,timer=null,running=false,current='',best=Number(localStorage.getItem('keystorm-best')||0);
+$('best').textContent=best;
+function pick(){let next;do{next=words[Math.floor(Math.random()*words.length)]}while(next===current);current=next;$('word').textContent=current}
+function render(){$('score').textContent=score;$('combo').textContent=combo+'×';$('time').textContent=time;$('best').textContent=best;$('bar').style.transform='scaleX('+(time/45)+')'}
+function end(){running=false;clearInterval(timer);$('typing').disabled=true;$('word').textContent='РАУНД ОКОНЧЕН';$('hint').textContent='Результат: '+score+' очков · комбо '+combo;$('status').textContent=score>best?'Новый рекорд! Отличная работа!':'Попробуй ещё раз и побей свой рекорд.';if(score>best){best=score;localStorage.setItem('keystorm-best',best)}$('start').textContent='↻ Ещё раз';render()}
+function start(){clearInterval(timer);score=0;combo=0;time=45;running=true;$('typing').disabled=false;$('typing').value='';$('status').textContent='Печатай слово и нажимай Enter.';$('hint').textContent='Введи слово точно так, как показано';$('start').textContent='Идёт игра…';pick();render();$('typing').focus();timer=setInterval(()=>{time--;render();if(time<=0)end()},1000)}
+function submit(){if(!running)return;const value=$('typing').value.trim().toLocaleUpperCase('ru');if(value===current){combo++;score+=10+Math.min(combo,10)*2;$('status').textContent='Точно! +'+(10+Math.min(combo,10)*2)+' очков';pick()}else{combo=0;$('status').textContent='Промах — комбо сброшено. Следующее слово ждёт!'}$('typing').value='';render();$('typing').focus()}
+$('start').addEventListener('click',()=>{if(!running)start()});$('submit').addEventListener('click',submit);$('typing').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();submit()}});$('reset').addEventListener('click',()=>{clearInterval(timer);running=false;score=0;combo=0;time=45;current='';$('typing').value='';$('typing').disabled=true;$('word').textContent='ГОТОВ?';$('hint').textContent='Нажми «Старт», чтобы начать раунд';$('status').textContent='45 секунд на максимальный результат.';$('start').textContent='▶ Старт';render()});render();
+})();
+</script></body></html>
