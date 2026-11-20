@@ -88,7 +88,7 @@ rocket:{title:'РАКЕТА',icon:'🚀',parts:[
 let selected='butterfly',paintColor=1,painted={};
 function svgFor(scene,preview=false){
 const parts=scene.parts;
-const body=parts.map((p,i)=>'<g><path class="paint-area" data-part="'+i+'" data-number="'+p[1]+'" d="'+p[0]+'" fill="'+(painted[selected]&&painted[selected][i]?'#'+ 'ffffff': '#ffffff')+'"/><text class="number-label" x="'+p[2]+'" y="'+p[3]+'">'+p[1]+'</text></g>').join('');
+const body=parts.map((p,i)=>'<g><path class="paint-area" data-part="'+i+'" data-number="'+p[1]+'" d="'+p[0]+'" fill="'+(painted[selected]&&painted[selected][i]?painted[selected][i]:"#ffffff")+'"/><text class="number-label" x="'+p[2]+'" y="'+p[3]+'">'+p[1]+'</text></g>').join('');
 return '<svg viewBox="0 0 500 330" role="img" aria-label="'+scene.title+' — раскраска по цифрам"><path d="M18 18 H482 V312 H18 Z" fill="none" stroke="#d7dce8" stroke-width="2" stroke-dasharray="5 8" rx="16"/>'+body+'</svg>';
 }
 function palette(){ $('palette').innerHTML=colors.map((c,i)=>'<button class="swatch '+(paintColor===i+1?'active':'')+'" data-color="'+(i+1)+'" aria-label="Цвет '+(i+1)+': '+colorNames[i]+'"><span class="color" style="background:'+c+'"></span>'+ (i+1)+'<small>'+colorNames[i]+'</small></button>').join('');}
