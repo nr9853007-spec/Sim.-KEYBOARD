@@ -51,7 +51,7 @@ P('M330 245 Q350 220 370 245 L390 480 Q350 535 310 480 Z',5,350,405),P('M340 250
 P('M130 215 Q185 145 245 210 Q190 275 130 215Z',5,190,210),P('M570 215 Q515 145 455 210 Q510 275 570 215Z',1,510,210),
 P('M105 540 Q150 490 195 540 Q150 590 105 540Z',2,150,540),P('M505 540 Q550 490 595 540 Q550 590 505 540Z',3,550,540),
 P('M85 585 Q145 555 205 585',4,145,575),P('M495 585 Q555 555 615 585',4,555,575)]},
-mandala:{title:'ЦВЕТОЧНАЯ МАНДАЛА',parts:(()=>{const a=[];for(let i=0;i<12;i++){const r=i*30;a.push(P('M350 350 C'+(350-48)+' 285 '+(350-45)+' 220 350 145 C'+(350+45)+' 220 '+(350+48)+' 285 350 350Z',i%6+1,350,205).map((v,j)=>j===0?'M350 350 C302 285 305 220 350 145 C395 220 398 285 350 350Z':v));a[a.length-1][0]='M350 350 C302 285 305 220 350 145 C395 220 398 285 350 350Z';a[a.length-1][2]=350;a[a.length-1][3]=220;}return a.map((p,i)=>{p[0]='<g transform="rotate('+i*30+' 350 350)">'+p[0]+'</g>';return p;}).concat([P('M350 265 C410 265 435 315 410 365 C385 415 315 415 290 365 C265 315 290 265 350 265Z',2,350,340),P('M350 305 C380 305 395 330 380 355 C365 380 335 380 320 355 C305 330 320 305 350 305Z',5,350,345)]);})()},
+mandala:{title:'ЦВЕТОЧНАЯ МАНДАЛА',parts:(()=>{const a=[];for(let i=0;i<12;i++){const r=i*30;a.push(P('M350 350 C'+(350-48)+' 285 '+(350-45)+' 220 350 145 C'+(350+45)+' 220 '+(350+48)+' 285 350 350Z',i%6+1,350,205).map((v,j)=>j===0?'M350 350 C302 285 305 220 350 145 C395 220 398 285 350 350Z':v));a[a.length-1][0]='M350 350 C302 285 305 220 350 145 C395 220 398 285 350 350Z';a[a.length-1][2]=350;a[a.length-1][3]=220;}return a.map((p,i)=>{p[4]='rotate('+i*30+' 350 350)';return p;}).concat([P('M350 265 C410 265 435 315 410 365 C385 415 315 415 290 365 C265 315 290 265 350 265Z',2,350,340),P('M350 305 C380 305 395 330 380 355 C365 380 335 380 320 355 C305 330 320 305 350 305Z',5,350,345)]);})()},
 cottage:{title:'КОТТЕДЖ В САДУ',parts:[
 P('M120 300 L350 105 L580 300 L535 330 L350 175 L165 330Z',1,350,255),P('M165 300 L535 300 L535 520 L165 520Z',2,350,445),
 P('M275 390 L425 390 L425 520 L275 520Z',3,350,465),P('M195 350 L270 350 L270 425 L195 425Z',4,230,385),P('M430 350 L505 350 L505 425 L430 425Z',5,470,385),
@@ -115,7 +115,7 @@ P('M230 570 Q260 530 290 570 Q260 610 230 570Z',2,260,570),P('M390 575 Q420 535 
 };
 let selected='butterfly',paintColor=1,painted={};
 function svgFor(scene){
-const body=scene.parts.map((p,i)=>'<g><path class="paint-area" data-part="'+i+'" d="'+p[0]+'" fill="'+(painted[selected]&&painted[selected][i]?painted[selected][i]:'#fff')+'"/><text class="number-label" x="'+p[2]+'" y="'+p[3]+'">'+p[1]+'</text></g>').join('');
+const body=scene.parts.map((p,i)=>'<g transform="'+(p[4]||'')+'"><path class="paint-area" data-part="'+i+'" d="'+p[0]+'" fill="'+(painted[selected]&&painted[selected][i]?painted[selected][i]:'#fff')+'"/><text class="number-label" x="'+p[2]+'" y="'+p[3]+'">'+p[1]+'</text></g>').join('');
 return '<svg viewBox="0 0 700 700" role="img" aria-label="'+scene.title+' — большая раскраска по номерам"><rect x="15" y="15" width="670" height="670" rx="28" fill="none" stroke="#cbd2df" stroke-width="3"/><rect x="28" y="28" width="644" height="644" rx="22" fill="none" stroke="#d8dce5" stroke-width="1.5" stroke-dasharray="5 9"/>'+body+'</svg>';
 }
 function palette(){$('palette').innerHTML=colors.map((c,i)=>'<button class="swatch '+(paintColor===i+1?'active':'')+'" data-color="'+(i+1)+'" aria-label="Цвет '+(i+1)+': '+colorNames[i]+'"><span class="color" style="background:'+c+'"></span>'+(i+1)+'<small>'+colorNames[i]+'</small></button>').join('');}
