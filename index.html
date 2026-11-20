@@ -6,7 +6,7 @@
 <title>N1kmeL Hub — Играй во что нравится</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="hub.css?v=9"><script src="hub.js?v=3" defer></script>
+<link rel="stylesheet" href="hub.css?v=10"><script src="hub.js?v=4" defer></script>
 <style>
 .maintenance-status{color:#ffc77a!important}.maintenance-status i{background:#e6a84f!important;box-shadow:0 0 10px #e6a84f!important}
 .play-link.is-disabled{opacity:.65;cursor:not-allowed;pointer-events:none}
@@ -148,7 +148,7 @@ body{background:radial-gradient(ellipse at 12% 8%,#17436a55 0,transparent 34%),r
 <header class="site-header">
 <a class="brand" href="#" aria-label="N1kmeL Hub — главная"><span class="brand-mark"><img src="assets/logo-mark.svg" alt=""></span><span class="brand-name">N1kmeL<span>HUB</span></span></a>
 <nav class="main-nav" aria-label="Главная навигация"><a class="nav-link active" href="#home">Главная</a><a class="nav-link" href="#games">Игры</a><a class="nav-link" href="#about">О хабе</a></nav>
-<a class="header-cta" href="#games">Выбрать игру <span>↗</span></a><button class="mobile-menu" type="button" aria-label="Открыть меню" aria-expanded="false"><span></span><span></span></button>
+<a class="header-cta" href="#games">Выбрать игру <span>↗</span></a><button class="mobile-menu" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="hubDrawer"><span></span><span></span></button>
 </header>
 <main>
 <section class="hero page-wrap" id="home">
@@ -179,7 +179,7 @@ body{background:radial-gradient(ellipse at 12% 8%,#17436a55 0,transparent 34%),r
 </main>
 <footer class="site-footer page-wrap"><a class="brand footer-brand" href="#"><span class="brand-mark"><img src="assets/logo-mark.svg" alt=""></span><span class="brand-name">N1kmeL<span>HUB</span></span></a><span>ТВОЯ ИГРОВАЯ ВСЕЛЕННАЯ</span><span>© <span id="year"></span> N1kmeL Hub</span></footer>
 <div class="hub-drawer-backdrop" id="hubDrawerBackdrop" hidden></div>
-<aside class="hub-drawer" id="hubDrawer" aria-hidden="true" aria-label="Меню N1kmeL Hub">
+<aside class="hub-drawer" id="hubDrawer" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Меню N1kmeL Hub" tabindex="-1" inert>
   <div class="drawer-topline"><span class="drawer-status"><i></i> HUB MENU</span><button class="hub-drawer-close" type="button" aria-label="Закрыть меню">×</button></div>
   <div class="drawer-identity">
     <div class="drawer-monogram">N<span>✦</span></div>
