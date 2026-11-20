@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 850"><rect width="700" height="850" fill="#fff"/><g fill="white" stroke="#171717" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+<!-- plate --> <ellipse cx="350" cy="700" rx="295" ry="90"/><ellipse cx="350" cy="690" rx="255" ry="62"/>
+<!-- stack --> <path d="M150 610 Q350 555 550 610 L535 675 Q350 715 165 675Z"/><path d="M165 530 Q350 475 535 530 L550 610 Q350 655 150 610Z"/><path d="M145 450 Q350 385 555 450 L535 530 Q350 575 165 530Z"/><path d="M130 370 Q350 300 570 370 L555 450 Q350 495 145 450Z"/>
+<!-- syrup top and drips --> <path d="M140 365 Q350 285 560 365 Q585 390 550 415 Q525 435 525 475 Q510 500 490 475 L485 430 Q350 470 210 430 L205 495 Q185 520 170 485 L175 420 Q120 410 140 365Z"/>
+<!-- top pancake --> <path d="M155 345 Q350 265 545 345 Q565 370 545 390 Q350 455 155 390 Q135 370 155 345Z"/>
+<!-- butter --> <path d="M285 315 Q330 280 385 305 L410 350 Q350 380 290 350Z"/>
+<!-- strawberries --> <path d="M210 260 Q165 205 205 155 Q255 115 290 170 Q315 225 250 275Z M430 255 Q395 195 440 150 Q490 120 520 180 Q540 235 470 270Z"/>
+<path d="M210 155 Q190 115 220 95 Q240 120 245 150 M240 155 Q255 105 280 115 Q275 145 260 165 M440 150 Q425 105 455 90 Q470 115 470 145 M475 150 Q500 100 520 120 Q510 145 490 165"/>
+<!-- berries --> <circle cx="325" cy="245" r="32"/><circle cx="370" cy="245" r="32"/><circle cx="395" cy="270" r="25/><circle cx="285" cy="260" r="24"/>
+<!-- blueberries --> <circle cx="160" cy="300" r="22"/><circle cx="185" cy="280" r="19"/><circle cx="520" cy="300" r="22"/><circle cx="545" cy="280" r="19"/>
+<!-- garnish --> <path d="M90 640 Q120 580 160 630 Q125 680 90 640Z M540 640 Q580 580 615 630 Q580 680 540 640Z"/>
+</g><g fill="#111" font-family="Arial,sans-serif" font-size="22" font-weight="bold" text-anchor="middle"><text x="350" y="620">4</text><text x="350" y="550">4</text><text x="350" y="470">4</text><text x="350" y="385">2</text><text x="350" y="335">1</text><text x="245" y="210">9</text><text x="475" y="205">9</text><text x="325" y="245">8</text><text x="370" y="245">8</text><text x="395" y="270">8</text><text x="160" y="300">7</text><text x="540" y="300">7</text><text x="130" y="645">3</text><text x="580" y="645">3</text></g></svg>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 850"><rect width="700" height="850" fill="#fff"/><g fill="white" stroke="#171717" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+<!-- large stylized flower --> <path d="M350 375 C250 330 210 250 255 195 C300 140 345 215 350 300 C355 215 400 140 445 195 C490 250 450 330 350 375Z"/>
+<path d="M350 375 C250 370 160 325 175 255 C190 185 275 240 350 335 C425 240 510 185 525 255 C540 325 450 370 350 375Z"/>
+<path d="M350 375 C270 430 220 520 275 565 C325 605 350 515 350 430 C350 515 375 605 425 565 C480 520 430 430 350 375Z"/>
+<path d="M350 375 C275 375 190 425 205 495 C220 565 295 495 350 415 C405 495 480 565 495 495 C510 425 425 375 350 375Z"/>
+<circle cx="350" cy="375" r="95"/><circle cx="350" cy="375" r="58"/><circle cx="350" cy="375" r="20"/>
+<!-- stems and leaves --> <path d="M335 465 Q330 565 350 690 L380 690 Q365 560 365 465Z"/>
+<path d="M350 585 Q235 500 155 565 Q210 660 350 620Z M365 635 Q480 530 565 585 Q510 680 365 670Z"/>
+<path d="M350 690 Q220 680 110 730 L590 730 Q480 680 350 690Z"/>
+<!-- small flowers --> <path d="M125 350 Q80 315 95 275 Q135 260 150 305 Q165 260 205 275 Q220 315 175 350 Q220 365 205 405 Q165 420 150 375 Q135 420 95 405 Q80 365 125 350Z"/>
+<circle cx="150" cy="350" r="24"/><path d="M560 350 Q515 315 530 275 Q570 260 585 305 Q600 260 640 275 Q655 315 610 350 Q655 365 640 405 Q600 420 585 375 Q570 420 530 405 Q515 365 560 350Z"/><circle cx="585" cy="350" r="24"/>
+<!-- border leaves --> <path d="M45 760 Q90 690 145 760 Q90 800 45 760Z M555 760 Q610 690 655 760 Q610 800 555 760Z"/>
+</g><g fill="#111" font-family="Arial,sans-serif" font-size="22" font-weight="bold" text-anchor="middle"><text x="300" y="255">a</text><text x="405" y="255">c</text><text x="260" y="350">d</text><text x="440" y="350">f</text><text x="350" y="300">e</text><text x="350" y="375">4</text><text x="350" y="440">2</text><text x="350" y="620">b</text><text x="250" y="570">c</text><text x="465" y="610">a</text><text x="150" y="350">9</text><text x="585" y="350">9</text><text x="90" y="760">5</text><text x="610" y="760">7</text></g></svg>
