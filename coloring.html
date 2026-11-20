@@ -40,7 +40,7 @@ header{display:flex;justify-content:space-between;align-items:center;margin-bott
 <div class="canvas-panel"><div class="canvas-head"><strong id="pictureTitle">01 · БАБОЧКА</strong><span class="progress" id="progress">Закрашено: 0 / 8</span></div><div class="art-wrap" id="art" aria-label="Картинка для раскрашивания"></div><div class="picture-caption">Нажми на область с цифрой, чтобы закрасить её выбранным цветом.</div></div>
 <aside class="tools-panel"><h2>Палитра цветов</h2><p>Сначала выбери цвет по номеру, затем нажми на такую же цифру на рисунке.</p><div class="palette" id="palette"></div><div class="status" id="status" aria-live="polite">Выбери цвет №1 и найди цифру 1 на рисунке.</div><div class="tool-actions"><button class="action" id="fillAll">✦ ЗАКРАСИТЬ ПО ЦИФРАМ</button><button class="action secondary" id="reset">↻ СБРОСИТЬ КАРТИНКУ</button></div></aside>
 </section>
-<p class="footer-note">10 больших авторских иллюстраций · 6 цветов · твоя собственная цветная галерея.</p>
+<p class="footer-note">14 раскрасок · отдельная палитра для каждой картинки · твоя собственная цветная галерея.</p>
 </main>
 <script>(()=>{'use strict';
 const $=id=>document.getElementById(id);
@@ -139,7 +139,7 @@ function count(){const p=painted[selected]||{};return{done:Object.keys(p).length
 function render(){const scene=scenes[selected];$('pictureTitle').textContent=String(Object.keys(scenes).indexOf(selected)+1).padStart(2,'0')+' · '+scene.title;$('art').innerHTML=svgFor(scene);const c=count();$('progress').textContent='Закрашено: '+c.done+' / '+c.total;palette();document.querySelectorAll('[data-picture]').forEach(b=>b.classList.toggle('active',b.dataset.picture===selected));}
 function statusFor(n){const list=scenes[selected].palette||colors.map((color,i)=>({key:String(i+1),name:colorNames[i]}));const o=list.find(x=>x.key===String(n));$('status').textContent='Цвет '+n+(o?' — '+o.name:'')+'. Найди обозначение '+n+' на рисунке.';}
 function paint(i){const part=scenes[selected].parts[i];if(!part)return;if(String(part[1])!==String(paintColor)){$('status').textContent='Для этой области нужен цвет №'+part[1]+'.';return;}painted[selected]=painted[selected]||{};if(painted[selected][i])return;const list=scenes[selected].palette||colors.map((color,j)=>({key:String(j+1),color}));painted[selected][i]=list.find(x=>x.key===String(paintColor)).color;const c=count();render();$('status').textContent=c.done===c.total?'Готово! Иллюстрация раскрашена! ✨':'Отлично! Осталось областей: '+(c.total-c.done)+'.';}
-$('gallery').addEventListener('click',e=>{const b=e.target.closest('[data-picture]');if(!b)return;selected=b.dataset.picture;paintColor=1;render();statusFor(1);});
+$('gallery').addEventListener('click',e=>{const b=e.target.closest('[data-picture]');if(!b)return;selected=b.dataset.picture;paintColor='1';render();statusFor(1);});
 $('palette').addEventListener('click',e=>{const b=e.target.closest('[data-color]');if(!b)return;paintColor=String(b.dataset.color);palette();statusFor(paintColor);});
 $('art').addEventListener('click',e=>{const p=e.target.closest('[data-part]');if(p)paint(Number(p.dataset.part));});
 $('fillAll').addEventListener('click',()=>{painted[selected]={};scenes[selected].parts.forEach((p,i)=>painted[selected][i]=(scenes[selected].palette||colors.map((color,j)=>({key:String(j+1),color}))).find(x=>x.key===String(p[1])).color);render();$('status').textContent='Готово! Вся картинка раскрашена по номерам. ✨';});
