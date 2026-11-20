@@ -220,3 +220,17 @@ body.hub-menu-lock{overflow:hidden}
 @media(max-width:380px){.hub-drawer{padding:16px 14px!important}.hub-drawer .drawer-identity{gap:10px!important}.hub-drawer .drawer-monogram{flex-basis:54px!important;width:54px!important;height:54px!important}.hub-drawer .hub-drawer-links>a{grid-template-columns:36px minmax(0,1fr) 12px!important;column-gap:8px!important;padding:9px!important}.hub-drawer .hub-drawer-links>a .drawer-link-icon{width:36px!important;height:36px!important;min-width:36px!important}.hub-drawer .drawer-foot-version{max-width:100%!important;margin-left:0!important;text-align:left!important}}
 @media(max-height:650px){.hub-drawer{padding-top:13px!important;padding-bottom:12px!important}.hub-drawer .drawer-topline{margin-bottom:13px!important}.hub-drawer .drawer-identity{margin-bottom:13px!important}.hub-drawer .drawer-divider{margin-bottom:13px!important}.hub-drawer .hub-drawer-links{gap:6px!important;margin-bottom:12px!important}.hub-drawer .hub-drawer-links>a{min-height:55px!important;padding:7px 10px!important}.hub-drawer .hub-drawer-links>a .drawer-link-icon{width:34px!important;height:34px!important;min-width:34px!important}.hub-drawer .drawer-feature{padding:12px!important;margin-bottom:8px!important}.hub-drawer .drawer-feature h3{margin:8px 0 5px!important;font-size:18px!important}.hub-drawer .drawer-feature p{margin-bottom:9px!important}}
 @media(prefers-reduced-motion:reduce){.hub-drawer,.hub-drawer *,.hub-drawer-backdrop{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+
+/* Performance: stop decorative animations outside the viewport or in background tabs. */
+body.page-hidden *,body.page-hidden *::before,body.page-hidden *::after,
+.is-offscreen *, .is-offscreen *::before, .is-offscreen *::after{
+ animation-play-state:paused!important;
+}
+.popular-board{will-change:auto!important}
+@media(prefers-reduced-motion:reduce){
+ .winter-snow,.space-cover:before,.shawarma-cover:before,.keystorm-cover:before,
+ .popular-board,.popular-live,.hub-online-dot,.hub-support-card:after{
+  animation:none!important;
+ }
+}
