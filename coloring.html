@@ -16,6 +16,54 @@ header{display:flex;justify-content:space-between;align-items:center;margin-bott
 @media(max-width:700px){.workspace{grid-template-columns:1fr}.tools-panel{order:2}.palette{grid-template-columns:repeat(5,minmax(0,1fr))}.swatch{padding:7px 2px}.swatch .color{width:25px;height:25px}.tool-actions{grid-template-columns:1fr 1fr}.tools-panel>p{margin-bottom:10px}.gallery{gap:7px}.picture{flex-basis:92px;padding:7px 4px}.picture .thumb{font-size:27px;height:48px}.picture span{font-size:9px}.picture small{font-size:7px}.canvas-panel{padding:10px}.art-wrap{padding:5px}}
 @media(max-width:420px){body{padding:13px 9px 25px}.gallery{gap:6px}.picture{flex-basis:83px}.picture span{font-size:8px}.picture small{letter-spacing:0}.palette{gap:5px}.swatch{font-size:9px}.swatch .color{width:22px;height:22px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* N1kmeL COLOR STUDIO — visual refresh */
+:root{--mint:#9cf2d7;--violet:#c9b8ff;--gold:#ffe19c;--muted:#bac7dc;--line:#ffffff24}
+body{background:radial-gradient(ellipse at 12% 8%,#6655a744,transparent 34%),radial-gradient(ellipse at 90% 22%,#53b99c2b,transparent 32%),linear-gradient(145deg,#101528,#1c2945 58%,#202b49);background-attachment:fixed}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.23;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:34px 34px;mask-image:linear-gradient(to bottom,#000,transparent 85%);animation:starDrift 28s linear infinite}
+.app{position:relative;animation:studioEnter .7s cubic-bezier(.2,.8,.2,1) both}
+.brand{font-size:11px;letter-spacing:2px;text-shadow:0 0 18px #9be8d266}
+.back{transition:transform .2s,border-color .2s,background .2s}.back:hover{transform:translateY(-2px);border-color:#a8f3dc;background:#ffffff12}
+.hero{margin-bottom:22px}.eyebrow{display:inline-flex;padding:7px 13px;border:1px solid #9be8d244;border-radius:99px;background:#9be8d20c;box-shadow:0 0 26px #9be8d21a;animation:softGlow 4s ease-in-out infinite}
+.hero h1{font-weight:900;text-shadow:0 8px 34px #0005;animation:titleRise .75s .08s both}.hero h1 span{background:linear-gradient(110deg,#c8b8ff,#a1f0d8 55%,#ffe0a3);background-clip:text;-webkit-background-clip:text;color:transparent}
+.hero p{font-size:13px}
+.gallery{padding-top:7px;padding-bottom:13px;scrollbar-width:thin}
+.picture{position:relative;overflow:hidden;flex-basis:112px;border-radius:18px;background:linear-gradient(145deg,#ffffff10,#ffffff05);transition:transform .25s,border-color .25s,box-shadow .25s,background .25s}
+.picture:after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 25%,#ffffff12 48%,transparent 70%);transform:translateX(-130%);transition:transform .55s;pointer-events:none}
+.picture:hover{transform:translateY(-4px);border-color:#b9f4e2;box-shadow:0 12px 24px #050b1c55}.picture:hover:after{transform:translateX(130%)}
+.picture .thumb{transition:transform .3s;filter:drop-shadow(0 5px 10px #0005)}.picture:hover .thumb{transform:translateY(-3px) scale(1.1)}
+.picture.active{border-color:#a4f0d9;background:linear-gradient(145deg,#8ee9d329,#b9aaff2b);box-shadow:0 0 0 1px #9cebd744,0 12px 30px #050b1c66}
+.workspace{gap:16px}
+.canvas-panel,.tools-panel{border-radius:25px;background:linear-gradient(145deg,#293a5bee,#17243bed);box-shadow:0 24px 65px #02081770,inset 0 1px #ffffff0c;backdrop-filter:blur(16px);transition:transform .25s,box-shadow .25s}
+.canvas-panel{padding:17px}.canvas-head strong{font-size:13px;letter-spacing:.5px}.progress{padding:7px 11px;border:1px solid #ffdc9b40;border-radius:99px;background:#ffdc9b10}
+.art-wrap{position:relative;border-radius:20px;border:1px solid #fff;box-shadow:0 12px 35px #10182b22,inset 0 0 0 1px #24324a12;transition:box-shadow .25s,transform .25s}
+.art-wrap:focus-within,.art-wrap:hover{box-shadow:0 15px 40px #10182b2d,0 0 0 4px #a4f0d922}
+.paint-area{transition:fill .2s,filter .2s,opacity .2s;transform-box:fill-box;transform-origin:center}
+.paint-area:hover{fill:#e7f8f2;filter:drop-shadow(0 2px 3px #63758a55);opacity:.94}
+.paint-area.just-painted{animation:paintPop .36s cubic-bezier(.2,.8,.2,1)}
+.number-label{font-size:22px}
+.tools-panel{padding:19px}.tools-panel h2{font-size:16px;letter-spacing:.2px}.tools-panel>p{font-size:11px}
+.palette{gap:9px}
+.swatch{position:relative;border-radius:15px;background:linear-gradient(145deg,#ffffff12,#ffffff06);transition:transform .2s,border-color .2s,background .2s,box-shadow .2s}
+.swatch:hover{transform:translateY(-3px) scale(1.025);border-color:#ffffff88;background:#ffffff15}
+.swatch .color{width:33px;height:33px;box-shadow:0 4px 12px #0005,inset 0 1px 2px #ffffff99;transition:transform .2s}
+.swatch.active{border-color:#c7ffec;box-shadow:0 0 0 2px #9be8d277,0 7px 18px #050b1c44;transform:translateY(-3px)}
+.swatch.active .color{transform:scale(1.1);box-shadow:0 0 0 3px #ffffff22,0 0 20px #9be8d255}
+.action{min-height:46px;border-radius:14px;font-size:10px;letter-spacing:.8px;box-shadow:0 8px 20px #0003;transition:transform .2s,filter .2s,box-shadow .2s}
+.action:hover{transform:translateY(-3px);filter:brightness(1.08);box-shadow:0 12px 25px #0004}.action:active{transform:translateY(0) scale(.98)}
+.action.secondary:hover{border-color:#c5b8ff;color:#fff;background:#ffffff15}
+.status{border-radius:12px;padding:8px 5px;transition:color .2s}
+.footer-note{padding-top:8px}
+@keyframes studioEnter{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes titleRise{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes softGlow{0%,100%{box-shadow:0 0 14px #9be8d20a}50%{box-shadow:0 0 26px #9be8d233}}
+@keyframes starDrift{from{background-position:0 0}to{background-position:68px 102px}}
+@keyframes paintPop{0%{transform:scale(.94);filter:brightness(1.3)}65%{transform:scale(1.025)}100%{transform:scale(1);filter:brightness(1)}}
+@keyframes celebrate{0%{transform:translateY(0) rotate(0);opacity:1}100%{transform:translateY(-70px) rotate(160deg);opacity:0}}
+.confetti-bit{position:fixed;z-index:20;top:65%;width:8px;height:12px;border-radius:3px;pointer-events:none;animation:celebrate 1.15s ease-out forwards}
+@media(max-width:700px){.canvas-panel,.tools-panel{border-radius:21px}.tools-panel{padding:15px}.swatch .color{width:28px;height:28px}}
+@media(prefers-reduced-motion:reduce){body:before,.app,.hero h1,.eyebrow{animation:none!important}.picture,.swatch,.action,.paint-area,.art-wrap{transition:none!important}.confetti-bit{display:none}}
+
 </style></head>
 <body><main class="app">
 <header><a class="brand" href="index.html">✦ N1KMEL HUB</a><a class="back" href="index.html#games">← В МЕНЮ</a></header>
@@ -149,4 +197,40 @@ function fillOriginal(x,y){if(!sourceCanvas||!sourceCtx)return;const w=sourceCan
 $('fillAll').addEventListener('click',()=>{if(scenes[selected].asset){$('status').textContent='Для оригинальной раскраски закрашивай области по одной, ориентируясь на цифры.';return;}painted[selected]={};scenes[selected].parts.forEach((p,i)=>painted[selected][i]=(scenes[selected].palette||colors.map((color,j)=>({key:String(j+1),color}))).find(x=>x.key===String(p[1])).color);render();$('status').textContent='Готово! Вся картинка раскрашена по номерам. ✨';});
 $('reset').addEventListener('click',()=>{painted[selected]={};if(scenes[selected].asset&&sourceImage&&sourceCanvas){sourceCtx.clearRect(0,0,sourceCanvas.width,sourceCanvas.height);sourceCtx.drawImage(sourceImage,0,0);fillHistory=[];$('progress').textContent='Закрашено: 0 областей';}else render();$('status').textContent='Начни заново с цвета №1.';});
 render();statusFor(1);
-})();</script></body></html>
+})();</script>
+<script>
+(()=> {
+  const art=document.getElementById('art');
+  const status=document.getElementById('status');
+  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(art) art.addEventListener('click',e=>{
+    const p=e.target.closest('[data-part]');
+    if(!p)return;
+    p.classList.remove('just-painted');
+    requestAnimationFrame(()=>p.classList.add('just-painted'));
+  });
+  let lastStatus='';
+  if(status){
+    new MutationObserver(()=>{
+      const value=status.textContent||'';
+      if(value===lastStatus)return;
+      lastStatus=value;
+      if(!reduced && /Готово!|раскрашена/i.test(value)){
+        const shades=['#9be8d2','#c2b4ff','#ffdc9b','#f3a5bd','#8ebbe9'];
+        for(let i=0;i<22;i++){
+          const bit=document.createElement('i');
+          bit.className='confetti-bit';
+          bit.style.left=(8+Math.random()*84)+'vw';
+          bit.style.background=shades[i%shades.length];
+          bit.style.animationDelay=(Math.random()*.28)+'s';
+          bit.style.transform='rotate('+(Math.random()*180)+'deg)';
+          document.body.appendChild(bit);
+          setTimeout(()=>bit.remove(),1600);
+        }
+      }
+    }).observe(status,{childList:true,subtree:true,characterData:true});
+  }
+})();
+</script>
+
+</body></html>
