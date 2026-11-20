@@ -1,38 +1,152 @@
 <!doctype html>
 <html lang="ru">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#17233b">
-<meta name="description" content="Разукрасить — игра временно на техническом обслуживании.">
-<title>Технические работы | Разукрасить — N1kmeL Hub</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#17233b">
+<title>Разукрасить по цифрам | N1kmeL Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box}
-body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;background:radial-gradient(ellipse at 50% 0,#46547d 0,transparent 55%),linear-gradient(145deg,#111a2c,#202b48);color:#f6f7ff;font-family:Manrope,system-ui,sans-serif}
-main{width:min(100%,560px);padding:clamp(28px,7vw,54px);text-align:center;border:1px solid #ffffff20;border-radius:28px;background:linear-gradient(145deg,#263653ed,#17243bed);box-shadow:0 25px 80px #02081788}
-.icon{width:82px;height:82px;margin:0 auto 24px;display:grid;place-items:center;border:1px solid #c2b4ff66;border-radius:25px;background:linear-gradient(145deg,#9be8d222,#c2b4ff25);font-size:38px}
-.eyebrow{color:#9be8d2;font-size:10px;font-weight:900;letter-spacing:3px}
-h1{margin:14px 0 12px;font-size:clamp(30px,7vw,46px);line-height:1.1;letter-spacing:-1.5px}
-h1 span{color:#c2b4ff}
-p{margin:0 auto;color:#b4c0d4;font-size:14px;line-height:1.8}
-.status{display:inline-flex;align-items:center;gap:9px;margin:25px 0;padding:10px 15px;border:1px solid #ffdc9b55;border-radius:99px;background:#ffdc9b12;color:#ffdc9b;font-size:10px;font-weight:900;letter-spacing:1px}
-.status i{width:7px;height:7px;border-radius:50%;background:#ffdc9b;box-shadow:0 0 12px #ffdc9b}
-a{display:inline-block;margin-top:8px;padding:13px 20px;border-radius:13px;background:linear-gradient(110deg,#9be8d2,#c2b4ff);color:#18233d;text-decoration:none;font-size:11px;font-weight:900}
-footer{margin-top:28px;color:#8192ad;font-size:9px;letter-spacing:1.5px}
-</style>
-</head>
-<body>
-<main>
-<div class="icon" aria-hidden="true">🛠️</div>
-<div class="eyebrow">N1KMEL CREATIVE · COLOR STUDIO</div>
-<h1>Технические <span>работы</span></h1>
-<p>Игра «Разукрасить» временно недоступна — мы проводим техническое обслуживание и готовим обновления. Спасибо за терпение!</p>
-<div class="status"><i></i> ИГРА НА ОБСЛУЖИВАНИИ</div>
-<p>Загляни немного позже. Совсем скоро раскраски снова будут доступны.</p>
-<a href="index.html#games">← Вернуться в N1kmeL Hub</a>
-<footer>© N1KMEL HUB · СПАСИБО, ЧТО ТЫ С НАМИ</footer>
+:root{color-scheme:dark;--mint:#9be8d2;--violet:#c2b4ff;--gold:#ffdc9b;--muted:#a6b4cb;--line:#ffffff20}
+*{box-sizing:border-box}body{margin:0;min-height:100svh;padding:17px 13px 35px;background:radial-gradient(ellipse at 50% -12%,#46547d,transparent 55%),linear-gradient(145deg,#111a2c,#202b48);color:#f6f7ff;font-family:Manrope,system-ui,sans-serif}.app{width:min(100%,1120px);margin:auto}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}.brand{color:#eff5ff;text-decoration:none;font-size:10px;font-weight:1000;letter-spacing:1.6px}.back{color:#e4eaff;text-decoration:none;border:1px solid var(--line);border-radius:99px;padding:9px 13px;font-size:10px;font-weight:900}
+.hero{text-align:center;margin:5px auto 19px}.eyebrow{color:var(--mint);font-size:9px;font-weight:1000;letter-spacing:3px}.hero h1{font-size:clamp(37px,8vw,58px);line-height:1;margin:9px 0;letter-spacing:-2px}.hero h1 span{color:var(--violet)}.hero p{max-width:590px;margin:auto;color:var(--muted);font-size:12px;line-height:1.7}
+.gallery{display:flex;gap:10px;margin:20px 0 15px;padding:4px 2px 10px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-color:#91d9c0 #ffffff12}.picture{flex:0 0 104px;scroll-snap-align:start;min-width:0;border:1px solid var(--line);border-radius:16px;padding:9px 6px 10px;background:#ffffff09;color:#edf3ff;font:800 10px Manrope;cursor:pointer;transition:.2s}.picture .thumb{height:65px;display:grid;place-items:center;font-size:31px;margin-bottom:4px;filter:drop-shadow(0 4px 7px #0004)}.picture small{display:block;color:#9eafc9;font-size:8px;letter-spacing:.7px;margin-top:3px}.picture.active{border-color:#a4f0d9;background:linear-gradient(145deg,#8ee9d31c,#b9aaff20);box-shadow:0 0 0 1px #9cebd733,0 8px 22px #050b1c55}.picture:focus-visible,.paint-area:focus-visible,.swatch:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.workspace{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:14px;align-items:stretch}.canvas-panel,.tools-panel{border:1px solid var(--line);border-radius:22px;background:linear-gradient(145deg,#263653ed,#17243bed);box-shadow:0 20px 55px #02081766}.canvas-panel{padding:14px;min-width:0}.canvas-head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:10px}.canvas-head strong{font-size:12px}.progress{font-size:10px;color:var(--gold);font-weight:900;white-space:nowrap}.art-wrap{width:100%;max-width:760px;margin:auto;aspect-ratio:1/1;border-radius:17px;background:linear-gradient(145deg,#fffdf6,#f0f2ff);padding:9px;box-shadow:inset 0 0 0 1px #24324a1a;overflow:hidden}.art-wrap svg{width:100%;height:100%;display:block}.art-wrap canvas{width:100%;height:auto;display:block;max-height:75vh;object-fit:contain}.paint-area{stroke:#26364c;stroke-width:3.2;stroke-linejoin:round;cursor:pointer;transition:fill .18s}.paint-area:hover{fill:#f2f5ff}.paint-area.done{cursor:default}.number-label{font-family:Manrope,system-ui,sans-serif;font-size:21px;font-weight:1000;fill:#26364c;pointer-events:none;text-anchor:middle;dominant-baseline:middle}.picture-caption{text-align:center;color:#8fa2bf;font-size:9px;margin:9px 0 0}
+.tools-panel{padding:16px;display:flex;flex-direction:column}.tools-panel h2{font-size:14px;margin:0 0 6px}.tools-panel>p{font-size:10px;color:var(--muted);line-height:1.6;margin:0 0 15px}.palette{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.swatch{border:1px solid #ffffff25;border-radius:12px;background:#ffffff0a;color:#edf3ff;padding:8px 3px 7px;cursor:pointer;font:900 10px Manrope;min-width:0}.swatch .color{display:block;width:29px;height:29px;margin:0 auto 5px;border-radius:50%;border:2px solid #ffffffa8;box-shadow:0 3px 8px #0004}.swatch.active{border-color:#fff;box-shadow:0 0 0 2px #9be8d277;background:#ffffff18;transform:translateY(-2px)}.swatch small{display:block;font-size:8px;color:#aab9d0;margin-top:2px}.tool-actions{display:grid;gap:8px;margin-top:auto;padding-top:18px}.action{min-height:41px;border:0;border-radius:12px;background:linear-gradient(110deg,#9be8d2,#c2b4ff);color:#18233d;font:1000 9px Manrope;letter-spacing:.6px;cursor:pointer}.action.secondary{background:#ffffff0b;border:1px solid var(--line);color:#edf3ff}.status{min-height:34px;margin-top:12px;text-align:center;color:#a9e9d6;font-size:10px;font-weight:800;line-height:1.5}
+.footer-note{text-align:center;color:#8294b0;font-size:9px;margin:14px 5px 0;line-height:1.6}
+@media(max-width:700px){.workspace{grid-template-columns:1fr}.tools-panel{order:2}.palette{grid-template-columns:repeat(5,minmax(0,1fr))}.swatch{padding:7px 2px}.swatch .color{width:25px;height:25px}.tool-actions{grid-template-columns:1fr 1fr}.tools-panel>p{margin-bottom:10px}.gallery{gap:7px}.picture{flex-basis:92px;padding:7px 4px}.picture .thumb{font-size:27px;height:48px}.picture span{font-size:9px}.picture small{font-size:7px}.canvas-panel{padding:10px}.art-wrap{padding:5px}}
+@media(max-width:420px){body{padding:13px 9px 25px}.gallery{gap:6px}.picture{flex-basis:83px}.picture span{font-size:8px}.picture small{letter-spacing:0}.palette{gap:5px}.swatch{font-size:9px}.swatch .color{width:22px;height:22px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head>
+<body><main class="app">
+<header><a class="brand" href="index.html">✦ N1KMEL HUB</a><a class="back" href="index.html#games">← В МЕНЮ</a></header>
+<section class="hero"><div class="eyebrow">N1KMEL CREATIVE · COLOR STUDIO</div><h1>РАЗУ<span>КРАСИТЬ</span></h1><p>Выбери одну из четырёх оригинальных раскрасок или рисунок из коллекции, затем выбирай цвет по легенде и закрашивай области.</p></section>
+<nav class="gallery" id="gallery" aria-label="Выбор картинки">
+<button class="picture active" data-picture="butterfly"><div class="thumb">🦋</div><span>Бабочка</span><small>01 · ФЛОРА</small></button>
+<button class="picture" data-picture="mandala"><div class="thumb">🌸</div><span>Мандала</span><small>02 · УЗОР</small></button>
+<button class="picture" data-picture="cottage"><div class="thumb">🏡</div><span>Коттедж</span><small>03 · УЮТ</small></button>
+<button class="picture" data-picture="koi"><div class="thumb">🐟</div><span>Кои</span><small>04 · ВОДА</small></button>
+<button class="picture" data-picture="owl"><div class="thumb">🦉</div><span>Сова</span><small>05 · ЛЕС</small></button>
+<button class="picture" data-picture="mushroom"><div class="thumb">🍄</div><span>Грибной домик</span><small>06 · ЛЕС</small></button>
+<button class="picture" data-picture="peacock"><div class="thumb">🦚</div><span>Павлин</span><small>07 · ПТИЦЫ</small></button>
+<button class="picture" data-picture="moon"><div class="thumb">🌙</div><span>Лунный сад</span><small>08 · НОЧЬ</small></button>
+<button class="picture" data-picture="reading"><div class="thumb">📚</div><span>Уголок чтения</span><small>09 · УЮТ</small></button>
+<button class="picture" data-picture="turtle"><div class="thumb">🐢</div><span>Черепаха</span><small>10 · МОРЕ</small></button>
+<button class="picture" data-picture="dino"><div class="thumb">🦕</div><span>Динозавры</span><small>11 · НОВИНКА</small></button>
+<button class="picture" data-picture="bunny"><div class="thumb">🐻</div><span>Мишка и зайчик</span><small>12 · НОВИНКА</small></button>
+<button class="picture" data-picture="flower"><div class="thumb">🌼</div><span>Цветочный рисунок</span><small>13 · НОВИНКА</small></button>
+<button class="picture" data-picture="pancakes"><div class="thumb">🥞</div><span>Панкейки</span><small>14 · НОВИНКА</small></button>
+</nav>
+<section class="workspace">
+<div class="canvas-panel"><div class="canvas-head"><strong id="pictureTitle">01 · БАБОЧКА</strong><span class="progress" id="progress">Закрашено: 0 / 8</span></div><div class="art-wrap" id="art" aria-label="Картинка для раскрашивания"></div><div class="picture-caption">Нажми на область с цифрой, чтобы закрасить её выбранным цветом.</div></div>
+<aside class="tools-panel"><h2>Палитра цветов</h2><p>Сначала выбери цвет по номеру, затем нажми на такую же цифру на рисунке.</p><div class="palette" id="palette"></div><div class="status" id="status" aria-live="polite">Выбери цвет №1 и найди цифру 1 на рисунке.</div><div class="tool-actions"><button class="action" id="fillAll">✦ ЗАКРАСИТЬ ПО ЦИФРАМ</button><button class="action secondary" id="reset">↻ СБРОСИТЬ КАРТИНКУ</button></div></aside>
+</section>
+<p class="footer-note">Оригинальные раскраски из твоих изображений и коллекция рисунков.</p>
 </main>
-</body>
-</html>
+<script>(()=>{'use strict';
+const $=id=>document.getElementById(id);
+const colors=['#f3a5bd','#f4cf78','#8fd5b8','#8ebbe9','#b7a5e8','#e99b72'];
+const colorNames=['Розовый','Медовый','Мятный','Голубой','Лавандовый','Коралловый'];
+const P=(d,n,x,y)=>[d,n,x,y];
+const scenes={
+butterfly:{title:'БАБОЧКА В ЦВЕТАХ',parts:[
+P('M350 275 C275 95 105 75 75 190 C55 270 190 315 330 330 Z',1,190,215),P('M350 275 C425 95 595 75 625 190 C645 270 510 315 370 330 Z',2,510,215),
+P('M330 330 C205 300 105 390 145 500 C180 585 285 490 345 365 Z',3,225,430),P('M370 330 C495 300 595 390 555 500 C520 585 415 490 355 365 Z',4,475,430),
+P('M330 245 Q350 220 370 245 L390 480 Q350 535 310 480 Z',5,350,405),P('M340 250 Q285 150 255 145 Q295 160 340 220',6,295,180),P('M360 250 Q415 150 445 145 Q405 160 360 220',6,405,180),
+P('M130 215 Q185 145 245 210 Q190 275 130 215Z',5,190,210),P('M570 215 Q515 145 455 210 Q510 275 570 215Z',1,510,210),
+P('M105 540 Q150 490 195 540 Q150 590 105 540Z',2,150,540),P('M505 540 Q550 490 595 540 Q550 590 505 540Z',3,550,540),
+P('M85 585 Q145 555 205 585',4,145,575),P('M495 585 Q555 555 615 585',4,555,575)]},
+mandala:{title:'ЦВЕТОЧНАЯ МАНДАЛА',parts:(()=>{const a=[];for(let i=0;i<12;i++){const r=i*30;a.push(P('M350 350 C'+(350-48)+' 285 '+(350-45)+' 220 350 145 C'+(350+45)+' 220 '+(350+48)+' 285 350 350Z',i%6+1,350,205).map((v,j)=>j===0?'M350 350 C302 285 305 220 350 145 C395 220 398 285 350 350Z':v));a[a.length-1][0]='M350 350 C302 285 305 220 350 145 C395 220 398 285 350 350Z';a[a.length-1][2]=350;a[a.length-1][3]=220;}return a.map((p,i)=>{p[4]='rotate('+i*30+' 350 350)';return p;}).concat([P('M350 265 C410 265 435 315 410 365 C385 415 315 415 290 365 C265 315 290 265 350 265Z',2,350,340),P('M350 305 C380 305 395 330 380 355 C365 380 335 380 320 355 C305 330 320 305 350 305Z',5,350,345)]);})()},
+cottage:{title:'КОТТЕДЖ В САДУ',parts:[
+P('M120 300 L350 105 L580 300 L535 330 L350 175 L165 330Z',1,350,255),P('M165 300 L535 300 L535 520 L165 520Z',2,350,445),
+P('M275 390 L425 390 L425 520 L275 520Z',3,350,465),P('M195 350 L270 350 L270 425 L195 425Z',4,230,385),P('M430 350 L505 350 L505 425 L430 425Z',5,470,385),
+P('M210 365 L255 365 L255 410 L210 410Z',6,232,388),P('M445 365 L490 365 L490 410 L445 410Z',6,468,388),
+P('M430 155 L480 155 L480 250 L430 215Z',5,455,195),P('M295 115 Q350 65 405 115 L390 145 L310 145Z',6,350,115),
+P('M80 530 Q160 485 240 530 Q320 570 400 530 Q500 480 620 530 L620 620 L80 620Z',3,350,575),
+P('M110 500 Q90 450 125 420 Q165 450 145 505Z',4,125,465),P('M555 500 Q535 450 570 420 Q610 450 590 505Z',4,570,465),
+P('M190 565 Q210 525 230 565 Q250 525 270 565Z',1,230,550),P('M430 565 Q450 525 470 565 Q490 525 510 565Z',5,470,550)]},
+koi:{title:'ПРУД С РЫБКАМИ КОИ',parts:[
+P('M100 330 C145 180 340 170 410 300 C450 380 335 470 210 425 C150 405 110 375 100 330Z',1,250,320),P('M405 330 L545 220 L520 345 L550 465Z',2,510,345),
+P('M250 260 Q290 195 340 245 L315 295Z',3,300,260),P('M240 410 Q300 475 350 420 L320 385Z',4,300,430),
+P('M390 430 C440 300 570 290 610 375 C635 440 550 505 455 485Z',5,500,410),P('M590 390 L655 330 L645 410 L660 475Z',6,640,410),
+P('M165 330 Q210 270 260 330 Q210 390 165 330Z',6,210,330),P('M470 400 Q510 355 550 400 Q510 445 470 400Z',2,510,400),
+P('M90 150 Q150 100 220 150 Q160 200 90 150Z',3,150,150),P('M490 145 Q550 95 620 145 Q560 195 490 145Z',4,555,145),
+P('M85 540 Q145 490 205 540 Q145 590 85 540Z',3,145,540),P('M495 555 Q555 505 615 555 Q555 605 495 555Z',1,555,555),
+P('M310 550 Q350 500 390 550 Q350 600 310 550Z',5,350,550),P('M340 120 Q350 80 360 120',2,350,110)]},
+
+dino:{title:'ДВА ДИНОЗАВРА',asset:'assets/coloring/dinosaurs.jpg',palette:[{key:'1',color:'#e74b3c',name:'Красный'},{key:'2',color:'#f4d23c',name:'Жёлтый'},{key:'3',color:'#36a853',name:'Зелёный'},{key:'4',color:'#2878c8',name:'Синий'},{key:'5',color:'#92502d',name:'Коричневый'},{key:'6',color:'#f28a24',name:'Оранжевый'}],parts:[
+P('M250 220 Q180 110 95 155 Q55 220 170 290 L280 310Z','6',170,220),P('M450 220 Q520 110 605 155 Q645 220 530 290 L420 310Z','3',530,220),
+P('M275 270 Q350 220 425 270 L455 470 Q350 560 245 470Z','3',350,390),P('M265 300 L190 360 L155 345 L225 270Z','5',205,320),P('M435 300 L510 360 L545 345 L475 270Z','5',495,320),
+P('M275 460 L240 575 L295 575 L335 470Z','4',275,535),P('M375 470 L405 575 L460 575 L425 460Z','4',420,535),P('M300 285 Q350 250 400 285 L390 345 L310 345Z','2',350,315),
+P('M290 190 Q350 140 410 190 L395 255 L305 255Z','6',350,215),P('M325 200 Q350 175 375 200 Q350 225 325 200Z','1',350,200)]},
+bunny:{title:'МИШКА И ЗАЙЧИК',asset:'assets/coloring/bear-bunny.jpg',palette:[{key:'1',color:'#426f3c',name:'Зелёный'},{key:'2',color:'#303030',name:'Чёрный'},{key:'3',color:'#d8b46a',name:'Песочный'},{key:'4',color:'#f49a36',name:'Оранжевый'},{key:'5',color:'#496b76',name:'Серо-синий'},{key:'6',color:'#e84f45',name:'Красный'},{key:'7',color:'#8b6545',name:'Коричневый'},{key:'8',color:'#929292',name:'Серый'},{key:'9',color:'#d8b99b',name:'Бежевый'},{key:'10',color:'#f0f0f0',name:'Белый'},{key:'11',color:'#efb9c4',name:'Розовый'}],parts:[
+P('M115 250 Q85 140 180 135 Q260 130 280 220 Q300 330 205 355 Q110 355 115 250Z','9',190,260),P('M130 165 Q110 85 160 110 L190 180Z','8',150,150),P('M205 170 Q215 85 250 120 L255 195Z','8',230,155),P('M165 270 Q190 250 210 270 Q190 290 165 270Z','11',190,270),P('M480 235 Q465 125 510 65 Q555 30 545 145 L530 235Z','10',520,150),P('M550 235 Q560 120 600 85 Q640 60 610 190 L590 250Z','10',590,165),P('M470 240 Q520 175 600 230 Q650 295 590 370 Q520 410 455 345Z','10',540,300),P('M470 355 Q520 400 600 355 L620 470 Q540 535 455 470Z','3',540,440),P('M500 260 Q520 245 535 265 Q520 280 500 260Z','2',518,262),P('M570 260 Q590 245 605 265 Q590 280 570 260Z','2',588,262),P('M540 300 Q555 290 570 300 Q555 315 540 300Z','6',555,300)]},
+flower:{title:'ЦВЕТОЧНЫЙ РИСУНОК',asset:'assets/coloring/flower-letters.jpg',palette:[{key:'1',color:'#111111',name:'Чёрный'},{key:'2',color:'#5aa0c9',name:'Голубой'},{key:'3',color:'#dedede',name:'Серый'},{key:'4',color:'#f2d637',name:'Жёлтый'},{key:'5',color:'#44758c',name:'Сине-серый'},{key:'6',color:'#f0e58a',name:'Светло-жёлтый'},{key:'7',color:'#868d25',name:'Оливковый'},{key:'8',color:'#f1d94e',name:'Золотой'},{key:'9',color:'#e85a9c',name:'Розовый'},{key:'0',color:'#a6aaa9',name:'Серебристый'},{key:'a',color:'#9bcfbe',name:'Мятный'},{key:'b',color:'#df6b9d',name:'Малиновый'},{key:'c',color:'#51bca5',name:'Бирюзовый'},{key:'d',color:'#8eb8dc',name:'Небесный'},{key:'e',color:'#58a98e',name:'Зелёный'},{key:'f',color:'#6eadd0',name:'Голубой'}],parts:[
+P('M350 350 Q180 260 180 120 Q320 100 350 350Z','a',265,220),P('M350 350 Q520 260 520 120 Q380 100 350 350Z','c',435,220),P('M350 350 Q180 440 180 580 Q320 600 350 350Z','d',265,480),P('M350 350 Q520 440 520 580 Q380 600 350 350Z','f',435,480),P('M350 350 Q260 200 350 90 Q440 200 350 350Z','e',350,190),P('M350 350 Q260 500 350 610 Q440 500 350 350Z','b',350,510),P('M250 350 Q170 280 90 350 Q170 420 250 350Z','9',160,350),P('M450 350 Q530 280 610 350 Q530 420 450 350Z','9',540,350),P('M350 260 Q440 260 440 350 Q440 440 350 440 Q260 440 260 350 Q260 260 350 260Z','4',350,285),P('M350 300 Q400 300 400 350 Q400 400 350 400 Q300 400 300 350 Q300 300 350 300Z','2',350,350),P('M350 330 Q370 330 370 350 Q370 370 350 370 Q330 370 330 350 Q330 330 350 330Z','1',350,350)]},
+pancakes:{title:'ПАНКЕЙКИ С ЯГОДАМИ',asset:'assets/coloring/pancakes.jpg',palette:[{key:'1',color:'#f4d13d',name:'Жёлтый'},{key:'2',color:'#f28b2e',name:'Оранжевый'},{key:'3',color:'#8b4b2a',name:'Коричневый'},{key:'4',color:'#edc18d',name:'Бежевый'},{key:'5',color:'#e34a42',name:'Красный'},{key:'6',color:'#e58ab4',name:'Розовый'},{key:'7',color:'#8b4db0',name:'Фиолетовый'},{key:'8',color:'#4b9dd5',name:'Синий'},{key:'9',color:'#55a94e',name:'Зелёный'}],parts:[
+P('M130 260 Q350 180 570 260 L550 330 Q350 390 150 330Z','4',350,280),P('M145 335 Q350 270 555 335 L540 405 Q350 460 160 405Z','4',350,375),P('M160 410 Q350 350 540 410 L525 480 Q350 535 175 480Z','4',350,450),P('M180 485 Q350 430 520 485 L500 545 Q350 590 200 545Z','4',350,515),P('M150 250 Q350 170 570 250 Q590 275 570 295 Q350 365 130 295 Q110 275 150 250Z','2',350,265),P('M200 160 Q250 95 300 160 Q350 95 400 160 Q450 95 500 160 L480 215 L220 215Z','9',350,170),P('M250 150 Q280 110 310 150 Q280 190 250 150Z','5',280,150),P('M390 150 Q420 110 450 150 Q420 190 390 150Z','5',420,150),P('M320 205 Q350 170 380 205 Q350 240 320 205Z','1',350,205),P('M130 560 Q350 520 570 560 L600 610 Q350 665 100 610Z','3',350,600),P('M220 585 Q250 545 280 585 Q250 625 220 585Z','8',250,585),P('M420 585 Q450 545 480 585 Q450 625 420 585Z','7',450,585)]},
+owl:{title:'СОВА НА ВЕТОЧКЕ',parts:[
+P('M220 205 Q350 90 480 205 L465 470 Q350 590 235 470Z',1,350,350),P('M225 270 Q120 270 145 435 Q175 500 260 445Z',2,195,385),P('M475 270 Q580 270 555 435 Q525 500 440 445Z',3,505,385),
+P('M235 215 Q205 120 275 150 Q320 170 310 240Z',4,260,190),P('M465 215 Q495 120 425 150 Q380 170 390 240Z',5,440,190),
+P('M260 270 C300 220 340 260 335 310 C330 355 280 355 255 320Z',6,295,300),P('M440 270 C400 220 360 260 365 310 C370 355 420 355 445 320Z',6,405,300),
+P('M325 355 L375 355 L350 395Z',2,350,370),P('M290 430 Q350 390 410 430 L390 500 Q350 535 310 500Z',4,350,465),
+P('M70 520 Q350 485 630 520',5,350,510),P('M125 500 Q90 435 55 440 Q90 495 125 500Z',3,95,470),
+P('M575 500 Q610 435 645 440 Q610 495 575 500Z',1,605,470),P('M175 565 Q230 525 280 565',4,225,555),P('M420 565 Q475 525 525 565',4,475,555)]},
+mushroom:{title:'ВОЛШЕБНЫЙ ГРИБНОЙ ЛЕС',parts:[
+P('M110 315 Q140 110 350 115 Q560 110 590 315 Q480 365 350 340 Q220 365 110 315Z',1,350,245),P('M265 320 L435 320 L415 540 Q350 580 285 540Z',2,350,465),
+P('M150 280 Q190 210 245 275 Q210 325 150 280Z',3,200,275),P('M455 275 Q510 210 550 280 Q490 325 455 275Z',4,500,275),
+P('M300 160 Q330 130 360 165 Q330 195 300 160Z',5,330,165),P('M400 215 Q430 185 455 220 Q425 245 400 215Z',6,430,215),
+P('M80 520 Q105 430 190 455 Q245 500 200 570 L95 570Z',5,145,510),P('M500 470 Q580 420 620 510 L610 575 L500 570Z',6,560,510),
+P('M70 585 Q170 545 260 585 Q350 620 440 585 Q540 545 630 585 L630 640 L70 640Z',3,350,605),
+P('M125 590 Q150 550 175 590 Q200 550 225 590Z',1,175,580),P('M470 600 Q495 550 520 600 Q545 550 570 600Z',2,520,585),
+P('M290 545 Q315 515 340 545 Q315 575 290 545Z',4,315,545),P('M360 550 Q385 520 410 550 Q385 580 360 550Z',4,385,550)]},
+peacock:{title:'ПАВЛИН И УЗОРНЫЙ ХВОСТ',parts:[
+P('M315 365 Q190 250 150 120 Q260 120 350 300 Q440 120 550 120 Q510 260 385 365Z',1,250,220),P('M350 340 Q190 180 90 245 Q180 390 315 410Z',2,180,320),P('M350 340 Q510 180 610 245 Q520 390 385 410Z',3,520,320),
+P('M320 355 Q350 310 380 355 L390 515 Q350 560 310 515Z',4,350,450),P('M325 350 Q280 300 300 250 Q350 210 400 250 Q420 300 375 350Z',5,350,290),
+P('M330 250 Q350 210 370 250 Q350 275 330 250Z',6,350,245),
+P('M180 210 Q220 175 260 220 Q220 260 180 210Z',5,220,215),P('M440 210 Q480 175 520 220 Q480 260 440 210Z',6,480,215),
+P('M115 300 Q150 265 185 300 Q150 335 115 300Z',4,150,300),P('M515 300 Q550 265 585 300 Q550 335 515 300Z',1,550,300),
+P('M250 545 Q350 510 450 545 L420 590 L280 590Z',3,350,560),P('M280 590 L420 590 L450 630 L250 630Z',2,350,610)]},
+moon:{title:'ЛУННЫЙ САД',parts:[
+P('M500 80 C385 120 390 275 505 315 C420 365 300 300 300 195 C300 85 405 25 500 80Z',2,420,190),
+P('M120 180 Q160 135 200 180 Q160 225 120 180Z',1,160,180),P('M540 390 Q575 350 610 390 Q575 430 540 390Z',5,575,390),
+P('M90 520 Q180 430 270 520 L270 625 L90 625Z',3,180,565),P('M430 480 Q520 400 610 480 L610 625 L430 625Z',4,520,550),
+P('M250 410 L350 300 L450 410 L430 450 L350 365 L270 450Z',5,350,390),P('M270 420 L430 420 L430 560 L270 560Z',6,350,500),
+P('M320 465 L380 465 L380 560 L320 560Z',1,350,510),P('M100 610 Q200 570 300 610 Q400 650 600 610',2,350,615),
+P('M110 350 Q140 290 170 350 Q140 410 110 350Z',4,140,350),P('M535 200 Q565 145 595 200 Q565 255 535 200Z',3,565,200),
+P('M235 145 L255 95 L275 145 L325 165 L275 185 L255 235 L235 185 L185 165Z',6,255,165)]},
+reading:{title:'УЮТНЫЙ УГОЛОК ДЛЯ ЧТЕНИЯ',parts:[
+P('M100 100 L600 100 L600 390 L100 390Z',1,350,245),P('M120 120 L335 120 L335 370 L120 370Z',4,225,240),P('M365 120 L580 120 L580 370 L365 370Z',5,470,240),
+P('M80 390 Q350 345 620 390 L620 440 L80 440Z',2,350,410),P('M175 440 Q120 475 145 590 L280 590 L300 455Z',3,210,525),P('M400 455 L425 590 L560 590 Q585 475 530 440Z',6,490,525),
+P('M270 455 Q350 420 430 455 L420 555 L280 555Z',1,350,500),P('M290 480 L410 480 L410 505 L290 505Z',4,350,493),
+P('M120 300 L200 300 L200 360 L120 360Z',2,160,330),P('M220 275 L305 275 L305 360 L220 360Z',3,260,320),
+P('M460 280 Q490 220 520 280 L520 365 L460 365Z',5,490,320),P('M470 260 Q430 210 450 180 Q490 200 490 250Z',3,465,220),
+P('M520 260 Q560 205 580 230 Q565 270 520 280Z',6,550,250),P('M300 590 Q350 560 400 590 L410 625 L290 625Z',2,350,600)]},
+turtle:{title:'МОРСКАЯ ЧЕРЕПАХА',parts:[
+P('M220 245 Q350 120 480 245 Q520 350 430 450 Q350 515 270 450 Q180 350 220 245Z',3,350,340),P('M260 270 Q350 190 440 270 L420 380 Q350 445 280 380Z',2,350,320),
+P('M270 250 Q300 205 335 245 L315 310Z',1,300,260),P('M365 245 Q400 205 430 250 L385 310Z',4,400,260),P('M285 380 Q320 430 350 405 L340 470Z',5,320,420),P('M415 380 Q380 430 350 405 L360 470Z',6,380,420),
+P('M475 305 Q565 260 590 325 Q575 390 490 375Z',1,540,325),P('M580 330 Q605 305 620 335 Q610 365 580 355Z',2,600,340),
+P('M95 180 Q135 130 175 180 Q135 230 95 180Z',4,135,180),P('M515 145 Q555 95 595 145 Q555 195 515 145Z',5,555,145),
+P('M90 520 Q150 470 210 520 Q150 570 90 520Z',3,150,520),P('M485 540 Q545 490 605 540 Q545 590 485 540Z',6,545,540),
+P('M230 570 Q260 530 290 570 Q260 610 230 570Z',2,260,570),P('M390 575 Q420 535 450 575 Q420 615 390 575Z',1,420,575)]}
+};
+let selected='butterfly',paintColor='1',painted={},sourceCanvas=null,sourceCtx=null,sourceImage=null,fillHistory=[];
+function svgFor(scene){
+const body=scene.parts.map((p,i)=>'<g transform="'+(p[4]||'')+'"><path class="paint-area" data-part="'+i+'" d="'+p[0]+'" fill="'+(painted[selected]&&painted[selected][i]?painted[selected][i]:'#fff')+'"/><text class="number-label" x="'+p[2]+'" y="'+p[3]+'">'+p[1]+'</text></g>').join('');
+return '<svg viewBox="0 0 700 700" role="img" aria-label="'+scene.title+' — большая раскраска по номерам"><rect x="15" y="15" width="670" height="670" rx="28" fill="none" stroke="#cbd2df" stroke-width="3"/><rect x="28" y="28" width="644" height="644" rx="22" fill="none" stroke="#d8dce5" stroke-width="1.5" stroke-dasharray="5 9"/>'+body+'</svg>';
+}
+function palette(){const list=scenes[selected].palette||colors.map((color,i)=>({key:String(i+1),color,name:colorNames[i]}));$('palette').innerHTML=list.map(o=>'<button class="swatch '+(String(paintColor)===String(o.key)?'active':'')+'" data-color="'+o.key+'" aria-label="Цвет '+o.key+': '+o.name+'"><span class="color" style="background:'+o.color+'"></span>'+o.key+'<small>'+o.name+'</small></button>').join('');}
+function count(){const p=painted[selected]||{};return{done:Object.keys(p).length,total:scenes[selected].asset?'областей':scenes[selected].parts.length};}
+function render(){const scene=scenes[selected];$('pictureTitle').textContent=String(Object.keys(scenes).indexOf(selected)+1).padStart(2,'0')+' · '+scene.title;
+if(scene.asset){$('art').innerHTML='<canvas id="sourceArt" aria-label="'+scene.title+'"></canvas>';const cv=$('sourceArt'),ctx=cv.getContext('2d',{willReadFrequently:true});sourceCanvas=cv;sourceCtx=ctx;sourceImage=new Image();sourceImage.onload=()=>{cv.width=sourceImage.naturalWidth;cv.height=sourceImage.naturalHeight;ctx.drawImage(sourceImage,0,0);fillHistory=[];$('art').style.aspectRatio=cv.width+' / '+cv.height;};sourceImage.onerror=()=>{$('art').innerHTML='<p style="color:#8a2d2d;padding:30px;text-align:center">Не найдена оригинальная картинка. Добавь файл '+scene.asset+' в репозиторий.</p>';};sourceImage.src=scene.asset+'?v=1';}
+else{$('art').style.aspectRatio='1 / 1';$('art').innerHTML=svgFor(scene);}
+const c=count();$('progress').textContent=scene.asset?'Закрашено: '+c.done+' областей':'Закрашено: '+c.done+' / '+c.total;palette();document.querySelectorAll('[data-picture]').forEach(b=>b.classList.toggle('active',b.dataset.picture===selected));}
+function statusFor(n){const list=scenes[selected].palette||colors.map((color,i)=>({key:String(i+1),name:colorNames[i]}));const o=list.find(x=>x.key===String(n));$('status').textContent='Цвет '+n+(o?' — '+o.name:'')+'. Найди обозначение '+n+' на рисунке.';}
+function paint(i){const part=scenes[selected].parts[i];if(!part)return;if(String(part[1])!==String(paintColor)){$('status').textContent='Для этой области нужен цвет №'+part[1]+'.';return;}painted[selected]=painted[selected]||{};if(painted[selected][i])return;const list=scenes[selected].palette||colors.map((color,j)=>({key:String(j+1),color}));painted[selected][i]=list.find(x=>x.key===String(paintColor)).color;const c=count();render();$('status').textContent=c.done===c.total?'Готово! Иллюстрация раскрашена! ✨':'Отлично! Осталось областей: '+(c.total-c.done)+'.';}
+$('gallery').addEventListener('click',e=>{const b=e.target.closest('[data-picture]');if(!b)return;selected=b.dataset.picture;paintColor='1';render();statusFor(1);});
+$('palette').addEventListener('click',e=>{const b=e.target.closest('[data-color]');if(!b)return;paintColor=String(b.dataset.color);palette();statusFor(paintColor);});
+$('art').addEventListener('click',e=>{if(scenes[selected].asset&&e.target.id==='sourceArt'){const r=e.target.getBoundingClientRect();fillOriginal(Math.floor((e.clientX-r.left)*e.target.width/r.width),Math.floor((e.clientY-r.top)*e.target.height/r.height));return;}const p=e.target.closest('[data-part]');if(p)paint(Number(p.dataset.part));});
+function fillOriginal(x,y){if(!sourceCanvas||!sourceCtx)return;const w=sourceCanvas.width,h=sourceCanvas.height;if(x<0||y<0||x>=w||y>=h)return;const data=sourceCtx.getImageData(0,0,w,h),d=data.data,start=y*w+x,at=start*4;if(d[at]<225||d[at+1]<225||d[at+2]<225)return;const before=sourceCtx.getImageData(0,0,w,h),seen=new Uint8Array(w*h),stack=[start],points=[];seen[start]=1;let overflow=false;while(stack.length){const q=stack.pop(),i=q*4;if(d[i]<215||d[i+1]<215||d[i+2]<215)continue;points.push(q);if(points.length>w*h*.18){overflow=true;break;}const xx=q%w,yy=(q/w)|0;const ns=[xx?q-1:-1,xx<w-1?q+1:-1,yy?q-w:-1,yy<h-1?q+w:-1];for(const n of ns)if(n>=0&&!seen[n]){seen[n]=1;stack.push(n);}}if(overflow||!points.length){$('status').textContent='Выбери закрытую область внутри рисунка.';return;}const col=(scenes[selected].palette||[]).find(o=>String(o.key)===String(paintColor));if(!col)return;fillHistory.push(before);if(fillHistory.length>20)fillHistory.shift();const rgb=col.color.match(/[0-9a-f]{2}/gi).map(v=>parseInt(v,16));for(const q of points){const i=q*4;d[i]=rgb[0];d[i+1]=rgb[1];d[i+2]=rgb[2];d[i+3]=255;}sourceCtx.putImageData(data,0,0);painted[selected]=painted[selected]||{};painted[selected][Object.keys(painted[selected]).length]=true;const n=Object.keys(painted[selected]).length;$('progress').textContent='Закрашено: '+n+' областей';$('status').textContent='Область закрашена цветом '+paintColor+'. Смотри на номер внутри следующей области.';}
+$('fillAll').addEventListener('click',()=>{if(scenes[selected].asset){$('status').textContent='Для оригинальной раскраски закрашивай области по одной, ориентируясь на цифры.';return;}painted[selected]={};scenes[selected].parts.forEach((p,i)=>painted[selected][i]=(scenes[selected].palette||colors.map((color,j)=>({key:String(j+1),color}))).find(x=>x.key===String(p[1])).color);render();$('status').textContent='Готово! Вся картинка раскрашена по номерам. ✨';});
+$('reset').addEventListener('click',()=>{painted[selected]={};if(scenes[selected].asset&&sourceImage&&sourceCanvas){sourceCtx.clearRect(0,0,sourceCanvas.width,sourceCanvas.height);sourceCtx.drawImage(sourceImage,0,0);fillHistory=[];$('progress').textContent='Закрашено: 0 областей';}else render();$('status').textContent='Начни заново с цвета №1.';});
+render();statusFor(1);
+})();</script></body></html>
