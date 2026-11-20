@@ -1,7 +1,100 @@
 <!doctype html>
-<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#101827"><title>Реакция! | N1kmeL Hub</title><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800;900&display=swap" rel="stylesheet">
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#080d1b">
+<meta name="description" content="Проверь скорость реакции в мини-игре N1kmeL Hub.">
+<title>Реакция! — проверь скорость | N1kmeL Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;min-height:100svh;background:radial-gradient(ellipse at 50% 0,#28466a,#101827 65%);color:#f2f6ff;font-family:Manrope,system-ui,sans-serif;display:grid;place-items:center;padding:20px}.app{width:min(100%,480px)}header{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px}a{color:#b9e9f4;text-decoration:none;font-size:12px;font-weight:800}.tag{font-size:10px;letter-spacing:2px;color:#8de8db;font-weight:900;text-align:center}.title{text-align:center;font-size:clamp(36px,10vw,54px);line-height:1.05;margin:12px 0}.sub{text-align:center;color:#aabbd0;font-size:13px;line-height:1.6;margin:0 auto 25px;max-width:350px}.panel{padding:18px;border:1px solid #ffffff20;border-radius:24px;background:#1a2a40d9;box-shadow:0 20px 55px #050b1680}.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-bottom:15px}.stat{padding:12px;border-radius:14px;background:#ffffff0b;text-align:center}.stat small{display:block;color:#9fb2c9;font-size:9px;font-weight:900;letter-spacing:1px}.stat strong{display:block;font-size:25px;margin-top:4px}.arena{width:100%;height:245px;border:0;border-radius:18px;background:linear-gradient(145deg,#29415d,#1b2b41);color:#dceeff;font-size:18px;font-weight:900;cursor:pointer;transition:background .2s,transform .15s;touch-action:manipulation}.arena:active{transform:scale(.985)}.arena.wait{background:linear-gradient(145deg,#a04452,#672d4a)}.arena.ready{background:linear-gradient(145deg,#1e9b75,#12634f);color:white}.arena.done{background:linear-gradient(145deg,#355b83,#263e63)}.message{text-align:center;min-height:44px;padding:14px 4px 3px;color:#c4d4e7;font-size:12px;font-weight:800;line-height:1.5}.restart{width:100%;padding:14px;border:0;border-radius:14px;background:linear-gradient(110deg,#9bf0df,#b8a3ff);color:#18243a;font-weight:1000;cursor:pointer}.tip{text-align:center;color:#8096ae;font-size:10px;line-height:1.6;margin:16px 8px 0}
-</style></head><body><main class="app"><header><a href="index.html">← N1KMEL HUB</a><span class="tag">МИНИ-ИГРА №06</span></header><div class="tag">ПРОВЕРЬ СВОЮ СКОРОСТЬ</div><h1 class="title">РЕАКЦИЯ!</h1><p class="sub">Дождись зелёного сигнала и нажми как можно быстрее. Не торопись — ранний клик не засчитывается!</p><section class="panel"><div class="stats"><div class="stat"><small>ПОСЛЕДНИЙ РЕЗУЛЬТАТ</small><strong id="last">—</strong></div><div class="stat"><small>ЛУЧШЕЕ ВРЕМЯ</small><strong id="best">—</strong></div></div><button class="arena" id="arena">Нажми «Старт»<br><small style="font-size:11px;font-weight:600;opacity:.75">Проверим твою реакцию</small></button><div class="message" id="message" aria-live="polite">Нажми кнопку ниже, чтобы начать раунд.</div><button class="restart" id="start">НАЧАТЬ</button></section><p class="tip">Совет: не нажимай заранее. Время измеряется в миллисекундах.</p></main><script>
-(()=>{'use strict';const $=id=>document.getElementById(id);let state='idle',started=0,timer=0,delay=0,best=Infinity;try{best=Number(localStorage.getItem('reactionBest'))||Infinity}catch{}function showBest(){$('best').textContent=Number.isFinite(best)?best+' мс':'—'}showBest();function start(){clearTimeout(timer);state='wait';$('arena').className='arena wait';$('arena').innerHTML='ЖДИ ЗЕЛЁНОГО…';$('message').textContent='Сигнал появится в случайный момент.';$('start').textContent='ОТМЕНА';delay=1300+Math.random()*3000;timer=setTimeout(()=>{if(state!=='wait')return;state='ready';started=performance.now();$('arena').className='arena ready';$('arena').textContent='ЖМИ!';$('message').textContent='СЕЙЧАС!'},delay)}function tap(){if(state==='wait'){clearTimeout(timer);state='idle';$('arena').className='arena done';$('arena').textContent='Слишком рано!';$('message').textContent='Нужно дождаться зелёного сигнала. Попробуй ещё раз.';$('start').textContent='ЕЩЁ РАЗ';return}if(state==='ready'){const ms=Math.round(performance.now()-started);state='done';$('last').textContent=ms+' мс';$('arena').className='arena done';$('arena').textContent=ms<220?'МОЛНИЕНОСНО!':ms<320?'ОТЛИЧНО!':'ХОРОШИЙ РЕЗУЛЬТАТ';$('message').textContent='Твоя реакция: '+ms+' мс.';if(ms<best){best=ms;try{localStorage.setItem('reactionBest',String(best))}catch{}showBest()}$('start').textContent='ЕЩЁ РАЗ'}}$('arena').addEventListener('click',tap);$('start').addEventListener('click',()=>{if(state==='wait'){clearTimeout(timer);state='idle';$('arena').className='arena';$('arena').innerHTML='Раунд отменён';$('message').textContent='Готов попробовать ещё раз?';$('start').textContent='НАЧАТЬ'}else start()})})();
-</script></body></html>
+:root{color-scheme:dark;--bg:#080d1b;--panel:rgba(17,26,48,.82);--line:rgba(173,196,255,.13);--muted:#91a1bd;--mint:#73f4cf;--violet:#a997ff;--red:#ff718d}
+*{box-sizing:border-box}
+body{margin:0;min-height:100svh;overflow-x:hidden;background:radial-gradient(ellipse at 50% -18%,#263b70 0,transparent 55%),linear-gradient(145deg,#080d1b,#10172b 58%,#0a1121);color:#f4f7ff;font-family:Manrope,system-ui,sans-serif;display:grid;place-items:center;padding:24px 16px;isolation:isolate}
+body:before,body:after{content:"";position:fixed;width:320px;height:320px;border-radius:50%;filter:blur(85px);opacity:.16;z-index:-1;pointer-events:none;animation:drift 13s ease-in-out infinite alternate}
+body:before{background:#6856ff;top:5%;left:-190px}body:after{background:#18cba4;right:-190px;bottom:0;animation-delay:-6s}
+@keyframes drift{to{transform:translate(55px,35px) scale(1.2)}}
+.app{width:min(100%,520px);margin:auto}
+header{display:flex;justify-content:space-between;align-items:center;margin:0 2px 34px}
+.back{display:inline-flex;align-items:center;gap:8px;color:#c4d0e8;text-decoration:none;font-size:11px;font-weight:900;letter-spacing:1px;transition:color .2s,transform .2s}.back:hover{color:var(--mint);transform:translateX(-3px)}
+.pill{display:flex;align-items:center;gap:7px;padding:8px 11px;border:1px solid var(--line);border-radius:999px;background:#ffffff08;color:#aebbd3;font-size:9px;font-weight:900;letter-spacing:1.5px}.pill i{width:6px;height:6px;border-radius:50%;background:var(--mint);box-shadow:0 0 12px var(--mint)}
+.eyebrow{text-align:center;color:var(--mint);font-size:10px;font-weight:900;letter-spacing:3px;text-transform:uppercase}
+h1{text-align:center;font-size:clamp(42px,11vw,64px);line-height:1;letter-spacing:-3px;margin:12px 0 12px;font-weight:900;background:linear-gradient(100deg,#fff 15%,#b9c8ff 55%,#85f4d8);background-clip:text;-webkit-background-clip:text;color:transparent}
+.subtitle{text-align:center;max-width:370px;margin:0 auto 27px;color:#9eacc6;font-size:13px;line-height:1.75}
+.panel{position:relative;padding:18px;border:1px solid var(--line);border-radius:28px;background:linear-gradient(145deg,rgba(25,37,66,.92),rgba(13,21,40,.94));box-shadow:0 26px 80px #02061299,inset 0 1px #ffffff0b;overflow:hidden}
+.panel:before{content:"";position:absolute;inset:0 15% auto;height:1px;background:linear-gradient(90deg,transparent,#b7c9ff55,transparent)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:14px}
+.stat{padding:12px 6px;border:1px solid #ffffff0a;border-radius:16px;background:linear-gradient(145deg,#ffffff0b,#ffffff04);text-align:center;min-width:0}
+.stat small{display:block;color:#91a2bf;font-size:8px;font-weight:900;letter-spacing:1px;line-height:1.4;min-height:22px}
+.stat strong{display:block;font-size:clamp(17px,5vw,23px);margin-top:3px;font-weight:900;letter-spacing:-.7px;white-space:nowrap}
+.unit{font-size:10px;color:#a6b5cf;font-weight:700}
+.arena-wrap{position:relative}
+.arena{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;width:100%;min-height:260px;border:1px solid #ffffff12;border-radius:21px;overflow:hidden;background:radial-gradient(circle at 50% 38%,#293b60,#1b2944 70%);color:#f4f7ff;font:inherit;cursor:pointer;touch-action:manipulation;user-select:none;transition:background .35s,border-color .35s,transform .2s,box-shadow .35s}
+.arena:focus-visible,.start:focus-visible{outline:3px solid var(--mint);outline-offset:4px}
+.arena:active{transform:scale(.992)}
+.arena.wait{background:radial-gradient(circle at 50% 45%,#612d51,#291e3d 75%);border-color:#ff718d55;box-shadow:inset 0 0 65px #ff41651a}
+.arena.ready{background:radial-gradient(circle at 50% 45%,#148a70,#0b463f 75%);border-color:#73f4cfaa;box-shadow:inset 0 0 75px #73f4cf25,0 0 35px #40e6b21c;animation:readyPulse .85s ease-in-out infinite alternate}
+.arena.done{background:radial-gradient(circle at 50% 45%,#354c7b,#1b2947 78%);border-color:#a997ff55}
+@keyframes readyPulse{to{box-shadow:inset 0 0 85px #73f4cf36,0 0 45px #40e6b233}}
+.signal{display:grid;place-items:center;width:76px;height:76px;border:1px solid #ffffff20;border-radius:24px;background:#ffffff0a;font-size:33px;box-shadow:0 10px 30px #050a1b55;transition:transform .3s}
+.wait .signal{animation:waitBeat 1.2s ease-in-out infinite}.ready .signal{background:#ffffff20;transform:scale(1.12);animation:signalPop .35s cubic-bezier(.2,1.7,.4,1)}
+@keyframes waitBeat{50%{transform:scale(.91);opacity:.65}}@keyframes signalPop{from{transform:scale(.55) rotate(-18deg)}to{transform:scale(1.12) rotate(0)}}
+.arena-title{font-size:clamp(19px,5vw,24px);font-weight:900;letter-spacing:1px}
+.arena-hint{color:#c3d0e6b8;font-size:11px;font-weight:700}
+.wait .arena-hint{color:#ffd0db}.ready .arena-hint{color:#c8ffed}
+.message{text-align:center;min-height:45px;padding:13px 5px 4px;color:#b6c4db;font-size:11px;font-weight:800;line-height:1.6}
+.message.good{color:var(--mint)}.message.bad{color:#ff9aad}
+.start{position:relative;width:100%;padding:16px 18px;border:0;border-radius:15px;background:linear-gradient(105deg,#8cf4d8,#a8a1ff);color:#101a2b;font:900 12px Manrope, sans-serif;letter-spacing:1.5px;cursor:pointer;box-shadow:0 9px 28px #8d9fff24;transition:transform .2s,filter .2s,box-shadow .2s}
+.start:hover{filter:brightness(1.08);transform:translateY(-2px);box-shadow:0 13px 34px #8d9fff38}.start:active{transform:translateY(0) scale(.99)}
+.footer{display:flex;justify-content:center;align-items:center;gap:8px;margin:17px 0 0;color:#71829f;font-size:10px;font-weight:700;text-align:center}.footer span{color:#a997ff}
+.particle{position:absolute;left:50%;top:50%;width:7px;height:7px;border-radius:2px;background:var(--mint);pointer-events:none;animation:burst .75s ease-out forwards}
+@keyframes burst{from{transform:translate(-50%,-50%) rotate(0) scale(1);opacity:1}to{transform:translate(var(--x),var(--y)) rotate(250deg) scale(.1);opacity:0}}
+@media(max-width:390px){body{padding:17px 12px}.panel{padding:13px;border-radius:23px}.arena{min-height:235px}.stats{gap:6px}.stat{padding:10px 3px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<main class="app">
+<header><a class="back" href="index.html">← <span>N1KMEL HUB</span></a><div class="pill"><i></i> MINI GAME · 06</div></header>
+<div class="eyebrow">Твой мозг против секундомера</div>
+<h1>РЕАКЦИЯ!</h1>
+<p class="subtitle">Дождись зелёного сигнала и нажми как можно быстрее. Проверь себя и побей собственный рекорд!</p>
+<section class="panel" aria-label="Игра на скорость реакции">
+<div class="stats">
+<div class="stat"><small>ПОСЛЕДНИЙ РЕЗУЛЬТАТ</small><strong id="last">—</strong></div>
+<div class="stat"><small>ЛИЧНЫЙ РЕКОРД</small><strong id="best">—</strong></div>
+<div class="stat"><small>СРЕДНЕЕ ЗА СЕССИЮ</small><strong id="average">—</strong></div>
+</div>
+<div class="arena-wrap">
+<button class="arena" id="arena" type="button" aria-label="Игровая зона. Нажми после зелёного сигнала.">
+<span class="signal" id="signal" aria-hidden="true">⚡</span>
+<span class="arena-title" id="arenaTitle">ГОТОВ ПРОВЕРИТЬСЯ?</span>
+<span class="arena-hint" id="arenaHint">Нажми «Начать раунд» ниже</span>
+</button>
+</div>
+<div class="message" id="message" aria-live="polite">Сначала появится ожидание, затем внезапно загорится зелёный сигнал.</div>
+<button class="start" id="start" type="button">НАЧАТЬ РАУНД</button>
+</section>
+<div class="footer">⚡ <span>Подсказка:</span> расслабься и реагируй на сигнал, а не угадывай момент.</div>
+</main>
+<script>
+(()=>{'use strict';
+const $=id=>document.getElementById(id);
+let state='idle',started=0,timer=0,best=Infinity,results=[];
+try{const saved=Number(localStorage.getItem('reactionBest'));if(saved>0)best=saved}catch{}
+function fmt(n){return Number.isFinite(n)?Math.round(n)+'<span class="unit"> мс</span>':'—'}
+function updateStats(){ $('best').innerHTML=fmt(best);$('average').innerHTML=results.length?fmt(results.reduce((a,b)=>a+b,0)/results.length):'—'; }
+function setArena(mode,title,hint,emoji){const a=$('arena');a.className='arena'+(mode?' '+mode:'');$('arenaTitle').textContent=title;$('arenaHint').textContent=hint;$('signal').textContent=emoji}
+function start(){clearTimeout(timer);state='wait';$('last').textContent='—';$('message').className='message';$('message').textContent='Не нажимай, пока зона не станет зелёной…';$('start').textContent='ОТМЕНИТЬ РАУНД';setArena('wait','ЖДИ ЗЕЛЁНОГО…','Не торопись. Сигнал появится внезапно.','◷');const delay=1600+Math.random()*3200;timer=setTimeout(()=>{if(state!=='wait')return;state='ready';started=performance.now();setArena('ready','ЖМИ СЕЙЧАС!','Коснись экрана или нажми мышкой','⚡');$('message').textContent='СЕЙЧАС!';},delay)}
+function particles(){const wrap=document.querySelector('.arena-wrap');for(let i=0;i<18;i++){const p=document.createElement('i');p.className='particle';const angle=Math.PI*2*i/18,dist=65+Math.random()*85;p.style.setProperty('--x',Math.cos(angle)*dist+'px');p.style.setProperty('--y',Math.sin(angle)*dist+'px');p.style.background=i%3===0?'#b5a7ff':i%3===1?'#73f4cf':'#fff';wrap.appendChild(p);setTimeout(()=>p.remove(),800)}}
+function tap(){if(state==='wait'){clearTimeout(timer);state='false';setArena('done','СЛИШКОМ РАНО!','Нужно дождаться зелёного сигнала','✕');$('message').className='message bad';$('message').textContent='Фальстарт! Ничего страшного — попробуй ещё раз.';$('start').textContent='ПОПРОБОВАТЬ СНОВА';return}
+if(state==='ready'){const ms=Math.round(performance.now()-started);state='done';results.push(ms);$('last').innerHTML=fmt(ms);let label='ХОРОШАЯ РЕАКЦИЯ';let hint='Раунд завершён. Сможешь быстрее?';if(ms<180){label='СУПЕРСКОРОСТЬ!';hint='Вот это молниеносно!'}else if(ms<240){label='ОТЛИЧНО!';hint='Очень быстрый результат!'}else if(ms<330){label='ЗДОРОВО!';hint='Хороший темп, продолжай!'}setArena('done',label,hint,'✦');$('message').className='message good';$('message').textContent='Твоя реакция — '+ms+' мс. '+(ms<240?'Новый уровень скорости!':'Каждый раунд — шанс улучшить результат.');if(ms<best){best=ms;try{localStorage.setItem('reactionBest',String(best))}catch{}$('message').textContent+=' Новый личный рекорд!';particles()}updateStats();$('start').textContent='ЕЩЁ ОДИН РАУНД';}}
+$('arena').addEventListener('click',tap);
+$('start').addEventListener('click',()=>{if(state==='wait'){clearTimeout(timer);state='idle';setArena('','РАУНД ОТМЕНЁН','Когда будешь готов — начинай снова','⚡');$('message').className='message';$('message').textContent='Передышка окончена? Можно начать в любой момент.';$('start').textContent='НАЧАТЬ РАУНД'}else start()});
+updateStats();
+})();
+</script>
+</body>
+</html>
