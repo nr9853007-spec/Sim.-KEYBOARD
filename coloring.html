@@ -6,101 +6,127 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root{color-scheme:dark;--mint:#9be8d2;--violet:#c2b4ff;--gold:#ffdc9b;--muted:#a6b4cb;--line:#ffffff20}
-*{box-sizing:border-box}body{margin:0;min-height:100svh;padding:17px 13px 35px;background:radial-gradient(ellipse at 50% -12%,#46547d,transparent 55%),linear-gradient(145deg,#111a2c,#202b48);color:#f6f7ff;font-family:Manrope,system-ui,sans-serif}.app{width:min(100%,980px);margin:auto}
+*{box-sizing:border-box}body{margin:0;min-height:100svh;padding:17px 13px 35px;background:radial-gradient(ellipse at 50% -12%,#46547d,transparent 55%),linear-gradient(145deg,#111a2c,#202b48);color:#f6f7ff;font-family:Manrope,system-ui,sans-serif}.app{width:min(100%,1120px);margin:auto}
 header{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}.brand{color:#eff5ff;text-decoration:none;font-size:10px;font-weight:1000;letter-spacing:1.6px}.back{color:#e4eaff;text-decoration:none;border:1px solid var(--line);border-radius:99px;padding:9px 13px;font-size:10px;font-weight:900}
 .hero{text-align:center;margin:5px auto 19px}.eyebrow{color:var(--mint);font-size:9px;font-weight:1000;letter-spacing:3px}.hero h1{font-size:clamp(37px,8vw,58px);line-height:1;margin:9px 0;letter-spacing:-2px}.hero h1 span{color:var(--violet)}.hero p{max-width:590px;margin:auto;color:var(--muted);font-size:12px;line-height:1.7}
-.gallery{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px;margin:20px 0 15px}.picture{min-width:0;border:1px solid var(--line);border-radius:16px;padding:9px 6px 10px;background:#ffffff09;color:#edf3ff;font:800 10px Manrope;cursor:pointer;transition:.2s}.picture .thumb{height:53px;display:grid;place-items:center;font-size:31px;margin-bottom:4px;filter:drop-shadow(0 4px 7px #0004)}.picture small{display:block;color:#9eafc9;font-size:8px;letter-spacing:.7px;margin-top:3px}.picture.active{border-color:#a4f0d9;background:linear-gradient(145deg,#8ee9d31c,#b9aaff20);box-shadow:0 0 0 1px #9cebd733,0 8px 22px #050b1c55}.picture:focus-visible,.paint-area:focus-visible,.swatch:focus-visible{outline:3px solid #fff;outline-offset:3px}
-.workspace{display:grid;grid-template-columns:minmax(0,1fr) 245px;gap:14px;align-items:stretch}.canvas-panel,.tools-panel{border:1px solid var(--line);border-radius:22px;background:linear-gradient(145deg,#263653ed,#17243bed);box-shadow:0 20px 55px #02081766}.canvas-panel{padding:14px;min-width:0}.canvas-head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:10px}.canvas-head strong{font-size:12px}.progress{font-size:10px;color:var(--gold);font-weight:900;white-space:nowrap}.art-wrap{width:100%;max-width:560px;margin:auto;aspect-ratio:4/3;border-radius:17px;background:linear-gradient(145deg,#fffdf6,#f0f2ff);padding:9px;box-shadow:inset 0 0 0 1px #24324a1a;overflow:hidden}.art-wrap svg{width:100%;height:100%;display:block}.paint-area{stroke:#26364c;stroke-width:3.2;stroke-linejoin:round;cursor:pointer;transition:fill .18s}.paint-area:hover{fill:#f2f5ff}.paint-area.done{cursor:default}.number-label{font-family:Manrope,system-ui,sans-serif;font-size:17px;font-weight:1000;fill:#26364c;pointer-events:none;text-anchor:middle;dominant-baseline:middle}.picture-caption{text-align:center;color:#8fa2bf;font-size:9px;margin:9px 0 0}
+.gallery{display:flex;gap:10px;margin:20px 0 15px;padding:4px 2px 10px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-color:#91d9c0 #ffffff12}.picture{flex:0 0 104px;scroll-snap-align:start;min-width:0;border:1px solid var(--line);border-radius:16px;padding:9px 6px 10px;background:#ffffff09;color:#edf3ff;font:800 10px Manrope;cursor:pointer;transition:.2s}.picture .thumb{height:65px;display:grid;place-items:center;font-size:31px;margin-bottom:4px;filter:drop-shadow(0 4px 7px #0004)}.picture small{display:block;color:#9eafc9;font-size:8px;letter-spacing:.7px;margin-top:3px}.picture.active{border-color:#a4f0d9;background:linear-gradient(145deg,#8ee9d31c,#b9aaff20);box-shadow:0 0 0 1px #9cebd733,0 8px 22px #050b1c55}.picture:focus-visible,.paint-area:focus-visible,.swatch:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.workspace{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:14px;align-items:stretch}.canvas-panel,.tools-panel{border:1px solid var(--line);border-radius:22px;background:linear-gradient(145deg,#263653ed,#17243bed);box-shadow:0 20px 55px #02081766}.canvas-panel{padding:14px;min-width:0}.canvas-head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:10px}.canvas-head strong{font-size:12px}.progress{font-size:10px;color:var(--gold);font-weight:900;white-space:nowrap}.art-wrap{width:100%;max-width:760px;margin:auto;aspect-ratio:1/1;border-radius:17px;background:linear-gradient(145deg,#fffdf6,#f0f2ff);padding:9px;box-shadow:inset 0 0 0 1px #24324a1a;overflow:hidden}.art-wrap svg{width:100%;height:100%;display:block}.paint-area{stroke:#26364c;stroke-width:3.2;stroke-linejoin:round;cursor:pointer;transition:fill .18s}.paint-area:hover{fill:#f2f5ff}.paint-area.done{cursor:default}.number-label{font-family:Manrope,system-ui,sans-serif;font-size:21px;font-weight:1000;fill:#26364c;pointer-events:none;text-anchor:middle;dominant-baseline:middle}.picture-caption{text-align:center;color:#8fa2bf;font-size:9px;margin:9px 0 0}
 .tools-panel{padding:16px;display:flex;flex-direction:column}.tools-panel h2{font-size:14px;margin:0 0 6px}.tools-panel>p{font-size:10px;color:var(--muted);line-height:1.6;margin:0 0 15px}.palette{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.swatch{border:1px solid #ffffff25;border-radius:12px;background:#ffffff0a;color:#edf3ff;padding:8px 3px 7px;cursor:pointer;font:900 10px Manrope;min-width:0}.swatch .color{display:block;width:29px;height:29px;margin:0 auto 5px;border-radius:50%;border:2px solid #ffffffa8;box-shadow:0 3px 8px #0004}.swatch.active{border-color:#fff;box-shadow:0 0 0 2px #9be8d277;background:#ffffff18;transform:translateY(-2px)}.swatch small{display:block;font-size:8px;color:#aab9d0;margin-top:2px}.tool-actions{display:grid;gap:8px;margin-top:auto;padding-top:18px}.action{min-height:41px;border:0;border-radius:12px;background:linear-gradient(110deg,#9be8d2,#c2b4ff);color:#18233d;font:1000 9px Manrope;letter-spacing:.6px;cursor:pointer}.action.secondary{background:#ffffff0b;border:1px solid var(--line);color:#edf3ff}.status{min-height:34px;margin-top:12px;text-align:center;color:#a9e9d6;font-size:10px;font-weight:800;line-height:1.5}
 .footer-note{text-align:center;color:#8294b0;font-size:9px;margin:14px 5px 0;line-height:1.6}
-@media(max-width:700px){.workspace{grid-template-columns:1fr}.tools-panel{order:2}.palette{grid-template-columns:repeat(5,minmax(0,1fr))}.swatch{padding:7px 2px}.swatch .color{width:25px;height:25px}.tool-actions{grid-template-columns:1fr 1fr}.tools-panel>p{margin-bottom:10px}.gallery{gap:6px}.picture{padding:7px 3px}.picture .thumb{font-size:25px;height:39px}.picture span{font-size:9px}.picture small{font-size:7px}.canvas-panel{padding:10px}.art-wrap{padding:5px}}
-@media(max-width:420px){body{padding:13px 9px 25px}.gallery{grid-template-columns:repeat(5,minmax(0,1fr))}.picture span{font-size:8px}.picture small{letter-spacing:0}.palette{gap:5px}.swatch{font-size:9px}.swatch .color{width:22px;height:22px}}
+@media(max-width:700px){.workspace{grid-template-columns:1fr}.tools-panel{order:2}.palette{grid-template-columns:repeat(5,minmax(0,1fr))}.swatch{padding:7px 2px}.swatch .color{width:25px;height:25px}.tool-actions{grid-template-columns:1fr 1fr}.tools-panel>p{margin-bottom:10px}.gallery{gap:7px}.picture{flex-basis:92px;padding:7px 4px}.picture .thumb{font-size:27px;height:48px}.picture span{font-size:9px}.picture small{font-size:7px}.canvas-panel{padding:10px}.art-wrap{padding:5px}}
+@media(max-width:420px){body{padding:13px 9px 25px}.gallery{gap:6px}.picture{flex-basis:83px}.picture span{font-size:8px}.picture small{letter-spacing:0}.palette{gap:5px}.swatch{font-size:9px}.swatch .color{width:22px;height:22px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style></head>
 <body><main class="app">
 <header><a class="brand" href="index.html">✦ N1KMEL HUB</a><a class="back" href="index.html#games">← В МЕНЮ</a></header>
 <section class="hero"><div class="eyebrow">N1KMEL CREATIVE · COLOR STUDIO</div><h1>РАЗУ<span>КРАСИТЬ</span></h1><p>Выбери картинку, затем нажимай на области с цифрами и раскрашивай их подходящими цветами. У каждой цифры — свой оттенок!</p></section>
 <nav class="gallery" id="gallery" aria-label="Выбор картинки">
-<button class="picture active" data-picture="butterfly"><div class="thumb">🦋</div><span>Бабочка</span><small>01</small></button>
-<button class="picture" data-picture="flower"><div class="thumb">🌼</div><span>Цветок</span><small>02</small></button>
-<button class="picture" data-picture="house"><div class="thumb">🏡</div><span>Домик</span><small>03</small></button>
-<button class="picture" data-picture="fish"><div class="thumb">🐠</div><span>Рыбка</span><small>04</small></button>
-<button class="picture" data-picture="rocket"><div class="thumb">🚀</div><span>Ракета</span><small>05</small></button>
+<button class="picture active" data-picture="butterfly"><div class="thumb">🦋</div><span>Бабочка</span><small>01 · ФЛОРА</small></button>
+<button class="picture" data-picture="mandala"><div class="thumb">🌸</div><span>Мандала</span><small>02 · УЗОР</small></button>
+<button class="picture" data-picture="cottage"><div class="thumb">🏡</div><span>Коттедж</span><small>03 · УЮТ</small></button>
+<button class="picture" data-picture="koi"><div class="thumb">🐟</div><span>Кои</span><small>04 · ВОДА</small></button>
+<button class="picture" data-picture="owl"><div class="thumb">🦉</div><span>Сова</span><small>05 · ЛЕС</small></button>
+<button class="picture" data-picture="mushroom"><div class="thumb">🍄</div><span>Грибной домик</span><small>06 · ЛЕС</small></button>
+<button class="picture" data-picture="peacock"><div class="thumb">🦚</div><span>Павлин</span><small>07 · ПТИЦЫ</small></button>
+<button class="picture" data-picture="moon"><div class="thumb">🌙</div><span>Лунный сад</span><small>08 · НОЧЬ</small></button>
+<button class="picture" data-picture="reading"><div class="thumb">📚</div><span>Уголок чтения</span><small>09 · УЮТ</small></button>
+<button class="picture" data-picture="turtle"><div class="thumb">🐢</div><span>Черепаха</span><small>10 · МОРЕ</small></button>
 </nav>
 <section class="workspace">
 <div class="canvas-panel"><div class="canvas-head"><strong id="pictureTitle">01 · БАБОЧКА</strong><span class="progress" id="progress">Закрашено: 0 / 8</span></div><div class="art-wrap" id="art" aria-label="Картинка для раскрашивания"></div><div class="picture-caption">Нажми на область с цифрой, чтобы закрасить её выбранным цветом.</div></div>
 <aside class="tools-panel"><h2>Палитра цветов</h2><p>Сначала выбери цвет по номеру, затем нажми на такую же цифру на рисунке.</p><div class="palette" id="palette"></div><div class="status" id="status" aria-live="polite">Выбери цвет №1 и найди цифру 1 на рисунке.</div><div class="tool-actions"><button class="action" id="fillAll">✦ ЗАКРАСИТЬ ПО ЦИФРАМ</button><button class="action secondary" id="reset">↻ СБРОСИТЬ КАРТИНКУ</button></div></aside>
 </section>
-<p class="footer-note">Пять рисунков · шесть оттенков · твоя собственная цветная коллекция.</p>
+<p class="footer-note">10 больших авторских иллюстраций · 6 цветов · твоя собственная цветная галерея.</p>
 </main>
-<script>
-(()=>{'use strict';
+<script>(()=>{'use strict';
 const $=id=>document.getElementById(id);
-const colors=['#f4a7b9','#f6d17e','#91d9c0','#8eb8ef','#b8a5ed','#f2a66e'];
-const colorNames=['Розовый','Жёлтый','Мятный','Голубой','Сиреневый','Персик'];
+const colors=['#f3a5bd','#f4cf78','#8fd5b8','#8ebbe9','#b7a5e8','#e99b72'];
+const colorNames=['Розовый','Медовый','Мятный','Голубой','Лавандовый','Коралловый'];
+const P=(d,n,x,y)=>[d,n,x,y];
 const scenes={
-butterfly:{title:'БАБОЧКА',icon:'🦋',parts:[
-['M250 135 C205 35 85 28 75 112 C68 171 156 188 230 166 Z',1,145,113],
-['M250 135 C295 35 415 28 425 112 C432 171 344 188 270 166 Z',2,355,113],
-['M230 166 C170 145 105 185 128 245 C148 291 216 248 246 187 Z',3,184,213],
-['M270 166 C330 145 395 185 372 245 C352 291 284 248 254 187 Z',4,316,213],
-['M242 105 Q250 90 258 105 L267 223 Q250 245 233 223 Z',5,250,181],
-['M245 105 Q217 70 206 81 M255 105 Q283 70 294 81',6,250,76],
-['M110 118 Q130 95 151 124 Q134 148 110 118',1,132,122],
-['M390 118 Q370 95 349 124 Q366 148 390 118',2,368,122]]},
-flower:{title:'ЦВЕТОК',icon:'🌼',parts:[
-['M250 125 C190 110 185 48 235 60 C260 12 310 48 278 111 Z',1,245,83],
-['M250 125 C285 70 345 82 328 132 C375 158 340 205 278 164 Z',2,318,139],
-['M250 125 C310 175 286 235 240 207 C194 239 158 195 222 158 Z',3,244,190],
-['M250 125 C190 165 145 128 172 92 C160 45 225 42 239 105 Z',4,184,111],
-['M239 175 Q215 230 223 291 L277 291 Q285 230 261 175 Z',3,250,253],
-['M226 231 Q160 193 155 245 Q183 274 226 248 Z',5,187,237],
-['M274 247 Q328 192 349 235 Q330 278 274 260 Z',6,316,245],
-['M250 108 C278 108 290 133 270 151 C248 170 218 147 230 126 Z',2,251,135]]},
-house:{title:'ДОМИК',icon:'🏡',parts:[
-['M65 155 L250 32 L435 155 L398 178 L250 80 L102 178 Z',1,250,112],
-['M102 169 L398 169 L398 295 L102 295 Z',2,250,260],
-['M215 208 Q250 175 285 208 L285 295 L215 295 Z',3,250,258],
-['M130 196 L195 196 L195 245 L130 245 Z',4,162,220],
-['M305 196 L370 196 L370 245 L305 245 Z',5,337,220],
-['M143 208 L182 208 L182 233 L143 233 Z',6,162,220],
-['M318 208 L357 208 L357 233 L318 233 Z',6,337,220],
-['M226 45 Q250 15 274 45 Q250 64 226 45 Z',5,250,42]]},
-fish:{title:'РЫБКА',icon:'🐠',parts:[
-['M95 165 Q165 55 300 112 Q355 135 355 180 Q355 225 300 248 Q165 305 95 195 Z',1,215,178],
-['M350 180 L445 105 L430 180 L445 255 Z',2,404,180],
-['M215 105 Q240 48 285 100 L263 133 Z',3,251,99],
-['M215 246 Q240 300 285 251 L263 224 Z',4,251,260],
-['M140 178 Q170 143 198 178 Q170 213 140 178 Z',5,169,179],
-['M114 178 Q125 165 136 178 Q125 191 114 178 Z',6,125,178],
-['M275 151 Q305 138 320 162 Q295 177 275 151 Z',3,299,157],
-['M275 204 Q305 217 320 193 Q295 179 275 204 Z',4,299,202]]},
-rocket:{title:'РАКЕТА',icon:'🚀',parts:[
-['M250 25 C320 72 330 165 295 225 L205 225 C170 165 180 72 250 25 Z',1,250,112],
-['M205 178 Q145 205 150 270 L220 230 Z',2,184,220],
-['M295 178 Q355 205 350 270 L280 230 Z',3,316,220],
-['M220 225 L280 225 L292 286 L208 286 Z',4,250,259],
-['M250 92 C278 92 290 119 274 140 Q250 164 226 140 C210 119 222 92 250 92 Z',5,250,124],
-['M225 285 Q235 325 250 300 Q265 325 275 285 Z',6,250,305],
-['M205 156 Q220 165 228 179 L190 187 Z',3,208,174],
-['M295 156 Q280 165 272 179 L310 187 Z',2,292,174]]}
+butterfly:{title:'БАБОЧКА В ЦВЕТАХ',parts:[
+P('M350 275 C275 95 105 75 75 190 C55 270 190 315 330 330 Z',1,190,215),P('M350 275 C425 95 595 75 625 190 C645 270 510 315 370 330 Z',2,510,215),
+P('M330 330 C205 300 105 390 145 500 C180 585 285 490 345 365 Z',3,225,430),P('M370 330 C495 300 595 390 555 500 C520 585 415 490 355 365 Z',4,475,430),
+P('M330 245 Q350 220 370 245 L390 480 Q350 535 310 480 Z',5,350,405),P('M340 250 Q285 150 255 145 Q295 160 340 220',6,295,180),P('M360 250 Q415 150 445 145 Q405 160 360 220',6,405,180),
+P('M130 215 Q185 145 245 210 Q190 275 130 215Z',5,190,210),P('M570 215 Q515 145 455 210 Q510 275 570 215Z',1,510,210),
+P('M105 540 Q150 490 195 540 Q150 590 105 540Z',2,150,540),P('M505 540 Q550 490 595 540 Q550 590 505 540Z',3,550,540),
+P('M85 585 Q145 555 205 585',4,145,575),P('M495 585 Q555 555 615 585',4,555,575)]},
+mandala:{title:'ЦВЕТОЧНАЯ МАНДАЛА',parts:(()=>{const a=[];for(let i=0;i<12;i++){const r=i*30;a.push(P('M350 350 C'+(350-48)+' 285 '+(350-45)+' 220 350 145 C'+(350+45)+' 220 '+(350+48)+' 285 350 350Z',i%6+1,350,205).map((v,j)=>j===0?'M350 350 C302 285 305 220 350 145 C395 220 398 285 350 350Z':v));a[a.length-1][0]='M350 350 C302 285 305 220 350 145 C395 220 398 285 350 350Z';a[a.length-1][2]=350;a[a.length-1][3]=220;}return a.map((p,i)=>{p[0]='<g transform="rotate('+i*30+' 350 350)">'+p[0]+'</g>';return p;}).concat([P('M350 265 C410 265 435 315 410 365 C385 415 315 415 290 365 C265 315 290 265 350 265Z',2,350,340),P('M350 305 C380 305 395 330 380 355 C365 380 335 380 320 355 C305 330 320 305 350 305Z',5,350,345)]);})()},
+cottage:{title:'КОТТЕДЖ В САДУ',parts:[
+P('M120 300 L350 105 L580 300 L535 330 L350 175 L165 330Z',1,350,255),P('M165 300 L535 300 L535 520 L165 520Z',2,350,445),
+P('M275 390 L425 390 L425 520 L275 520Z',3,350,465),P('M195 350 L270 350 L270 425 L195 425Z',4,230,385),P('M430 350 L505 350 L505 425 L430 425Z',5,470,385),
+P('M210 365 L255 365 L255 410 L210 410Z',6,232,388),P('M445 365 L490 365 L490 410 L445 410Z',6,468,388),
+P('M430 155 L480 155 L480 250 L430 215Z',5,455,195),P('M295 115 Q350 65 405 115 L390 145 L310 145Z',6,350,115),
+P('M80 530 Q160 485 240 530 Q320 570 400 530 Q500 480 620 530 L620 620 L80 620Z',3,350,575),
+P('M110 500 Q90 450 125 420 Q165 450 145 505Z',4,125,465),P('M555 500 Q535 450 570 420 Q610 450 590 505Z',4,570,465),
+P('M190 565 Q210 525 230 565 Q250 525 270 565Z',1,230,550),P('M430 565 Q450 525 470 565 Q490 525 510 565Z',5,470,550)]},
+koi:{title:'ПРУД С РЫБКАМИ КОИ',parts:[
+P('M100 330 C145 180 340 170 410 300 C450 380 335 470 210 425 C150 405 110 375 100 330Z',1,250,320),P('M405 330 L545 220 L520 345 L550 465Z',2,510,345),
+P('M250 260 Q290 195 340 245 L315 295Z',3,300,260),P('M240 410 Q300 475 350 420 L320 385Z',4,300,430),
+P('M390 430 C440 300 570 290 610 375 C635 440 550 505 455 485Z',5,500,410),P('M590 390 L655 330 L645 410 L660 475Z',6,640,410),
+P('M165 330 Q210 270 260 330 Q210 390 165 330Z',6,210,330),P('M470 400 Q510 355 550 400 Q510 445 470 400Z',2,510,400),
+P('M90 150 Q150 100 220 150 Q160 200 90 150Z',3,150,150),P('M490 145 Q550 95 620 145 Q560 195 490 145Z',4,555,145),
+P('M85 540 Q145 490 205 540 Q145 590 85 540Z',3,145,540),P('M495 555 Q555 505 615 555 Q555 605 495 555Z',1,555,555),
+P('M310 550 Q350 500 390 550 Q350 600 310 550Z',5,350,550),P('M340 120 Q350 80 360 120',2,350,110)]},
+owl:{title:'СОВА НА ВЕТОЧКЕ',parts:[
+P('M220 205 Q350 90 480 205 L465 470 Q350 590 235 470Z',1,350,350),P('M225 270 Q120 270 145 435 Q175 500 260 445Z',2,195,385),P('M475 270 Q580 270 555 435 Q525 500 440 445Z',3,505,385),
+P('M235 215 Q205 120 275 150 Q320 170 310 240Z',4,260,190),P('M465 215 Q495 120 425 150 Q380 170 390 240Z',5,440,190),
+P('M260 270 C300 220 340 260 335 310 C330 355 280 355 255 320Z',6,295,300),P('M440 270 C400 220 360 260 365 310 C370 355 420 355 445 320Z',6,405,300),
+P('M325 355 L375 355 L350 395Z',2,350,370),P('M290 430 Q350 390 410 430 L390 500 Q350 535 310 500Z',4,350,465),
+P('M70 520 Q350 485 630 520',5,350,510),P('M125 500 Q90 435 55 440 Q90 495 125 500Z',3,95,470),
+P('M575 500 Q610 435 645 440 Q610 495 575 500Z',1,605,470),P('M175 565 Q230 525 280 565',4,225,555),P('M420 565 Q475 525 525 565',4,475,555)]},
+mushroom:{title:'ВОЛШЕБНЫЙ ГРИБНОЙ ЛЕС',parts:[
+P('M110 315 Q140 110 350 115 Q560 110 590 315 Q480 365 350 340 Q220 365 110 315Z',1,350,245),P('M265 320 L435 320 L415 540 Q350 580 285 540Z',2,350,465),
+P('M150 280 Q190 210 245 275 Q210 325 150 280Z',3,200,275),P('M455 275 Q510 210 550 280 Q490 325 455 275Z',4,500,275),
+P('M300 160 Q330 130 360 165 Q330 195 300 160Z',5,330,165),P('M400 215 Q430 185 455 220 Q425 245 400 215Z',6,430,215),
+P('M80 520 Q105 430 190 455 Q245 500 200 570 L95 570Z',5,145,510),P('M500 470 Q580 420 620 510 L610 575 L500 570Z',6,560,510),
+P('M70 585 Q170 545 260 585 Q350 620 440 585 Q540 545 630 585 L630 640 L70 640Z',3,350,605),
+P('M125 590 Q150 550 175 590 Q200 550 225 590Z',1,175,580),P('M470 600 Q495 550 520 600 Q545 550 570 600Z',2,520,585),
+P('M290 545 Q315 515 340 545 Q315 575 290 545Z',4,315,545),P('M360 550 Q385 520 410 550 Q385 580 360 550Z',4,385,550)]},
+peacock:{title:'ПАВЛИН И УЗОРНЫЙ ХВОСТ',parts:[
+P('M315 365 Q190 250 150 120 Q260 120 350 300 Q440 120 550 120 Q510 260 385 365Z',1,250,220),P('M350 340 Q190 180 90 245 Q180 390 315 410Z',2,180,320),P('M350 340 Q510 180 610 245 Q520 390 385 410Z',3,520,320),
+P('M320 355 Q350 310 380 355 L390 515 Q350 560 310 515Z',4,350,450),P('M325 350 Q280 300 300 250 Q350 210 400 250 Q420 300 375 350Z',5,350,290),
+P('M330 250 Q350 210 370 250 Q350 275 330 250Z',6,350,245),
+P('M180 210 Q220 175 260 220 Q220 260 180 210Z',5,220,215),P('M440 210 Q480 175 520 220 Q480 260 440 210Z',6,480,215),
+P('M115 300 Q150 265 185 300 Q150 335 115 300Z',4,150,300),P('M515 300 Q550 265 585 300 Q550 335 515 300Z',1,550,300),
+P('M250 545 Q350 510 450 545 L420 590 L280 590Z',3,350,560),P('M280 590 L420 590 L450 630 L250 630Z',2,350,610)]},
+moon:{title:'ЛУННЫЙ САД',parts:[
+P('M500 80 C385 120 390 275 505 315 C420 365 300 300 300 195 C300 85 405 25 500 80Z',2,420,190),
+P('M120 180 Q160 135 200 180 Q160 225 120 180Z',1,160,180),P('M540 390 Q575 350 610 390 Q575 430 540 390Z',5,575,390),
+P('M90 520 Q180 430 270 520 L270 625 L90 625Z',3,180,565),P('M430 480 Q520 400 610 480 L610 625 L430 625Z',4,520,550),
+P('M250 410 L350 300 L450 410 L430 450 L350 365 L270 450Z',5,350,390),P('M270 420 L430 420 L430 560 L270 560Z',6,350,500),
+P('M320 465 L380 465 L380 560 L320 560Z',1,350,510),P('M100 610 Q200 570 300 610 Q400 650 600 610',2,350,615),
+P('M110 350 Q140 290 170 350 Q140 410 110 350Z',4,140,350),P('M535 200 Q565 145 595 200 Q565 255 535 200Z',3,565,200),
+P('M235 145 L255 95 L275 145 L325 165 L275 185 L255 235 L235 185 L185 165Z',6,255,165)]},
+reading:{title:'УЮТНЫЙ УГОЛОК ДЛЯ ЧТЕНИЯ',parts:[
+P('M100 100 L600 100 L600 390 L100 390Z',1,350,245),P('M120 120 L335 120 L335 370 L120 370Z',4,225,240),P('M365 120 L580 120 L580 370 L365 370Z',5,470,240),
+P('M80 390 Q350 345 620 390 L620 440 L80 440Z',2,350,410),P('M175 440 Q120 475 145 590 L280 590 L300 455Z',3,210,525),P('M400 455 L425 590 L560 590 Q585 475 530 440Z',6,490,525),
+P('M270 455 Q350 420 430 455 L420 555 L280 555Z',1,350,500),P('M290 480 L410 480 L410 505 L290 505Z',4,350,493),
+P('M120 300 L200 300 L200 360 L120 360Z',2,160,330),P('M220 275 L305 275 L305 360 L220 360Z',3,260,320),
+P('M460 280 Q490 220 520 280 L520 365 L460 365Z',5,490,320),P('M470 260 Q430 210 450 180 Q490 200 490 250Z',3,465,220),
+P('M520 260 Q560 205 580 230 Q565 270 520 280Z',6,550,250),P('M300 590 Q350 560 400 590 L410 625 L290 625Z',2,350,600)]},
+turtle:{title:'МОРСКАЯ ЧЕРЕПАХА',parts:[
+P('M220 245 Q350 120 480 245 Q520 350 430 450 Q350 515 270 450 Q180 350 220 245Z',3,350,340),P('M260 270 Q350 190 440 270 L420 380 Q350 445 280 380Z',2,350,320),
+P('M270 250 Q300 205 335 245 L315 310Z',1,300,260),P('M365 245 Q400 205 430 250 L385 310Z',4,400,260),P('M285 380 Q320 430 350 405 L340 470Z',5,320,420),P('M415 380 Q380 430 350 405 L360 470Z',6,380,420),
+P('M475 305 Q565 260 590 325 Q575 390 490 375Z',1,540,325),P('M580 330 Q605 305 620 335 Q610 365 580 355Z',2,600,340),
+P('M95 180 Q135 130 175 180 Q135 230 95 180Z',4,135,180),P('M515 145 Q555 95 595 145 Q555 195 515 145Z',5,555,145),
+P('M90 520 Q150 470 210 520 Q150 570 90 520Z',3,150,520),P('M485 540 Q545 490 605 540 Q545 590 485 540Z',6,545,540),
+P('M230 570 Q260 530 290 570 Q260 610 230 570Z',2,260,570),P('M390 575 Q420 535 450 575 Q420 615 390 575Z',1,420,575)]}
 };
 let selected='butterfly',paintColor=1,painted={};
-function svgFor(scene,preview=false){
-const parts=scene.parts;
-const body=parts.map((p,i)=>'<g><path class="paint-area" data-part="'+i+'" data-number="'+p[1]+'" d="'+p[0]+'" fill="'+(painted[selected]&&painted[selected][i]?painted[selected][i]:"#ffffff")+'"/><text class="number-label" x="'+p[2]+'" y="'+p[3]+'">'+p[1]+'</text></g>').join('');
-return '<svg viewBox="0 0 500 330" role="img" aria-label="'+scene.title+' — раскраска по цифрам"><path d="M18 18 H482 V312 H18 Z" fill="none" stroke="#d7dce8" stroke-width="2" stroke-dasharray="5 8" rx="16"/>'+body+'</svg>';
+function svgFor(scene){
+const body=scene.parts.map((p,i)=>'<g><path class="paint-area" data-part="'+i+'" d="'+p[0]+'" fill="'+(painted[selected]&&painted[selected][i]?painted[selected][i]:'#fff')+'"/><text class="number-label" x="'+p[2]+'" y="'+p[3]+'">'+p[1]+'</text></g>').join('');
+return '<svg viewBox="0 0 700 700" role="img" aria-label="'+scene.title+' — большая раскраска по номерам"><rect x="15" y="15" width="670" height="670" rx="28" fill="none" stroke="#cbd2df" stroke-width="3"/><rect x="28" y="28" width="644" height="644" rx="22" fill="none" stroke="#d8dce5" stroke-width="1.5" stroke-dasharray="5 9"/>'+body+'</svg>';
 }
-function palette(){ $('palette').innerHTML=colors.map((c,i)=>'<button class="swatch '+(paintColor===i+1?'active':'')+'" data-color="'+(i+1)+'" aria-label="Цвет '+(i+1)+': '+colorNames[i]+'"><span class="color" style="background:'+c+'"></span>'+ (i+1)+'<small>'+colorNames[i]+'</small></button>').join('');}
-function count(){const p=painted[selected]||{};const done=Object.keys(p).length;return {done,total:scenes[selected].parts.length};}
+function palette(){$('palette').innerHTML=colors.map((c,i)=>'<button class="swatch '+(paintColor===i+1?'active':'')+'" data-color="'+(i+1)+'" aria-label="Цвет '+(i+1)+': '+colorNames[i]+'"><span class="color" style="background:'+c+'"></span>'+(i+1)+'<small>'+colorNames[i]+'</small></button>').join('');}
+function count(){const p=painted[selected]||{};return{done:Object.keys(p).length,total:scenes[selected].parts.length};}
 function render(){const scene=scenes[selected];$('pictureTitle').textContent=String(Object.keys(scenes).indexOf(selected)+1).padStart(2,'0')+' · '+scene.title;$('art').innerHTML=svgFor(scene);const c=count();$('progress').textContent='Закрашено: '+c.done+' / '+c.total;palette();document.querySelectorAll('[data-picture]').forEach(b=>b.classList.toggle('active',b.dataset.picture===selected));}
-function statusFor(n){$('status').textContent='Выбран цвет №'+n+' — '+colorNames[n-1]+'. Найди цифру '+n+' на картинке.';}
-function paint(index){const part=scenes[selected].parts[index];if(!part)return;if(part[1]!==paintColor){$('status').textContent='Здесь нужна цифра '+part[1]+'. Выбери цвет №'+part[1]+'.';return;}painted[selected]=painted[selected]||{};if(painted[selected][index])return;painted[selected][index]=colors[paintColor-1];const c=count();render();if(c.done===c.total){$('status').textContent='Готово! Картинка полностью раскрашена. ✨';}else{$('status').textContent='Отлично! Осталось раскрасить: '+(c.total-c.done)+'.';}}
+function statusFor(n){$('status').textContent='Цвет №'+n+' — '+colorNames[n-1]+'. Найди цифру '+n+' на рисунке.';}
+function paint(i){const part=scenes[selected].parts[i];if(!part)return;if(part[1]!==paintColor){$('status').textContent='Для этой области нужен цвет №'+part[1]+'.';return;}painted[selected]=painted[selected]||{};if(painted[selected][i])return;painted[selected][i]=colors[paintColor-1];const c=count();render();$('status').textContent=c.done===c.total?'Готово! Иллюстрация раскрашена! ✨':'Отлично! Осталось областей: '+(c.total-c.done)+'.';}
 $('gallery').addEventListener('click',e=>{const b=e.target.closest('[data-picture]');if(!b)return;selected=b.dataset.picture;paintColor=1;render();statusFor(1);});
 $('palette').addEventListener('click',e=>{const b=e.target.closest('[data-color]');if(!b)return;paintColor=Number(b.dataset.color);palette();statusFor(paintColor);});
 $('art').addEventListener('click',e=>{const p=e.target.closest('[data-part]');if(p)paint(Number(p.dataset.part));});
-$('fillAll').addEventListener('click',()=>{const scene=scenes[selected];painted[selected]=painted[selected]||{};scene.parts.forEach((p,i)=>painted[selected][i]=colors[p[1]-1]);render();$('status').textContent='Картинка раскрашена по номерам! ✨';});
-$('reset').addEventListener('click',()=>{painted[selected]={};render();$('status').textContent='Картинка очищена. Начни заново с цвета №1.';});
+$('fillAll').addEventListener('click',()=>{painted[selected]={};scenes[selected].parts.forEach((p,i)=>painted[selected][i]=colors[p[1]-1]);render();$('status').textContent='Готово! Вся картинка раскрашена по номерам. ✨';});
+$('reset').addEventListener('click',()=>{painted[selected]={};render();$('status').textContent='Начни заново с цвета №1.';});
 render();statusFor(1);
-})();
-</script></body></html>
+})();</script></body></html>
