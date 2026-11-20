@@ -21,4 +21,16 @@ if(root){
  const paint=()=>{const ranked=games.map((g,i)=>({...g,count:Math.max(0,Number(visits[g.id])||0),order:i})).sort((a,b)=>b.count-a.count||a.order-b.order);root.innerHTML=ranked.map((g,i)=>'<li><span class="popular-place">'+String(i+1).padStart(2,'0')+'</span><span class="popular-game-icon">'+g.icon+'</span><span class="popular-game-name">'+g.name+'</span><b>'+g.count+'</b></li>').join('')};
  document.querySelectorAll('a[href]').forEach(a=>{const href=(a.getAttribute('href')||'').split('?')[0],game=games.find(g=>href===g.url||href.endsWith('/'+g.url));if(game)a.addEventListener('click',()=>{visits[game.id]=(Number(visits[game.id])||0)+1;try{localStorage.setItem(key,JSON.stringify(visits))}catch{}paint()})});paint();
 }
+
+const motionSections=document.querySelectorAll('.hero,.games-section,.about-section');
+if('IntersectionObserver' in window && motionSections.length){
+ const motionObserver=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>entry.target.classList.toggle('is-offscreen',!entry.isIntersecting));
+ },{rootMargin:'120px 0px'});
+ motionSections.forEach(section=>motionObserver.observe(section));
+}
+const syncPageVisibility=()=>document.body.classList.toggle('page-hidden',document.hidden);
+document.addEventListener('visibilitychange',syncPageVisibility,{passive:true});
+syncPageVisibility();
+
 })();
