@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 850"><rect width="700" height="850" fill="#fff"/><g fill="white" stroke="#171717" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1700" viewBox="0 0 700 850" preserveAspectRatio="xMidYMid meet"><rect width="700" height="850" fill="#fff"/><g fill="white" stroke="#171717" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
 <path d="M30 710 Q80 660 130 700 T240 700 T350 700 T460 700 T670 700 L670 820 L30 820Z"/><path d="M70 710 Q100 650 135 710 M540 710 Q575 650 610 710"/>
 <!-- tall dinosaur body, neck and head -->
 <path d="M270 585 Q245 520 270 455 L300 355 Q310 300 355 275 Q400 250 450 275 Q490 300 475 350 Q460 390 420 395 L390 455 Q385 515 430 565 L465 635 Q475 675 440 680 L390 680 Q365 675 360 645 L330 575 L315 650 Q310 680 275 680 L235 680 Q215 675 225 645Z"/>
