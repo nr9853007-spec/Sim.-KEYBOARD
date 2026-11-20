@@ -1,0 +1,1 @@
+Place the four original worksheet JPEG files in this folder: dinosaurs.jpg, bear-bunny.jpg, flower-letters.jpg, pancakes.jpg. The coloring page loads them from these paths.
