@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 850"><rect width="700" height="850" fill="#fff"/><g fill="white" stroke="#171717" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1700" viewBox="0 0 700 850" preserveAspectRatio="xMidYMid meet"><rect width="700" height="850" fill="#fff"/><g fill="white" stroke="#171717" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
 <!-- plate --> <ellipse cx="350" cy="700" rx="295" ry="90"/><ellipse cx="350" cy="690" rx="255" ry="62"/>
 <!-- stack --> <path d="M150 610 Q350 555 550 610 L535 675 Q350 715 165 675Z"/><path d="M165 530 Q350 475 535 530 L550 610 Q350 655 150 610Z"/><path d="M145 450 Q350 385 555 450 L535 530 Q350 575 165 530Z"/><path d="M130 370 Q350 300 570 370 L555 450 Q350 495 145 450Z"/>
 <!-- syrup top and drips --> <path d="M140 365 Q350 285 560 365 Q585 390 550 415 Q525 435 525 475 Q510 500 490 475 L485 430 Q350 470 210 430 L205 495 Q185 520 170 485 L175 420 Q120 410 140 365Z"/>
