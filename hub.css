@@ -100,3 +100,23 @@ body.hub-menu-lock{overflow:hidden}
 @media(max-width:600px){.mobile-menu{display:block}.main-nav{display:none!important}}
 @media(min-width:601px){.hub-drawer{width:420px}}
 @media(prefers-reduced-motion:reduce){.hub-drawer,.hub-drawer-backdrop,.hub-drawer-links a,.hub-nft-card,.hub-support-profile{transition:none!important;animation:none!important}}
+
+/* N1KMEL HUB — refined cool-toned drawer matching the winter/teal hub theme */
+.hub-drawer{background:radial-gradient(ellipse at 100% 0,#24647755,transparent 43%),radial-gradient(ellipse at 0 80%,#254d6050,transparent 45%),linear-gradient(155deg,#102b3b 0%,#0b1e2c 55%,#091724 100%)!important;border-left:1px solid #9be9e044!important;color:#e8fbff!important;box-shadow:-25px 0 80px #020b14b8,inset 1px 0 #d5ffff0c!important}
+.hub-drawer-logo,.hub-avatar{background:linear-gradient(145deg,#baf4e4,#78cde7 55%,#8d9ff2)!important;color:#102c3d!important;box-shadow:0 0 24px #72d9d355,inset 0 2px 5px #fff9!important}
+.hub-drawer-brand,.hub-drawer-profile{color:#e8fbff!important}.hub-drawer-brand small,.hub-drawer-profile small{color:#9dc8d2!important}
+.hub-drawer-close{border-color:#9be9e044!important;background:#b6f4ed0b!important;color:#b7f4e8!important}.hub-drawer-close:hover{background:#83e7d51f!important;border-color:#8be7d5!important}
+.hub-drawer-profile{border-color:#9be9e02d!important;background:linear-gradient(110deg,#d5ffff0e,#70d6d00a)!important;box-shadow:inset 0 1px #fff2!important}
+.hub-crown{color:#b7e7ff!important;text-shadow:0 0 14px #84d9ef!important}.hub-drawer-caption{color:#8fcacb!important}
+.hub-drawer-links a{border-color:#a4e7e324!important;background:linear-gradient(100deg,#d9ffff0d,#d9ffff04)!important;color:#e2f8fa!important}
+.hub-drawer-links a:hover{border-color:#83e7d5a6!important;background:#70d9d019!important}.hub-drawer-links a span{background:#75dccc1b!important;color:#a6f0df!important}.hub-drawer-links a i{color:#a4e8dc!important}
+.hub-support-card{border-color:#8ce7d88a!important;background:radial-gradient(circle at 95% 5%,#a8f3e52a,transparent 42%),linear-gradient(135deg,#174b55,#123343 70%,#102a3b)!important;box-shadow:0 0 32px #51d9c31b,inset 0 1px #fff3!important}
+.hub-support-card:after{color:#a9f4e52b!important}.hub-heart{color:#8de6d2!important;text-shadow:0 0 14px #66dbc5!important}.hub-support-tag{color:#a9e9df!important}
+.hub-support-card h3{color:#e7fffa!important}.hub-support-card p{color:#b4d9dc!important}
+.hub-support-profile{background:linear-gradient(105deg,#b9f2df,#8dd9e9 58%,#b7c5ff)!important;color:#0d2b3b!important;box-shadow:0 5px 18px #020d1a66!important}
+.hub-nft-card{border-color:#9be9e02c!important;background:linear-gradient(110deg,#d9ffff0e,#75d9e20a)!important;color:#e3faff!important}.hub-nft-card:hover{border-color:#8de7d4!important;box-shadow:0 10px 30px #020d1a66!important}
+.hub-nft-icon{background:#8be6d51a!important}.hub-nft-card small{color:#9fcbd2!important}.hub-nft-card i{color:#a9e9df!important}
+.hub-drawer-foot{border-top-color:#9be9e022!important;color:#83b9c4!important}.hub-online-dot{background:#8be5c6!important;box-shadow:0 0 10px #8be5c6!important}
+.mobile-menu{border-color:#9be9e044!important;background:linear-gradient(145deg,#194153,#102b3b)!important;box-shadow:0 5px 20px #0004,inset 0 1px #d9ffff22!important}.mobile-menu:hover{border-color:#9cebdc!important}.mobile-menu span{background:#b4f1e6!important}
+.hub-drawer-backdrop{background:#03121dcc!important;backdrop-filter:blur(9px)!important}
+@media(prefers-reduced-motion:reduce){.hub-online-dot,.hub-support-card:after{animation:none!important}}
