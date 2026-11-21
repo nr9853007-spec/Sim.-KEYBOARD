@@ -186,22 +186,73 @@ const collectionCatalog=[
 {id:'wrapper',emoji:'🍬',title:'Фантик',desc:'Сладкая находка'}
 ];
 let unlocked=[];try{unlocked=JSON.parse(localStorage.getItem('yardCollection')||'[]')||[]}catch{unlocked=[]}
-let albumDeck=[],albumPicks=[],albumBusy=false,albumMoves=0;
+let albumDeck=[],albumPicks=[],albumBusy=false,albumMoves=0,albumFlipTimer=null,albumRoundId=0;
 const update=()=>{$('score').textContent=score;$('best').textContent=best;$('coins').textContent=coins};
 function award(n){score+=n;coins+=Math.max(1,Math.floor(n/10));if(score>best){best=score;localStorage.setItem('yardBest',best)}localStorage.setItem('yardCoins',coins);update()}
-function renderMemoryGrid(active){const root=$('memoryGrid');if(!root)return;root.innerHTML='';albumDeck.forEach((card,index)=>{const b=document.createElement('button');b.className='memory-card'+(card.matched?' matched':'')+(card.revealed?' revealed':'');b.type='button';b.textContent=card.revealed||card.matched?card.item.emoji:'?';b.disabled=card.matched||!active;b.setAttribute('aria-label',card.revealed||card.matched?card.item.title:'Закрытая карточка');b.addEventListener('click',()=>flipMemory(index,b));root.append(b)})}
-function makeAlbumDeck(){const pairs=collectionCatalog.flatMap((item,pair)=>[{pair,item,matched:unlocked.includes(item.id)},{pair,item,matched:unlocked.includes(item.id)}]);for(let i=pairs.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[pairs[i],pairs[j]]=[pairs[j],pairs[i]]}return pairs}
-function beginAlbum(){albumDeck=makeAlbumDeck();albumPicks=[];albumBusy=false;albumMoves=0;running=true;$('start').textContent='Перемешать заново';$('message').textContent='Найди две одинаковые карточки. Каждая найденная пара — новая вещь в альбоме.';renderMemoryGrid(true)}
-function flipMemory(index,button){if(!running||albumBusy)return;const card=albumDeck[index];if(card.revealed||card.matched)return;card.revealed=true;button.classList.add('revealed');button.textContent=card.item.emoji;albumPicks.push(index);if(albumPicks.length<2)return;albumMoves++;const [a,b]=albumPicks.map(i=>albumDeck[i]);albumBusy=true;if(a.pair===b.pair){a.matched=b.matched=true;const item=a.item;if(!unlocked.includes(item.id)){unlocked.push(item.id);localStorage.setItem('yardCollection',JSON.stringify(unlocked));award(30);$('message').textContent='Нашёл! В альбом добавлено: '+item.title+'. +30 очков.';paintCollection()}else{$('message').textContent='Эта находка уже была в альбоме. Ищи следующую пару.'}albumPicks=[];albumBusy=false;renderMemoryGrid(true);if(albumDeck.every(x=>x.matched)){running=false;award(50);$('message').textContent='Альбом собран! Ты нашёл все дворовые сокровища. Бонус +50 очков.';$('start').textContent='Сыграть ещё раз'}$('round').textContent='ПАРЫ '+unlocked.length+'/4'}else{$('message').textContent='Не совпало. Запомни карточки!';setTimeout(()=>{a.revealed=b.revealed=false;albumPicks=[];albumBusy=false;renderMemoryGrid(true)},720)}}
+function renderMemoryGrid(active){
+ const root=$('memoryGrid');if(!root)return;root.innerHTML='';
+ const movesEl=$('albumMoves');if(movesEl)movesEl.textContent='ХОДЫ: '+albumMoves;
+ albumDeck.forEach((card,index)=>{
+  const b=document.createElement('button');
+  b.className='memory-card'+(card.matched?' matched':'')+(card.revealed?' revealed':'');
+  b.type='button';b.textContent=card.revealed||card.matched?card.item.emoji:'?';
+  b.disabled=card.matched||!active;
+  b.setAttribute('aria-label',card.revealed||card.matched?card.item.title:'Закрытая карточка');
+  b.addEventListener('click',()=>flipMemory(index,b));root.append(b);
+ });
+}
+function makeAlbumDeck(){
+ const pairs=collectionCatalog.flatMap((item,pair)=>[
+  {pair,item,matched:false,revealed:false},
+  {pair,item,matched:false,revealed:false}
+ ]);
+ for(let i=pairs.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[pairs[i],pairs[j]]=[pairs[j],pairs[i]]}
+ return pairs;
+}
+function beginAlbum(){
+ if(albumFlipTimer){clearTimeout(albumFlipTimer);albumFlipTimer=null}
+ albumRoundId++;albumDeck=makeAlbumDeck();albumPicks=[];albumBusy=false;albumMoves=0;running=true;
+ $('start').disabled=false;$('start').textContent='Перемешать карточки';
+ $('round').textContent='ПАРЫ 0/4';$('message').textContent='Колода перемешана! Открывай по две карточки и ищи совпадения.';
+ renderMemoryGrid(true);
+}
+function flipMemory(index,button){
+ if(!running||mode!=='album'||albumBusy)return;
+ const card=albumDeck[index];if(!card||card.revealed||card.matched)return;
+ card.revealed=true;button.classList.add('revealed');button.textContent=card.item.emoji;albumPicks.push(index);
+ if(albumPicks.length<2)return;
+ albumMoves++;const movesEl=$('albumMoves');if(movesEl)movesEl.textContent='ХОДЫ: '+albumMoves;
+ const [a,b]=albumPicks.map(i=>albumDeck[i]);albumBusy=true;
+ if(a.pair===b.pair){
+  a.matched=b.matched=true;const item=a.item;
+  if(!unlocked.includes(item.id)){
+   unlocked.push(item.id);try{localStorage.setItem('yardCollection',JSON.stringify(unlocked))}catch{}
+   award(30);$('message').textContent='Нашёл! В альбом добавлено: '+item.title+'. +30 очков.';paintCollection();
+  }else{$('message').textContent='Пара совпала! Эта находка уже есть в альбоме.'}
+  albumPicks=[];albumBusy=false;renderMemoryGrid(true);
+  const matchedPairs=albumDeck.filter(x=>x.matched).length/2;$('round').textContent='ПАРЫ '+matchedPairs+'/4';
+  if(albumDeck.every(x=>x.matched)){
+   running=false;award(50);$('message').textContent='Альбом собран! Все четыре пары найдены. +50 очков. Можно перемешать колоду и сыграть ещё раз.';
+   $('start').disabled=false;$('start').textContent='Перемешать карточки';
+  }
+ }else{
+  $('message').textContent='Не совпало. Запомни картинки — карточки скоро закроются.';
+  const roundId=albumRoundId;
+  albumFlipTimer=setTimeout(()=>{
+   albumFlipTimer=null;if(roundId!==albumRoundId||mode!=='album')return;
+   a.revealed=b.revealed=false;albumPicks=[];albumBusy=false;renderMemoryGrid(true);
+  },850);
+ }
+}
 function paintCollection(){const root=$('collectionGrid');if(!root)return;root.innerHTML='';collectionCatalog.forEach(item=>{const found=unlocked.includes(item.id);const el=document.createElement('div');el.className='collection-item'+(found?' found':'');el.innerHTML='<span class="collect-emoji">'+(found?item.emoji:'?')+'</span><b>'+(found?item.title:'Неизвестная находка')+'</b><small>'+(found?item.desc:'Найди пару в альбоме')+'</small>';root.append(el)});$('collectionCount').textContent=unlocked.length+' / '+collectionCatalog.length}
 function setMode(m){
- stop();mode=m;document.querySelectorAll('.mode').forEach(b=>b.classList.toggle('active',b.dataset.mode===m));
+ stop();mode=m;document.body.dataset.mode=mode;document.querySelectorAll('.mode').forEach(b=>b.classList.toggle('active',b.dataset.mode===m));
  round=1;score=0;step=1;kicks=0;goals=0;hopPhase='setup';hopCurrent=0;hopPicked=false;hopTarget=randomHopTarget();kickLock=false;update();render();
  $('start').disabled=false;$('start').textContent=mode==='album'?'Начать поиск пар':mode==='hop'?'Начать классики':'Начать игру';
  $('message').textContent=mode==='hop'?'Выбери клетку, на которую бросишь камешек.':mode==='album'?'Найди четыре пары и добавь находки в альбом.':'Выбери испытание и нажми «Начать игру».';
 }
 function render(){
- stop();
+ stop();document.body.dataset.mode=mode;
  $('round').textContent=mode==='hop'?'КЛАССИКИ':mode==='kick'?'УДАР 1/5':mode==='dodge'?'ВРЕМЯ':'ПАРЫ '+unlocked.length+'/4';
  if(mode==='hop'){
   $('gameTitle').textContent='Классики';$('hint').textContent='Выбери цифру для камешка. Пройди туда и обратно, не наступив на него, а затем подними!';
@@ -215,8 +266,9 @@ function render(){
   bindDodgeControls();
  }else{
   $('gameTitle').textContent='Альбом находок';$('hint').textContent='Открывай карточки по две. Найди четыре пары и пополни свой альбом дворовых сокровищ!';
-  $('playArea').innerHTML='<div class="memory-help">Найди одинаковые карточки и собери свой альбом.</div><div class="memory-grid" id="memoryGrid"></div>';
-  $('start').textContent='Начать поиск пар';$('round').textContent='ПАРЫ '+unlocked.length+'/4';renderMemoryGrid(false);
+  $('playArea').innerHTML='<div class="memory-toolbar"><span>МИНИ-ИГРА · НАЙДИ ПАРЫ</span><b id="albumMoves">ХОДЫ: 0</b></div><div class="memory-help">Открывай по две карточки. Найденные предметы попадут в твой альбом.</div><div class="memory-grid" id="memoryGrid"></div>';
+  if(!albumDeck.length)albumDeck=makeAlbumDeck();
+  $('start').textContent='Начать поиск пар';$('start').disabled=false;$('round').textContent='ПАРЫ '+(albumDeck.filter(x=>x.matched).length/2)+'/4';renderMemoryGrid(false);
  }
  paintCollection();
 }
@@ -384,8 +436,11 @@ function finishDodge(){
  $('start').disabled=false;$('start').textContent='Ещё попытка';
 }
 function stop(){
- running=false;if(timer)clearInterval(timer);if(raf)cancelAnimationFrame(raf);if(holdTimer)clearInterval(holdTimer);heldDirection=0;holdTimer=raf=null;heldDirection=0;
- falling.forEach(o=>o.el.remove());falling=[];
+ running=false;
+ if(timer)clearInterval(timer);if(raf)cancelAnimationFrame(raf);if(holdTimer)clearInterval(holdTimer);
+ if(albumFlipTimer){clearTimeout(albumFlipTimer);albumFlipTimer=null;albumRoundId++}
+ heldDirection=0;holdTimer=raf=null;falling.forEach(o=>o.el.remove());falling=[];
+ if(mode==='album'){albumPicks.forEach(i=>{if(albumDeck[i]&&!albumDeck[i].matched)albumDeck[i].revealed=false});albumPicks=[];albumBusy=false}
 }
 function start(){
  if(mode==='hop'){
@@ -395,7 +450,7 @@ function start(){
  if(mode==='kick'){
   if(running)return;kicks=0;goals=0;running=true;kickLock=false;$('start').disabled=true;$('start').textContent='Матч идёт';$('message').textContent='Пять ударов. Смотри на перчатки и выбирай угол!';renderGoal();$('round').textContent='УДАР 1/5';return;
  }
- if(mode==='album'){if(!running)beginAlbum();return}
+ if(mode==='album'){beginAlbum();return}
  if(mode==='dodge'){
   if(running)return;render();running=true;player=50;dodgeStart=performance.now();lastSpawn=0;lastTime=0;
   $('start').disabled=true;$('start').textContent='Уворачивайся!';
@@ -403,7 +458,7 @@ function start(){
   $('message').textContent='Двигайся и не стой на месте!';raf=requestAnimationFrame(dodgeFrame);
  }
 }
-$('start').addEventListener('click',start);$('reset').addEventListener('click',()=>{stop();score=0;round=1;kicks=0;goals=0;hopPhase='setup';hopCurrent=0;hopPicked=false;hopTarget=randomHopTarget();update();render();$('start').disabled=false;$('start').textContent=mode==='album'?'Начать поиск пар':mode==='hop'?'Начать прыжки':'Начать игру';$('message').textContent='Раунд сброшен.'});
+$('start').addEventListener('click',start);$('reset').addEventListener('click',()=>{stop();score=0;round=1;kicks=0;goals=0;hopPhase='setup';hopCurrent=0;hopPicked=false;hopTarget=randomHopTarget();update();render();if(mode==='album'){beginAlbum();return}$('start').disabled=false;$('start').textContent=mode==='hop'?'Начать прыжки':'Начать игру';$('message').textContent='Раунд сброшен.'});
 document.querySelectorAll('.mode').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
 document.addEventListener('keydown',e=>{if(mode==='dodge'&&running){if(e.key==='ArrowLeft'){e.preventDefault();move(-5)}if(e.key==='ArrowRight'){e.preventDefault();move(5)}}});update();paintCollection();render();
 })();
