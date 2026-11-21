@@ -90,19 +90,208 @@ function makeAlbumDeck(){const pairs=collectionCatalog.flatMap((item,pair)=>[{pa
 function beginAlbum(){albumDeck=makeAlbumDeck();albumPicks=[];albumBusy=false;albumMoves=0;running=true;$('start').textContent='Перемешать заново';$('message').textContent='Найди две одинаковые карточки. Каждая найденная пара — новая вещь в альбоме.';renderMemoryGrid(true)}
 function flipMemory(index,button){if(!running||albumBusy)return;const card=albumDeck[index];if(card.revealed||card.matched)return;card.revealed=true;button.classList.add('revealed');button.textContent=card.item.emoji;albumPicks.push(index);if(albumPicks.length<2)return;albumMoves++;const [a,b]=albumPicks.map(i=>albumDeck[i]);albumBusy=true;if(a.pair===b.pair){a.matched=b.matched=true;const item=a.item;if(!unlocked.includes(item.id)){unlocked.push(item.id);localStorage.setItem('yardCollection',JSON.stringify(unlocked));award(30);$('message').textContent='Нашёл! В альбом добавлено: '+item.title+'. +30 очков.';paintCollection()}else{$('message').textContent='Эта находка уже была в альбоме. Ищи следующую пару.'}albumPicks=[];albumBusy=false;renderMemoryGrid(true);if(albumDeck.every(x=>x.matched)){running=false;award(50);$('message').textContent='Альбом собран! Ты нашёл все дворовые сокровища. Бонус +50 очков.';$('start').textContent='Сыграть ещё раз'}$('round').textContent='ПАРЫ '+unlocked.length+'/4'}else{$('message').textContent='Не совпало. Запомни карточки!';setTimeout(()=>{a.revealed=b.revealed=false;albumPicks=[];albumBusy=false;renderMemoryGrid(true)},720)}}
 function paintCollection(){const root=$('collectionGrid');if(!root)return;root.innerHTML='';collectionCatalog.forEach(item=>{const found=unlocked.includes(item.id);const el=document.createElement('div');el.className='collection-item'+(found?' found':'');el.innerHTML='<span class="collect-emoji">'+(found?item.emoji:'?')+'</span><b>'+(found?item.title:'Неизвестная находка')+'</b><small>'+(found?item.desc:'Найди пару в альбоме')+'</small>';root.append(el)});$('collectionCount').textContent=unlocked.length+' / '+collectionCatalog.length}
-function setMode(m){stop();mode=m;document.querySelectorAll('.mode').forEach(b=>b.classList.toggle('active',b.dataset.mode===m));round=1;score=0;step=1;kicks=0;goals=0;update();render();$('start').disabled=false;$('start').textContent=mode==='album'?'Начать поиск пар':'Начать игру';$('message').textContent=mode==='album'?'Найди четыре пары и добавь находки в альбом.':'Выбери испытание и нажми «Начать игру».';}
-function render(){stop();$('round').textContent=mode==='hop'?'РАУНД '+round:mode==='kick'?'УДАР '+(kicks+1)+'/5':mode==='dodge'?'ВРЕМЯ':'ПАРЫ '+unlocked.length+'/4';if(mode==='hop'){ $('gameTitle').textContent='Классики';$('hint').textContent='Нажимай клетки по порядку от 1 до 8. Собери всю последовательность!';$('playArea').innerHTML='<div class="hop-board">'+Array.from({length:8},(_,i)=>'<button class="hop" data-n="'+(i+1)+'">'+(i+1)+'</button>').join('')+'</div>';$('playArea').querySelectorAll('.hop').forEach(b=>b.addEventListener('click',()=>hop(Number(b.dataset.n),b)))}else if(mode==='kick'){$('gameTitle').textContent='Пенальти';$('hint').textContent='Выбери направление удара. Попробуй обмануть вратаря!';$('playArea').innerHTML='<div class="goal">🧤</div><div class="kick-row"><button class="kick" data-dir="left">ЛЕВО</button><button class="kick" data-dir="center">ЦЕНТР</button><button class="kick" data-dir="right">ПРАВО</button></div>';$('playArea').querySelectorAll('.kick').forEach(b=>b.addEventListener('click',()=>kick(b.dataset.dir)))}else if(mode==='dodge'){$('gameTitle').textContent='Вышибалы';$('hint').textContent='Двигайся стрелками ← → или кнопками. Не дай мячу попасть в тебя!';$('playArea').innerHTML='<div class="dodge-area" id="dodgeArea"><div class="dodge-player" id="player">🧍</div></div><div class="touch-controls"><button id="left">←</button><button id="right">→</button></div>';$('left').addEventListener('pointerdown',()=>move(-8));$('right').addEventListener('pointerdown',()=>move(8))}else{$('gameTitle').textContent='Альбом находок';$('hint').textContent='Открывай карточки по две. Найди четыре пары и пополни свой альбом дворовых сокровищ!';$('playArea').innerHTML='<div class="memory-help">Сначала нажми «Начать игру», чтобы перемешать карточки.</div><div class="memory-grid" id="memoryGrid"></div>';$('start').textContent='Начать поиск пар';$('round').textContent='ПАРЫ '+unlocked.length+'/4';renderMemoryGrid(false)}paintCollection()}
-function hop(n,b){if(!running){$('message').textContent='Сначала нажми «Начать игру».';return}if(n!==step){b.classList.add('wrong');setTimeout(()=>b.classList.remove('wrong'),250);$('message').textContent='Не по порядку! Начни последовательность заново.';document.querySelectorAll('.hop').forEach(x=>x.classList.remove('done'));step=1;return}b.classList.add('done');award(10);step++;if(step>8){round++;step=1;$('message').textContent='Отлично! Раунд пройден. Ещё один круг?';$('start').textContent='Следующий раунд';running=false;$('round').textContent='РАУНД '+round}}
-function kick(dir){if(!running)return;kicks++;const keeper=['left','center','right'][Math.floor(Math.random()*3)],goal=keeper!==dir;if(goal){goals++;award(25);$('message').textContent='ГОЛ! Отличный удар!'}else{$('message').textContent='Вратарь угадал направление. Попробуй ещё!'}$('playArea').querySelector('.goal').textContent=goal?'⚽':'🧤';$('round').textContent='УДАР '+Math.min(kicks+1,5)+'/5';if(kicks>=5){running=false;$('message').textContent='Матч окончен: '+goals+' голов из 5. Нажми «Начать игру», чтобы сыграть снова.';$('start').textContent='Новый матч';$('start').disabled=false}}
-function move(d){player=Math.max(8,Math.min(92,player+d));const p=$('player');if(p)p.style.left=player+'%'}
-function spawn(){const area=$('dodgeArea');if(!area)return;const el=document.createElement('span');el.className='falling';el.textContent='🏐';el.style.left=(Math.random()*90+3)+'%';area.append(el);falling.push({el,y:-35,x:parseFloat(el.style.left),speed:2+Math.random()*2.2})}
-function dodgeFrame(t){if(!running||mode!=='dodge')return;const dt=Math.min(32,t-lastTime||16);lastTime=t;if(t-lastSpawn>650){spawn();lastSpawn=t}const area=$('dodgeArea'),h=area.clientHeight;falling=falling.filter(o=>{o.y+=o.speed*dt/16;o.el.style.top=o.y+'px';if(o.y>h-52&&o.y<h-8&&Math.abs(o.x-player)<9){finishDodge();return false}if(o.y>h){o.el.remove();return false}return true});if(running)raf=requestAnimationFrame(dodgeFrame)}
-function finishDodge(){stop();$('message').textContent='Мяч попал! Ты продержался '+Math.floor((performance.now()-dodgeStart)/1000)+' сек.';$('start').textContent='Ещё попытка'}
-let dodgeStart=0;
-function stop(){running=false;if(timer)clearInterval(timer);if(raf)cancelAnimationFrame(raf);timer=raf=null;falling.forEach(o=>o.el.remove());falling=[]}
-function start(){if(mode==='hop'){step=1;running=true;document.querySelectorAll('.hop').forEach(b=>b.classList.remove('done'));$('message').textContent='Поехали! Жми 1, 2, 3…';$('start').textContent='Заново'}else if(mode==='kick'){kicks=0;goals=0;running=true;$('start').textContent='Матч идёт';$('message').textContent='Пять ударов — покажи класс!';$('round').textContent='УДАР 1/5';$('playArea').querySelector('.goal').textContent='🧤'}else if(mode==='album'){beginAlbum()}else{render();running=true;player=50;dodgeStart=performance.now();lastSpawn=0;lastTime=0;timer=setInterval(()=>{if(running){award(5);$('round').textContent=Math.floor((performance.now()-dodgeStart)/1000)+' СЕК'}} ,1000);$('start').textContent='Уворачивайся!';$('message').textContent='Используй ← → или кнопки внизу.';raf=requestAnimationFrame(dodgeFrame)}}
-$('start').addEventListener('click',start);$('reset').addEventListener('click',()=>{stop();score=0;round=1;kicks=0;goals=0;update();render();$('start').textContent='Начать игру';$('message').textContent='Раунд сброшен.'});
+function setMode(m){
+ stop();mode=m;document.querySelectorAll('.mode').forEach(b=>b.classList.toggle('active',b.dataset.mode===m));
+ round=1;score=0;step=1;kicks=0;goals=0;hopPhase='setup';hopCurrent=0;hopPicked=false;hopTarget=randomHopTarget();kickLock=false;update();render();
+ $('start').disabled=false;$('start').textContent=mode==='album'?'Начать поиск пар':mode==='hop'?'Начать классики':'Начать игру';
+ $('message').textContent=mode==='hop'?'Выбери клетку, на которую бросишь камешек.':mode==='album'?'Найди четыре пары и добавь находки в альбом.':'Выбери испытание и нажми «Начать игру».';
+}
+function render(){
+ stop();
+ $('round').textContent=mode==='hop'?'КЛАССИКИ':mode==='kick'?'УДАР 1/5':mode==='dodge'?'ВРЕМЯ':'ПАРЫ '+unlocked.length+'/4';
+ if(mode==='hop'){
+  $('gameTitle').textContent='Классики';$('hint').textContent='Выбери цифру для камешка. Пройди туда и обратно, не наступив на него, а затем подними!';
+  renderHop();
+ }else if(mode==='kick'){
+  $('gameTitle').textContent='Пенальти';$('hint').textContent='Посмотри, куда направлены перчатки. Вратарь может рискнуть и прыгнуть в другой угол — бей с умом!';
+  renderGoal();
+ }else if(mode==='dodge'){
+  $('gameTitle').textContent='Вышибалы';$('hint').textContent='Уворачивайся от летящих мячей. Удерживай кнопки или используй стрелки.';
+  $('playArea').innerHTML='<div class="dodge-arena-wrap"><div class="dodge-scoreline"><span>ПРОДЕРЖИСЬ КАК МОЖНО ДОЛЬШЕ</span><b id="dodgeTime">00:00</b></div><div class="dodge-area" id="dodgeArea"><div class="dodge-lane lane-a"></div><div class="dodge-lane lane-b"></div><div class="dodge-player" id="player"><span>🧢</span><i></i></div></div><div class="touch-controls"><button id="left" aria-label="Влево">←</button><small>УДЕРЖИВАЙ</small><button id="right" aria-label="Вправо">→</button></div></div>';
+  bindDodgeControls();
+ }else{
+  $('gameTitle').textContent='Альбом находок';$('hint').textContent='Открывай карточки по две. Найди четыре пары и пополни свой альбом дворовых сокровищ!';
+  $('playArea').innerHTML='<div class="memory-help">Найди одинаковые карточки и собери свой альбом.</div><div class="memory-grid" id="memoryGrid"></div>';
+  $('start').textContent='Начать поиск пар';$('round').textContent='ПАРЫ '+unlocked.length+'/4';renderMemoryGrid(false);
+ }
+ paintCollection();
+}
+function renderHop(){
+ const setup=hopPhase==='setup',finished=hopPhase==='lost'||hopPhase==='win';
+ const tiles=Array.from({length:8},(_,i)=>{
+  const n=i+1,stone=n===hopTarget&&!hopPicked,here=n===hopCurrent;
+  return '<button type="button" class="hop-tile'+(stone?' has-stone':'')+(here?' occupied':'')+(setup&&n===hopTarget?' selected':'')+'" data-number="'+n+'"><span class="hop-number">'+n+'</span>'+(stone?'<span class="hop-stone">🪨</span>':'')+(here?'<span class="hop-boy">🧢</span>':'')+'</button>';
+ }).join('');
+ const homeHere=hopCurrent===9;
+ let picker='';
+ if(setup){
+  picker='<div class="stone-picker"><div class="stone-picker-title">КУДА БРОСИМ КАМЕШЕК?</div><div class="stone-choices">'+Array.from({length:8},(_,i)=>'<button type="button" class="stone-choice'+(hopTarget===i+1?' active':'')+'" data-stone="'+(i+1)+'">'+(i+1)+'</button>').join('')+'</div><p>Можно выбрать любую цифру от 1 до 8.</p></div>';
+ }
+ let action='';
+ if(hopPhase==='out'&&hopCurrent+1===hopTarget)action='<button class="action hop-action" id="hopSkip">ПЕРЕПРЫГНУТЬ КАМЕШЕК ↗</button>';
+ else if(hopPhase==='out'&&hopCurrent===8)action='<button class="action hop-action" id="hopHome">ДОПРЫГАТЬ ДО ДОМИКА →</button>';
+ else if(hopPhase==='back'&&!hopPicked&&hopCurrent===hopTarget+1)action='<button class="action hop-action" id="hopPickup">ПОДНЯТЬ КАМЕШЕК ✦</button>';
+ else if(hopPhase==='back'&&hopCurrent===1)action='<button class="action hop-action" id="hopFinish">ВЕРНУТЬСЯ НА СТАРТ ✓</button>';
+ let banner='';
+ if(hopPhase==='lost')banner='<div class="hop-result lost"><b>ОЙ! НАСТУПИЛ НА КАМЕШЕК</b><span>Попробуй ещё раз — во дворе дают второй шанс.</span></div>';
+ if(hopPhase==='win')banner='<div class="hop-result won"><b>КЛАССИКИ ПРОЙДЕНЫ!</b><span>Ты вернулся на старт и поднял свой камешек. +60 очков</span></div>';
+ const status=setup?'Сначала выбери клетку для камешка.':hopPhase==='out'?'ПУТЬ ТУДА · НЕ НАСТУПИ НА КАМЕШЕК':hopPhase==='back'?'ОБРАТНЫЙ ПУТЬ · ЗАБЕРИ КАМЕШЕК':hopPhase==='win'?'ПОБЕДА':'ПОПРОБУЙ ЕЩЁ РАЗ';
+ $('playArea').innerHTML=picker+'<div class="hop-status">'+status+'</div><div class="hop-course"><div class="hop-start"><span>СТАРТ</span>'+(hopCurrent===0?'<b class="hop-boy">🧢</b>':'')+'</div><div class="hop-path">'+tiles+'</div><button type="button" class="hop-home'+(homeHere?' occupied':'')+'" data-number="9">ДОМИК '+(homeHere?'<b class="hop-boy">🧢</b>':'🏠')+'</button></div>'+banner+'<div class="hop-actions">'+action+'</div>';
+ $('playArea').querySelectorAll('[data-stone]').forEach(btn=>btn.addEventListener('click',()=>{if(!setup)return;hopTarget=Number(btn.dataset.stone);renderHop()}));
+ $('playArea').querySelectorAll('[data-number]').forEach(btn=>btn.addEventListener('click',()=>hopTo(Number(btn.dataset.number))));
+ $('hopSkip')?.addEventListener('click',skipStone);$('hopHome')?.addEventListener('click',goHome);
+ $('hopPickup')?.addEventListener('click',pickStone);$('hopFinish')?.addEventListener('click',finishHop);
+ if(setup){$('start').disabled=false;$('start').textContent='Начать прыжки'}
+ else if(finished){$('start').disabled=false;$('start').textContent='Новый раунд'}
+ else{$('start').disabled=true;$('start').textContent='Прыжки идут…'}
+}
+function beginHop(){
+ hopPhase='out';hopCurrent=0;hopPicked=false;running=true;
+ $('message').textContent='Прыгай по клеткам по порядку. Камешек нужно перепрыгнуть!';
+ renderHop();
+}
+function failHop(reason){
+ running=false;hopPhase='lost';$('message').textContent=reason||'Ты наступил на камешек. Раунд не засчитан.';
+ $('start').disabled=false;$('start').textContent='Попробовать снова';renderHop();
+}
+function hopTo(n){
+ if(hopPhase==='setup'){if(n>=1&&n<=8){hopTarget=n;renderHop()}return}
+ if(!running)return;
+ if(n===hopTarget&&!hopPicked){failHop('Наступил на камешек! Нужно было его перепрыгнуть.');return}
+ if(hopPhase==='out'){
+  const expected=hopCurrent+1;
+  if(n!==expected){failHop('Сбился с клеток. Во дворе нужно прыгать по порядку!');return}
+  if(n===9){goHome();return}
+  hopCurrent=n;award(5);$('message').textContent='Хорошо! Следующая клетка — '+(hopCurrent+1)+'.';renderHop();return;
+ }
+ if(hopPhase==='back'){
+  const expected=hopCurrent-1;
+  if(!hopPicked&&hopCurrent===hopTarget+1){failHop('Сначала подними камешек, не наступая на его клетку!');return}
+  if(n!==expected){failHop('Не та клетка! Возвращайся в обратном порядке.');return}
+  hopCurrent=n;award(5);$('message').textContent='Отлично, продолжаем обратный путь.';renderHop();
+ }
+}
+function skipStone(){
+ if(!running||hopPhase!=='out'||hopCurrent+1!==hopTarget)return;
+ hopCurrent=hopTarget+1;
+ award(10);$('message').textContent='Красиво перепрыгнул камешек!';
+ if(hopCurrent>8){hopCurrent=9;hopPhase='back';$('message').textContent='Ты в домике! Теперь возвращайся и подними камешек.'}
+ renderHop();
+}
+function goHome(){
+ if(!running||hopPhase!=='out'||hopCurrent!==8)return;
+ hopCurrent=9;hopPhase='back';$('message').textContent='Разворот! Возвращайся по клеткам в обратном порядке.';renderHop();
+}
+function pickStone(){
+ if(!running||hopPhase!=='back'||hopPicked||hopCurrent!==hopTarget+1)return;
+ hopPicked=true;award(20);hopCurrent=hopTarget-1;
+ $('message').textContent='Камешек поднят! Осталось вернуться на старт.';
+ if(hopCurrent===0){finishHop();return}
+ renderHop();
+}
+function finishHop(){
+ if(hopPhase!=='back'||hopCurrent!==1)return;
+ running=false;hopPhase='win';round++;award(60);$('message').textContent='Победа! Ты вернулся и поднял камешек.';renderHop();
+}
+let kickLock=false;
+function renderGoal(){
+ keeperDir=chooseKeeper();
+ const arrow=keeperDir==='left'?'↖':keeperDir==='center'?'↑':'↗';
+ $('playArea').innerHTML='<div class="penalty-scene"><div class="penalty-scoreboard"><span>СЧЁТ МАТЧА</span><b>'+goals+' : '+(kicks-goals)+'</b><small>УДАР '+(kicks+1)+'/5</small></div><div class="goal-frame" id="goal"><div class="goal-net"></div><div class="goal-post post-left"></div><div class="goal-post post-right"></div><div class="goal-crossbar"></div><div class="keeper" id="keeper" data-dir="'+keeperDir+'">🧤</div><div class="shot-ball" id="shotBall" data-dir="center">⚽</div><div class="goal-line"></div></div><div class="keeper-readout" id="keeperReadout"><span>ПЕРЧАТКИ ВРАТАРЯ</span><b>'+arrow+' '+directions[keeperDir]+'</b></div><div class="keeper-lanes"><i class="'+(keeperDir==='left'?'lit':'')+'">ЛЕВО</i><i class="'+(keeperDir==='center'?'lit':'')+'">ЦЕНТР</i><i class="'+(keeperDir==='right'?'lit':'')+'">ПРАВО</i></div><div class="kick-row"><button class="kick" data-dir="left">↖<small>ЛЕВЫЙ УГОЛ</small></button><button class="kick" data-dir="center">↑<small>ПО ЦЕНТРУ</small></button><button class="kick" data-dir="right">↗<small>ПРАВЫЙ УГОЛ</small></button></div></div>';
+ $('playArea').querySelectorAll('.kick').forEach(b=>b.addEventListener('click',()=>kick(b.dataset.dir)));
+}
+function kick(dir){
+ if(!running||kickLock)return; if(kicks>=5)return;
+ kickLock=true;kicks++;
+ const planned=keeperDir,guessed=dir===planned;
+ const saved=Math.random()<(guessed?.66:.18);
+ const keeper=$('keeper'),ball=$('shotBall'),goal=$('goal');
+ if(ball){ball.dataset.dir=dir;ball.classList.add('in-flight')}
+ if(keeper){keeper.classList.add('diving');keeper.classList.add('dive-'+(saved?dir:planned))}
+ if(saved){
+  if(guessed){$('message').textContent='СЕЙВ! Перчатки уже были в этом углу.'}
+  else{$('message').textContent='НЕВЕРОЯТНО! Вратарь угадал в последний момент и вытащил мяч!'}
+  if(ball)ball.classList.add('caught');if(goal)goal.classList.add('is-saved');
+ }else{
+  goals++;award(25);$('message').textContent='ГОООЛ! Вратарь прыгнул не туда — +25 очков.';
+  if(goal)goal.classList.add('is-goal');if(ball)ball.classList.add('scored');
+ }
+ $('round').textContent='УДАР '+Math.min(kicks+1,5)+'/5';
+ if(kicks>=5){
+  running=false;$('start').disabled=false;$('start').textContent='Новый матч';
+  $('message').textContent='МАТЧ ОКОНЧЕН: '+goals+' голов из 5. '+(goals>=4?'Отличная серия!':'Попробуй ещё раз!');
+  if(kickLock)setTimeout(()=>kickLock=false,900);
+ }else{
+  setTimeout(()=>{keeperDir=chooseKeeper();updateKeeperPlan();kickLock=false},850);
+ }
+}
+function updateKeeperPlan(){
+ const keeper=$('keeper'),readout=$('keeperReadout'),arrow=keeperDir==='left'?'↖':keeperDir==='center'?'↑':'↗';
+ if(!keeper||!readout)return;
+ keeper.className='keeper';keeper.dataset.dir=keeperDir;
+ readout.innerHTML='<span>ПЕРЧАТКИ ВРАТАРЯ</span><b>'+arrow+' '+directions[keeperDir]+'</b>';
+ document.querySelectorAll('.keeper-lanes i').forEach(el=>el.classList.toggle('lit',el.textContent.trim()===(keeperDir==='left'?'ЛЕВО':keeperDir==='center'?'ЦЕНТР':'ПРАВО')));
+ const ball=$('shotBall'),goal=$('goal');if(ball){ball.className='shot-ball';ball.dataset.dir='center'}if(goal)goal.className='goal-frame';
+}
+function move(d){player=Math.max(6,Math.min(94,player+d));const p=$('player');if(p)p.style.left=player+'%'}
+function spawn(){
+ const area=$('dodgeArea');if(!area)return;
+ const el=document.createElement('span');el.className='falling';el.textContent='🏐';
+ const width=area.clientWidth;const x=8+Math.random()*Math.max(10,width-44);
+ el.style.left=x+'px';area.append(el);
+ falling.push({el,y:-38,x,speed:2.4+Math.random()*2.4});
+}
+function dodgeFrame(t){
+ if(!running||mode!=='dodge')return;
+ const dt=Math.min(34,t-lastTime||16);lastTime=t;
+ const elapsed=(t-dodgeStart)/1000,spawnEvery=Math.max(330,760-elapsed*9);
+ if(t-lastSpawn>spawnEvery){spawn();lastSpawn=t}
+ const area=$('dodgeArea'),playerEl=$('player'),height=area.clientHeight,playerRect=playerEl.getBoundingClientRect();let hit=false;
+ falling=falling.filter(o=>{
+  o.y+=o.speed*dt/16;o.el.style.top=o.y+'px';
+  const r=o.el.getBoundingClientRect();
+  const overlap=r.left<playerRect.right-5&&r.right>playerRect.left+5&&r.top<playerRect.bottom-4&&r.bottom>playerRect.top+4;
+  if(overlap){hit=true;o.el.remove();return false}
+  if(o.y>height+35){o.el.remove();return false}
+  return true;
+ });
+ if($('dodgeTime')){const sec=Math.floor(elapsed);$('dodgeTime').textContent=String(Math.floor(sec/60)).padStart(2,'0')+':'+String(sec%60).padStart(2,'0')}
+ if(hit){finishDodge();return}
+ if(running)raf=requestAnimationFrame(dodgeFrame);
+}
+function bindDodgeControls(){
+ const startHold=(dir,e)=>{e.preventDefault();heldDirection=dir;move(dir);if(holdTimer)clearInterval(holdTimer);holdTimer=setInterval(()=>{if(running&&mode==='dodge')move(heldDirection)},55)};
+ const stopHold=()=>{heldDirection=0;if(holdTimer)clearInterval(holdTimer);holdTimer=null};
+ [['left',-5],['right',5]].forEach(([id,dir])=>{const el=$(id);el.addEventListener('pointerdown',e=>startHold(dir,e));el.addEventListener('contextmenu',e=>e.preventDefault())});
+ window.addEventListener('pointerup',stopHold);window.addEventListener('pointercancel',stopHold);window.addEventListener('blur',stopHold);
+}
+function finishDodge(){
+ const seconds=Math.floor((performance.now()-dodgeStart)/1000);
+ stop();$('message').textContent='Мяч коснулся игрока! Ты продержался '+seconds+' сек. '+(seconds>=20?'Настоящий мастер вышибал!':'Попробуй продержаться дольше.');
+ $('start').disabled=false;$('start').textContent='Ещё попытка';
+}
+function stop(){
+ running=false;if(timer)clearInterval(timer);if(raf)cancelAnimationFrame(raf);if(holdTimer)clearInterval(holdTimer);heldDirection=0;holdTimer=raf=null;
+ falling.forEach(o=>o.el.remove());falling=[];
+}
+function start(){
+ if(mode==='hop'){
+  if(hopPhase==='lost'||hopPhase==='win'){hopPhase='setup';hopTarget=randomHopTarget();hopCurrent=0;hopPicked=false;$('message').textContent='Новый бросок! Выбери цифру для камешка.';renderHop();return}
+  if(hopPhase==='setup'){beginHop()}return;
+ }
+ if(mode==='kick'){
+  if(running)return;kicks=0;goals=0;running=true;kickLock=false;$('start').disabled=true;$('start').textContent='Матч идёт';$('message').textContent='Пять ударов. Смотри на перчатки и выбирай угол!';renderGoal();$('round').textContent='УДАР 1/5';return;
+ }
+ if(mode==='album'){if(!running)beginAlbum();return}
+ if(mode==='dodge'){
+  if(running)return;render();running=true;player=50;dodgeStart=performance.now();lastSpawn=0;lastTime=0;
+  $('start').disabled=true;$('start').textContent='Уворачивайся!';
+  timer=setInterval(()=>{if(running){award(5);const sec=Math.floor((performance.now()-dodgeStart)/1000);$('round').textContent=sec+' СЕК'}},1000);
+  $('message').textContent='Двигайся и не стой на месте!';raf=requestAnimationFrame(dodgeFrame);
+ }
+}
+$('start').addEventListener('click',start);$('reset').addEventListener('click',()=>{stop();score=0;round=1;kicks=0;goals=0;hopPhase='setup';hopCurrent=0;hopPicked=false;hopTarget=randomHopTarget();update();render();$('start').disabled=false;$('start').textContent=mode==='album'?'Начать поиск пар':mode==='hop'?'Начать прыжки':'Начать игру';$('message').textContent='Раунд сброшен.'});
 document.querySelectorAll('.mode').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
-document.addEventListener('keydown',e=>{if(mode==='dodge'&&running){if(e.key==='ArrowLeft')move(-8);if(e.key==='ArrowRight')move(8)}});update();paintCollection();render();
+document.addEventListener('keydown',e=>{if(mode==='dodge'&&running){if(e.key==='ArrowLeft'){e.preventDefault();move(-5)}if(e.key==='ArrowRight'){e.preventDefault();move(5)}}});update();paintCollection();render();
 })();
 </script></body></html>
