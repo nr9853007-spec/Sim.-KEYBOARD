@@ -211,7 +211,7 @@ function render(){
   renderGoal();
  }else if(mode==='dodge'){
   $('gameTitle').textContent='Вышибалы';$('hint').textContent='Уворачивайся от летящих мячей. Удерживай кнопки или используй стрелки.';
-  $('playArea').innerHTML='<div class="dodge-arena-wrap"><div class="dodge-scoreline"><span>ПРОДЕРЖИСЬ КАК МОЖНО ДОЛЬШЕ</span><b id="dodgeTime">00:00</b></div><div class="dodge-area" id="dodgeArea"><div class="dodge-lane lane-a"></div><div class="dodge-lane lane-b"></div><div class="dodge-player" id="player"><span>🧢</span><i></i></div></div><div class="touch-controls"><button id="left" aria-label="Влево">←</button><small>УДЕРЖИВАЙ</small><button id="right" aria-label="Вправо">→</button></div></div>';
+  $('playArea').innerHTML='<div class="dodge-arena-wrap"><div class="dodge-scoreline"><span>ПРОДЕРЖИСЬ КАК МОЖНО ДОЛЬШЕ</span><b id="dodgeTime">00:00</b></div><div class="dodge-area" id="dodgeArea"><div class="dodge-lane lane-a"></div><div class="dodge-lane lane-b"></div><div class="dodge-player" id="player"><span>🧒</span><i></i></div></div><div class="touch-controls"><button id="left" aria-label="Влево">←</button><small>УДЕРЖИВАЙ</small><button id="right" aria-label="Вправо">→</button></div></div>';
   bindDodgeControls();
  }else{
   $('gameTitle').textContent='Альбом находок';$('hint').textContent='Открывай карточки по две. Найди четыре пары и пополни свой альбом дворовых сокровищ!';
@@ -224,12 +224,12 @@ function renderHop(){
  const setup=hopPhase==='setup',finished=hopPhase==='lost'||hopPhase==='win';
  const tiles=Array.from({length:8},(_,i)=>{
   const n=i+1,stone=n===hopTarget&&!hopPicked,here=n===hopCurrent;
-  return '<button type="button" class="hop-tile'+(stone?' has-stone':'')+(here?' occupied':'')+(setup&&n===hopTarget?' selected':'')+'" data-number="'+n+'"><span class="hop-number">'+n+'</span>'+(stone?'<span class="hop-stone">🪨</span>':'')+(here?'<span class="hop-boy">🧢</span>':'')+'</button>';
+  return '<button type="button" class="hop-tile'+(stone?' has-stone':'')+(here?' occupied':'')+(setup&&n===hopTarget?' selected':'')+'" data-number="'+n+'"><span class="hop-number">'+n+'</span>'+(stone?'<span class="hop-stone">🪨</span>':'')+(here?'<span class="hop-boy">🧒</span>':'')+'</button>';
  }).join('');
  const homeHere=hopCurrent===9;
  let picker='';
  if(setup){
-  picker='<div class="stone-picker"><div class="stone-picker-title">КУДА БРОСИМ КАМЕШЕК?</div><div class="stone-choices">'+Array.from({length:8},(_,i)=>'<button type="button" class="stone-choice'+(hopTarget===i+1?' active':'')+'" data-stone="'+(i+1)+'">'+(i+1)+'</button>').join('')+'</div><p>Можно выбрать любую цифру от 1 до 8.</p></div>';
+  picker='<div class="stone-picker"><div class="stone-picker-title">КУДА БРОСИМ КАМЕШЕК?</div><div class="stone-choices">'+Array.from({length:8},(_,i)=>'<button type="button" class="stone-choice'+(hopTarget===i+1?' active':'')+'" data-stone="'+(i+1)+'">'+(i+1)+'</button>').join('')+'</div><p>Можно выбрать любую цифру от 1 до 8.</p><button type="button" class="action secondary hop-random" id="hopRandom">🎲 СЛУЧАЙНЫЙ БРОСОК</button></div>';
  }
  let action='';
  if(hopPhase==='out'&&hopCurrent+1===hopTarget)action='<button class="action hop-action" id="hopSkip">ПЕРЕПРЫГНУТЬ КАМЕШЕК ↗</button>';
@@ -240,10 +240,10 @@ function renderHop(){
  if(hopPhase==='lost')banner='<div class="hop-result lost"><b>ОЙ! НАСТУПИЛ НА КАМЕШЕК</b><span>Попробуй ещё раз — во дворе дают второй шанс.</span></div>';
  if(hopPhase==='win')banner='<div class="hop-result won"><b>КЛАССИКИ ПРОЙДЕНЫ!</b><span>Ты вернулся на старт и поднял свой камешек. +60 очков</span></div>';
  const status=setup?'Сначала выбери клетку для камешка.':hopPhase==='out'?'ПУТЬ ТУДА · НЕ НАСТУПИ НА КАМЕШЕК':hopPhase==='back'?'ОБРАТНЫЙ ПУТЬ · ЗАБЕРИ КАМЕШЕК':hopPhase==='win'?'ПОБЕДА':'ПОПРОБУЙ ЕЩЁ РАЗ';
- $('playArea').innerHTML=picker+'<div class="hop-status">'+status+'</div><div class="hop-course"><div class="hop-start"><span>СТАРТ</span>'+(hopCurrent===0?'<b class="hop-boy">🧢</b>':'')+'</div><div class="hop-path">'+tiles+'</div><button type="button" class="hop-home'+(homeHere?' occupied':'')+'" data-number="9">ДОМИК '+(homeHere?'<b class="hop-boy">🧢</b>':'🏠')+'</button></div>'+banner+'<div class="hop-actions">'+action+'</div>';
+ $('playArea').innerHTML=picker+'<div class="hop-status">'+status+'</div><div class="hop-course"><div class="hop-start"><span>СТАРТ</span>'+(hopCurrent===0?'<b class="hop-boy">🧒</b>':'')+'</div><div class="hop-path">'+tiles+'</div><button type="button" class="hop-home'+(homeHere?' occupied':'')+'" data-number="9">ДОМИК '+(homeHere?'<b class="hop-boy">🧢</b>':'🏠')+'</button></div>'+banner+'<div class="hop-actions">'+action+'</div>';
  $('playArea').querySelectorAll('[data-stone]').forEach(btn=>btn.addEventListener('click',()=>{if(!setup)return;hopTarget=Number(btn.dataset.stone);renderHop()}));
  $('playArea').querySelectorAll('[data-number]').forEach(btn=>btn.addEventListener('click',()=>hopTo(Number(btn.dataset.number))));
- $('hopSkip')?.addEventListener('click',skipStone);$('hopHome')?.addEventListener('click',goHome);
+ $('hopRandom')?.addEventListener('click',()=>{hopTarget=randomHopTarget();renderHop()});$('hopSkip')?.addEventListener('click',skipStone);$('hopHome')?.addEventListener('click',goHome);
  $('hopPickup')?.addEventListener('click',pickStone);$('hopFinish')?.addEventListener('click',finishHop);
  if(setup){$('start').disabled=false;$('start').textContent='Начать прыжки'}
  else if(finished){$('start').disabled=false;$('start').textContent='Новый раунд'}
@@ -314,13 +314,13 @@ function kick(dir){
  if(keeper){keeper.classList.add('diving');keeper.classList.add('dive-'+(saved?dir:planned))}
  if(saved){
   if(guessed){$('message').textContent='СЕЙВ! Перчатки уже были в этом углу.'}
-  else{$('message').textContent='НЕВЕРОЯТНО! Вратарь угадал в последний момент и вытащил мяч!'}
+  else{$('message').textContent='НЕВЕРОЯТНО! Вратарь прыгнул в сторону и вытащил мяч!'}
   if(ball)ball.classList.add('caught');if(goal)goal.classList.add('is-saved');
  }else{
-  goals++;award(25);$('message').textContent='ГОООЛ! Вратарь прыгнул не туда — +25 очков.';
+  goals++;award(25);$('message').textContent=guessed?'ГОООЛ! Вратарь угадал угол, но не дотянулся. +25 очков.':'ГОООЛ! Вратарь прыгнул не туда — +25 очков.';
   if(goal)goal.classList.add('is-goal');if(ball)ball.classList.add('scored');
  }
- $('round').textContent='УДАР '+Math.min(kicks+1,5)+'/5';
+ $('round').textContent='УДАР '+Math.min(kicks+1,5)+'/5';const scoreBoard=document.querySelector('.penalty-scoreboard b');if(scoreBoard)scoreBoard.textContent=goals+' : '+(kicks-goals);
  if(kicks>=5){
   running=false;$('start').disabled=false;$('start').textContent='Новый матч';
   $('message').textContent='МАТЧ ОКОНЧЕН: '+goals+' голов из 5. '+(goals>=4?'Отличная серия!':'Попробуй ещё раз!');
