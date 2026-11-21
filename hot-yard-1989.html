@@ -71,6 +71,10 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.22;ba
 <script>
 (()=>{'use strict';
 const $=id=>document.getElementById(id);let mode='hop',score=0,coins=Number(localStorage.getItem('yardCoins')||0),best=Number(localStorage.getItem('yardBest')||0),round=1,step=1,kicks=0,goals=0,player=50,falling=[],timer=null,raf=null,running=false,lastSpawn=0,lastTime=0;
+let hopPhase='setup',hopCurrent=0,hopTarget=1,hopPicked=false,keeperDir='center',dodgeStart=0,holdTimer=null,heldDirection=0;
+const randomHopTarget=()=>1+Math.floor(Math.random()*8);
+const directions={left:'В ЛЕВЫЙ УГОЛ',center:'ПО ЦЕНТРУ',right:'В ПРАВЫЙ УГОЛ'};
+const chooseKeeper=()=>['left','center','right'][Math.floor(Math.random()*3)];
 const collectionCatalog=[
 {id:'badge',emoji:'🎖️',title:'Дворовый значок',desc:'Первый трофей'},
 {id:'car',emoji:'🚗',title:'Машинка',desc:'Мечта каждого двора'},
