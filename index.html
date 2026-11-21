@@ -387,6 +387,53 @@ body{background:radial-gradient(ellipse at 12% 8%,#17436a55 0,transparent 34%),r
 @keyframes meadowSparkle{0%,100%{opacity:.5;transform:scale(.8)}50%{opacity:1;transform:scale(1.2) rotate(18deg)}}
 @media(max-width:600px){.forest-cover .cover-label{font-size:7px;letter-spacing:1px}.forest-cover-scene{inset:0!important}}
 @media(prefers-reduced-motion:reduce){.forest-cover .cover-orbit,.cover-timka,.cover-pines,.cover-oak,.cover-envelope,.cover-acorn,.cover-flower,.cover-fireflies,.forest-cover .cover-spark{animation:none!important}}
+
+/* FOREST MEADOW — layered mesh-light redesign */
+.forest-cover{
+ background:
+  radial-gradient(ellipse 34% 48% at 52% 34%,rgba(255,244,190,.95) 0%,rgba(255,221,143,.42) 42%,transparent 78%),
+  radial-gradient(ellipse 46% 62% at 8% 12%,rgba(123,205,172,.92) 0%,transparent 74%),
+  radial-gradient(ellipse 42% 58% at 94% 18%,rgba(105,164,126,.94) 0%,transparent 72%),
+  radial-gradient(ellipse 60% 55% at 48% 100%,rgba(40,105,75,.98) 0%,transparent 76%),
+  linear-gradient(145deg,#b9e0b7 0%,#83b88d 48%,#315f4d 100%)!important;
+ border:1px solid #d7efbd88!important;
+ box-shadow:inset 0 1px #ffffffaa, inset 0 -35px 65px #153c3040,0 18px 48px #0b211d66!important;
+}
+.forest-cover:before{
+ background:
+  radial-gradient(ellipse at 50% 0%,#fff9d988,transparent 48%),
+  radial-gradient(ellipse at 12% 75%,#b7e7a044,transparent 40%),
+  radial-gradient(ellipse at 88% 68%,#e9d99b33,transparent 38%),
+  linear-gradient(180deg,#eaffdf12 0%,transparent 42%,#173c3155 100%)!important;
+ backdrop-filter:saturate(1.08);
+}
+.forest-cover:after{
+ background:linear-gradient(180deg,transparent 34%,#183c3155 100%)!important;
+}
+.forest-cover .cover-orbit{
+ border-color:#fff4c9a6!important;
+ box-shadow:0 0 0 20px #fff4c922,0 0 0 46px #fff4c912,0 0 48px #fff0bd55!important;
+}
+.forest-cover-scene{filter:drop-shadow(0 8px 16px #173d3040);transform:scale(1.015);transform-origin:center bottom}
+.forest-cover .cover-label{
+ background:linear-gradient(100deg,#244f3dc9,#3d7255a8);
+ border:1px solid #eaffd766;border-radius:999px;padding:7px 12px;
+ box-shadow:0 5px 18px #173c3044;backdrop-filter:blur(8px);
+}
+.forest-cover .cover-title{
+ text-shadow:0 3px 4px #183c31aa,0 8px 25px #163b2f88!important;
+}
+.forest-cover .cover-title b{
+ color:#ffe7a7!important;
+ text-shadow:0 2px 0 #9b7445,0 7px 20px #183c3199!important;
+}
+.forest-cover .cover-play{
+ border:1px solid #fff6d9!important;
+ box-shadow:0 0 0 6px #fff5d522,0 9px 24px #183c3166,0 0 25px #fff0b855!important;
+}
+.game-card:has(.forest-cover):hover .forest-cover-scene{transform:scale(1.045);transition:transform .65s cubic-bezier(.2,.8,.2,1),filter .65s}
+@media(prefers-reduced-motion:reduce){.forest-cover-scene{transform:none!important}.game-card:has(.forest-cover):hover .forest-cover-scene{transform:none!important}}
+
 </style></head>
 <body>
 <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
