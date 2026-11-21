@@ -155,6 +155,111 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.22;ba
 .collection-panel{border-color:#bc7c4b88;background:radial-gradient(ellipse at 100% 0,#db86301d,transparent 42%),linear-gradient(145deg,#452319,#1f0f0c)}
 @media(max-width:650px){.hop-course{grid-template-columns:1fr;gap:8px}.hop-start,.hop-home{min-height:44px;flex-direction:row}.hop-path{gap:6px}.hop-number{top:4px;left:6px;font-size:13px}.hop-stone{font-size:25px}.hop-boy{font-size:22px}.goal-frame{height:165px}.dodge-area{height:255px}.stone-choices{gap:5px}.stone-choice{border-radius:8px;font-size:13px}.kick{min-height:58px}.kick small{font-size:7px}}
 @media(prefers-reduced-motion:reduce){.hero .ball,.mode,.hop-stone,.hop-boy,.falling,.keeper,.shot-ball{animation:none!important;transition:none!important}}
+
+/* N1KMEL — second visual pass for all Soviet-yard mini-games */
+:root{--chalk:#f8e7c9;--dust:#d5b18c;--brick:#713a2b;--asphalt:#3b3029;--sunset:#e5a05a}
+body[data-mode]{background:
+ radial-gradient(ellipse at 50% -10%,#bd693c3d,transparent 48%),
+ radial-gradient(ellipse at 8% 70%,#dc8b4020,transparent 32%),
+ linear-gradient(160deg,#251410,#100b0a 75%);background-attachment:fixed}
+body[data-mode] .panel{position:relative;overflow:hidden;border:1px solid #d6a17499;border-radius:24px;padding:clamp(15px,2.5vw,26px);background:linear-gradient(145deg,#513021 0%,#2c1913 56%,#1b100d 100%);box-shadow:inset 0 1px #fff4,0 22px 55px #0008}
+body[data-mode] .panel:before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 100% 0,#ffcb7720,transparent 42%),linear-gradient(145deg,#fff1 0,transparent 38%);opacity:.9}
+body[data-mode] .panel>*{position:relative;z-index:1}
+body[data-mode] .panel-head{padding:4px 2px 14px;margin-bottom:14px;border-bottom:1px solid #f1c28d33}
+body[data-mode] .panel-head h2{font-size:clamp(21px,3vw,28px);letter-spacing:-.5px;color:#ffebcd}
+body[data-mode] .hint{max-width:760px;color:#dfbea0;font-size:12px;line-height:1.65;margin:0 0 16px}
+body[data-mode] .pill{background:#1d100ee8;border-color:#e5b17a66;color:#ffdda4}
+body[data-mode] .section-label{color:#f1ba7b}
+body[data-mode] .action{border-radius:12px;letter-spacing:.4px}
+body[data-mode] .action:disabled{opacity:.5;filter:grayscale(.35);cursor:not-allowed;transform:none}
+
+/* Hopscotch: a chalk-drawn court rather than a row of plain buttons */
+body[data-mode="hop"] .panel{background:radial-gradient(ellipse at 50% 0,#87654835,transparent 48%),linear-gradient(145deg,#4c3125,#211714 72%,#1b100e)}
+body[data-mode="hop"] .stone-picker{position:relative;border:1px solid #e5bd8b88;border-radius:18px;padding:16px;background:linear-gradient(135deg,#6c4a3488,#302019cc);box-shadow:inset 0 1px #fff3,0 9px 22px #1a0d0a77}
+body[data-mode="hop"] .stone-picker:before{content:"";position:absolute;inset:7px;border:1px dashed #f9e1b355;border-radius:12px;pointer-events:none}
+body[data-mode="hop"] .stone-picker-title{font-size:10px;letter-spacing:2px;color:#ffe7be}
+body[data-mode="hop"] .stone-choices{position:relative;z-index:1;gap:8px}
+body[data-mode="hop"] .stone-choice{border:1px solid #f4d5a6;border-radius:12px;background:linear-gradient(145deg,#ebd2aa,#a67a57);color:#4d3121;box-shadow:inset 0 1px #fff9,0 4px 0 #583827,0 7px 13px #170b0888;font-size:16px;transition:transform .18s,filter .18s}
+body[data-mode="hop"] .stone-choice:hover{transform:translateY(-2px);filter:brightness(1.08)}
+body[data-mode="hop"] .stone-choice.active{background:linear-gradient(145deg,#fff1c9,#f4bd77);border-color:#fff0c8;color:#563018;box-shadow:0 0 0 3px #ffda9b33,0 4px 0 #9a5832,0 8px 17px #170b0877}
+.hop-random{position:relative;z-index:1;display:block;margin:12px auto 0;min-width:200px;font-size:10px}
+body[data-mode="hop"] .hop-status{display:flex;align-items:center;justify-content:center;gap:10px;margin:17px auto 13px;color:#f5d5a8;font-size:9px;letter-spacing:1.8px}
+body[data-mode="hop"] .hop-status:before,body[data-mode="hop"] .hop-status:after{content:"";width:clamp(12px,10vw,90px);height:1px;background:linear-gradient(90deg,transparent,#e8bd8c99)}
+body[data-mode="hop"] .hop-status:after{transform:scaleX(-1)}
+body[data-mode="hop"] .hop-course{position:relative;display:grid;grid-template-columns:64px minmax(0,1fr) 64px;align-items:center;gap:10px;padding:18px;border:1px solid #d0a47a88;border-radius:22px;background:
+ radial-gradient(ellipse at 50% 0,#d6b18b26,transparent 65%),
+ repeating-linear-gradient(0deg,#ffffff0a 0 1px,transparent 1px 28px),
+ linear-gradient(145deg,#5e4a3b,#352b26 58%,#29201c);
+ box-shadow:inset 0 1px #fff4,0 14px 28px #0c070677}
+body[data-mode="hop"] .hop-course:before{content:"";position:absolute;inset:8px;border:1px dashed #e6c9a977;border-radius:15px;pointer-events:none}
+body[data-mode="hop"] .hop-start,body[data-mode="hop"] .hop-home{position:relative;z-index:1;min-height:88px;border:1px dashed #f0d7b2bb;border-radius:14px;background:linear-gradient(145deg,#a9825c,#57402e);color:#fff0ce;font-size:8px;letter-spacing:1px;box-shadow:inset 0 1px #fff5,0 5px 10px #150b0877}
+body[data-mode="hop"] .hop-home{cursor:default}
+body[data-mode="hop"] .hop-path{position:relative;z-index:1;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;max-width:470px;margin:auto;width:100%}
+body[data-mode="hop"] .hop-tile{aspect-ratio:1.55;border:2px solid #ecd3b1;border-radius:14px;background:
+ radial-gradient(circle at 15% 15%,#fff3 0 2px,transparent 3px),
+ linear-gradient(145deg,#c6a17a,#8b654b 65%,#624634);
+ color:#fff0d5;box-shadow:inset 0 1px #fff9,inset 0 -4px #4d30245c,0 5px 0 #291a14,0 10px 14px #170d0a66;overflow:visible;touch-action:manipulation;transition:transform .17s,filter .17s}
+body[data-mode="hop"] .hop-tile:nth-child(3n+2){background:linear-gradient(145deg,#b99070,#76523f 70%,#50362a)}
+body[data-mode="hop"] .hop-tile:hover{transform:translateY(-3px);filter:brightness(1.08)}
+body[data-mode="hop"] .hop-tile:active{transform:translateY(3px);box-shadow:inset 0 1px #fff5,0 2px 0 #291a14}
+body[data-mode="hop"] .hop-tile.selected{outline:3px solid #ffdd9c;outline-offset:2px}
+body[data-mode="hop"] .hop-tile.has-stone{background:radial-gradient(circle at 50% 62%,#e5ad6e,#976044 68%,#593827);border-color:#ffe0a6}
+body[data-mode="hop"] .hop-number{top:8px;left:10px;font-size:17px;color:#fff4dc;text-shadow:0 2px 4px #3a2019}
+body[data-mode="hop"] .hop-stone{font-size:clamp(26px,4vw,38px);filter:drop-shadow(0 7px 3px #26130fbb)}
+body[data-mode="hop"] .hop-boy{font-size:clamp(25px,4vw,34px);filter:drop-shadow(0 6px 5px #1c0d0acc)}
+body[data-mode="hop"] .hop-actions{min-height:52px;margin-top:14px}
+body[data-mode="hop"] .hop-action{min-width:min(100%,310px);padding:14px 20px;letter-spacing:1px}
+body[data-mode="hop"] .hop-result{max-width:520px;border-radius:16px;padding:17px;box-shadow:0 12px 28px #12080666}
+body[data-mode="hop"] .hop-result b{font-size:13px;letter-spacing:1.4px}
+body[data-mode="hop"] .hop-result span{font-size:11px}
+@media(max-width:650px){body[data-mode="hop"] .hop-course{grid-template-columns:1fr;gap:8px;padding:13px}body[data-mode="hop"] .hop-start,body[data-mode="hop"] .hop-home{min-height:44px}body[data-mode="hop"] .hop-path{max-width:400px;gap:7px}}
+
+/* Penalty: a more readable scoreboard and illuminated keeper lanes */
+body[data-mode="kick"] .penalty-scene{position:relative;overflow:hidden;padding:clamp(12px,2.5vw,22px);border:1px solid #d69b6288;border-radius:20px;background:radial-gradient(ellipse at 50% 0,#ffce7028,transparent 50%),linear-gradient(180deg,#4d3628,#261915 80%);box-shadow:inset 0 1px #fff4,0 14px 28px #150b0888}
+body[data-mode="kick"] .penalty-scoreboard{max-width:590px;margin:0 auto;padding:10px 14px;border:1px solid #dba66d77;border-radius:13px;background:linear-gradient(90deg,#1e1311,#382017,#1e1311);box-shadow:inset 0 1px #fff2,0 6px 13px #150a0888}
+body[data-mode="kick"] .penalty-scoreboard b{font-size:clamp(24px,4vw,34px);text-shadow:0 0 16px #ffc36d66}
+body[data-mode="kick"] .goal-frame{height:clamp(175px,28vw,245px);border:9px solid #f0d5a9;border-bottom:6px solid #ab754c;background:repeating-linear-gradient(90deg,#ffedcc1c 0 2px,transparent 2px 31px),repeating-linear-gradient(0deg,#ffedcc19 0 2px,transparent 2px 31px),linear-gradient(180deg,#81644d,#47604a 78%,#2f432f);box-shadow:0 10px 0 #2b1711,0 18px 28px #13090788,inset 0 0 45px #1b120c77}
+body[data-mode="kick"] .goal-frame:after{content:"";position:absolute;left:0;right:0;bottom:0;height:22%;background:linear-gradient(180deg,transparent,#253a2788);pointer-events:none}
+body[data-mode="kick"] .goal-post,body[data-mode="kick"] .goal-crossbar{background:linear-gradient(90deg,#fff4d8,#c78e54 55%,#fff0c8);box-shadow:0 0 12px #ffdfa277}
+body[data-mode="kick"] .keeper{font-size:clamp(42px,6vw,57px);filter:drop-shadow(0 8px 6px #0a0707bb);transform-origin:50% 80%}
+body[data-mode="kick"] .keeper-readout{margin:13px auto 8px;font-size:9px}
+body[data-mode="kick"] .keeper-readout b{display:inline-flex;align-items:center;gap:8px;padding:8px 13px;border:1px solid #f0c17a77;border-radius:999px;background:#f3bc6022;color:#ffe3ac;font-size:11px;box-shadow:0 0 18px #ffbd6720}
+body[data-mode="kick"] .keeper-lanes{max-width:560px;margin:9px auto 15px;gap:9px}
+body[data-mode="kick"] .keeper-lanes i{padding:10px;border-radius:10px;background:#251713;color:#ae8c70;border-color:#a8734b77;font-size:9px}
+body[data-mode="kick"] .keeper-lanes i.lit{background:linear-gradient(145deg,#f5d28e,#c98b4c);color:#4a2918;border-color:#ffedbf;box-shadow:0 0 0 3px #ffcf7928,0 6px 14px #160a0877}
+body[data-mode="kick"] .kick-row{max-width:560px;margin:18px auto 4px;gap:11px}
+body[data-mode="kick"] .kick{min-height:79px;border-radius:15px;border:1px solid #f2c487;background:linear-gradient(145deg,#a75b34,#5b2b1d);box-shadow:inset 0 1px #fff5,0 5px 0 #31150f,0 12px 17px #10080788;font-size:24px}
+body[data-mode="kick"] .kick:hover{background:linear-gradient(145deg,#d58c50,#783a24)}
+body[data-mode="kick"] .kick small{font-size:8px;letter-spacing:.8px;color:#ffe2b8}
+
+/* Dodgeball: playground floor, clear lanes and larger touch controls */
+body[data-mode="dodge"] .dodge-arena-wrap{position:relative;overflow:hidden;border-radius:20px;border:1px solid #d4945e88;padding:clamp(10px,2vw,17px);background:linear-gradient(145deg,#583222,#2b1711);box-shadow:inset 0 1px #fff4,0 15px 30px #12090699}
+body[data-mode="dodge"] .dodge-area{height:clamp(250px,42vw,360px);border:3px solid #e1b27d;border-radius:14px;background:radial-gradient(ellipse at 50% 5%,#eeb76b55,transparent 48%),repeating-linear-gradient(90deg,transparent 0 24.8%,#fce1b52a 25% 25.3%,transparent 25.5% 49.8%),linear-gradient(180deg,#9b6040,#795038 50%,#4d3023 100%);box-shadow:inset 0 0 40px #30170f99,0 6px 0 #2b1711}
+body[data-mode="dodge"] .dodge-area:after{content:"";position:absolute;left:0;right:0;bottom:0;height:29%;background:linear-gradient(180deg,transparent,#29170fcc);pointer-events:none}
+body[data-mode="dodge"] .dodge-lane{z-index:1;background:repeating-linear-gradient(180deg,#ffe2bd44 0 8px,transparent 8px 17px);width:2px}
+body[data-mode="dodge"] .dodge-player{z-index:4;width:58px;height:75px;filter:drop-shadow(0 9px 6px #160907bb)}
+body[data-mode="dodge"] .dodge-player span{font-size:48px}
+body[data-mode="dodge"] .falling{width:38px;height:38px;font-size:31px;z-index:3}
+body[data-mode="dodge"] .dodge-scoreline{padding:2px 4px 9px;border-bottom:1px solid #efbe7d33}
+body[data-mode="dodge"] .dodge-scoreline b{font-variant-numeric:tabular-nums;text-shadow:0 0 12px #ffd17c55}
+body[data-mode="dodge"] .touch-controls button{height:54px;width:90px;border:1px solid #efc78e;border-radius:14px;background:linear-gradient(145deg,#bd7444,#663421);font-size:27px;box-shadow:inset 0 1px #fff4,0 5px 0 #30170f,0 10px 17px #10080777;touch-action:none}
+body[data-mode="dodge"] .touch-controls button:active{transform:translateY(3px);box-shadow:inset 0 1px #fff2,0 2px 0 #30170f}
+body[data-mode="dodge"] .touch-controls small{font-size:8px;letter-spacing:1.5px}
+
+/* Album: tactile collectible cards and an always-visible shuffle action */
+body[data-mode="album"] .memory-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:3px 0 13px;padding:10px 12px;border:1px solid #d69b6377;border-radius:12px;background:#22120fee;color:#d9b08b;font-size:8px;font-weight:1000;letter-spacing:1.1px}
+body[data-mode="album"] .memory-toolbar b{color:#ffda9c;font-size:10px}
+body[data-mode="album"] .memory-help{margin:0 0 15px;text-align:left;color:#e2bf9a;font-size:11px;line-height:1.5}
+body[data-mode="album"] .memory-grid{max-width:630px;margin:16px auto 4px;gap:clamp(8px,1.7vw,13px)}
+body[data-mode="album"] .memory-card{position:relative;overflow:hidden;aspect-ratio:1.2;border:1px solid #ecc38c;border-radius:16px;background:radial-gradient(circle at 50% 35%,#a65c36,#71391f 65%,#3b1d14);color:#ffe2a1;font-size:clamp(25px,5vw,39px);text-shadow:0 2px 6px #190805aa;box-shadow:inset 0 1px #fff5,inset 0 -5px #27120d77,0 5px 0 #24100b,0 10px 18px #10070677;transition:transform .23s,filter .23s,background .23s}
+body[data-mode="album"] .memory-card:before{content:"N";position:absolute;inset:7px;border:1px solid #f7d5a755;border-radius:10px;display:grid;place-items:center;font-size:clamp(28px,4vw,42px);font-weight:1000;color:#ffdc9a55;pointer-events:none}
+body[data-mode="album"] .memory-card:not(:disabled):hover{transform:translateY(-4px) rotate(-1deg);filter:brightness(1.15)}
+body[data-mode="album"] .memory-card.revealed{background:linear-gradient(145deg,#fff0bf,#d79b5d);color:#512b19;transform:scale(1.04);box-shadow:0 0 0 3px #ffd98a55,0 8px 20px #15090788}
+body[data-mode="album"] .memory-card.matched{background:linear-gradient(145deg,#c6df9c,#638a50);border-color:#e6f5c0;color:#24401d;box-shadow:0 0 0 2px #bfe28e33,0 5px 0 #2b4426}
+body[data-mode="album"] .collection-panel{border:1px solid #d0915888;background:linear-gradient(145deg,#49271b,#1d100d);box-shadow:inset 0 1px #fff3,0 15px 35px #0005}
+body[data-mode="album"] #start{min-width:220px}
+@media(max-width:520px){body[data-mode="album"] .memory-card{aspect-ratio:1;border-radius:12px}body[data-mode="album"] .memory-toolbar{font-size:7px}}
+@media(prefers-reduced-motion:reduce){.mode,.hop-tile,.memory-card,.kick,.touch-controls button{transition:none!important}}
 </style></head>
 <body><div class="wrap">
 <header class="top"><a class="back" href="index.html#games">← В игровой хаб</a><div class="brand">N1KMEL ORIGINAL</div></header>
@@ -247,7 +352,7 @@ function flipMemory(index,button){
 function paintCollection(){const root=$('collectionGrid');if(!root)return;root.innerHTML='';collectionCatalog.forEach(item=>{const found=unlocked.includes(item.id);const el=document.createElement('div');el.className='collection-item'+(found?' found':'');el.innerHTML='<span class="collect-emoji">'+(found?item.emoji:'?')+'</span><b>'+(found?item.title:'Неизвестная находка')+'</b><small>'+(found?item.desc:'Найди пару в альбоме')+'</small>';root.append(el)});$('collectionCount').textContent=unlocked.length+' / '+collectionCatalog.length}
 function setMode(m){
  stop();mode=m;document.body.dataset.mode=mode;document.querySelectorAll('.mode').forEach(b=>b.classList.toggle('active',b.dataset.mode===m));
- round=1;score=0;step=1;kicks=0;goals=0;hopPhase='setup';hopCurrent=0;hopPicked=false;hopTarget=randomHopTarget();kickLock=false;update();render();
+ round=1;score=0;step=1;kicks=0;goals=0;hopPhase='setup';hopCurrent=0;hopPicked=false;hopTarget=randomHopTarget();kickLock=false;if(m==='album'){albumDeck=makeAlbumDeck();albumPicks=[];albumBusy=false;albumMoves=0}update();render();
  $('start').disabled=false;$('start').textContent=mode==='album'?'Начать поиск пар':mode==='hop'?'Начать классики':'Начать игру';
  $('message').textContent=mode==='hop'?'Выбери клетку, на которую бросишь камешек.':mode==='album'?'Найди четыре пары и добавь находки в альбом.':'Выбери испытание и нажми «Начать игру».';
 }
