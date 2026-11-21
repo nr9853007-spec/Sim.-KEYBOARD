@@ -434,6 +434,28 @@ body{background:radial-gradient(ellipse at 12% 8%,#17436a55 0,transparent 34%),r
 .game-card:has(.forest-cover):hover .forest-cover-scene{transform:scale(1.045);transition:transform .65s cubic-bezier(.2,.8,.2,1),filter .65s}
 @media(prefers-reduced-motion:reduce){.forest-cover-scene{transform:none!important}.game-card:has(.forest-cover):hover .forest-cover-scene{transform:none!important}}
 
+
+/* HOT YARD 1989 — sunset mesh courtyard cover */
+.yard-cover{isolation:isolate;overflow:hidden!important;background:radial-gradient(ellipse at 53% 20%,#ffd875 0%,#f6a04e55 24%,transparent 55%),radial-gradient(ellipse at 5% 90%,#e84b27 0%,transparent 50%),radial-gradient(ellipse at 95% 100%,#a92d20 0%,transparent 46%),linear-gradient(145deg,#a94c27,#4b211b 72%,#271313)!important;border:1px solid #ffb35c99!important;box-shadow:inset 0 1px #fff5,0 16px 42px #0005}
+.yard-cover:before{content:"";position:absolute;inset:0;z-index:0;background:linear-gradient(180deg,#ffdc8a22,transparent 44%,#1c0c0c99),repeating-linear-gradient(120deg,transparent 0 38px,#ffd17a0c 39px 40px)}
+.yard-cover .cover-orbit{z-index:1;border-color:#ffd18a88!important;box-shadow:0 0 0 20px #ffce7720,0 0 0 44px #ffce7710,0 0 40px #ffae4b55!important}
+.yard-cover-art{position:absolute;inset:0;z-index:2;overflow:hidden}
+.yard-sun{position:absolute;width:110px;height:110px;border-radius:50%;right:16%;top:8%;background:radial-gradient(circle,#fff4c1,#ffc15f 58%,#ff813b00 74%);box-shadow:0 0 45px #ffb65399}
+.yard-block{position:absolute;right:0;bottom:24%;width:76%;height:38%;display:flex;align-items:center;justify-content:space-evenly;padding:12px 8px 0;background:linear-gradient(180deg,#a95c42,#602b25);clip-path:polygon(0 17%,100% 0,100% 100%,0 100%);box-shadow:inset 0 10px #e58a5c}
+.yard-block i{width:12%;height:52%;background:linear-gradient(90deg,#ffce7a,#b85a36);border:4px solid #54231e;box-shadow:inset 0 0 0 2px #ffe2a0}
+.yard-hoop{position:absolute;right:7%;top:28%;font-size:42px;filter:drop-shadow(0 5px 5px #240b0a99);animation:yardFloat 3.5s ease-in-out infinite}
+.yard-ball{position:absolute;right:26%;bottom:16%;font-size:54px;filter:drop-shadow(0 9px 7px #210c0b99);animation:yardBall 4s ease-in-out infinite}
+.yard-chalk{position:absolute;left:38%;bottom:13%;font-size:17px;font-weight:1000;line-height:1.3;letter-spacing:5px;color:#ffe9c8;text-shadow:0 2px 4px #38130f;transform:rotate(-8deg)}
+.yard-bike{position:absolute;left:6%;bottom:14%;font-size:53px;filter:drop-shadow(0 7px 5px #240b0a99);transform:rotate(-10deg)}
+.yard-cover .cover-label{z-index:5;color:#ffe9c5;background:#3d1b17aa;border:1px solid #ffca7b66;border-radius:99px;padding:7px 11px;backdrop-filter:blur(8px)}
+.yard-cover .cover-title{z-index:5;color:#fff1d5;text-shadow:0 3px 0 #7d2a1d,0 8px 18px #1b0808}
+.yard-cover .cover-title b{color:#ffc66f;text-shadow:0 3px 0 #963b20,0 8px 20px #1b0808}
+.yard-cover .cover-play{z-index:6;background:linear-gradient(145deg,#fff0c5,#f2a448)!important;color:#632413!important;box-shadow:0 0 0 6px #ffcf7625,0 7px 22px #16070799}
+.yard-cover .cover-spark{z-index:5;color:#ffe6a8;text-shadow:0 0 15px #ffc15b;animation:yardSpark 2.5s ease-in-out infinite}
+.yard-cover .spark-right{animation-delay:-1.2s}
+.game-card:has(.yard-cover):hover{border-color:#ffb85f;box-shadow:0 22px 55px #0006,0 0 30px #f47a2c35}
+@keyframes yardFloat{50%{transform:translateY(-8px) rotate(6deg)}}@keyframes yardBall{50%{transform:translateY(-8px) rotate(14deg)}}@keyframes yardSpark{50%{opacity:.4;transform:scale(.7) rotate(30deg)}}
+@media(prefers-reduced-motion:reduce){.yard-cover *{animation:none!important}}
 </style></head>
 <body>
 <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
@@ -509,7 +531,8 @@ body{background:radial-gradient(ellipse at 12% 8%,#17436a55 0,transparent 34%),r
 <g class="cover-envelope" transform="translate(425 244) rotate(9)"><rect width="48" height="35" rx="5" fill="#fff4d7" stroke="#c98d59" stroke-width="2"/><path d="M2 4L24 21L46 4" fill="none" stroke="#d99a69" stroke-width="2.5"/><path d="M19 22L24 27L29 22" fill="none" stroke="#d99a69" stroke-width="2"/></g>
 <g class="cover-acorn" transform="translate(226 292)"><path d="M-12 -1Q-12 -18 0 -20Q12 -18 12 -1L10 17Q0 28 -10 17Z" fill="#c78a4f" stroke="#805637" stroke-width="2"/><path d="M-15 -4Q-12 -19 0 -19Q12 -19 15 -4Z" fill="#815a3e"/><path d="M0 -19Q-3 -27 4 -30" fill="none" stroke="#6f513b" stroke-width="4" stroke-linecap="round"/></g>
 </svg>
-</div><div class="cover-title">ЛЕСНАЯ<br><b>ПОЛЯНА</b></div><span class="cover-play">▶</span></a><div class="game-info"><div class="game-info-main"><div class="game-category">ГОЛОВОЛОМКА <span>·</span> ПРИКЛЮЧЕНИЕ</div><h3>Лесная поляна</h3><p>Помоги суслику Тимке собрать письма, уворачиваться от волков и исследовать лесные тропинки!</p></div><div class="game-info-bottom"><span class="game-status"><i></i> Доступна</span><a class="play-link" href="forest-post.html">Играть <span>↗</span></a></div></div></article></div>
+</div><div class="cover-title">ЛЕСНАЯ<br><b>ПОЛЯНА</b></div><span class="cover-play">▶</span></a><div class="game-info"><div class="game-info-main"><div class="game-category">ГОЛОВОЛОМКА <span>·</span> ПРИКЛЮЧЕНИЕ</div><h3>Лесная поляна</h3><p>Помоги суслику Тимке собрать письма, уворачиваться от волков и исследовать лесные тропинки!</p></div><div class="game-info-bottom"><span class="game-status"><i></i> Доступна</span><a class="play-link" href="forest-post.html">Играть <span>↗</span></a></div></div></article>
+<article class="game-card"><a class="game-cover yard-cover" href="hot-yard-1989.html" aria-label="Играть в Жаркий двор 1989"><div class="cover-noise"></div><div class="cover-orbit"></div><span class="cover-label">N1KMEL ORIGINAL · ЛЕТО 1989</span><span class="cover-spark spark-left">✦</span><span class="cover-spark spark-right">✧</span><div class="yard-cover-art"><div class="yard-sun"></div><div class="yard-block"><i></i><i></i><i></i><i></i></div><div class="yard-hoop">🏀</div><div class="yard-ball">⚽</div><div class="yard-chalk">1&nbsp; 2&nbsp; 3<br>4&nbsp; 5&nbsp; 6</div><div class="yard-bike">🚲</div></div><div class="cover-title">ЖАРКИЙ<br><b>ДВОР</b></div><span class="cover-play">▶</span></a><div class="game-info"><div class="game-info-main"><div class="game-category">АРКАДА <span>·</span> РЕТРО 1989</div><h3>Жаркий двор — 1989</h3><p>Классики, пенальти и вышибалы. Вернись в лето, когда двор был целой вселенной!</p></div><div class="game-info-bottom"><span class="game-status"><i></i> Доступна</span><a class="play-link" href="hot-yard-1989.html">Играть <span>↗</span></a></div></div></article></div>
 </section>
 <section class="about-section page-wrap" id="about"><div class="about-icon">✦</div><div><div class="eyebrow"><i></i> О N1KMEL HUB</div><h2>Одна точка входа.<br><span>Целый мир игр.</span></h2></div><p>Мы собираем разные игровые проекты в одном удобном пространстве. Выбирай, запускай и возвращайся за следующими приключениями.</p></section>
 </main>
