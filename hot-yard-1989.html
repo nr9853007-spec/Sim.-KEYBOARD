@@ -249,7 +249,7 @@ function renderHop(){
  else if(hopPhase==='back')$('hint').textContent='Возвращайся назад. Следующая клетка — '+(hopCurrent-1)+'.';
  else if(hopPhase==='win')$('hint').textContent='Идеальный раунд! Камешек у тебя, можно начинать новый бросок.';
  else if(hopPhase==='lost')$('hint').textContent='Не беда. Выбери новую цифру и попробуй ещё раз.';
- $('playArea').innerHTML=picker+'<div class="hop-status">'+status+'</div><div class="hop-course"><div class="hop-start"><span>СТАРТ</span>'+(hopCurrent===0?'<b class="hop-boy">🧒</b>':'')+'</div><div class="hop-path">'+tiles+'</div><button type="button" class="hop-home'+(homeHere?' occupied':'')+'" data-number="9">ДОМИК '+(homeHere?'<b class="hop-boy">🧢</b>':'🏠')+'</button></div>'+banner+'<div class="hop-actions">'+action+'</div>';
+ $('playArea').innerHTML=picker+'<div class="hop-status">'+status+'</div><div class="hop-course"><div class="hop-start"><span>СТАРТ</span>'+(hopCurrent===0?'<b class="hop-boy">🧒</b>':'')+'</div><div class="hop-path">'+tiles+'</div><button type="button" class="hop-home'+(homeHere?' occupied':'')+'" data-number="9">ДОМИК '+(homeHere?'<b class="hop-boy">🧒</b>':'🏠')+'</button></div>'+banner+'<div class="hop-actions">'+action+'</div>';
  $('playArea').querySelectorAll('[data-stone]').forEach(btn=>btn.addEventListener('click',()=>{if(!setup)return;hopTarget=Number(btn.dataset.stone);renderHop()}));
  $('playArea').querySelectorAll('[data-number]').forEach(btn=>btn.addEventListener('click',()=>hopTo(Number(btn.dataset.number))));
  $('hopRandom')?.addEventListener('click',()=>{hopTarget=randomHopTarget();renderHop()});$('hopSkip')?.addEventListener('click',skipStone);$('hopHome')?.addEventListener('click',goHome);
