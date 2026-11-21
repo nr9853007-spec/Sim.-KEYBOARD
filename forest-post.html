@@ -16,6 +16,38 @@
 @keyframes titleFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}@keyframes tagGlow{0%,100%{box-shadow:0 5px 18px #9aaf7730}50%{box-shadow:0 7px 25px #9aaf7755}}@keyframes forestShimmer{to{background-position:200% 0}}@keyframes mailPop{0%{transform:scale(.7) translateY(5px)}70%{transform:scale(1.16) translateY(-4px)}100%{transform:scale(1) translateY(-2px)}}@keyframes boardBreathe{0%,100%{filter:saturate(1)}50%{filter:saturate(1.08)}}
 @media(prefers-reduced-motion:reduce){.hero h1,.tag,.board-card:before,canvas,.mail.got{animation:none!important}}
 \n@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+/* Animated welcome screen */
+.intro-screen{z-index:10;background:radial-gradient(ellipse at 50% 15%,#f9e8b9aa,transparent 42%),linear-gradient(145deg,#203b35ed,#344f3bdc 55%,#203b35f2);overflow:hidden}
+.intro-screen:before,.intro-screen:after{content:"";position:absolute;width:320px;height:320px;border:1px solid #f5e7bd28;border-radius:50%;animation:introOrbit 18s linear infinite}
+.intro-screen:before{top:-150px;left:-90px;box-shadow:0 0 0 35px #f5e7bd0d,0 0 0 75px #f5e7bd08}
+.intro-screen:after{right:-150px;bottom:-180px;animation-direction:reverse}
+.intro-card{position:relative;z-index:1;width:min(100%,480px);padding:34px 28px 28px;border:1px solid #fff4d77a;border-radius:32px;text-align:center;overflow:hidden;background:linear-gradient(155deg,#fff9e9f7,#f3edcfF2);box-shadow:0 28px 90px #10241f80;animation:introCardIn .8s cubic-bezier(.2,1.25,.4,1) both}
+.intro-card:before{content:"";position:absolute;inset:0 0 auto;height:5px;background:linear-gradient(90deg,#8fb66e,#f2cf83,#d9854d,#8fb66e);background-size:220% 100%;animation:forestShimmer 5s linear infinite}
+.intro-scene{height:148px;position:relative;margin:0 auto 12px;display:grid;place-items:center}
+.intro-sun{position:absolute;width:88px;height:88px;right:18%;top:0;border-radius:50%;background:linear-gradient(145deg,#fff0b8,#f1bd6f);box-shadow:0 0 0 12px #f1d18b30,0 0 48px #e6b96a70;animation:introSun 4s ease-in-out infinite}
+.intro-tree{position:absolute;bottom:15px;font-size:48px;filter:drop-shadow(0 7px 4px #40553a30);animation:introTree 3.5s ease-in-out infinite}
+.intro-tree.left{left:9%}.intro-tree.right{right:8%;animation-delay:-1.2s}
+.intro-gopher{position:relative;z-index:2;font-size:94px;line-height:1;filter:drop-shadow(0 12px 7px #45583c45);animation:introGopher 2.5s ease-in-out infinite}
+.intro-acorn{position:absolute;left:23%;bottom:25px;font-size:27px;animation:introAcorn 3s ease-in-out infinite}
+.intro-firefly{position:absolute;color:#f2c76f;text-shadow:0 0 12px #e8b85c;animation:introSpark 2.2s ease-in-out infinite}
+.intro-firefly.one{left:27%;top:15px}.intro-firefly.two{right:28%;bottom:26px;animation-delay:-1s}
+.intro-kicker{display:inline-flex;gap:8px;align-items:center;padding:7px 13px;border-radius:99px;background:#e5edcf;color:#688256;font-size:9px;font-weight:1000;letter-spacing:1.8px}
+.intro-card h1{margin:14px 0 9px;color:#38583b;font-size:clamp(36px,9vw,54px);line-height:.98;letter-spacing:-2px}
+.intro-card h1 span{color:#c77d4d}
+.intro-card p{max-width:350px;margin:0 auto;color:#77836b;font-size:13px;line-height:1.7}
+.intro-start{width:min(100%,270px);min-height:50px;margin:22px auto 0;border:0;border-radius:16px;background:linear-gradient(135deg,#789a61,#52784e);color:#fff;font:1000 13px Nunito;letter-spacing:.3px;box-shadow:0 6px 0 #3f6240,0 12px 26px #56784b38;cursor:pointer;transition:transform .2s,box-shadow .2s,filter .2s}
+.intro-start:hover{transform:translateY(-3px);filter:brightness(1.06);box-shadow:0 9px 0 #3f6240,0 18px 32px #56784b48}
+.intro-start:active{transform:translateY(3px);box-shadow:0 2px 0 #3f6240}
+.intro-foot{margin-top:16px;color:#9b987d;font-size:9px;font-weight:900;letter-spacing:1.4px}
+@keyframes introCardIn{from{opacity:0;transform:translateY(28px) scale(.94)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes introGopher{0%,100%{transform:translateY(2px) rotate(-2deg)}50%{transform:translateY(-9px) rotate(2deg)}}
+@keyframes introSun{50%{transform:translateY(5px) scale(1.05)}}
+@keyframes introTree{50%{transform:translateY(-5px) rotate(2deg)}}
+@keyframes introAcorn{50%{transform:translateY(-10px) rotate(16deg)}}
+@keyframes introSpark{50%{opacity:.35;transform:scale(.65) rotate(35deg)}}
+@keyframes introOrbit{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.intro-screen:before,.intro-screen:after,.intro-card,.intro-sun,.intro-tree,.intro-gopher,.intro-acorn,.intro-firefly{animation:none!important}}
 </style>
 </head>
 <body><main class="app">
@@ -36,6 +68,7 @@
  <div class="status" id="status" aria-live="polite">Лес проснулся. Пора в путь!</div>
 </aside>
 </section></main>
+<div class="overlay intro-screen show" id="introScreen" role="dialog" aria-modal="true" aria-labelledby="introTitle"><div class="intro-card"><div class="intro-scene" aria-hidden="true"><span class="intro-sun"></span><span class="intro-tree left">🌳</span><span class="intro-tree right">🌲</span><span class="intro-gopher">🐿️</span><span class="intro-acorn">🌰</span><span class="intro-firefly one">✦</span><span class="intro-firefly two">✧</span></div><span class="intro-kicker">✿ N1KMEL HUB · ЛЕСНОЕ ПРИКЛЮЧЕНИЕ ✿</span><h1 id="introTitle">Лесная <span>поляна</span></h1><p>Знакомься, это Тимка! Помоги ему собрать лесные письма, найти безопасные тропинки и добраться до почтового домика.</p><button class="intro-start" id="introStart" type="button">Начать приключение <span aria-hidden="true">→</span></button><div class="intro-foot">СТРЕЛКИ · WASD · ЭКРАННЫЕ КНОПКИ</div></div></div>
 <div class="overlay" id="overlay"><div class="modal"><div class="emoji" id="modalEmoji">🌼</div><h2 id="modalTitle">Все письма доставлены!</h2><p id="modalText">Лесные друзья благодарят тебя за помощь.</p><button class="btn" id="modalButton">Продолжить путешествие</button></div></div>
 <script>
 (()=> {
@@ -55,14 +88,14 @@ const hazardsByLevel=[
  [{x:5,y:1,type:'wolf'},{x:9,y:6,type:'cactus'},{x:1,y:5,type:'wolf'}],
  [{x:4,y:5,type:'wolf'},{x:8,y:3,type:'cactus'},{x:1,y:3,type:'wolf'},{x:9,y:6,type:'cactus'}]
 ];
-let level=0,player=[1,1],steps=0,got=[],history=[],won=false,gameOver=false,flash=0,lives=3,wolfPositions=[];
+let level=0,player=[1,1],steps=0,got=[],history=[],won=false,gameOver=false,flash=0,lives=3,wolfPositions=[],introOpen=true;
 const key=p=>p[0]+','+p[1],inside=(x,y)=>x>=0&&y>=0&&x<W&&y<H;
 function config(){let l=levels[level];player=[...l.start];steps=0;got=[];history=[];won=false;gameOver=false;lives=3;wolfPositions=hazardsByLevel[level].filter(h=>h.type==='wolf').map(h=>({x:h.x,y:h.y}));$('lives').textContent=lives;$('levelName').textContent='ТРОПИНКА № '+(level+1)+' · '+l.name.toUpperCase();$('story').textContent=l.story;$('steps').textContent='0';$('mission').textContent='Собери 3 письма, обходи опасные клетки и доберись до ящика.';$('status').textContent='Лес проснулся. Пора в путь!';$('next').hidden=true;$('overlay').classList.remove('show');updateMail();draw()}
 function updateMail(){[0,1,2].forEach(i=>$('mailList').children[i].classList.toggle('got',got.includes(i)));$('stars').textContent=got.length+'/3'}
 function blocked(x,y){let l=levels[level];return !inside(x,y)||l.walls.some(p=>p[0]===x&&p[1]===y)||hazardsByLevel[level].some(h=>h.type==='cactus'&&h.x===x&&h.y===y)}
 function caught(){lives--;$('lives').textContent=lives;flash=2;if(lives<=0){gameOver=true;$('modalEmoji').textContent='🐺';$('modalTitle').textContent='Волки догнали Тимку!';$('modalText').textContent='На этой тропинке закончились силы. Попробуй ещё раз — письма будут ждать тебя.';$('modalButton').textContent='Попробовать снова';$('overlay').classList.add('show');$('status').textContent='Путешествие остановлено.';return}player=[...levels[level].start];$('status').textContent='Ой! Волк догнал Тимку. Минус жизнь — ищи другой маршрут!';draw()}
 function moveWolves(){if(won||gameOver||steps%2!==0)return;for(let w of wolfPositions){let choices=[[0,-1],[1,0],[0,1],[-1,0]].map(d=>({x:w.x+d[0],y:w.y+d[1]})).filter(p=>inside(p.x,p.y)&&!levels[level].walls.some(a=>a[0]===p.x&&a[1]===p.y)&&!hazardsByLevel[level].some(h=>h.type==='cactus'&&h.x===p.x&&h.y===p.y)&&!wolfPositions.some(o=>o!==w&&o.x===p.x&&o.y===p.y));choices.sort((a,b)=>(Math.abs(a.x-player[0])+Math.abs(a.y-player[1]))-(Math.abs(b.x-player[0])+Math.abs(b.y-player[1])));if(choices.length){w.x=choices[0].x;w.y=choices[0].y}if(w.x===player[0]&&w.y===player[1]){caught();return}}}
-function move(dx,dy){if(won||gameOver)return;let x=player[0]+dx,y=player[1]+dy;if(blocked(x,y)){flash=1;let hazard=hazardsByLevel[level].find(h=>h.x===x&&h.y===y);$('status').textContent=hazard?(hazard.type==='wolf'?'Впереди волк! Обойди его по соседней тропинке.':'Колючий кактус! Найди безопасный обход.'):'Тут густые заросли. Попробуй другой путь!';draw();return}if(wolfPositions.some(w=>w.x===x&&w.y===y)){caught();return}history.push({player:[...player],got:[...got],steps,wolves:wolfPositions.map(w=>({...w})),lives});if(history.length>80)history.shift();player=[x,y];steps++;$('steps').textContent=steps;
+function move(dx,dy){if(introOpen||won||gameOver)return;let x=player[0]+dx,y=player[1]+dy;if(blocked(x,y)){flash=1;let hazard=hazardsByLevel[level].find(h=>h.x===x&&h.y===y);$('status').textContent=hazard?(hazard.type==='wolf'?'Впереди волк! Обойди его по соседней тропинке.':'Колючий кактус! Найди безопасный обход.'):'Тут густые заросли. Попробуй другой путь!';draw();return}if(wolfPositions.some(w=>w.x===x&&w.y===y)){caught();return}history.push({player:[...player],got:[...got],steps,wolves:wolfPositions.map(w=>({...w})),lives});if(history.length>80)history.shift();player=[x,y];steps++;$('steps').textContent=steps;
 let l=levels[level];l.letters.forEach((p,i)=>{if(p[0]===x&&p[1]===y&&!got.includes(i)){got.push(i);$('status').textContent='Нашёл письмо! Осталось: '+(3-got.length);updateMail()}});
 if(x===l.mailbox[0]&&y===l.mailbox[1]){if(got.length===3){win()}else{$('status').textContent='Почтовый ящик уже рядом! Сначала собери все письма.'}}
 else if(got.length===3)$('status').textContent='Все письма собраны! Теперь к почтовому ящику.';
@@ -96,6 +129,6 @@ ctx.fillStyle='#668b57';ctx.beginPath();ctx.roundRect(7,8,10,9,3);ctx.fill();ctx
 ctx.restore();
 if(flash){ctx.strokeStyle='#d58a55';ctx.lineWidth=3;ctx.strokeRect(2,2,568,464);flash--}
 }
-document.querySelectorAll('[data-move]').forEach(b=>b.addEventListener('click',()=>move(...b.dataset.move.split(',').map(Number))));let swipeStart=null;canvas.addEventListener('pointerdown',e=>{swipeStart=[e.clientX,e.clientY]});canvas.addEventListener('pointerup',e=>{if(!swipeStart)return;let dx=e.clientX-swipeStart[0],dy=e.clientY-swipeStart[1];swipeStart=null;if(Math.max(Math.abs(dx),Math.abs(dy))<22)return;if(Math.abs(dx)>Math.abs(dy))move(dx>0?1:-1,0);else move(0,dy>0?1:-1)});document.addEventListener('keydown',e=>{let d={ArrowUp:[0,-1],w:[0,-1],ArrowDown:[0,1],s:[0,1],ArrowLeft:[-1,0],a:[-1,0],ArrowRight:[1,0],d:[1,0]}[e.key];if(d){e.preventDefault();move(...d)}});$('undo').onclick=undo;$('restart').onclick=config;$('hint').onclick=hint;$('next').onclick=()=>{if(level<levels.length-1){level++;config()}};$('modalButton').onclick=()=>{if(gameOver){config()}else if(level<levels.length-1){level++;config()}else{level=0;config()}};config();
+$('introStart').onclick=()=>{$('introScreen').classList.remove('show');introOpen=false};document.querySelectorAll('[data-move]').forEach(b=>b.addEventListener('click',()=>move(...b.dataset.move.split(',').map(Number))));let swipeStart=null;canvas.addEventListener('pointerdown',e=>{swipeStart=[e.clientX,e.clientY]});canvas.addEventListener('pointerup',e=>{if(!swipeStart)return;let dx=e.clientX-swipeStart[0],dy=e.clientY-swipeStart[1];swipeStart=null;if(Math.max(Math.abs(dx),Math.abs(dy))<22)return;if(Math.abs(dx)>Math.abs(dy))move(dx>0?1:-1,0);else move(0,dy>0?1:-1)});document.addEventListener('keydown',e=>{let d={ArrowUp:[0,-1],w:[0,-1],ArrowDown:[0,1],s:[0,1],ArrowLeft:[-1,0],a:[-1,0],ArrowRight:[1,0],d:[1,0]}[e.key];if(d){e.preventDefault();move(...d)}});$('undo').onclick=undo;$('restart').onclick=config;$('hint').onclick=hint;$('next').onclick=()=>{if(level<levels.length-1){level++;config()}};$('modalButton').onclick=()=>{if(gameOver){config()}else if(level<levels.length-1){level++;config()}else{level=0;config()}};config();
 })();
 </script></body></html>
