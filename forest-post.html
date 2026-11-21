@@ -48,6 +48,46 @@
 @keyframes introSpark{50%{opacity:.35;transform:scale(.65) rotate(35deg)}}
 @keyframes introOrbit{to{transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){.intro-screen:before,.intro-screen:after,.intro-card,.intro-sun,.intro-tree,.intro-gopher,.intro-acorn,.intro-firefly{animation:none!important}}
+
+/* TIMKA'S FOREST — richer storybook game presentation */
+:root{--ink:#344d3c;--green:#557f58;--leaf:#b6d49a;--line:#d8e5c9}
+body{background:radial-gradient(ellipse at 12% 4%,#d7edc5 0,transparent 40%),radial-gradient(ellipse at 92% 25%,#f4d8ae 0,transparent 38%),linear-gradient(160deg,#edf2d9,#f5ead4 70%)}
+.app{max-width:1080px}
+header{padding:5px 3px 12px}
+.brand{display:inline-flex;align-items:center;gap:8px;color:#476d4a;font-size:12px}
+.back{border-color:#b9cfaa;background:#ffffffb8;box-shadow:0 5px 15px #536f3b12;transition:transform .2s,background .2s}
+.back:hover{transform:translateY(-2px);background:#fff}
+.hero{border-color:#c6dba9;background:radial-gradient(circle at 80% 10%,#fff6c9 0 5%,transparent 5.5%),linear-gradient(130deg,#e3f0c8,#b9d99f 52%,#f2d5a7);box-shadow:0 20px 48px #536f3b22,inset 0 1px #fff9}
+.hero:after{content:"";position:absolute;inset:auto -4% -75% -4%;height:170px;border-radius:50%;background:#6e9b6240;filter:blur(2px)}
+.hero h1{position:relative;z-index:1;text-shadow:0 3px 0 #fff9,0 10px 22px #456b3a30}
+.hero p{position:relative;z-index:1;color:#647b5b}
+.board-card,.info{border-color:#d9e2c8;background:linear-gradient(145deg,#fffdf4f5,#f7f4e5f2);box-shadow:0 18px 46px #52633a1c,inset 0 1px #fff}
+.board-card{padding:clamp(10px,2vw,18px);border-radius:26px}
+.info{border-radius:26px}
+.board-top{padding:3px 2px 8px}
+.level-name{display:inline-flex;align-items:center;gap:7px;font-size:11px;letter-spacing:.8px}
+.level-name:before{content:"✦";color:#d69b58}
+.stat{border:1px solid #e2e6d2;background:linear-gradient(145deg,#f7f5e8,#e9efda);box-shadow:0 3px 9px #63774b0c}
+canvas{border:1px solid #cbd9b5;border-radius:19px;box-shadow:0 12px 30px #4d6c3c20,inset 0 1px #fff9;touch-action:pan-y}
+.under-board{padding:0 3px;color:#7c896d}
+.hint{padding:5px 9px;border-radius:99px;background:#edf0dc;color:#718650;text-decoration:none}
+.info h2{font-size:18px;letter-spacing:-.3px}
+.mission{background:linear-gradient(135deg,#f3f1dc,#eaf0d8);border-color:#dce4c7}
+.mail{border:1px solid #ead8b8;box-shadow:0 4px 12px #98764a10}
+.mail.got{box-shadow:0 5px 15px #dfa84c33}
+.btn{background:linear-gradient(145deg,#83a66d,#5f8758);box-shadow:0 4px 0 #466d45,0 8px 18px #577b4b20}
+.btn.alt{background:linear-gradient(145deg,#fff7e5,#e9e5cf);box-shadow:0 4px 0 #d1c9ae}
+.dpad{background:linear-gradient(145deg,#f8f7e9,#e1edcf);border-color:#d2dfc1;box-shadow:0 10px 22px #52633a17}
+.dpad button{background:linear-gradient(145deg,#fffef3,#dcebcf);box-shadow:0 4px 0 #bdcfae,0 6px 12px #52633a12;transition:transform .12s,filter .12s}
+.dpad button:hover{filter:brightness(1.04)}
+.overlay{background:#1d3a2ed9;backdrop-filter:blur(9px)}
+.modal{border:1px solid #fff4d8;background:linear-gradient(145deg,#fffdf2,#f0efd9);box-shadow:0 28px 80px #10251b66}
+.intro-card{border-color:#fff8df;background:linear-gradient(155deg,#fffdf1,#f1f1d9);box-shadow:0 32px 100px #0b241d99}
+.intro-screen{background:radial-gradient(ellipse at 50% 15%,#fff0bfaa,transparent 42%),linear-gradient(145deg,#173d35ed,#375c45e8 55%,#183b34f5)}
+@keyframes forestCardPulse{0%,100%{box-shadow:0 18px 46px #52633a1c, inset 0 1px #fff}50%{box-shadow:0 22px 55px #52633a28,inset 0 1px #fff}}
+.board-card{animation:forestCardPulse 7s ease-in-out infinite}
+@media(max-width:760px){.hero{padding:24px 14px 22px}.board-card{border-radius:21px}.info{border-radius:21px}}
+@media(prefers-reduced-motion:reduce){.board-card{animation:none!important}}
 </style>
 </head>
 <body><main class="app">
@@ -105,14 +145,14 @@ function win(){won=true;$('status').textContent='Все письма доста�
 function undo(){if(!history.length||won)return;let s=history.pop();player=s.player;got=s.got;steps=s.steps;if(s.wolves)wolfPositions=s.wolves;if(s.lives!==undefined){lives=s.lives;$('lives').textContent=lives}$('steps').textContent=steps;$('status').textContent='Последний шаг отменён.';updateMail();draw()}
 function hint(){if(won||gameOver)return;let l=levels[level],target=got.length<3?l.letters.find((p,i)=>!got.includes(i)):l.mailbox;let q=[[player[0],player[1],[]]],seen=new Set([key(player)]),found=null;while(q.length){let [x,y,path]=q.shift();if(x===target[0]&&y===target[1]){found=path;break}for(let [dx,dy] of [[0,-1],[1,0],[0,1],[-1,0]]){let nx=x+dx,ny=y+dy,k=key([nx,ny]);if(!blocked(nx,ny)&&!seen.has(k)){seen.add(k);q.push([nx,ny,path.concat([[nx,ny]])])}}}if(found&&found.length){let [nx,ny]=found[0];$('status').textContent='Попробуй шагнуть '+(nx>player[0]?'вправо':nx<player[0]?'влево':ny>player[1]?'вниз':'вверх')+'.';flash=2;draw()}else $('status').textContent='Поищи свободную тропинку среди деревьев.'}
 function rounded(x,y,w,h,r){ctx.beginPath();ctx.roundRect(x,y,w,h,r)}
-function draw(){let l=levels[level];ctx.clearRect(0,0,canvas.width,canvas.height);let bg=ctx.createLinearGradient(0,0,0,468);bg.addColorStop(0,'#e8efcf');bg.addColorStop(1,'#d7e5bb');ctx.fillStyle=bg;ctx.fillRect(0,0,572,468);
+function draw(){const now=performance.now(),pulse=Math.sin(now/430),slowPulse=Math.sin(now/900);let l=levels[level];ctx.clearRect(0,0,canvas.width,canvas.height);let bg=ctx.createLinearGradient(0,0,0,468);bg.addColorStop(0,'#e8efcf');bg.addColorStop(1,'#d7e5bb');ctx.fillStyle=bg;ctx.fillRect(0,0,572,468);
 for(let y=0;y<H;y++)for(let x=0;x<W;x++){let px=x*T+2,py=y*T+2;ctx.fillStyle=(x+y)%2?'#e3edc9':'#e8efcf';rounded(px,py,48,48,9);ctx.fill();if((x*7+y*11)%9===0){ctx.fillStyle='#b6cb9b';ctx.beginPath();ctx.arc(px+12,py+34,1.5,0,7);ctx.arc(px+33,py+12,1,0,7);ctx.fill()}if((x*3+y*5)%13===0){ctx.fillStyle='#fff6df';ctx.beginPath();ctx.arc(px+36,py+34,2,0,7);ctx.fill()}}
 l.walls.forEach(([x,y],i)=>{let px=x*T,py=y*T;ctx.fillStyle='#a9bd8a';ctx.beginPath();ctx.ellipse(px+27,py+40,22,7,0,0,7);ctx.fill();ctx.fillStyle=i%3===0?'#66885a':'#789765';ctx.beginPath();ctx.arc(px+25,py+25,18,0,7);ctx.arc(px+14,py+30,11,0,7);ctx.arc(px+36,py+30,12,0,7);ctx.fill();ctx.fillStyle='#91ad75';ctx.beginPath();ctx.arc(px+19,py+17,6,0,7);ctx.fill()});
-hazardsByLevel[level].filter(h=>h.type==='cactus').forEach(h=>{let hx=h.x*T+26,hy=h.y*T+27;ctx.save();ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='30px "Apple Color Emoji","Segoe UI Emoji",sans-serif';ctx.fillText('🌵',hx,hy);ctx.restore()});wolfPositions.forEach(w=>{let hx=w.x*T+26,hy=w.y*T+27;ctx.save();ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='32px "Apple Color Emoji","Segoe UI Emoji",sans-serif';ctx.shadowColor='#52633a55';ctx.shadowBlur=8;ctx.fillText('🐺',hx,hy);ctx.restore()});
-l.letters.forEach((p,i)=>{if(got.includes(i))return;let x=p[0]*T+26,y=p[1]*T+25;ctx.save();ctx.translate(x,y);ctx.rotate(-.12);ctx.fillStyle='#fff8e7';ctx.strokeStyle='#c98a56';ctx.lineWidth=2;rounded(-11,-8,22,17,3);ctx.fill();ctx.stroke();ctx.strokeStyle='#d9a06b';ctx.beginPath();ctx.moveTo(-10,-7);ctx.lineTo(0,1);ctx.lineTo(10,-7);ctx.stroke();ctx.fillStyle='#c97c4d';ctx.font='bold 9px Nunito';ctx.textAlign='center';ctx.fillText('♥',0,6);ctx.restore()});
+hazardsByLevel[level].filter(h=>h.type==='cactus').forEach(h=>{let hx=h.x*T+26,hy=h.y*T+27;ctx.save();ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='30px "Apple Color Emoji","Segoe UI Emoji",sans-serif';ctx.fillText('🌵',hx,hy);ctx.restore()});wolfPositions.forEach(w=>{let hx=w.x*T+26,hy=w.y*T+27+Math.sin(now/360+w.x)*2;ctx.save();ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='32px "Apple Color Emoji","Segoe UI Emoji",sans-serif';ctx.shadowColor='#52633a55';ctx.shadowBlur=8;ctx.fillText('🐺',hx,hy);ctx.restore()});
+l.letters.forEach((p,i)=>{if(got.includes(i))return;let x=p[0]*T+26,y=p[1]*T+25;ctx.save();ctx.translate(x,y+Math.sin(now/430+i*1.7)*3);ctx.rotate(-.12);ctx.fillStyle='#fff8e7';ctx.strokeStyle='#c98a56';ctx.lineWidth=2;rounded(-11,-8,22,17,3);ctx.fill();ctx.stroke();ctx.strokeStyle='#d9a06b';ctx.beginPath();ctx.moveTo(-10,-7);ctx.lineTo(0,1);ctx.lineTo(10,-7);ctx.stroke();ctx.fillStyle='#c97c4d';ctx.font='bold 9px Nunito';ctx.textAlign='center';ctx.fillText('♥',0,6);ctx.restore()});
 let [mx,my]=l.mailbox;let bx=mx*T+26,by=my*T+28;ctx.fillStyle='#9e7955';ctx.fillRect(bx-3,by-3,6,21);ctx.fillStyle='#c96f50';rounded(bx-14,by-17,28,23,5);ctx.fill();ctx.fillStyle='#f7d8aa';ctx.fillRect(bx-2,by-10,4,8);ctx.fillStyle='#b45d43';ctx.fillRect(bx+10,by-23,3,14);ctx.fillStyle='#f2c879';ctx.beginPath();ctx.arc(bx+11,by-24,3,0,7);ctx.fill();
 let [px,py]=player;let cx=px*T+26,cy=py*T+25;
-ctx.save();ctx.translate(cx,cy+Math.sin(steps*.7)*1.2);
+ctx.save();ctx.translate(cx,cy+Math.sin(now/210)*2.4);ctx.rotate(Math.sin(now/520)*.035);
 ctx.fillStyle='#78906455';ctx.beginPath();ctx.ellipse(0,19,17,5,0,0,Math.PI*2);ctx.fill();
 ctx.fillStyle='#a96d3f';ctx.beginPath();ctx.ellipse(-12,7,8,5,-.45,0,Math.PI*2);ctx.fill();
 ctx.fillStyle='#bd8250';ctx.beginPath();ctx.ellipse(0,4,13,16,0,0,Math.PI*2);ctx.fill();
@@ -127,7 +167,7 @@ ctx.fillStyle='#5b382e';ctx.beginPath();ctx.arc(0,-1,1.8,0,Math.PI*2);ctx.fill()
 ctx.strokeStyle='#8d5c43';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(0,1);ctx.quadraticCurveTo(-2,3,-4,2);ctx.moveTo(0,1);ctx.quadraticCurveTo(2,3,4,2);ctx.stroke();
 ctx.fillStyle='#668b57';ctx.beginPath();ctx.roundRect(7,8,10,9,3);ctx.fill();ctx.fillStyle='#e9d89e';ctx.fillRect(9,10,6,1.5);ctx.beginPath();ctx.arc(12,14,1.2,0,Math.PI*2);ctx.fill();
 ctx.restore();
-if(flash){ctx.strokeStyle='#d58a55';ctx.lineWidth=3;ctx.strokeRect(2,2,568,464);flash--}
+if(flash){ctx.strokeStyle='#d58a55';ctx.lineWidth=3;ctx.globalAlpha=.55+.25*Math.sin(now/65);ctx.strokeRect(2,2,568,464);ctx.globalAlpha=1;flash--}
 }
 $('introStart').onclick=()=>{$('introScreen').classList.remove('show');introOpen=false};document.querySelectorAll('[data-move]').forEach(b=>b.addEventListener('click',()=>move(...b.dataset.move.split(',').map(Number))));let swipeStart=null;canvas.addEventListener('pointerdown',e=>{swipeStart=[e.clientX,e.clientY]});canvas.addEventListener('pointerup',e=>{if(!swipeStart)return;let dx=e.clientX-swipeStart[0],dy=e.clientY-swipeStart[1];swipeStart=null;if(Math.max(Math.abs(dx),Math.abs(dy))<22)return;if(Math.abs(dx)>Math.abs(dy))move(dx>0?1:-1,0);else move(0,dy>0?1:-1)});document.addEventListener('keydown',e=>{let d={ArrowUp:[0,-1],w:[0,-1],ArrowDown:[0,1],s:[0,1],ArrowLeft:[-1,0],a:[-1,0],ArrowRight:[1,0],d:[1,0]}[e.key];if(d){e.preventDefault();move(...d)}});$('undo').onclick=undo;$('restart').onclick=config;$('hint').onclick=hint;$('next').onclick=()=>{if(level<levels.length-1){level++;config()}};$('modalButton').onclick=()=>{if(gameOver){config()}else if(level<levels.length-1){level++;config()}else{level=0;config()}};config();
 })();
