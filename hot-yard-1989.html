@@ -252,7 +252,7 @@ body[data-mode="album"] .memory-toolbar b{color:#ffda9c;font-size:10px}
 body[data-mode="album"] .memory-help{margin:0 0 15px;text-align:left;color:#e2bf9a;font-size:11px;line-height:1.5}
 body[data-mode="album"] .memory-grid{max-width:630px;margin:16px auto 4px;gap:clamp(8px,1.7vw,13px)}
 body[data-mode="album"] .memory-card{position:relative;overflow:hidden;aspect-ratio:1.2;border:1px solid #ecc38c;border-radius:16px;background:radial-gradient(circle at 50% 35%,#a65c36,#71391f 65%,#3b1d14);color:#ffe2a1;font-size:clamp(25px,5vw,39px);text-shadow:0 2px 6px #190805aa;box-shadow:inset 0 1px #fff5,inset 0 -5px #27120d77,0 5px 0 #24100b,0 10px 18px #10070677;transition:transform .23s,filter .23s,background .23s}
-body[data-mode="album"] .memory-card:before{content:"N";position:absolute;inset:7px;border:1px solid #f7d5a755;border-radius:10px;display:grid;place-items:center;font-size:clamp(28px,4vw,42px);font-weight:1000;color:#ffdc9a55;pointer-events:none}
+body[data-mode="album"] .memory-card:before{content:none}
 body[data-mode="album"] .memory-card:not(:disabled):hover{transform:translateY(-4px) rotate(-1deg);filter:brightness(1.15)}
 body[data-mode="album"] .memory-card.revealed{background:linear-gradient(145deg,#fff0bf,#d79b5d);color:#512b19;transform:scale(1.04);box-shadow:0 0 0 3px #ffd98a55,0 8px 20px #15090788}
 body[data-mode="album"] .memory-card.matched{background:linear-gradient(145deg,#c6df9c,#638a50);border-color:#e6f5c0;color:#24401d;box-shadow:0 0 0 2px #bfe28e33,0 5px 0 #2b4426}
@@ -260,6 +260,85 @@ body[data-mode="album"] .collection-panel{border:1px solid #d0915888;background:
 body[data-mode="album"] #start{min-width:220px}
 @media(max-width:520px){body[data-mode="album"] .memory-card{aspect-ratio:1;border-radius:12px}body[data-mode="album"] .memory-toolbar{font-size:7px}}
 @media(prefers-reduced-motion:reduce){.mode,.hop-tile,.memory-card,.kick,.touch-controls button{transition:none!important}}
+
+/* MEMORY ALBUM — nostalgic collectible cards, animated flips and discovery effects */
+.album-hero{position:relative;display:flex;align-items:center;gap:15px;overflow:hidden;margin:0 0 15px;padding:17px 19px;border:1px solid #dfad70aa;border-radius:18px;background:
+ radial-gradient(circle at 92% 0,#f9cd7c33,transparent 38%),
+ linear-gradient(110deg,#754126,#48271c 58%,#2e1914);box-shadow:inset 0 1px #fff4,0 12px 27px #170a0777}
+.album-hero:after{content:"";position:absolute;right:-26px;bottom:-68px;width:180px;height:180px;border:1px solid #f7d69a32;border-radius:50%;box-shadow:0 0 0 18px #f7d69a0d,0 0 0 38px #f7d69a0a;pointer-events:none}
+.album-hero-medal{flex:0 0 48px;width:48px;height:48px;display:grid;place-items:center;border:1px solid #ffe5ac;border-radius:15px;background:linear-gradient(145deg,#fff0bb,#c77b37);color:#693718;font-size:27px;box-shadow:0 5px 14px #15090677,0 0 20px #ffd27a22;animation:albumMedalFloat 3s ease-in-out infinite}
+.album-hero-copy{display:flex;flex-direction:column;gap:4px;min-width:0;position:relative;z-index:1}
+.album-hero-copy small{font-size:8px;font-weight:1000;letter-spacing:1.6px;color:#f4c98c}
+.album-hero-copy b{font-size:clamp(16px,2.4vw,21px);color:#ffebc8;letter-spacing:-.3px}
+.album-hero-copy span{font-size:10px;color:#e0bd9b;line-height:1.45}
+.album-hero-year{position:relative;z-index:1;margin-left:auto;color:#ffd28c;font-weight:1000;font-size:20px;letter-spacing:2px;text-shadow:0 0 17px #ffd18b77;transform:rotate(-8deg)}
+.album-toolbar{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 0 10px}
+.album-stat{padding:10px 12px;border:1px solid #d79c6577;border-radius:12px;background:linear-gradient(145deg,#43251a,#24130f);box-shadow:inset 0 1px #fff2}
+.album-stat small{display:block;color:#c99b73;font-size:7px;font-weight:1000;letter-spacing:1.1px}
+.album-stat b{display:block;margin-top:4px;color:#ffe0a9;font-size:17px;font-variant-numeric:tabular-nums}
+.album-stat-last b{color:#bfe4a0}
+.album-progress-track{height:7px;overflow:hidden;margin:0 0 17px;border-radius:99px;background:#1b100d;border:1px solid #97644066;box-shadow:inset 0 1px 3px #0008}
+.album-progress-track i{display:block;width:0;height:100%;border-radius:99px;background:linear-gradient(90deg,#80ad62,#c6e39a,#ffe1a0);box-shadow:0 0 12px #c8e79b77;transition:width .55s cubic-bezier(.2,.8,.2,1)}
+.album-grid-caption{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:0 1px 9px;color:#f0c890;font-size:8px;font-weight:1000;letter-spacing:1.1px}
+.album-grid-caption small{color:#a9876b;font-size:7px;letter-spacing:.8px}
+body[data-mode="album"] .memory-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(8px,1.5vw,13px);max-width:720px;margin:0 auto 14px;perspective:1000px}
+body[data-mode="album"] .memory-card{position:relative;display:block;width:100%;min-width:0;aspect-ratio:1.12;padding:0;border:0;border-radius:15px;background:transparent;overflow:visible;perspective:1000px;cursor:pointer;box-shadow:none;transform-style:preserve-3d;animation:albumCardEnter .48s both;animation-delay:calc(var(--card-index,0)*42ms);transition:transform .2s,filter .2s}
+body[data-mode="album"] .memory-card:disabled{opacity:1;cursor:default}
+body[data-mode="album"] .memory-card:not(:disabled):hover{transform:translateY(-5px) rotate(-1deg);filter:brightness(1.08)}
+.memory-card-inner{position:absolute;inset:0;display:block;border-radius:15px;transform-style:preserve-3d;transition:transform .62s cubic-bezier(.2,.72,.16,1)}
+body[data-mode="album"] .memory-card.revealed .memory-card-inner,body[data-mode="album"] .memory-card.matched .memory-card-inner{transform:rotateY(180deg)}
+.memory-face{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;border-radius:15px;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden}
+.memory-back{border:1px solid #e4b477;background:
+ radial-gradient(circle at 50% 10%,#f4d19225,transparent 46%),
+ repeating-linear-gradient(45deg,#ffffff08 0 2px,transparent 2px 9px),
+ linear-gradient(145deg,#96552f,#5a2d1c 58%,#2d1711);box-shadow:inset 0 1px #fff5,inset 0 -5px #1f100c99,0 5px 0 #21100c,0 10px 16px #0f070677;color:#ffdc9e}
+.memory-back:before{content:"";position:absolute;inset:6px;border:1px solid #f7d9a66b;border-radius:10px;pointer-events:none}
+.memory-back:after{content:"";position:absolute;inset:-50%;background:linear-gradient(115deg,transparent 40%,#fff2 49%,transparent 58%);transform:translateX(-70%);transition:transform .8s ease}
+.memory-card:not(.revealed):not(.matched):hover .memory-back:after{transform:translateX(70%)}
+.card-back-stars{font-size:clamp(17px,3vw,27px);text-shadow:0 0 16px #ffde9b99;animation:albumStarPulse 2.4s ease-in-out infinite}
+.memory-back b{font-size:clamp(17px,3vw,24px);font-weight:1000;letter-spacing:3px;text-shadow:0 2px 0 #472012,0 0 16px #ffdb9b66}
+.memory-back small{font-size:7px;letter-spacing:1.4px;color:#e9bd86;font-weight:900}
+.memory-back i{position:absolute;bottom:12px;font-style:normal;font-size:13px;color:#f6d7a0aa}
+.memory-front{transform:rotateY(180deg);border:1px solid #ffdf9e;background:
+ radial-gradient(circle at 50% 4%,#fff6d0 0,transparent 53%),
+ linear-gradient(145deg,#ffe4ae,#d4a06b 70%,#9d613c);color:#58321d;box-shadow:inset 0 1px #fff9,inset 0 -4px #75472a33,0 5px 0 #3c2116,0 10px 17px #0e070677}
+.memory-front:before{content:"";position:absolute;inset:6px;border:1px solid #8e5c3866;border-radius:10px;pointer-events:none}
+.memory-item{position:relative;z-index:1;font-size:clamp(25px,5vw,42px);line-height:1.1;filter:drop-shadow(0 5px 3px #55331e44);animation:albumItemPop .4s cubic-bezier(.2,.8,.2,1)}
+.memory-front b{position:relative;z-index:1;font-size:clamp(8px,1.3vw,11px);font-weight:1000;text-align:center;padding:0 3px}
+.memory-front small{position:relative;z-index:1;font-size:6px;letter-spacing:1px;font-weight:1000;color:#855b39}
+body[data-mode="album"] .memory-card.matched .memory-front{border-color:#e7f6c4;background:radial-gradient(circle at 50% 0,#f4ffd8,#c8dfa0 68%,#71965d);color:#29421e;box-shadow:inset 0 1px #fff9,0 0 0 2px #b9e49155,0 5px 0 #3f5931,0 0 23px #b9e58b55}
+body[data-mode="album"] .memory-card.matched .memory-front:before{border-color:#54784666}
+body[data-mode="album"] .memory-card.fresh-unlock .memory-front{animation:albumNewFound .72s ease-out}
+body[data-mode="album"] .memory-card.fresh-unlock .memory-front:after{content:"✦  ✧  ✦";position:absolute;inset:0;display:grid;place-items:center;color:#fff5c9;font-size:22px;text-shadow:0 0 12px #f4d78c;animation:albumSparkle .9s ease-out both;pointer-events:none}
+body[data-mode="album"] .memory-card:focus-visible{outline:3px solid #fff0b5;outline-offset:4px}
+.album-tip{display:flex;align-items:flex-start;gap:9px;padding:11px 13px;border:1px dashed #c18a5b77;border-radius:12px;background:#2b171187;color:#d7b28f;font-size:9px;line-height:1.55}
+.album-tip span{color:#ffdb91;font-size:15px;line-height:1}
+body[data-mode="album"] .collection-panel{position:relative;overflow:hidden;border:1px solid #d79a6488;border-radius:20px;background:radial-gradient(ellipse at 100% 0,#d88c3a22,transparent 45%),linear-gradient(145deg,#48271a,#1f100c);box-shadow:inset 0 1px #fff3,0 16px 36px #0005}
+body[data-mode="album"] .collection-heading h2{font-size:21px;color:#ffe5b5}
+body[data-mode="album"] .collection-item{position:relative;overflow:hidden;border:1px solid #bd8c6155;border-radius:14px;background:linear-gradient(145deg,#3a241a,#21130f);transition:transform .24s,border-color .24s,box-shadow .24s}
+body[data-mode="album"] .collection-item.found{border-color:#b7d88c;background:linear-gradient(145deg,#5c7442,#293e27);box-shadow:inset 0 1px #fff5,0 0 19px #b4de8240;animation:albumCollectionPulse 3s ease-in-out infinite}
+body[data-mode="album"] .collection-item .collect-emoji{font-size:29px;transition:transform .25s}
+body[data-mode="album"] .collection-item.found .collect-emoji{animation:albumItemPop .5s cubic-bezier(.2,.8,.2,1)}
+body[data-mode="album"] .collection-item b{font-size:10px;color:#f3dfc2}
+body[data-mode="album"] .collection-item.found b{color:#f1ffd8}
+@keyframes albumCardEnter{from{opacity:0;transform:translateY(14px) scale(.92)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes albumMedalFloat{50%{transform:translateY(-4px) rotate(5deg)}}
+@keyframes albumStarPulse{50%{transform:scale(1.18);text-shadow:0 0 21px #ffdc9b}}
+@keyframes albumItemPop{0%{transform:scale(.55) rotate(-10deg)}70%{transform:scale(1.15) rotate(4deg)}100%{transform:scale(1)}}
+@keyframes albumNewFound{0%{filter:brightness(1)}35%{filter:brightness(1.55)}100%{filter:brightness(1)}}
+@keyframes albumSparkle{0%{opacity:0;transform:scale(.2) rotate(-25deg)}45%{opacity:1;transform:scale(1.15) rotate(9deg)}100%{opacity:0;transform:scale(1.4) rotate(25deg)}}
+@keyframes albumCollectionPulse{0%,100%{box-shadow:inset 0 1px #fff5,0 0 12px #b4de8220}50%{box-shadow:inset 0 1px #fff5,0 0 20px #b4de8250}}
+@media(max-width:560px){
+ .album-hero{padding:13px;gap:10px}.album-hero-medal{width:39px;height:39px;flex-basis:39px;font-size:22px}.album-hero-year{font-size:15px}
+ .album-stat{padding:9px 8px}.album-stat small{font-size:6px;letter-spacing:.5px}.album-stat b{font-size:15px}
+ body[data-mode="album"] .memory-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+ body[data-mode="album"] .memory-card{aspect-ratio:1.25;border-radius:14px}
+ body[data-mode="album"] .memory-face{border-radius:14px}
+}
+@media(prefers-reduced-motion:reduce){
+ .album-hero-medal,.card-back-stars,.collection-item.found{animation:none!important}
+ .memory-card,.memory-card-inner,.memory-front,.memory-back{transition:none!important;animation:none!important}
+}
 </style></head>
 <body><div class="wrap">
 <header class="top"><a class="back" href="index.html#games">← В игровой хаб</a><div class="brand">N1KMEL ORIGINAL</div></header>
@@ -296,11 +375,18 @@ const update=()=>{$('score').textContent=score;$('best').textContent=best;$('coi
 function award(n){score+=n;coins+=Math.max(1,Math.floor(n/10));if(score>best){best=score;localStorage.setItem('yardBest',best)}localStorage.setItem('yardCoins',coins);update()}
 function renderMemoryGrid(active){
  const root=$('memoryGrid');if(!root)return;root.innerHTML='';
- const movesEl=$('albumMoves');if(movesEl)movesEl.textContent='ХОДЫ: '+albumMoves;
+ const movesEl=$('albumMoves');if(movesEl)movesEl.textContent=String(albumMoves).padStart(2,'0');
+ const pairCount=albumDeck.filter(card=>card.matched).length/2;
+ const pairEl=$('albumPairCount');if(pairEl)pairEl.textContent=pairCount+' / 4';
+ const bar=$('albumProgressBar');if(bar)bar.style.width=(pairCount/4*100)+'%';
  albumDeck.forEach((card,index)=>{
   const b=document.createElement('button');
-  b.className='memory-card'+(card.matched?' matched':'')+(card.revealed?' revealed':'');
-  b.type='button';b.textContent=card.revealed||card.matched?card.item.emoji:'?';
+  b.className='memory-card'+(card.revealed?' revealed':'')+(card.matched?' matched':'')+(card.justFound?' fresh-unlock':'');
+  b.type='button';b.dataset.index=String(index);
+  b.innerHTML='<span class="memory-card-inner">'+
+   '<span class="memory-face memory-back"><span class="card-back-stars">✦</span><b>N1K</b><small>ДВОР · 1989</small><i>✧</i></span>'+
+   '<span class="memory-face memory-front"><span class="memory-item">'+card.item.emoji+'</span><b>'+card.item.title+'</b><small>НАХОДКА №'+String(card.pair+1).padStart(2,'0')+'</small></span>'+
+  '</span>';
   b.disabled=card.matched||!active;
   b.setAttribute('aria-label',card.revealed||card.matched?card.item.title:'Закрытая карточка');
   b.addEventListener('click',()=>flipMemory(index,b));root.append(b);
@@ -308,8 +394,8 @@ function renderMemoryGrid(active){
 }
 function makeAlbumDeck(){
  const pairs=collectionCatalog.flatMap((item,pair)=>[
-  {pair,item,matched:false,revealed:false},
-  {pair,item,matched:false,revealed:false}
+  {pair,item,matched:false,revealed:false,justFound:false},
+  {pair,item,matched:false,revealed:false,justFound:false}
  ]);
  for(let i=pairs.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[pairs[i],pairs[j]]=[pairs[j],pairs[i]]}
  return pairs;
@@ -317,39 +403,51 @@ function makeAlbumDeck(){
 function beginAlbum(){
  if(albumFlipTimer){clearTimeout(albumFlipTimer);albumFlipTimer=null}
  albumRoundId++;albumDeck=makeAlbumDeck();albumPicks=[];albumBusy=false;albumMoves=0;running=true;
- $('start').disabled=false;$('start').textContent='Перемешать карточки';
- $('round').textContent='ПАРЫ 0/4';$('message').textContent='Колода перемешана! Открывай по две карточки и ищи совпадения.';
+ $('start').disabled=false;$('start').textContent='Перемешать колоду ↻';
+ $('round').textContent='ПАРЫ 0/4';$('message').textContent='Новая колода готова. Найди пары дворовых сокровищ!';
  renderMemoryGrid(true);
 }
 function flipMemory(index,button){
  if(!running||mode!=='album'||albumBusy)return;
  const card=albumDeck[index];if(!card||card.revealed||card.matched)return;
- card.revealed=true;button.classList.add('revealed');button.textContent=card.item.emoji;albumPicks.push(index);
+ card.revealed=true;albumPicks.push(index);renderMemoryGrid(true);
  if(albumPicks.length<2)return;
- albumMoves++;const movesEl=$('albumMoves');if(movesEl)movesEl.textContent='ХОДЫ: '+albumMoves;
+ albumMoves++;const movesEl=$('albumMoves');if(movesEl)movesEl.textContent=String(albumMoves).padStart(2,'0');
  const [a,b]=albumPicks.map(i=>albumDeck[i]);albumBusy=true;
  if(a.pair===b.pair){
-  a.matched=b.matched=true;const item=a.item;
-  if(!unlocked.includes(item.id)){
-   unlocked.push(item.id);try{localStorage.setItem('yardCollection',JSON.stringify(unlocked))}catch{}
-   award(30);$('message').textContent='Нашёл! В альбом добавлено: '+item.title+'. +30 очков.';paintCollection();
-  }else{$('message').textContent='Пара совпала! Эта находка уже есть в альбоме.'}
+  a.matched=b.matched=true;const item=a.item;const newlyFound=!unlocked.includes(item.id);
+  if(newlyFound){
+   a.justFound=b.justFound=true;unlocked.push(item.id);
+   try{localStorage.setItem('yardCollection',JSON.stringify(unlocked))}catch{}
+   award(30);$('message').textContent='Новая находка: '+item.title+'! Предмет добавлен в альбом. +30 очков.';
+   paintCollection();
+  }else{$('message').textContent='Отлично! Пара совпала — эта находка уже есть в коллекции.'}
   albumPicks=[];albumBusy=false;renderMemoryGrid(true);
   const matchedPairs=albumDeck.filter(x=>x.matched).length/2;$('round').textContent='ПАРЫ '+matchedPairs+'/4';
   if(albumDeck.every(x=>x.matched)){
-   running=false;award(50);$('message').textContent='Альбом собран! Все четыре пары найдены. +50 очков. Можно перемешать колоду и сыграть ещё раз.';
-   $('start').disabled=false;$('start').textContent='Перемешать карточки';
+   running=false;award(50);$('message').textContent='Коллекция собрана! Все четыре пары найдены. Бонус +50 очков. Можно перемешать колоду и сыграть снова.';
+   $('start').disabled=false;$('start').textContent='Перемешать колоду ↻';
   }
  }else{
-  $('message').textContent='Не совпало. Запомни картинки — карточки скоро закроются.';
+  $('message').textContent='Пока не совпало. Запомни карточки — они скоро перевернутся.';
   const roundId=albumRoundId;
   albumFlipTimer=setTimeout(()=>{
    albumFlipTimer=null;if(roundId!==albumRoundId||mode!=='album')return;
    a.revealed=b.revealed=false;albumPicks=[];albumBusy=false;renderMemoryGrid(true);
-  },850);
+  },900);
  }
 }
-function paintCollection(){const root=$('collectionGrid');if(!root)return;root.innerHTML='';collectionCatalog.forEach(item=>{const found=unlocked.includes(item.id);const el=document.createElement('div');el.className='collection-item'+(found?' found':'');el.innerHTML='<span class="collect-emoji">'+(found?item.emoji:'?')+'</span><b>'+(found?item.title:'Неизвестная находка')+'</b><small>'+(found?item.desc:'Найди пару в альбоме')+'</small>';root.append(el)});$('collectionCount').textContent=unlocked.length+' / '+collectionCatalog.length}
+function paintCollection(){
+ const root=$('collectionGrid');if(!root)return;root.innerHTML='';
+ collectionCatalog.forEach(item=>{
+  const found=unlocked.includes(item.id);const el=document.createElement('div');
+  el.className='collection-item'+(found?' found':'');
+  el.innerHTML='<span class="collect-emoji">'+(found?item.emoji:'?')+'</span><b>'+(found?item.title:'Неизвестная находка')+'</b><small>'+(found?item.desc:'Найди пару в альбоме')+'</small>';
+  root.append(el);
+ });
+ $('collectionCount').textContent=unlocked.length+' / '+collectionCatalog.length;
+ const progress=$('collectionProgress');if(progress)progress.style.width=(unlocked.length/collectionCatalog.length*100)+'%';
+}
 function setMode(m){
  stop();mode=m;document.body.dataset.mode=mode;document.querySelectorAll('.mode').forEach(b=>b.classList.toggle('active',b.dataset.mode===m));
  round=1;score=0;step=1;kicks=0;goals=0;hopPhase='setup';hopCurrent=0;hopPicked=false;hopTarget=randomHopTarget();kickLock=false;if(m==='album'){albumDeck=makeAlbumDeck();albumPicks=[];albumBusy=false;albumMoves=0}update();render();
@@ -370,10 +468,13 @@ function render(){
   $('playArea').innerHTML='<div class="dodge-arena-wrap"><div class="dodge-scoreline"><span>ПРОДЕРЖИСЬ КАК МОЖНО ДОЛЬШЕ</span><b id="dodgeTime">00:00</b></div><div class="dodge-area" id="dodgeArea"><div class="dodge-lane lane-a"></div><div class="dodge-lane lane-b"></div><div class="dodge-player" id="player"><span>🧒</span><i></i></div></div><div class="touch-controls"><button id="left" aria-label="Влево">←</button><small>УДЕРЖИВАЙ</small><button id="right" aria-label="Вправо">→</button></div></div>';
   bindDodgeControls();
  }else{
-  $('gameTitle').textContent='Альбом находок';$('hint').textContent='Открывай карточки по две. Найди четыре пары и пополни свой альбом дворовых сокровищ!';
-  $('playArea').innerHTML='<div class="memory-toolbar"><span>МИНИ-ИГРА · НАЙДИ ПАРЫ</span><b id="albumMoves">ХОДЫ: 0</b></div><div class="memory-help">Открывай по две карточки. Найденные предметы попадут в твой альбом.</div><div class="memory-grid" id="memoryGrid"></div>';
+  $('gameTitle').textContent='Альбом находок';$('hint').textContent='Переворачивай карточки, ищи одинаковые пары и собирай коллекцию дворовых сокровищ.';
+  $('playArea').innerHTML='<div class="album-hero"><div class="album-hero-medal">✦</div><div class="album-hero-copy"><small>ЛИЧНАЯ КОЛЛЕКЦИЯ · РАЙОН №7</small><b>Сокровища нашего двора</b><span>Вспомни лето 1989-го — каждая находка хранит свою историю.</span></div><div class="album-hero-year">1989</div></div>'+
+  '<div class="album-toolbar"><div class="album-stat"><small>НАЙДЕНО ПАР</small><b id="albumPairCount">0 / 4</b></div><div class="album-stat"><small>ТВОИ ХОДЫ</small><b id="albumMoves">00</b></div><div class="album-stat album-stat-last"><small>ПРЕДМЕТОВ В АЛЬБОМЕ</small><b>'+unlocked.length+' / 4</b></div></div>'+
+  '<div class="album-progress-track"><i id="albumProgressBar"></i></div><div class="album-grid-caption"><span>КАРТОЧКИ ИЗ СТАРОГО АЛЬБОМА</span><small>НАЖМИ, ЧТОБЫ ПЕРЕВЕРНУТЬ</small></div><div class="memory-grid" id="memoryGrid"></div>'+
+  '<div class="album-tip"><span>✦</span> Найди две одинаковые карточки — они останутся открытыми, а новая вещь появится в твоей коллекции.</div>';
   if(!albumDeck.length)albumDeck=makeAlbumDeck();
-  $('start').textContent='Начать поиск пар';$('start').disabled=false;$('round').textContent='ПАРЫ '+(albumDeck.filter(x=>x.matched).length/2)+'/4';renderMemoryGrid(false);
+  $('start').textContent='Перемешать колоду ↻';$('start').disabled=false;$('round').textContent='ПАРЫ '+(albumDeck.filter(x=>x.matched).length/2)+'/4';renderMemoryGrid(false);
  }
  paintCollection();
 }
