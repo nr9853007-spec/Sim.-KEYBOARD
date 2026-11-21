@@ -175,7 +175,7 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.22;ba
 <script>
 (()=>{'use strict';
 const $=id=>document.getElementById(id);let mode='hop',score=0,coins=Number(localStorage.getItem('yardCoins')||0),best=Number(localStorage.getItem('yardBest')||0),round=1,step=1,kicks=0,goals=0,player=50,falling=[],timer=null,raf=null,running=false,lastSpawn=0,lastTime=0;
-let hopPhase='setup',hopCurrent=0,hopTarget=1,hopPicked=false,keeperDir='center',dodgeStart=0,holdTimer=null,heldDirection=0;
+let hopPhase='setup',hopCurrent=0,hopTarget=1,hopPicked=false,keeperDir='center',dodgeStart=0,holdTimer=null,heldDirection=0,holdEventsBound=false;
 const randomHopTarget=()=>1+Math.floor(Math.random()*8);
 const directions={left:'В ЛЕВЫЙ УГОЛ',center:'ПО ЦЕНТРУ',right:'В ПРАВЫЙ УГОЛ'};
 const chooseKeeper=()=>['left','center','right'][Math.floor(Math.random()*3)];
@@ -240,6 +240,15 @@ function renderHop(){
  if(hopPhase==='lost')banner='<div class="hop-result lost"><b>ОЙ! НАСТУПИЛ НА КАМЕШЕК</b><span>Попробуй ещё раз — во дворе дают второй шанс.</span></div>';
  if(hopPhase==='win')banner='<div class="hop-result won"><b>КЛАССИКИ ПРОЙДЕНЫ!</b><span>Ты вернулся на старт и поднял свой камешек. +60 очков</span></div>';
  const status=setup?'Сначала выбери клетку для камешка.':hopPhase==='out'?'ПУТЬ ТУДА · НЕ НАСТУПИ НА КАМЕШЕК':hopPhase==='back'?'ОБРАТНЫЙ ПУТЬ · ЗАБЕРИ КАМЕШЕК':hopPhase==='win'?'ПОБЕДА':'ПОПРОБУЙ ЕЩЁ РАЗ';
+ if(setup)$('hint').textContent='Выбери цифру для камешка или нажми случайный бросок. Затем пройди маршрут и вернись за камешком.';
+ else if(hopPhase==='out'&&hopCurrent+1===hopTarget)$('hint').textContent='Камешек на клетке '+hopTarget+'. Нажми «Перепрыгнуть камешек», иначе проиграешь.';
+ else if(hopPhase==='out'&&hopCurrent===8)$('hint').textContent='Все клетки пройдены! Доберись до домика, чтобы развернуться.';
+ else if(hopPhase==='out')$('hint').textContent='Прыгни на клетку '+(hopCurrent+1)+'. Не сбивайся с последовательности.';
+ else if(hopPhase==='back'&&!hopPicked&&hopCurrent===hopTarget+1)$('hint').textContent='Ты рядом с камешком '+hopTarget+'. Подними его, не наступая на клетку!';
+ else if(hopPhase==='back'&&hopCurrent===1)$('hint').textContent='Последний прыжок — вернись на стартовую линию!';
+ else if(hopPhase==='back')$('hint').textContent='Возвращайся назад. Следующая клетка — '+(hopCurrent-1)+'.';
+ else if(hopPhase==='win')$('hint').textContent='Идеальный раунд! Камешек у тебя, можно начинать новый бросок.';
+ else if(hopPhase==='lost')$('hint').textContent='Не беда. Выбери новую цифру и попробуй ещё раз.';
  $('playArea').innerHTML=picker+'<div class="hop-status">'+status+'</div><div class="hop-course"><div class="hop-start"><span>СТАРТ</span>'+(hopCurrent===0?'<b class="hop-boy">🧒</b>':'')+'</div><div class="hop-path">'+tiles+'</div><button type="button" class="hop-home'+(homeHere?' occupied':'')+'" data-number="9">ДОМИК '+(homeHere?'<b class="hop-boy">🧢</b>':'🏠')+'</button></div>'+banner+'<div class="hop-actions">'+action+'</div>';
  $('playArea').querySelectorAll('[data-stone]').forEach(btn=>btn.addEventListener('click',()=>{if(!setup)return;hopTarget=Number(btn.dataset.stone);renderHop()}));
  $('playArea').querySelectorAll('[data-number]').forEach(btn=>btn.addEventListener('click',()=>hopTo(Number(btn.dataset.number))));
@@ -363,11 +372,11 @@ function dodgeFrame(t){
  if(hit){finishDodge();return}
  if(running)raf=requestAnimationFrame(dodgeFrame);
 }
+function stopDodgeHold(){heldDirection=0;if(holdTimer)clearInterval(holdTimer);holdTimer=null}
 function bindDodgeControls(){
  const startHold=(dir,e)=>{e.preventDefault();heldDirection=dir;move(dir);if(holdTimer)clearInterval(holdTimer);holdTimer=setInterval(()=>{if(running&&mode==='dodge')move(heldDirection)},55)};
- const stopHold=()=>{heldDirection=0;if(holdTimer)clearInterval(holdTimer);holdTimer=null};
  [['left',-5],['right',5]].forEach(([id,dir])=>{const el=$(id);el.addEventListener('pointerdown',e=>startHold(dir,e));el.addEventListener('contextmenu',e=>e.preventDefault())});
- window.addEventListener('pointerup',stopHold);window.addEventListener('pointercancel',stopHold);window.addEventListener('blur',stopHold);
+ if(!holdEventsBound){window.addEventListener('pointerup',stopDodgeHold);window.addEventListener('pointercancel',stopDodgeHold);window.addEventListener('blur',stopDodgeHold);holdEventsBound=true}
 }
 function finishDodge(){
  const seconds=Math.floor((performance.now()-dodgeStart)/1000);
@@ -375,7 +384,7 @@ function finishDodge(){
  $('start').disabled=false;$('start').textContent='Ещё попытка';
 }
 function stop(){
- running=false;if(timer)clearInterval(timer);if(raf)cancelAnimationFrame(raf);if(holdTimer)clearInterval(holdTimer);heldDirection=0;holdTimer=raf=null;
+ running=false;if(timer)clearInterval(timer);if(raf)cancelAnimationFrame(raf);if(holdTimer)clearInterval(holdTimer);heldDirection=0;holdTimer=raf=null;heldDirection=0;
  falling.forEach(o=>o.el.remove());falling=[];
 }
 function start(){
