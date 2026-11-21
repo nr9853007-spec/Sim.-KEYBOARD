@@ -190,7 +190,7 @@ function pickStone(){
  renderHop();
 }
 function finishHop(){
- if(hopPhase!=='back'||hopCurrent!==1)return;
+ if(hopPhase!=='back'||(hopCurrent!==1&&hopCurrent!==0))return;
  running=false;hopPhase='win';round++;award(60);$('message').textContent='Победа! Ты вернулся и поднял камешек.';renderHop();
 }
 let kickLock=false;
