@@ -150,6 +150,48 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opa
 @media(max-width:760px){.app{padding-top:13px}.hero{padding:19px 17px;border-radius:19px;margin-bottom:13px}.hero-mark{font-size:57px}.panel{border-radius:18px}.board{gap:4px;padding:8px}.piece-card{min-height:104px}}
 @media(max-width:420px){.topbar{gap:7px;margin-bottom:17px}.brand{gap:8px}.brand-mark{width:39px;height:39px}.top-actions{gap:5px}.ghost-btn,.primary-btn{padding:8px 9px;border-radius:10px}.hero{padding:17px 14px}.hero p{font-size:11px}.board{gap:3px;padding:6px}.piece-card{min-height:94px}.mini-cell{width:15px;height:15px}}
 @media(prefers-reduced-motion:reduce){body:before,.brand-mark,.brand-mark:after,.hero:before,.hero:after,.hero-mark,.cell.filled,.cell.preview,.combo:after,.drag-ghost{animation:none!important}}
+
+/* BLOCK HUNT — HUNT SYSTEM / PRISMATIC LINE COLLAPSE */
+:root{--cyan:#78f7e9;--violet:#b29aff;--gold:#ffd98a}
+.stats{grid-template-columns:repeat(4,minmax(0,1fr))}
+.stat-value.violet{color:#c3a9ff;text-shadow:0 0 20px #a78bfa55}
+.cell.crystal-cell{overflow:visible;border-color:#e9ce7a;background:linear-gradient(145deg,#28364b,#20243a);box-shadow:inset 0 1px #ffffff30,0 0 15px #ffd66a22}
+.crystal-mark{position:absolute;inset:0;display:grid;place-items:center;color:#fff1a3;font-size:clamp(11px,2vw,17px);font-weight:1000;text-shadow:0 0 5px #fff,0 0 12px #ffd45b,0 0 22px #ffc14b;animation:crystalBeat 1.25s ease-in-out infinite;pointer-events:none;z-index:2}
+@keyframes crystalBeat{0%,100%{transform:scale(.78) rotate(0);opacity:.7}50%{transform:scale(1.2) rotate(42deg);opacity:1}}
+.cell.power-preview{outline:2px solid #ffdf8c;outline-offset:-3px;filter:brightness(1.3);box-shadow:0 0 17px #ffd16d88,inset 0 0 12px #fff4}
+.board.cascade-active{box-shadow:inset 0 0 35px #66f7e62c,0 0 0 5px #68f1e51c,0 0 42px #54e8db66}
+.board.cascade-active:before,.board.power-burst:before{content:"";position:absolute;z-index:12;pointer-events:none;inset:7px;border-radius:12px;background:linear-gradient(90deg,transparent 0%,#9ffef000 28%,#d7fff9dd 49%,#b6a2ff88 54%,transparent 72%);filter:blur(3px);animation:prismSweep .76s cubic-bezier(.18,.7,.2,1) both}
+@keyframes prismSweep{0%{transform:translateX(-115%) skewX(-12deg);opacity:0}18%{opacity:1}100%{transform:translateX(115%) skewX(-12deg);opacity:0}}
+.cell.clearing,.cell.power-clearing{z-index:8;overflow:visible!important;pointer-events:none}
+.fx-shard{position:absolute;z-index:15;left:50%;top:50%;width:8px;height:4px;border-radius:3px;background:linear-gradient(90deg,#fff,#75f6e8 52%,#a68dff);box-shadow:0 0 9px #8fffff;pointer-events:none;will-change:transform,opacity}
+.cell.power-clearing .fx-shard{background:linear-gradient(90deg,#fff4d1,#ffd06c 55%,#ff91c9);box-shadow:0 0 10px #ffd16e}
+.tools-panel{padding:15px;background:linear-gradient(145deg,#182942f5,#101b2d)}
+.energy-pill{font-size:10px;color:#ffe6a1;background:#77551f33;border-color:#d9ae5e66;box-shadow:0 0 18px #ffc85e18}
+.power-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.power-btn{position:relative;display:grid;grid-template-columns:31px 1fr;grid-template-rows:auto auto;align-items:center;column-gap:8px;min-height:58px;padding:9px 10px;text-align:left;border:1px solid #354c6d;border-radius:13px;background:linear-gradient(145deg,#1b2c46,#111c30);color:#eaf5ff;cursor:pointer;transition:transform .18s,border-color .18s,box-shadow .18s,filter .18s}
+.power-btn:hover:not(:disabled){transform:translateY(-2px);border-color:#79e8db;box-shadow:0 8px 20px #02081277,0 0 18px #5ce8e022}
+.power-btn:active:not(:disabled){transform:scale(.97)}
+.power-btn:disabled{opacity:.36;filter:saturate(.45);cursor:not-allowed}
+.power-btn.active{border-color:#9bfff1;box-shadow:0 0 0 2px #6ceadd24,0 0 22px #5ce8e055;background:linear-gradient(145deg,#1c4a50,#172943)}
+.power-icon{grid-row:1/3;width:30px;height:30px;display:grid;place-items:center;border-radius:10px;background:#79f1e61c;color:#98fff1;font-size:19px;box-shadow:inset 0 1px #ffffff19}
+.power-btn:nth-child(2) .power-icon{color:#ffc96f;background:#ffc96f18}
+.power-btn:nth-child(3) .power-icon{color:#c4aaff;background:#ad91ff20}
+.power-btn b{font-size:9px;letter-spacing:1px}
+.power-btn small{margin-top:2px;color:#94a9c5;font-size:8px}
+.quest-line{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px;padding:9px 10px;border:1px solid #56618a66;border-radius:11px;background:linear-gradient(90deg,#2a355633,#735b9b22);font-size:9px;color:#b9c5e3}
+.quest-line strong{color:#d9c7ff;letter-spacing:1px;font-size:8px}
+.tool-note{margin-top:8px;color:#8098b8;font-size:9px;line-height:1.5}
+.toast{position:fixed;z-index:10001;left:50%;bottom:max(20px,env(safe-area-inset-bottom));transform:translate(-50%,18px) scale(.96);max-width:min(92vw,520px);padding:12px 18px;border:1px solid #9bfff1a8;border-radius:999px;background:linear-gradient(100deg,#15384aee,#30264feF);color:#eafffb;font-size:11px;font-weight:900;letter-spacing:.35px;text-align:center;box-shadow:0 14px 38px #000a,0 0 28px #6deee755;opacity:0;pointer-events:none;transition:opacity .22s,transform .22s}
+.toast.show{opacity:1;transform:translate(-50%,0) scale(1)}
+.cell.clearing{animation:crystalCollapse .66s cubic-bezier(.19,.78,.22,1) both;transform-origin:center}
+.cell.clearing:before{content:"";position:absolute;inset:2px;border:1px solid #f0fffb;border-radius:5px;box-shadow:0 0 15px #aafff4,inset 0 0 12px #fff;background:linear-gradient(135deg,#fff9,#7bfff055 38%,#aa8cff44);z-index:4;pointer-events:none;animation:facetFlash .48s ease-out both}
+@keyframes facetFlash{0%{opacity:0;transform:scale(.25) rotate(-25deg)}28%{opacity:1;transform:scale(1.12) rotate(8deg)}100%{opacity:0;transform:scale(1.5) rotate(22deg)}}
+@keyframes crystalCollapse{0%{opacity:1;filter:brightness(1);transform:scale(1) rotate(0)}18%{opacity:1;filter:brightness(2.3) saturate(1.8);transform:scale(1.13) rotate(4deg)}42%{opacity:.9;filter:brightness(2.8) saturate(1.6);transform:scale(.88) rotate(-13deg)}100%{opacity:0;filter:brightness(2) blur(4px);transform:translateY(-9px) scale(.08) rotate(48deg)}}
+.cell.power-clearing{animation:meteorVanish .58s cubic-bezier(.2,.7,.2,1) both}
+@keyframes meteorVanish{0%{opacity:1;transform:scale(1);filter:brightness(1)}35%{opacity:1;transform:scale(1.18);filter:brightness(2.4) sepia(.55)}100%{opacity:0;transform:scale(.05) rotate(75deg);filter:brightness(2) blur(4px)}}
+@media(max-width:760px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.power-btn{min-height:55px}.tools-panel{padding:13px}}
+@media(max-width:420px){.power-grid{gap:6px}.power-btn{padding:8px;grid-template-columns:27px 1fr;column-gap:6px}.power-icon{width:26px;height:26px;font-size:17px}.power-btn b{font-size:8px}.power-btn small{font-size:7px}.quest-line{font-size:8px}}
+@media(prefers-reduced-motion:reduce){.crystal-mark,.board.cascade-active:before,.board.power-burst:before,.cell.clearing,.cell.clearing:before,.cell.power-clearing,.toast,.fx-shard{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
@@ -163,6 +205,7 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opa
 <div class="stat"><div class="stat-label">ТЕКУЩИЙ СЧЁТ</div><div class="stat-value cyan" id="score">0</div></div>
 <div class="stat"><div class="stat-label">РЕКОРД</div><div class="stat-value gold" id="best">0</div></div>
 <div class="stat"><div class="stat-label">ОЧИЩЕНО ЛИНИЙ</div><div class="stat-value" id="lines">0</div></div>
+<div class="stat"><div class="stat-label">НАЙДЕНО КРИСТАЛЛОВ</div><div class="stat-value violet" id="crystalsFound">0</div></div>
 </section>
 <div class="layout">
 <section class="panel">
@@ -176,21 +219,32 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opa
 <div class="tray" id="tray"></div>
 <div class="hint"><strong>Drag &amp; Drop:</strong> зажми фигуру и перетащи её на поле — мышью или пальцем. Светящийся контур покажет место установки. Можно также просто нажать на фигуру, а затем на клетку.</div>
 </section>
+<section class="panel tools-panel">
+<div class="panel-head"><div><div class="panel-title">ОСОБЫЕ ПРИЁМЫ</div><div class="panel-sub">Заряды за линии и найденные кристаллы</div></div><span class="pill energy-pill" id="energyPill">⚡ 5 / 12</span></div>
+<div class="power-grid">
+<button class="power-btn" id="rotateBtn" type="button"><span class="power-icon">⟳</span><b>ПОВОРОТ</b><small>Бесплатно · E</small></button>
+<button class="power-btn" id="meteorBtn" type="button"><span class="power-icon">☄</span><b>МЕТЕОР</b><small>Область 3×3 · 4⚡</small></button>
+<button class="power-btn" id="prismBtn" type="button"><span class="power-icon">✦</span><b>ПРИЗМА</b><small>Ряд + колонка · 7⚡</small></button>
+<button class="power-btn" id="shuffleBtn" type="button"><span class="power-icon">↝</span><b>ПЕРЕСБОРКА</b><small>Новые фигуры · 3⚡</small></button>
+</div>
+<div class="quest-line"><span id="questProgress">✧ 0 / 5 до бонуса</span><strong id="hunterRank">НОВИЧОК</strong></div>
+<div class="tool-note" id="toolNote">Найди золотые кристаллы на поле — они заряжают твои способности.</div>
+</section>
 <div class="combo"><span>СЕРИЯ ОЧИСТОК</span><strong id="combo">× 0</strong></div>
 </aside>
 </div>
 <footer class="footer"><span>N1KMEL HUB · BLOCK HUNT</span><span>THINK. PLACE. CLEAR.</span></footer>
 </main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 <div class="overlay" id="helpModal" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
-<div class="modal"><h2 id="helpTitle">Как играть?</h2><p>Выбирай одну из трёх фигур и ставь её на поле. Когда целая строка или колонка заполнена, она исчезает. За несколько линий одновременно начисляется бонус. Игра заканчивается, когда ни одна из оставшихся фигур больше не помещается.</p><div class="modal-actions"><button class="primary-btn" id="closeHelp" type="button">Понятно!</button></div></div>
+<div class="modal"><h2 id="helpTitle">Как играть?</h2><p>Перетаскивай фигуры мышью или пальцем. Поворачивай их клавишей E. Собирай полные линии, подбирай золотые кристаллы и копи энергию. Метеор очищает область 3×3, Призма — выбранную строку и колонку, Пересборка меняет оставшиеся фигуры. Каждые пять кристаллов дают бонус энергии.</p><div class="modal-actions"><button class="primary-btn" id="closeHelp" type="button">Понятно!</button></div></div>
 </div>
 <div class="overlay" id="gameOver" role="dialog" aria-modal="true" aria-labelledby="overTitle">
 <div class="modal"><div class="eyebrow">ЭТО БЫЛО СИЛЬНО</div><h2 id="overTitle">Игра окончена</h2><p>Свободного места для следующих фигур не осталось.</p><div class="modal-score" id="finalScore">0</div><p>Твой результат</p><div class="modal-actions"><button class="primary-btn" id="playAgainBtn" type="button">Играть ещё ↻</button><a class="ghost-btn" href="index.html" style="text-decoration:none;display:inline-flex;align-items:center">В хаб ↗</a></div></div>
 </div>
-<script>
-(function(){
+<script>(function(){
 'use strict';
-const SIZE=9;
+const SIZE=9,MAX_ENERGY=12;
 const COLORS=['c0','c1','c2','c3','c4','c5'];
 const SHAPES=[
 [[0,0]],[[0,0],[0,1]],[[0,0],[0,1],[0,2]],[[0,0],[0,1],[0,2],[0,3]],[[0,0],[0,1],[0,2],[0,3],[0,4]],
@@ -204,180 +258,177 @@ const SHAPES=[
 [[0,0],[0,1],[1,0],[1,1],[2,0],[2,1]]
 ];
 const boardEl=document.getElementById('board'),trayEl=document.getElementById('tray');
-let board, pieces, score=0, lines=0, best=0, combo=0, selected=-1, soundOn=false, locked=false;
-let dragState=null, suppressPieceClickUntil=0;
+let board,pieces,crystals=new Set(),score=0,lines=0,best=0,combo=0,selected=-1,soundOn=false,locked=false,animating=false;
+let energy=5,crystalsFound=0,claimedMilestone=0,powerMode=null,rescueAvailable=false,dragState=null,suppressPieceClickUntil=0,toastTimer=null;
 function safeBest(){try{return Number(localStorage.getItem('blockHuntBest')||0)}catch(_){return 0}}
 function saveBest(){try{localStorage.setItem('blockHuntBest',String(best))}catch(_){}}
 function rand(n){return Math.floor(Math.random()*n)}
-function newPiece(){return {shape:SHAPES[rand(SHAPES.length)],color:COLORS[rand(COLORS.length)]}}
+function newPiece(){return {shape:SHAPES[rand(SHAPES.length)].map(p=>[p[0],p[1]]),color:COLORS[rand(COLORS.length)]}}
+function showToast(message){const el=document.getElementById('toast');if(!el)return;el.textContent=message;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),2200)}
+function spawnCrystals(count){let placed=0,tries=0;while(placed<count&&crystals.size<6&&tries<350){tries++;const r=rand(SIZE),c=rand(SIZE),key=r+','+c;if(board[r][c]===null&&!crystals.has(key)){crystals.add(key);placed++}}}
 function reset(){
-board=Array.from({length:SIZE},()=>Array(SIZE).fill(null));
-pieces=[newPiece(),newPiece(),newPiece()];score=0;lines=0;combo=0;selected=-1;locked=false;
-document.getElementById('gameOver').classList.remove('open');
-render();checkMoves();
+board=Array.from({length:SIZE},()=>Array(SIZE).fill(null));pieces=[newPiece(),newPiece(),newPiece()];crystals=new Set();
+score=0;lines=0;combo=0;selected=-1;locked=false;animating=false;energy=5;crystalsFound=0;claimedMilestone=0;powerMode=null;rescueAvailable=false;dragState=null;
+document.getElementById('gameOver').classList.remove('open');spawnCrystals(3);render();checkMoves();
 }
 function render(){
 renderBoard();renderTray();
-document.getElementById('score').textContent=score.toLocaleString('ru-RU');
-document.getElementById('best').textContent=best.toLocaleString('ru-RU');
-document.getElementById('lines').textContent=lines;
-document.getElementById('combo').textContent='× '+combo;
-document.getElementById('status').textContent=locked?'НЕТ ХОДОВ':'В ИГРЕ';
+document.getElementById('score').textContent=score.toLocaleString('ru-RU');document.getElementById('best').textContent=best.toLocaleString('ru-RU');document.getElementById('lines').textContent=lines;document.getElementById('combo').textContent='× '+combo;document.getElementById('crystalsFound').textContent=crystalsFound;
+document.getElementById('status').textContent=locked?'НЕТ ХОДОВ':(rescueAvailable?'НУЖЕН БОНУС':'В ИГРЕ');document.getElementById('energyPill').textContent='⚡ '+energy+' / '+MAX_ENERGY;
+document.getElementById('questProgress').textContent='✧ '+(crystalsFound%5)+' / 5 до бонуса';document.getElementById('hunterRank').textContent=crystalsFound>=20?'МАСТЕР ОХОТЫ':(crystalsFound>=10?'СЛЕДОПЫТ':(crystalsFound>=5?'РАЗВЕДЧИК':'НОВИЧОК'));renderPowerUi();
+}
+function renderPowerUi(){
+document.getElementById('rotateBtn').disabled=locked||animating||selected<0||!pieces[selected];
+const meteor=document.getElementById('meteorBtn'),prism=document.getElementById('prismBtn'),shuffle=document.getElementById('shuffleBtn');
+meteor.disabled=locked||animating||energy<4;prism.disabled=locked||animating||energy<7;shuffle.disabled=locked||animating||energy<3||!pieces.some(Boolean);
+meteor.classList.toggle('active',powerMode==='meteor');prism.classList.toggle('active',powerMode==='prism');
 }
 function renderBoard(preview){
 let html='';
 for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++){
-let v=board[r][c],cls=v?'filled '+v:'',extra='';
-if(preview&&selected>=0){
-let p=pieces[selected],hit=p.shape.some(([dr,dc])=>dr+preview.r===r&&dc+preview.c===c);
-if(hit)extra=canPlace(selected,preview.r,preview.c)?' preview':' invalid-preview';
-}
-html+='<div class="cell '+cls+extra+'" data-r="'+r+'" data-c="'+c+'" role="gridcell" aria-label="Строка '+(r+1)+', колонка '+(c+1)+'"></div>';
+const v=board[r][c],key=r+','+c,treasure=crystals.has(key);let cls=v?'filled '+v:'',extra='';
+if(preview&&selected>=0&&pieces[selected]){const p=pieces[selected],hit=p.shape.some(([dr,dc])=>dr+preview.r===r&&dc+preview.c===c);if(hit)extra=canPlace(selected,preview.r,preview.c)?' preview':' invalid-preview'}
+if(preview&&powerMode){const hit=powerMode==='meteor'?(Math.abs(r-preview.r)<=1&&Math.abs(c-preview.c)<=1):(r===preview.r||c===preview.c);if(hit)extra+=' power-preview'}
+html+='<div class="cell '+cls+(treasure?' crystal-cell':'')+extra+'" data-r="'+r+'" data-c="'+c+'" role="gridcell" aria-label="Строка '+(r+1)+', колонка '+(c+1)+(treasure?', кристалл':'')+'">'+(treasure?'<span class="crystal-mark">✦</span>':'')+'</div>';
 }
 boardEl.innerHTML=html;
 }
 function renderTray(){
 trayEl.innerHTML='';
 pieces.forEach((p,i)=>{
-let btn=document.createElement('button');btn.type='button';btn.className='piece-card'+(p?'':' empty')+(selected===i?' selected':'');
-btn.setAttribute('aria-label',p?'Выбрать фигуру '+(i+1):'Фигура использована');
+const btn=document.createElement('button');btn.type='button';btn.className='piece-card'+(p?'':' empty')+(selected===i?' selected':'');btn.setAttribute('aria-label',p?'Выбрать или перетащить фигуру '+(i+1):'Фигура использована');
 if(!p){btn.innerHTML='<span class="piece-caption">ГОТОВО</span>';trayEl.appendChild(btn);return}
-let h=Math.max(...p.shape.map(x=>x[0]))+1,w=Math.max(...p.shape.map(x=>x[1]))+1;
-let mini=document.createElement('div');mini.className='mini-grid';mini.style.gridTemplateColumns='repeat('+w+',15px)';
-for(let r=0;r<h;r++)for(let c=0;c<w;c++){
-let cell=document.createElement('i');cell.className='mini-cell';cell.style.visibility=p.shape.some(x=>x[0]===r&&x[1]===c)?'visible':'hidden';cell.style.setProperty('--piece-color',colorFor(p.color));mini.appendChild(cell);
-}
-btn.appendChild(mini);let cap=document.createElement('span');cap.className='piece-caption';cap.textContent='ФИГУРА '+(i+1);btn.appendChild(cap);
+const height=Math.max(...p.shape.map(x=>x[0]))+1,width=Math.max(...p.shape.map(x=>x[1]))+1,mini=document.createElement('div');mini.className='mini-grid';mini.style.gridTemplateColumns='repeat('+width+',15px)';
+for(let r=0;r<height;r++)for(let c=0;c<width;c++){const cell=document.createElement('i');cell.className='mini-cell';cell.style.visibility=p.shape.some(x=>x[0]===r&&x[1]===c)?'visible':'hidden';cell.style.setProperty('--piece-color',colorFor(p.color));mini.appendChild(cell)}
+btn.appendChild(mini);const cap=document.createElement('span');cap.className='piece-caption';cap.textContent='ФИГУРА '+(i+1);btn.appendChild(cap);
 btn.addEventListener('pointerdown',e=>{
-if(locked||!pieces[i]||(e.pointerType==='mouse'&&e.button!==0))return;
-dragState={index:i,pointerId:e.pointerId,startX:e.clientX,startY:e.clientY,card:btn,dragging:false,ghost:null};
-try{btn.setPointerCapture(e.pointerId)}catch(_){}
+if(locked||animating||!pieces[i]||powerMode||(e.pointerType==='mouse'&&e.button!==0))return;
+dragState={index:i,pointerId:e.pointerId,startX:e.clientX,startY:e.clientY,card:btn,dragging:false,ghost:null};try{btn.setPointerCapture(e.pointerId)}catch(_){}
 });
 btn.addEventListener('pointermove',e=>{
-if(!dragState||dragState.pointerId!==e.pointerId)return;
-const state=dragState;
+if(!dragState||dragState.pointerId!==e.pointerId)return;const state=dragState;
 if(!state.dragging&&Math.hypot(e.clientX-state.startX,e.clientY-state.startY)>7){
-state.dragging=true;selected=i;
-trayEl.querySelectorAll('.piece-card').forEach(card=>card.classList.remove('selected'));
-btn.classList.add('selected','dragging');
-state.ghost=createDragGhost(pieces[i]);document.body.appendChild(state.ghost);
-boardEl.classList.add('drag-active');renderBoard();
+state.dragging=true;selected=i;powerMode=null;trayEl.querySelectorAll('.piece-card').forEach(card=>card.classList.remove('selected'));
+btn.classList.add('selected','dragging');state.ghost=createDragGhost(pieces[i]);document.body.appendChild(state.ghost);boardEl.classList.add('drag-active');renderPowerUi();renderBoard();
 }
 if(state.dragging){e.preventDefault();moveDragGhost(state.ghost,e.clientX,e.clientY);const target=boardCellAtPoint(e.clientX,e.clientY);renderBoard(target?{r:target.r,c:target.c}:undefined)}
 });
 btn.addEventListener('pointerup',e=>{
-if(!dragState||dragState.pointerId!==e.pointerId)return;
-const state=dragState;dragState=null;
-if(!state.dragging)return;
-e.preventDefault();suppressPieceClickUntil=performance.now()+450;
-const target=boardCellAtPoint(e.clientX,e.clientY);
-state.ghost?.remove();btn.classList.remove('dragging','selected');boardEl.classList.remove('drag-active');
-if(target){selected=i;place(i,target.r,target.c)}
-else{selected=-1;renderTray();renderBoard()}
+if(!dragState||dragState.pointerId!==e.pointerId)return;const state=dragState;dragState=null;if(!state.dragging)return;
+e.preventDefault();suppressPieceClickUntil=performance.now()+450;const target=boardCellAtPoint(e.clientX,e.clientY);state.ghost?.remove();btn.classList.remove('dragging','selected');boardEl.classList.remove('drag-active');
+if(target){selected=i;place(i,target.r,target.c)}else{selected=-1;renderTray();renderBoard()}
 });
 btn.addEventListener('pointercancel',e=>{
-if(!dragState||dragState.pointerId!==e.pointerId)return;
-const state=dragState;dragState=null;state.ghost?.remove();btn.classList.remove('dragging','selected');boardEl.classList.remove('drag-active');selected=-1;renderTray();renderBoard();
+if(!dragState||dragState.pointerId!==e.pointerId)return;const state=dragState;dragState=null;state.ghost?.remove();btn.classList.remove('dragging','selected');boardEl.classList.remove('drag-active');selected=-1;renderTray();renderBoard();
 });
 btn.addEventListener('lostpointercapture',e=>{
-if(!dragState||dragState.pointerId!==e.pointerId)return;
-const state=dragState;dragState=null;state.ghost?.remove();boardEl.classList.remove('drag-active');if(state.dragging){selected=-1;renderTray();renderBoard()}
+if(!dragState||dragState.pointerId!==e.pointerId)return;const state=dragState;dragState=null;state.ghost?.remove();boardEl.classList.remove('drag-active');if(state.dragging){selected=-1;renderTray();renderBoard()}
 });
-btn.addEventListener('click',()=>{
-if(performance.now()<suppressPieceClickUntil||locked||!pieces[i])return;
-selected=selected===i?-1:i;renderTray();renderBoard();
-});
+btn.addEventListener('click',()=>{if(performance.now()<suppressPieceClickUntil||locked||animating||!pieces[i])return;powerMode=null;selected=selected===i?-1:i;renderTray();renderBoard();renderPowerUi()});
 trayEl.appendChild(btn);
 });
 }
 function colorFor(cls){return ({c0:'#42d9d2',c1:'#a78bfa',c2:'#ff78b8',c3:'#ffc66d',c4:'#65a8ff',c5:'#8de08b'})[cls]||'#fff'}
 function boardCellAtPoint(x,y){
-const boardRect=boardEl.getBoundingClientRect();
-if(x<boardRect.left||x>boardRect.right||y<boardRect.top||y>boardRect.bottom)return null;
-const direct=document.elementFromPoint(x,y)?.closest('.cell');
-if(direct&&boardEl.contains(direct))return {r:Number(direct.dataset.r),c:Number(direct.dataset.c)};
-let nearest=null,nearestDistance=Infinity;
-boardEl.querySelectorAll('.cell').forEach(cell=>{
-const rect=cell.getBoundingClientRect(),cx=rect.left+rect.width/2,cy=rect.top+rect.height/2;
-const distance=Math.hypot(x-cx,y-cy);
-if(distance<nearestDistance){nearestDistance=distance;nearest={r:Number(cell.dataset.r),c:Number(cell.dataset.c),size:Math.max(rect.width,rect.height)}}
-});
-return nearest&&nearestDistance<nearest.size*.9?nearest:null;
+const rect=boardEl.getBoundingClientRect();if(x<rect.left||x>rect.right||y<rect.top||y>rect.bottom)return null;
+const direct=document.elementFromPoint(x,y)?.closest('.cell');if(direct&&boardEl.contains(direct))return {r:Number(direct.dataset.r),c:Number(direct.dataset.c)};
+let nearest=null,distance=Infinity;boardEl.querySelectorAll('.cell').forEach(cell=>{const r=cell.getBoundingClientRect(),d=Math.hypot(x-r.left-r.width/2,y-r.top-r.height/2);if(d<distance){distance=d;nearest={r:Number(cell.dataset.r),c:Number(cell.dataset.c),size:Math.max(r.width,r.height)}}});
+return nearest&&distance<nearest.size*.9?nearest:null;
 }
 function createDragGhost(piece){
-const ghost=document.createElement('div');ghost.className='drag-ghost';
-const height=Math.max(...piece.shape.map(point=>point[0]))+1,width=Math.max(...piece.shape.map(point=>point[1]))+1;
-const grid=document.createElement('div');grid.className='drag-ghost-grid';grid.style.gridTemplateColumns='repeat('+width+',var(--drag-cell))';
-for(let r=0;r<height;r++)for(let c=0;c<width;c++){
-const tile=document.createElement('i');tile.className='drag-ghost-cell '+piece.color;
-tile.style.visibility=piece.shape.some(point=>point[0]===r&&point[1]===c)?'visible':'hidden';grid.appendChild(tile);
+const ghost=document.createElement('div');ghost.className='drag-ghost';const height=Math.max(...piece.shape.map(p=>p[0]))+1,width=Math.max(...piece.shape.map(p=>p[1]))+1,grid=document.createElement('div');grid.className='drag-ghost-grid';grid.style.gridTemplateColumns='repeat('+width+',var(--drag-cell))';
+for(let r=0;r<height;r++)for(let c=0;c<width;c++){const tile=document.createElement('i');tile.className='drag-ghost-cell '+piece.color;tile.style.visibility=piece.shape.some(p=>p[0]===r&&p[1]===c)?'visible':'hidden';grid.appendChild(tile)}
+const caption=document.createElement('span');caption.className='drag-ghost-caption';caption.textContent='ОТПУСТИ НА ПОЛЕ';ghost.append(grid,caption);return ghost;
 }
-const caption=document.createElement('span');caption.className='drag-ghost-caption';caption.textContent='ОТПУСТИ НА ПОЛЕ';
-ghost.append(grid,caption);return ghost;
+function moveDragGhost(ghost,x,y){if(!ghost)return;ghost.style.left=Math.max(8,Math.min(window.innerWidth-ghost.offsetWidth-8,x+18))+'px';ghost.style.top=Math.max(8,Math.min(window.innerHeight-ghost.offsetHeight-8,y+18))+'px'}
+function canPlace(index,r,c){const p=pieces[index];if(!p)return false;return p.shape.every(([dr,dc])=>r+dr>=0&&r+dr<SIZE&&c+dc>=0&&c+dc<SIZE&&!board[r+dr][c+dc])}
+function rotateSelected(){
+if(selected<0||!pieces[selected]||locked||animating){showToast('Сначала выбери фигуру');return}
+const shape=pieces[selected].shape,maxRow=Math.max(...shape.map(p=>p[0])),rotated=shape.map(([r,c])=>[c,maxRow-r]),minRow=Math.min(...rotated.map(p=>p[0])),minCol=Math.min(...rotated.map(p=>p[1]));
+pieces[selected].shape=rotated.map(([r,c])=>[r-minRow,c-minCol]);renderTray();renderBoard();renderPowerUi();beep(480,.06,'triangle');showToast('Фигура повернута');
 }
-function moveDragGhost(ghost,x,y){
-if(!ghost)return;
-const left=Math.max(8,Math.min(window.innerWidth-ghost.offsetWidth-8,x+18));
-const top=Math.max(8,Math.min(window.innerHeight-ghost.offsetHeight-8,y+18));
-ghost.style.left=left+'px';ghost.style.top=top+'px';
+function startPower(mode){
+if(locked||animating)return;const cost=mode==='meteor'?4:7;if(energy<cost){showToast('Недостаточно энергии — найди кристаллы или очисти линии');return}
+powerMode=powerMode===mode?null:mode;selected=-1;renderTray();renderBoard();renderPowerUi();showToast(powerMode?(mode==='meteor'?'МЕТЕОР: выбери центр области 3×3':'ПРИЗМА: выбери клетку для очистки ряда и колонки'):'Способность отменена');
 }
-function canPlace(index,r,c){
-let p=pieces[index];if(!p)return false;
-return p.shape.every(([dr,dc])=>r+dr>=0&&r+dr<SIZE&&c+dc>=0&&c+dc<SIZE&&!board[r+dr][c+dc]);
+function shufflePieces(){
+if(locked||animating)return;if(energy<3){showToast('Для пересборки нужно 3⚡');return}
+energy-=3;powerMode=null;selected=-1;pieces=pieces.map(p=>p?newPiece():null);beep(640,.1,'triangle');render();checkMoves();showToast('Фигуры пересобраны — новый шанс!');
 }
-function place(index,r,c){
-if(locked||index<0||!pieces[index])return;
-if(!canPlace(index,r,c)){beep(130,.07,'sawtooth');return}
-let p=pieces[index];
-p.shape.forEach(([dr,dc])=>{board[r+dr][c+dc]=p.color});
+function makeShard(cell,index,total,delay,kind){
+const shard=document.createElement('i');shard.className='fx-shard';cell.appendChild(shard);const angle=Math.PI*2*index/total+(Math.random()-.5)*.5,dist=17+Math.random()*16,dx=Math.cos(angle)*dist,dy=Math.sin(angle)*dist;
+if(shard.animate)shard.animate([{transform:'translate(-50%,-50%) scale(.45) rotate(0deg)',opacity:0},{transform:'translate(-50%,-50%) scale(1.15) rotate(45deg)',opacity:1,offset:.2},{transform:'translate(calc(-50% + '+dx+'px),calc(-50% + '+dy+'px)) scale(.1) rotate(150deg)',opacity:0}],{duration:480,delay:delay,easing:'cubic-bezier(.1,.7,.2,1)',fill:'forwards'});
+}
+async function animateClearCells(keys,rows,cols,kind){
+const nodes=[],coords=keys.map(k=>k.split(',').map(Number));let maxDelay=0;
+coords.forEach(([r,c])=>{
+const cell=boardEl.querySelector('.cell[data-r="'+r+'"][data-c="'+c+'"]');if(!cell)return;
+const dists=[];if(kind==='line'){if(rows.includes(r))dists.push(Math.abs(c-4));if(cols.includes(c))dists.push(Math.abs(r-4))}
+const delay=(dists.length?Math.min(...dists):0)*34+rand(24);maxDelay=Math.max(maxDelay,delay);
+cell.classList.add(kind==='line'?'clearing':'power-clearing');
+if(cell.animate)cell.animate([{transform:'scale(1) rotate(0deg)',opacity:1,filter:'brightness(1) saturate(1)'},{transform:'scale(1.18) rotate(5deg)',opacity:1,filter:'brightness(2.4) saturate(1.8)',offset:.2},{transform:'scale(.88) rotate(-13deg)',opacity:.9,filter:'brightness(2.8) saturate(1.6)',offset:.48},{transform:'translateY(-9px) scale(.05) rotate(55deg)',opacity:0,filter:'brightness(2) blur(4px)'}],{duration:620,delay:delay,easing:'cubic-bezier(.18,.72,.19,1)',fill:'forwards'});
+for(let n=0;n<4;n++)makeShard(cell,n,4,delay+70,kind);nodes.push(cell);
+});
+boardEl.classList.add(kind==='line'?'cascade-active':'power-burst');
+await new Promise(resolve=>setTimeout(resolve,700+maxDelay));nodes.forEach(cell=>cell.querySelectorAll('.fx-shard').forEach(shard=>shard.remove()));boardEl.classList.remove('cascade-active','power-burst');
+}
+async function place(index,r,c){
+if(locked||animating||index<0||!pieces[index])return;if(!canPlace(index,r,c)){beep(130,.07,'sawtooth');return}
+const p=pieces[index];let found=0;
+p.shape.forEach(([dr,dc])=>{const y=r+dr,x=c+dc,key=y+','+x;board[y][x]=p.color;if(crystals.delete(key))found++});
 score+=p.shape.length*5;
-pieces[index]=null;selected=-1;
-let rows=[],cols=[];
-for(let y=0;y<SIZE;y++)if(board[y].every(Boolean))rows.push(y);
-for(let x=0;x<SIZE;x++)if(board.every(row=>row[x]))cols.push(x);
+if(found){crystalsFound+=found;energy=Math.min(MAX_ENERGY,energy+found);score+=found*90;showToast('КРИСТАЛЛ НАЙДЕН! +'+(found*90)+' очков · +'+found+'⚡');
+while(Math.floor(crystalsFound/5)>claimedMilestone){claimedMilestone++;energy=Math.min(MAX_ENERGY,energy+3);setTimeout(()=>showToast('ЗВАНИЕ ОХОТНИКА ПОВЫШЕНО! +3⚡'),350)}}
+pieces[index]=null;selected=-1;powerMode=null;
+let rows=[],cols=[];for(let y=0;y<SIZE;y++)if(board[y].every(Boolean))rows.push(y);for(let x=0;x<SIZE;x++)if(board.every(row=>row[x]))cols.push(x);
 if(rows.length||cols.length){
-boardEl.classList.remove('clear-flash');void boardEl.offsetWidth;boardEl.classList.add('clear-flash');
-setTimeout(()=>boardEl.classList.remove('clear-flash'),460);
-combo++;let cleared=new Set();
-rows.forEach(y=>{for(let x=0;x<SIZE;x++)cleared.add(y+','+x)});
-cols.forEach(x=>{for(let y=0;y<SIZE;y++)cleared.add(y+','+x)});
-cleared.forEach(key=>{let a=key.split(',').map(Number);board[a[0]][a[1]]=null});
-lines+=rows.length+cols.length;
-score+=rows.length*100+cols.length*100+Math.max(0,cleared.size-(rows.length+cols.length))*2+combo*20;
-beep(560,.12,'sine');
+const cleared=new Set();rows.forEach(y=>{for(let x=0;x<SIZE;x++)cleared.add(y+','+x)});cols.forEach(x=>{for(let y=0;y<SIZE;y++)cleared.add(y+','+x)});
+locked=true;animating=true;render();await animateClearCells(Array.from(cleared),rows,cols,'line');cleared.forEach(key=>{const [y,x]=key.split(',').map(Number);board[y][x]=null});
+combo++;lines+=rows.length+cols.length;energy=Math.min(MAX_ENERGY,energy+rows.length+cols.length);
+score+=rows.length*100+cols.length*100+Math.max(0,cleared.size-(rows.length+cols.length))*2+combo*35;
+beep(570,.14,'sine');if(rows.length+cols.length>=2){score+=75*(rows.length+cols.length-1);showToast('ПРИЗМАТИЧЕСКИЙ КАСКАД! +'+(rows.length+cols.length)+' ЛИНИИ')}
+locked=false;animating=false;
 }else{combo=0;beep(320,.045,'triangle')}
 if(score>best){best=score;saveBest()}
-if(pieces.every(x=>!x))pieces=[newPiece(),newPiece(),newPiece()];
+if(pieces.every(x=>!x)){pieces=[newPiece(),newPiece(),newPiece()];spawnCrystals(2);showToast('НОВЫЙ НАБОР ФИГУР — ИЩИ КРИСТАЛЛЫ!')}
 render();checkMoves();
 }
+async function usePower(mode,r,c){
+if(locked||animating||!powerMode)return;const cost=mode==='meteor'?4:7;if(energy<cost){powerMode=null;renderPowerUi();showToast('Не хватает энергии');return}
+const keys=new Set();
+if(mode==='meteor'){for(let y=Math.max(0,r-1);y<=Math.min(SIZE-1,r+1);y++)for(let x=Math.max(0,c-1);x<=Math.min(SIZE-1,c+1);x++)if(board[y][x])keys.add(y+','+x)}
+else{for(let x=0;x<SIZE;x++)if(board[r][x])keys.add(r+','+x);for(let y=0;y<SIZE;y++)if(board[y][c])keys.add(y+','+c)}
+if(!keys.size){powerMode=null;renderBoard();renderPowerUi();showToast('Здесь пока нечего очищать — выбери другую клетку');return}
+energy-=cost;powerMode=null;selected=-1;locked=true;animating=true;render();await animateClearCells(Array.from(keys),[],[],'power');keys.forEach(key=>{const [y,x]=key.split(',').map(Number);board[y][x]=null});
+score+=keys.size*(mode==='prism'?24:18);if(mode==='prism'){lines+=2;combo=0;showToast('ПРИЗМЕННЫЙ РАЗРЕЗ! РЯД И КОЛОНКА ОЧИЩЕНЫ')}else{combo=0;showToast('МЕТЕОРИТНЫЙ УДАР! −'+keys.size+' БЛОКОВ')}
+if(score>best){best=score;saveBest()}locked=false;animating=false;render();checkMoves();
+}
 function checkMoves(){
-if(!pieces.some((p,i)=>p&&Array.from({length:SIZE},(_,r)=>Array.from({length:SIZE},(_,c)=>canPlace(i,r,c))).some(row=>row.some(Boolean)))){
-locked=true;selected=-1;render();
-document.getElementById('finalScore').textContent=score.toLocaleString('ru-RU');
-document.getElementById('gameOver').classList.add('open');
+const hasMove=pieces.some((p,i)=>p&&Array.from({length:SIZE},(_,r)=>Array.from({length:SIZE},(_,c)=>canPlace(i,r,c))).some(row=>row.some(Boolean)));
+if(!hasMove){if(energy>=3&&pieces.some(Boolean)){rescueAvailable=true;locked=false;render();showToast('ХОДОВ НЕТ — попробуй Пересборку или Метеор');return}
+locked=true;selected=-1;powerMode=null;render();document.getElementById('finalScore').textContent=score.toLocaleString('ru-RU');document.getElementById('gameOver').classList.add('open')
+}else{rescueAvailable=false;locked=false;render()}
 }
-}
-function beep(freq,duration,type){
-if(!soundOn)return;
-try{let ctx=beep.ctx||(beep.ctx=new (window.AudioContext||window.webkitAudioContext)());let osc=ctx.createOscillator(),gain=ctx.createGain();osc.type=type;osc.frequency.value=freq;gain.gain.setValueAtTime(.045,ctx.currentTime);gain.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+duration);osc.connect(gain);gain.connect(ctx.destination);osc.start();osc.stop(ctx.currentTime+duration)}catch(_){}
-}
-boardEl.addEventListener('click',e=>{
-let cell=e.target.closest('.cell');if(!cell||selected<0||locked)return;
-place(selected,Number(cell.dataset.r),Number(cell.dataset.c));
-});
-boardEl.addEventListener('pointermove',e=>{
-if(dragState?.dragging||selected<0||locked)return;let cell=e.target.closest('.cell');if(cell)renderBoard({r:Number(cell.dataset.r),c:Number(cell.dataset.c)});
-});
-boardEl.addEventListener('pointerleave',()=>{if(selected>=0&&!locked)renderBoard()});
-document.getElementById('restartBtn').addEventListener('click',reset);
-document.getElementById('playAgainBtn').addEventListener('click',reset);
+function beep(freq,duration,type){if(!soundOn)return;try{const ctx=beep.ctx||(beep.ctx=new (window.AudioContext||window.webkitAudioContext)()),osc=ctx.createOscillator(),gain=ctx.createGain();osc.type=type;osc.frequency.value=freq;gain.gain.setValueAtTime(.045,ctx.currentTime);gain.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+duration);osc.connect(gain);gain.connect(ctx.destination);osc.start();osc.stop(ctx.currentTime+duration)}catch(_){}}
+boardEl.addEventListener('click',e=>{const cell=e.target.closest('.cell');if(!cell||locked||animating)return;const r=Number(cell.dataset.r),c=Number(cell.dataset.c);if(powerMode){usePower(powerMode,r,c);return}if(selected>=0)place(selected,r,c)});
+boardEl.addEventListener('pointermove',e=>{if(locked||animating||(!powerMode&&selected<0))return;const cell=e.target.closest('.cell');if(cell)renderBoard({r:Number(cell.dataset.r),c:Number(cell.dataset.c)})});
+boardEl.addEventListener('pointerleave',()=>{if((selected>=0||powerMode)&&!locked)renderBoard()});
+document.getElementById('rotateBtn').addEventListener('click',rotateSelected);
+document.getElementById('meteorBtn').addEventListener('click',()=>startPower('meteor'));
+document.getElementById('prismBtn').addEventListener('click',()=>startPower('prism'));
+document.getElementById('shuffleBtn').addEventListener('click',shufflePieces);
+document.getElementById('restartBtn').addEventListener('click',reset);document.getElementById('playAgainBtn').addEventListener('click',reset);
 document.getElementById('helpBtn').addEventListener('click',()=>document.getElementById('helpModal').classList.add('open'));
 document.getElementById('closeHelp').addEventListener('click',()=>document.getElementById('helpModal').classList.remove('open'));
 document.getElementById('helpModal').addEventListener('click',e=>{if(e.target.id==='helpModal')e.currentTarget.classList.remove('open')});
 document.getElementById('soundBtn').addEventListener('click',e=>{soundOn=!soundOn;e.currentTarget.textContent=soundOn?'♫':'♪̸';e.currentTarget.title=soundOn?'Звук включён':'Звук выключен';if(soundOn)beep(440,.08,'sine')});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){selected=-1;renderTray();renderBoard();document.querySelectorAll('.overlay').forEach(x=>x.classList.remove('open'))}if(e.key.toLowerCase()==='r'&&!e.ctrlKey&&!e.metaKey)reset();if(['1','2','3'].includes(e.key)&&pieces[Number(e.key)-1]){selected=Number(e.key)-1;renderTray();renderBoard()}});
+document.addEventListener('keydown',e=>{
+if(e.key==='Escape'){selected=-1;powerMode=null;renderTray();renderBoard();renderPowerUi();document.querySelectorAll('.overlay').forEach(x=>x.classList.remove('open'))}
+if(e.key.toLowerCase()==='r'&&!e.ctrlKey&&!e.metaKey)reset();
+if(e.key.toLowerCase()==='e'&&!e.ctrlKey&&!e.metaKey){e.preventDefault();rotateSelected()}
+if(['1','2','3'].includes(e.key)&&pieces[Number(e.key)-1]){powerMode=null;selected=Number(e.key)-1;renderTray();renderBoard();renderPowerUi()}
+});
 best=safeBest();reset();
-})();
-</script>
+})();</script>
 </body>
 </html>
