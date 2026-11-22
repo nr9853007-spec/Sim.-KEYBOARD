@@ -537,6 +537,32 @@ body{background:radial-gradient(ellipse at 12% 8%,#17436a55 0,transparent 34%),r
 @keyframes forestSparkPulse{0%,100%{opacity:.5;transform:scale(.82)}50%{opacity:1;transform:scale(1.18) rotate(18deg)}}
 @media(max-width:600px){.forest-cover{min-height:245px!important}.forest-cover .cover-label{top:13px!important;left:12px!important;font-size:7px!important;letter-spacing:.8px!important;padding:7px 9px!important}.forest-cover .cover-title{left:17px!important;bottom:17px!important;font-size:clamp(28px,8vw,37px)!important}.forest-cover .cover-play{right:16px!important;bottom:16px!important;width:43px;height:43px}}
 @media(prefers-reduced-motion:reduce){.forest-cover *{animation:none!important;transition:none!important}}
+
+/* BLOCK HUNT — upgraded animated launcher card */
+.block-hunt-cover{background:radial-gradient(ellipse at 50% 36%,#286c86 0,#1b315d 43%,#0b1228 100%)!important;transition:transform .4s cubic-bezier(.2,.8,.2,1),box-shadow .35s,border-color .35s!important}
+.block-hunt-cover:before{background:repeating-radial-gradient(ellipse at center,transparent 0 24px,#71f5e51b 25px 26px,transparent 27px 51px),conic-gradient(from 20deg at 50% 50%,transparent,#7fffee0b,transparent,#aa91ff0d,transparent)!important}
+.block-hunt-cover .cover-orbit{border-width:1px!important;box-shadow:0 0 0 18px #68eddf12,0 0 0 42px #9a8cff10,0 0 50px #5ce8e05c!important}
+.block-hunt-cover:hover .cover-orbit{transform:scale(1.13) rotate(18deg)!important;box-shadow:0 0 0 24px #68eddf18,0 0 0 54px #9a8cff12,0 0 65px #5ce8e077!important}
+.hunt-grid{position:relative;gap:6px;padding:14px;border-radius:21px;transform:perspective(550px) rotateX(17deg) rotateZ(-8deg) scale(.96);box-shadow:0 20px 48px #020914bb,0 0 45px #4de4d955,inset 0 1px #ffffff2a;animation:blockHuntFloat 3.4s ease-in-out infinite}
+.hunt-grid i{position:relative;overflow:hidden;animation:huntTileGlow 2.8s ease-in-out infinite}
+.hunt-grid i:nth-child(2n){animation-delay:-.8s}.hunt-grid i:nth-child(3n){animation-delay:-1.6s}
+.hunt-grid i:after{content:"";position:absolute;inset:-80% -30%;background:linear-gradient(110deg,transparent 43%,#ffffffb3 50%,transparent 57%);transform:translateX(-100%);animation:huntTileSweep 4s ease-in-out infinite}
+.hunt-grid i:nth-child(2n):after{animation-delay:-1.7s}
+.hunt-orb{right:18%;top:1%;border-radius:50%;width:40px;height:40px}
+.hunt-drag-tag{position:absolute;right:18%;bottom:1%;padding:7px 10px;border:1px solid #92fff17a;border-radius:99px;background:#091a31d9;color:#cffff7;font-size:8px;font-weight:1000;letter-spacing:1.7px;box-shadow:0 0 20px #59e8db33;animation:huntTagPulse 2.4s ease-in-out infinite}
+.block-hunt-cover .cover-label{box-shadow:0 4px 18px #020b1e77,0 0 18px #67e8dc20}
+.block-hunt-cover .cover-title{letter-spacing:1.8px!important}
+.block-hunt-cover .cover-play{transition:transform .25s,box-shadow .25s!important}
+.block-hunt-cover:hover .cover-play{transform:translateY(-4px) scale(1.1);box-shadow:0 0 0 7px #67e8dc2c,0 10px 28px #061321dd,0 0 25px #5ce8e077!important}
+.game-card:has(.block-hunt-cover){border-color:#5eddd44d;box-shadow:0 13px 34px #0004,0 0 0 1px #7bfff00b;transition:transform .35s,border-color .35s,box-shadow .35s}
+.game-card:has(.block-hunt-cover):hover{transform:translateY(-7px);border-color:#8bfff0;box-shadow:0 26px 65px #0008,0 0 40px #55dacf35}
+.game-card:has(.block-hunt-cover) .game-category{color:#80e9dc}
+.game-card:has(.block-hunt-cover) .game-info h3{color:#f0fffd}
+@keyframes huntTileGlow{0%,100%{filter:brightness(1)}50%{filter:brightness(1.22)}}
+@keyframes huntTileSweep{0%,35%{transform:translateX(-100%)}70%,100%{transform:translateX(100%)}}
+@keyframes huntTagPulse{0%,100%{box-shadow:0 0 12px #59e8db22;transform:translateY(0)}50%{box-shadow:0 0 24px #59e8db55;transform:translateY(-3px)}}
+@media(max-width:600px){.hunt-grid{grid-template-columns:repeat(3,32px);gap:6px;padding:12px}.hunt-grid i{border-radius:7px}.hunt-drag-tag{right:12%;font-size:7px}}
+@media(prefers-reduced-motion:reduce){.hunt-grid,.hunt-grid i,.hunt-grid i:after,.hunt-drag-tag{animation:none!important}}
 </style></head>
 <body>
 <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
@@ -784,11 +810,11 @@ body{background:radial-gradient(ellipse at 12% 8%,#17436a55 0,transparent 34%),r
 <i class="h1"></i><i class="h2"></i><i class="h3"></i><i class="h4"></i><i class="h5"></i><i class="h6"></i><i class="h7"></i><i class="h8"></i><i class="h9"></i>
 </div>
 <div class="hunt-orb">✦</div>
-<span class="hunt-float hunt-float-a">+240</span><span class="hunt-float hunt-float-b">✧</span>
+<span class="hunt-float hunt-float-a">+240</span><span class="hunt-float hunt-float-b">✧</span><span class="hunt-drag-tag">DRAG &amp; DROP</span>
 </div>
 <div class="cover-title">BLOCK<br><b>HUNT</b></div><span class="cover-play">▶</span>
 </a>
-<div class="game-info"><div class="game-info-main"><div class="game-category">ГОЛОВОЛОМКА <span>·</span> PUZZLE</div><h3>Block Hunt</h3><p>Собирай фигуры, очищай линии и побей собственный рекорд в неоновой блочной головоломке!</p></div>
+<div class="game-info"><div class="game-info-main"><div class="game-category">ГОЛОВОЛОМКА <span>·</span> PUZZLE</div><h3>Block Hunt</h3><p>Перетаскивай неоновые фигуры мышью или пальцем, очищай линии и собирай комбо. Проверь свою тактику в Block Hunt!</p></div>
 <div class="game-info-bottom"><span class="game-status"><i></i> Доступна</span><a class="play-link" href="block-hunt.html">Играть <span>↗</span></a></div></div>
 </article></div>
 </section>
