@@ -78,6 +78,78 @@ h1 span{background:linear-gradient(90deg,#69eee3,#9c9cff 58%,#f5a7d7);background
 @media(max-width:760px){.app{width:min(610px,100% - 22px);padding-top:16px}.layout{grid-template-columns:1fr}.hero-mark{display:none}.panel{padding:13px}.board{gap:4px;padding:7px}.cell{border-radius:5px}.side{grid-template-columns:1fr}.piece-card{min-height:108px}.mini-cell{width:17px;height:17px}}
 @media(max-width:420px){.topbar{align-items:flex-start}.brand-name{font-size:15px}.ghost-btn,.primary-btn{padding:9px 10px;font-size:11px}.stats{gap:7px}.stat{padding:10px}.stat-value{font-size:20px}.stat-label{font-size:8px}.board{gap:3px;padding:6px}.cell{border-radius:4px}.tray{gap:6px}.piece-card{min-height:96px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+/* BLOCK HUNT — NEON ARCADE VISUAL PASS */
+:root{--cyan:#73f5e8;--violet:#aa91ff;--gold:#ffd991;--pink:#ff91c9}
+body{background:radial-gradient(ellipse at 12% 2%,#1c64724d,transparent 34%),radial-gradient(ellipse at 92% 18%,#633a9850,transparent 31%),radial-gradient(ellipse at 50% 100%,#163a5444,transparent 38%),#070c17}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.32;background-image:radial-gradient(1px 1px at 12% 18%,#d8fff7 98%,transparent),radial-gradient(1px 1px at 78% 11%,#c7c4ff 98%,transparent),radial-gradient(1px 1px at 38% 72%,#b5fff8 98%,transparent),radial-gradient(1px 1px at 91% 80%,#e1baff 98%,transparent);background-size:240px 210px;animation:ambientStars 15s linear infinite}
+@keyframes ambientStars{to{background-position:240px 210px}}
+.app{width:min(1160px,100% - 34px);padding-top:30px}
+.topbar{margin-bottom:30px}
+.brand-mark{position:relative;overflow:hidden;border:1px solid #e0fffa99;box-shadow:0 8px 26px #56dcd955,0 0 0 5px #6df1e50d;animation:brandLevitate 4s ease-in-out infinite}
+.brand-mark:after{content:"";position:absolute;inset:-80% -30%;background:linear-gradient(110deg,transparent 42%,#ffffff99 50%,transparent 58%);transform:translateX(-85%);animation:brandSweep 5s ease-in-out infinite}
+@keyframes brandLevitate{50%{transform:translateY(-3px) rotate(3deg)}}
+@keyframes brandSweep{0%,35%{transform:translateX(-85%)}65%,100%{transform:translateX(85%)}}
+.brand-name{letter-spacing:2px}
+.hero{position:relative;isolation:isolate;align-items:center;padding:25px 28px;margin-bottom:19px;border:1px solid #79e8e331;border-radius:24px;background:linear-gradient(115deg,#101c2ceF,#17233ad9 58%,#221c3ce0);box-shadow:0 20px 50px #02071377,inset 0 1px #ffffff17;overflow:hidden}
+.hero:before{content:"";position:absolute;inset:-65% auto -65% 60%;width:340px;border:1px solid #7cfff11f;border-radius:50%;box-shadow:0 0 0 23px #7cfff10a,0 0 0 48px #a88bff0a,0 0 55px #59eee81a;animation:heroOrbit 22s linear infinite;z-index:-1}
+.hero:after{content:"✦";position:absolute;right:11%;top:20%;color:#b5fff2;font-size:18px;text-shadow:0 0 20px #5ce8e0;animation:heroSpark 3s ease-in-out infinite}
+@keyframes heroOrbit{to{transform:rotate(360deg)}}
+@keyframes heroSpark{50%{opacity:.25;transform:scale(.7) rotate(35deg)}}
+.hero p{max-width:610px}
+.hero-mark{font-size:76px;color:#8cf4e6;text-shadow:0 0 34px #5ce8e077;animation:markFloat 5s ease-in-out infinite}
+@keyframes markFloat{50%{transform:translateY(-8px) rotate(12deg)}}
+.stat{position:relative;overflow:hidden;background:linear-gradient(145deg,#14263a,#101a2d);border-color:#3a526f;box-shadow:0 9px 25px #02081288,inset 0 1px #ffffff0b;transition:transform .2s,border-color .2s}
+.stat:after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:linear-gradient(90deg,transparent,#63eee2,#a98cff,transparent);opacity:.5}
+.stat:hover{transform:translateY(-3px);border-color:#68dacf88}
+.stat-value{text-shadow:0 0 20px #72eee933}
+.panel{position:relative;overflow:hidden;border-color:#354968;border-radius:23px;background:linear-gradient(145deg,#142138f5,#0b1525f5);box-shadow:0 22px 58px #02071299,inset 0 1px #ffffff12}
+.panel:before{content:"";position:absolute;left:18px;right:18px;top:0;height:1px;background:linear-gradient(90deg,transparent,#9dfcf077,transparent)}
+.panel-head{margin-bottom:17px}
+.panel-title{letter-spacing:2px}
+.pill{box-shadow:0 0 18px #50dcd21c}
+.board{position:relative;gap:5px;padding:10px;border-radius:19px;border-color:#3c5676;background:linear-gradient(145deg,#081321,#101d30);box-shadow:inset 0 1px #ffffff10,0 16px 36px #020914bb,0 0 0 5px #68f1e509}
+.board.drag-active{border-color:#7df6e6;box-shadow:inset 0 0 35px #54e8db17,0 0 0 5px #68f1e51c,0 0 30px #54e8db28}
+.cell{position:relative;overflow:hidden;border-radius:7px;background:linear-gradient(145deg,#1b2c42,#132139);border-color:#30445f;transition:background .14s,border-color .14s,transform .14s,box-shadow .14s}
+.cell:after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(135deg,#ffffff12,transparent 55%);pointer-events:none}
+.cell.filled{animation:blockAppear .22s cubic-bezier(.2,.8,.25,1) both}
+@keyframes blockAppear{from{opacity:.35;transform:scale(.72) rotate(-5deg)}to{opacity:1;transform:scale(1) rotate(0)}}
+.cell.preview{outline:2px solid #d8fff9;outline-offset:-3px;filter:brightness(1.4);transform:scale(.93);box-shadow:0 0 17px #7bfff0aa,inset 0 0 12px #ffffff55;animation:previewPulse .7s ease-in-out infinite alternate}
+.cell.invalid-preview{background:linear-gradient(145deg,#bd5578,#8c2e58)!important;outline:2px solid #ff9abb;box-shadow:0 0 14px #ff598855}
+@keyframes previewPulse{to{filter:brightness(1.65);transform:scale(.89)}}
+.board.clear-flash{animation:boardClearFlash .42s ease-out}
+@keyframes boardClearFlash{35%{box-shadow:inset 0 0 55px #c6fff677,0 0 35px #79eee966}100%{box-shadow:inset 0 1px #ffffff10,0 16px 36px #020914bb,0 0 0 5px #68f1e509}}
+.piece-card{position:relative;overflow:hidden;touch-action:none;-webkit-user-select:none;user-select:none;cursor:grab;background:linear-gradient(145deg,#1a2e49,#101c30);border-color:#354b6c;box-shadow:inset 0 1px #ffffff0b,0 6px 16px #02081266}
+.piece-card:before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 20%,#8df7eb11,transparent 65%);opacity:.9}
+.piece-card:hover{border-color:#79dcd3;box-shadow:0 10px 24px #030b18aa,0 0 19px #61e7dc1b;transform:translateY(-3px)}
+.piece-card:active,.piece-card.dragging{cursor:grabbing;transform:scale(.97);border-color:#8ffff1;opacity:.56}
+.piece-card.selected{border-color:#79f3e6;box-shadow:0 0 0 2px #62eee128,0 0 26px #45d7d655;background:linear-gradient(150deg,#1c4050,#14283b)}
+.mini-cell{width:17px;height:17px;border-radius:5px;box-shadow:inset 0 1px #fff9,0 0 12px color-mix(in srgb,var(--piece-color),transparent 55%),0 3px 6px #0006}
+.piece-caption{font-size:8px;letter-spacing:1.35px}
+.hint{border-color:#3b5270;background:linear-gradient(110deg,#0e1b2e,#15223a);box-shadow:inset 0 1px #ffffff0c}
+.combo{position:relative;overflow:hidden;background:linear-gradient(100deg,#29375c,#172940);border-color:#6c72ae;box-shadow:0 12px 26px #02081488}
+.combo:after{content:"✦";position:absolute;right:17px;top:5px;color:#d3baff55;font-size:32px;animation:comboGlimmer 2.8s ease-in-out infinite}
+@keyframes comboGlimmer{50%{transform:rotate(25deg) scale(1.15);opacity:.35}}
+.drag-ghost{--drag-cell:clamp(19px,5vw,27px);position:fixed;z-index:9999;pointer-events:none;display:grid;justify-items:center;gap:8px;padding:11px 12px 9px;border:1px solid #aafff0c9;border-radius:15px;background:linear-gradient(145deg,#18374bea,#111c35eb);box-shadow:0 16px 45px #0009,0 0 0 4px #62eee122,0 0 28px #62eee188;backdrop-filter:blur(12px);transform:rotate(-3deg) scale(1.04);animation:ghostLift .14s ease-out}
+.drag-ghost-grid{display:grid;gap:4px}
+.drag-ghost-cell{width:var(--drag-cell);height:var(--drag-cell);border-radius:6px;border:1px solid #ffffff66;box-shadow:inset 0 1px #fff9,0 3px 8px #0006}
+.drag-ghost-cell.c0{background:linear-gradient(145deg,#71fff0,#21a9b6)}
+.drag-ghost-cell.c1{background:linear-gradient(145deg,#d7a9ff,#855bea)}
+.drag-ghost-cell.c2{background:linear-gradient(145deg,#ffb0d4,#db4f9b)}
+.drag-ghost-cell.c3{background:linear-gradient(145deg,#ffe5a0,#e99d3d)}
+.drag-ghost-cell.c4{background:linear-gradient(145deg,#a5d6ff,#438ce6)}
+.drag-ghost-cell.c5{background:linear-gradient(145deg,#c5f7a5,#5caf61)}
+.drag-ghost-caption{font-size:7px;line-height:1;letter-spacing:1.4px;font-weight:1000;color:#b6fff4}
+@keyframes ghostLift{from{opacity:0;transform:translateY(8px) rotate(-7deg) scale(.88)}to{opacity:1;transform:translateY(0) rotate(-3deg) scale(1.04)}}
+.board-note{font-size:9px;color:#9db3cf}
+.overlay{background:#020611e8}
+.modal{border-color:#6d83ac;background:linear-gradient(145deg,#1b2d49,#10192b);box-shadow:0 28px 90px #000d,0 0 35px #6e7cfb22}
+.primary-btn{background:linear-gradient(110deg,#7af2e6,#b39bff);box-shadow:0 8px 24px #5ce8e044,inset 0 1px #fff7}
+.primary-btn:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.footer{color:#879bb8}
+@media(max-width:760px){.app{padding-top:13px}.hero{padding:19px 17px;border-radius:19px;margin-bottom:13px}.hero-mark{font-size:57px}.panel{border-radius:18px}.board{gap:4px;padding:8px}.piece-card{min-height:104px}}
+@media(max-width:420px){.topbar{gap:7px;margin-bottom:17px}.brand{gap:8px}.brand-mark{width:39px;height:39px}.top-actions{gap:5px}.ghost-btn,.primary-btn{padding:8px 9px;border-radius:10px}.hero{padding:17px 14px}.hero p{font-size:11px}.board{gap:3px;padding:6px}.piece-card{min-height:94px}.mini-cell{width:15px;height:15px}}
+@media(prefers-reduced-motion:reduce){body:before,.brand-mark,.brand-mark:after,.hero:before,.hero:after,.hero-mark,.cell.filled,.cell.preview,.combo:after,.drag-ghost{animation:none!important}}
 </style>
 </head>
 <body>
@@ -94,15 +166,15 @@ h1 span{background:linear-gradient(90deg,#69eee3,#9c9cff 58%,#f5a7d7);background
 </section>
 <div class="layout">
 <section class="panel">
-<div class="panel-head"><div><div class="panel-title">ИГРОВОЕ ПОЛЕ</div><div class="panel-sub">9 × 9 · размещай фигуры на свободных клетках</div></div><span class="pill" id="status">В ИГРЕ</span></div>
+<div class="panel-head"><div><div class="panel-title">ИГРОВОЕ ПОЛЕ</div><div class="panel-sub">Перетаскивай фигуры мышью или пальцем · 9 × 9</div></div><span class="pill" id="status">В ИГРЕ</span></div>
 <div class="board-wrap"><div class="board" id="board" role="grid" aria-label="Игровое поле 9 на 9"></div></div>
-<div class="board-note"><span>▣ Выбери фигуру справа</span><span>Заполни линию целиком</span></div>
+<div class="board-note"><span>✥ Перетащи фигуру прямо на поле</span><span>Собирай полные линии</span></div>
 </section>
 <aside class="side">
 <section class="panel">
-<div class="panel-head"><div><div class="panel-title">ТВОИ ФИГУРЫ</div><div class="panel-sub">Выбери фигуру, затем клетку на поле</div></div><span class="pill">3 ХОДА</span></div>
+<div class="panel-head"><div><div class="panel-title">ТВОИ ФИГУРЫ</div><div class="panel-sub">Захвати фигуру и отпусти на нужной клетке</div></div><span class="pill">3 ХОДА</span></div>
 <div class="tray" id="tray"></div>
-<div class="hint"><strong>Как играть:</strong> нажми на фигуру, а затем на клетку, где должен оказаться её верхний левый угол. Заполняй целые строки или столбцы, чтобы освободить место.</div>
+<div class="hint"><strong>Drag &amp; Drop:</strong> зажми фигуру и перетащи её на поле — мышью или пальцем. Светящийся контур покажет место установки. Можно также просто нажать на фигуру, а затем на клетку.</div>
 </section>
 <div class="combo"><span>СЕРИЯ ОЧИСТОК</span><strong id="combo">× 0</strong></div>
 </aside>
@@ -133,6 +205,7 @@ const SHAPES=[
 ];
 const boardEl=document.getElementById('board'),trayEl=document.getElementById('tray');
 let board, pieces, score=0, lines=0, best=0, combo=0, selected=-1, soundOn=false, locked=false;
+let dragState=null, suppressPieceClickUntil=0;
 function safeBest(){try{return Number(localStorage.getItem('blockHuntBest')||0)}catch(_){return 0}}
 function saveBest(){try{localStorage.setItem('blockHuntBest',String(best))}catch(_){}}
 function rand(n){return Math.floor(Math.random()*n)}
@@ -175,11 +248,79 @@ for(let r=0;r<h;r++)for(let c=0;c<w;c++){
 let cell=document.createElement('i');cell.className='mini-cell';cell.style.visibility=p.shape.some(x=>x[0]===r&&x[1]===c)?'visible':'hidden';cell.style.setProperty('--piece-color',colorFor(p.color));mini.appendChild(cell);
 }
 btn.appendChild(mini);let cap=document.createElement('span');cap.className='piece-caption';cap.textContent='ФИГУРА '+(i+1);btn.appendChild(cap);
-btn.addEventListener('click',()=>{if(locked||!pieces[i])return;selected=selected===i?-1:i;renderTray();renderBoard();});
+btn.addEventListener('pointerdown',e=>{
+if(locked||!pieces[i]||(e.pointerType==='mouse'&&e.button!==0))return;
+dragState={index:i,pointerId:e.pointerId,startX:e.clientX,startY:e.clientY,card:btn,dragging:false,ghost:null};
+try{btn.setPointerCapture(e.pointerId)}catch(_){}
+});
+btn.addEventListener('pointermove',e=>{
+if(!dragState||dragState.pointerId!==e.pointerId)return;
+const state=dragState;
+if(!state.dragging&&Math.hypot(e.clientX-state.startX,e.clientY-state.startY)>7){
+state.dragging=true;selected=i;
+trayEl.querySelectorAll('.piece-card').forEach(card=>card.classList.remove('selected'));
+btn.classList.add('selected','dragging');
+state.ghost=createDragGhost(pieces[i]);document.body.appendChild(state.ghost);
+boardEl.classList.add('drag-active');renderBoard();
+}
+if(state.dragging){e.preventDefault();moveDragGhost(state.ghost,e.clientX,e.clientY);const target=boardCellAtPoint(e.clientX,e.clientY);renderBoard(target?{r:target.r,c:target.c}:undefined)}
+});
+btn.addEventListener('pointerup',e=>{
+if(!dragState||dragState.pointerId!==e.pointerId)return;
+const state=dragState;dragState=null;
+if(!state.dragging)return;
+e.preventDefault();suppressPieceClickUntil=performance.now()+450;
+const target=boardCellAtPoint(e.clientX,e.clientY);
+state.ghost?.remove();btn.classList.remove('dragging','selected');boardEl.classList.remove('drag-active');
+if(target){selected=i;place(i,target.r,target.c)}
+else{selected=-1;renderTray();renderBoard()}
+});
+btn.addEventListener('pointercancel',e=>{
+if(!dragState||dragState.pointerId!==e.pointerId)return;
+const state=dragState;dragState=null;state.ghost?.remove();btn.classList.remove('dragging','selected');boardEl.classList.remove('drag-active');selected=-1;renderTray();renderBoard();
+});
+btn.addEventListener('lostpointercapture',e=>{
+if(!dragState||dragState.pointerId!==e.pointerId)return;
+const state=dragState;dragState=null;state.ghost?.remove();boardEl.classList.remove('drag-active');if(state.dragging){selected=-1;renderTray();renderBoard()}
+});
+btn.addEventListener('click',()=>{
+if(performance.now()<suppressPieceClickUntil||locked||!pieces[i])return;
+selected=selected===i?-1:i;renderTray();renderBoard();
+});
 trayEl.appendChild(btn);
 });
 }
 function colorFor(cls){return ({c0:'#42d9d2',c1:'#a78bfa',c2:'#ff78b8',c3:'#ffc66d',c4:'#65a8ff',c5:'#8de08b'})[cls]||'#fff'}
+function boardCellAtPoint(x,y){
+const boardRect=boardEl.getBoundingClientRect();
+if(x<boardRect.left||x>boardRect.right||y<boardRect.top||y>boardRect.bottom)return null;
+const direct=document.elementFromPoint(x,y)?.closest('.cell');
+if(direct&&boardEl.contains(direct))return {r:Number(direct.dataset.r),c:Number(direct.dataset.c)};
+let nearest=null,nearestDistance=Infinity;
+boardEl.querySelectorAll('.cell').forEach(cell=>{
+const rect=cell.getBoundingClientRect(),cx=rect.left+rect.width/2,cy=rect.top+rect.height/2;
+const distance=Math.hypot(x-cx,y-cy);
+if(distance<nearestDistance){nearestDistance=distance;nearest={r:Number(cell.dataset.r),c:Number(cell.dataset.c),size:Math.max(rect.width,rect.height)}}
+});
+return nearest&&nearestDistance<nearest.size*.9?nearest:null;
+}
+function createDragGhost(piece){
+const ghost=document.createElement('div');ghost.className='drag-ghost';
+const height=Math.max(...piece.shape.map(point=>point[0]))+1,width=Math.max(...piece.shape.map(point=>point[1]))+1;
+const grid=document.createElement('div');grid.className='drag-ghost-grid';grid.style.gridTemplateColumns='repeat('+width+',var(--drag-cell))';
+for(let r=0;r<height;r++)for(let c=0;c<width;c++){
+const tile=document.createElement('i');tile.className='drag-ghost-cell '+piece.color;
+tile.style.visibility=piece.shape.some(point=>point[0]===r&&point[1]===c)?'visible':'hidden';grid.appendChild(tile);
+}
+const caption=document.createElement('span');caption.className='drag-ghost-caption';caption.textContent='ОТПУСТИ НА ПОЛЕ';
+ghost.append(grid,caption);return ghost;
+}
+function moveDragGhost(ghost,x,y){
+if(!ghost)return;
+const left=Math.max(8,Math.min(window.innerWidth-ghost.offsetWidth-8,x+18));
+const top=Math.max(8,Math.min(window.innerHeight-ghost.offsetHeight-8,y+18));
+ghost.style.left=left+'px';ghost.style.top=top+'px';
+}
 function canPlace(index,r,c){
 let p=pieces[index];if(!p)return false;
 return p.shape.every(([dr,dc])=>r+dr>=0&&r+dr<SIZE&&c+dc>=0&&c+dc<SIZE&&!board[r+dr][c+dc]);
@@ -195,6 +336,8 @@ let rows=[],cols=[];
 for(let y=0;y<SIZE;y++)if(board[y].every(Boolean))rows.push(y);
 for(let x=0;x<SIZE;x++)if(board.every(row=>row[x]))cols.push(x);
 if(rows.length||cols.length){
+boardEl.classList.remove('clear-flash');void boardEl.offsetWidth;boardEl.classList.add('clear-flash');
+setTimeout(()=>boardEl.classList.remove('clear-flash'),460);
 combo++;let cleared=new Set();
 rows.forEach(y=>{for(let x=0;x<SIZE;x++)cleared.add(y+','+x)});
 cols.forEach(x=>{for(let y=0;y<SIZE;y++)cleared.add(y+','+x)});
@@ -223,7 +366,7 @@ let cell=e.target.closest('.cell');if(!cell||selected<0||locked)return;
 place(selected,Number(cell.dataset.r),Number(cell.dataset.c));
 });
 boardEl.addEventListener('pointermove',e=>{
-if(selected<0||locked)return;let cell=e.target.closest('.cell');if(cell)renderBoard({r:Number(cell.dataset.r),c:Number(cell.dataset.c)});
+if(dragState?.dragging||selected<0||locked)return;let cell=e.target.closest('.cell');if(cell)renderBoard({r:Number(cell.dataset.r),c:Number(cell.dataset.c)});
 });
 boardEl.addEventListener('pointerleave',()=>{if(selected>=0&&!locked)renderBoard()});
 document.getElementById('restartBtn').addEventListener('click',reset);
