@@ -281,6 +281,23 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opa
  .drag-ghost,.cell.clearing::before,.cell.power-clearing::before{animation:none!important}
 }
 
+
+/* BLOCK HUNT — meteor descent, orbital shockwave and impact sparks */
+.board.meteor-shake{animation:meteorBoardShake .42s cubic-bezier(.3,.05,.4,1)}
+@keyframes meteorBoardShake{0%,100%{transform:translate(0,0)}18%{transform:translate(-3px,2px)}38%{transform:translate(4px,-2px)}58%{transform:translate(-2px,-1px)}78%{transform:translate(2px,1px)}}
+.meteor-comet{position:absolute;z-index:40;width:39px;height:39px;border-radius:50%;pointer-events:none;background:radial-gradient(circle at 34% 30%,#fffbdc 0 8%,#ffe39b 18%,#ff9a54 42%,#e94b61 68%,#a62f75 100%);box-shadow:0 0 10px #fff4bd,0 0 24px #ffb45c,0 0 48px #ff6c62}
+.meteor-comet:before{content:"";position:absolute;width:112px;height:25px;right:24px;top:8px;border-radius:100%;background:linear-gradient(90deg,transparent,#ff638c33 30%,#ff9d5caa 75%,#fff0bc);filter:blur(5px)}
+.meteor-comet:after{content:"";position:absolute;inset:9px;border-radius:50%;background:#fff9d9;box-shadow:0 0 18px 7px #fff2b5}
+.meteor-impact{position:absolute;z-index:42;width:10px;height:10px;pointer-events:none}
+.meteor-orbit{position:absolute;left:50%;top:50%;width:76px;height:31px;border:2px solid #ffd18b;border-radius:50%;box-shadow:0 0 12px #ffb45c,inset 0 0 8px #ffdf9c;transform:translate(-50%,-50%) rotate(-28deg)}
+.meteor-orbit.orbit-1{width:112px;height:43px;border-color:#ff8f9e;transform:translate(-50%,-50%) rotate(38deg);animation:meteorOrbitSpin .7s ease-out both}
+.meteor-orbit.orbit-2{width:145px;height:55px;border-color:#b99cff;transform:translate(-50%,-50%) rotate(82deg);animation:meteorOrbitSpin .82s ease-out both}
+.meteor-orbit.orbit-0{animation:meteorOrbitSpin .62s ease-out both}
+@keyframes meteorOrbitSpin{0%{opacity:0;scale:.25;rotate:-45deg}35%{opacity:1}100%{opacity:0;scale:1.65;rotate:55deg}}
+.meteor-spark{position:absolute;left:50%;top:50%;width:6px;height:13px;border-radius:8px;background:linear-gradient(#fffbdc,#ffb65e 55%,#fa6386);box-shadow:0 0 9px #ffbd75;transform:translate(-50%,-50%) rotate(var(--angle)) translateY(calc(var(--distance)*-1));animation:meteorSparkFly .62s cubic-bezier(.12,.7,.18,1) both}
+@keyframes meteorSparkFly{0%{opacity:0;scale:.2}18%{opacity:1;scale:1.2}100%{opacity:0;scale:.1;translate:0 -14px}}
+@media(prefers-reduced-motion:reduce){.board.meteor-shake{animation:none!important}.meteor-comet,.meteor-orbit,.meteor-spark,.meteor-impact{display:none!important}}
+
 </style>
 </head>
 <body>
@@ -522,6 +539,19 @@ boardEl.appendChild(beam);
 if(beam.animate)beam.animate([{opacity:0,transform:axis==='horizontal'?'scaleX(.08)':'scaleY(.08)'},{opacity:1,transform:axis==='horizontal'?'scaleX(1)':'scaleY(1)',offset:.28},{opacity:.9,transform:axis==='horizontal'?'scaleX(1.04)':'scaleY(1.04)',offset:.68},{opacity:0,transform:axis==='horizontal'?'scaleX(1.12)':'scaleY(1.12)'}],{duration:820,easing:'cubic-bezier(.15,.72,.18,1)',fill:'forwards'});
 return beam;
 }
+async function animateMeteorStrike(r,c){
+const target=boardEl.querySelector('.cell[data-r="'+r+'"][data-c="'+c+'"]');if(!target)return;
+const boardRect=boardEl.getBoundingClientRect(),cellRect=target.getBoundingClientRect();
+const x=cellRect.left+cellRect.width/2-boardRect.left,y=cellRect.top+cellRect.height/2-boardRect.top;
+const comet=document.createElement('div');comet.className='meteor-comet';comet.style.left=(x-20)+'px';comet.style.top=(y-20)+'px';boardEl.appendChild(comet);
+if(comet.animate)comet.animate([{transform:'translate(-125px,-175px) rotate(-35deg) scale(.35)',opacity:0},{transform:'translate(-85px,-120px) rotate(-25deg) scale(.7)',opacity:1,offset:.24},{transform:'translate(0,0) rotate(0deg) scale(1.2)',opacity:1,offset:.82},{transform:'translate(8px,8px) rotate(15deg) scale(.1)',opacity:0}],{duration:520,easing:'cubic-bezier(.18,.72,.2,1)',fill:'forwards'});
+await new Promise(resolve=>setTimeout(resolve,410));comet.remove();
+const impact=document.createElement('div');impact.className='meteor-impact';impact.style.left=x+'px';impact.style.top=y+'px';boardEl.appendChild(impact);
+for(let n=0;n<3;n++){const ring=document.createElement('i');ring.className='meteor-orbit orbit-'+n;impact.appendChild(ring)}
+for(let n=0;n<12;n++){const spark=document.createElement('i');spark.className='meteor-spark';spark.style.setProperty('--angle',(n*30+rand(14))+'deg');spark.style.setProperty('--distance',(42+rand(42))+'px');impact.appendChild(spark)}
+if(impact.animate)impact.animate([{opacity:0,transform:'translate(-50%,-50%) scale(.35)'},{opacity:1,transform:'translate(-50%,-50%) scale(1)',offset:.22},{opacity:0,transform:'translate(-50%,-50%) scale(1.5)'}],{duration:760,easing:'ease-out',fill:'forwards'});
+boardEl.classList.add('meteor-shake');await new Promise(resolve=>setTimeout(resolve,740));boardEl.classList.remove('meteor-shake');impact.remove();
+}
 async function animateClearCells(keys,rows,cols,kind){
 const nodes=[],beams=[];let maxDelay=0;
 if(kind==='line'){
@@ -573,7 +603,7 @@ const keys=new Set();
 if(mode==='meteor'){for(let y=Math.max(0,r-1);y<=Math.min(SIZE-1,r+1);y++)for(let x=Math.max(0,c-1);x<=Math.min(SIZE-1,c+1);x++)if(board[y][x])keys.add(y+','+x)}
 else{for(let x=0;x<SIZE;x++)if(board[r][x])keys.add(r+','+x);for(let y=0;y<SIZE;y++)if(board[y][c])keys.add(y+','+c)}
 if(!keys.size){powerMode=null;renderBoard();renderPowerUi();showToast('Здесь пока нечего очищать — выбери другую клетку');return}
-energy-=cost;powerMode=null;selected=-1;locked=true;animating=true;render();await animateClearCells(Array.from(keys),[],[],'power');keys.forEach(key=>{const [y,x]=key.split(',').map(Number);board[y][x]=null});
+energy-=cost;powerMode=null;selected=-1;locked=true;animating=true;render();if(mode==='meteor')await animateMeteorStrike(r,c);await animateClearCells(Array.from(keys),[],[],'power');keys.forEach(key=>{const [y,x]=key.split(',').map(Number);board[y][x]=null});
 score+=keys.size*(mode==='prism'?24:18);if(mode==='prism'){lines+=2;combo=0;showToast('ПРИЗМЕННЫЙ РАЗРЕЗ! РЯД И КОЛОНКА ОЧИЩЕНЫ')}else{combo=0;showToast('МЕТЕОРИТНЫЙ УДАР! −'+keys.size+' БЛОКОВ')}
 if(score>best){best=score;saveBest()}locked=false;animating=false;render();checkMoves();
 }
