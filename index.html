@@ -622,6 +622,98 @@ body{background:radial-gradient(ellipse at 12% 8%,#17436a55 0,transparent 34%),r
 @keyframes summerStampPulse{0%,100%{transform:translateY(0);box-shadow:0 0 14px #ffb34a44}50%{transform:translateY(-4px);box-shadow:0 0 24px #ffb34a88}}
 @media(max-width:600px){.forest-letter-stamp,.yard-summer-stamp{top:17%;right:10%;font-size:7px;padding:6px 8px}}
 @media(prefers-reduced-motion:reduce){.forest-cover:after,.forest-cover .forest-sun-rays,.forest-cover .forest-clouds,.forest-cover .forest-nebula,.forest-cover .forest-planet-rings,.forest-cover .forest-starfield circle,.forest-cover .cover-timka,.forest-cover .cover-envelope,.forest-cover .cover-acorn,.forest-cover .forest-flower,.forest-cover .cover-flower,.forest-letter-stamp,.yard-cover:after,.yard-cover .yard-clouds,.yard-cover .yard-flag,.yard-cover .yard-kids,.yard-cover .yard-ball-svg,.yard-cover .yard-bike-svg,.yard-cover .yard-boombox,.yard-cover .yard-window-glow circle,.yard-summer-stamp{animation:none!important}}
+
+/* FOREST MEADOW + HOT YARD — unified neon arcade launch cards */
+.forest-cover{
+ background:radial-gradient(ellipse at 50% 30%,#1d5964 0,#18304d 48%,#10172d 100%)!important;
+ border:1px solid #72f5e2aa!important;
+ box-shadow:inset 0 1px #e4fffa33,0 18px 48px #0008,0 0 30px #4cebd52b!important;
+}
+.forest-cover:before{
+ background:
+  radial-gradient(circle at 18% 18%,#b9fff3 0 1px,transparent 2px),
+  radial-gradient(circle at 82% 24%,#c7b8ff 0 2px,transparent 3px),
+  linear-gradient(135deg,#5ce8e01c,transparent 48%,#a78bfa22)!important;
+}
+.forest-cover:after{
+ background:linear-gradient(180deg,#327e8877,#182b4cdd)!important;
+ box-shadow:0 -10px 35px #65f3e644!important;
+}
+.forest-cover .cover-orbit{
+ border-color:#8dfff0aa!important;
+ box-shadow:0 0 0 20px #6fffee12,0 0 0 42px #b29aff10,0 0 35px #69f5e966!important;
+ animation:forestNeonOrbit 24s linear infinite!important;
+}
+@keyframes forestNeonOrbit{to{transform:rotate(360deg)}}
+.forest-cover-art{
+ filter:saturate(1.35) contrast(1.08) drop-shadow(0 0 18px #6bf5df55);
+}
+.forest-cover .forest-landscape-v2{filter:saturate(1.25) contrast(1.08)}
+.forest-cover .cover-label{
+ color:#bafff2!important;background:#0a203bc9!important;
+ border:1px solid #7df7e677;border-radius:99px;padding:7px 11px;
+ box-shadow:0 0 18px #5ce8e022;backdrop-filter:blur(8px);
+}
+.forest-cover .cover-title{
+ color:#effffb!important;text-shadow:0 0 18px #4fe8d988,0 4px 18px #071326!important;
+}
+.forest-cover .cover-title b{
+ color:#8df8e7!important;text-shadow:0 0 18px #62f4e9aa!important;
+}
+.forest-cover .cover-play{
+ background:linear-gradient(145deg,#c9fff4,#69e8dc)!important;
+ color:#07313b!important;box-shadow:0 0 0 5px #75f5e522,0 0 25px #5ce8e088!important;
+}
+.game-card:has(.forest-cover):hover{
+ border-color:#80fff0!important;box-shadow:0 22px 55px #0006,0 0 32px #52e8d744!important;
+}
+.yard-cover{
+ background:
+  radial-gradient(ellipse at 60% 18%,#ffbd6b55,transparent 36%),
+  radial-gradient(ellipse at 12% 85%,#ff5e8a35,transparent 45%),
+  linear-gradient(145deg,#542b48,#211b3c 65%,#11182e)!important;
+ border:1px solid #ffad7dcc!important;
+ box-shadow:inset 0 1px #fff5,0 18px 48px #0008,0 0 30px #ff8a6530!important;
+}
+.yard-cover:before{
+ background:
+  radial-gradient(ellipse at 55% 12%,#ffe1a044,transparent 42%),
+  linear-gradient(180deg,#24173b22 0%,#111329aa 100%),
+  repeating-linear-gradient(125deg,transparent 0 40px,#ffb77b0c 41px 42px)!important;
+}
+.yard-cover:after{
+ background:linear-gradient(180deg,transparent 35%,#17142fc2 100%),radial-gradient(ellipse at 50% 100%,#ff8e7044,transparent 60%)!important;
+}
+.yard-cover .cover-orbit{
+ border-color:#ffc58b99!important;
+ box-shadow:0 0 0 20px #ffad7b18,0 0 0 44px #c69aff12,0 0 40px #ff9a6c66!important;
+}
+.yard-cover-art{filter:saturate(1.35) contrast(1.08) drop-shadow(0 0 18px #ff956c55)}
+.yard-cover .cover-label{
+ color:#ffe1c5!important;background:#211b3ddd!important;
+ border:1px solid #ffc08b77;border-radius:99px;padding:7px 11px;
+ box-shadow:0 0 18px #ff9c6c22;backdrop-filter:blur(8px);
+}
+.yard-cover .cover-title{
+ color:#fff3e9!important;text-shadow:0 0 18px #ff9c7aaa,0 5px 18px #170d24!important;
+}
+.yard-cover .cover-title b{
+ color:#ffc58c!important;text-shadow:0 0 18px #ff986dcc!important;
+}
+.yard-cover .cover-play{
+ background:linear-gradient(145deg,#ffe0b6,#ff9c83)!important;
+ color:#351a32!important;box-shadow:0 0 0 5px #ffad8622,0 0 25px #ff9c7f88!important;
+}
+.yard-cover .cover-spark{
+ color:#ffd9b5!important;text-shadow:0 0 15px #ff9e79!important;
+}
+.game-card:has(.yard-cover):hover{
+ border-color:#ffbc91!important;box-shadow:0 22px 55px #0006,0 0 32px #ff916044!important;
+}
+@media(prefers-reduced-motion:reduce){
+ .forest-cover .cover-orbit{animation:none!important}
+}
+
 </style></head>
 <body>
 <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
