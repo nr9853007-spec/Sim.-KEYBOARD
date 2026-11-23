@@ -232,6 +232,55 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opa
 @media(max-width:760px){.app{width:min(650px,100% - 22px);padding-top:15px}.hero{padding:19px 18px}.layout{grid-template-columns:1fr}.side{grid-template-columns:1fr}.panel{padding:14px}.piece-card{min-height:106px}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:420px){.hero{padding:16px 14px}.stats{gap:7px}.stat{padding:10px 11px}.panel{padding:12px}.tray{gap:6px}.piece-card{min-height:94px}.board{gap:3px;padding:6px}.clear-beam.horizontal{height:3px}.clear-beam.vertical{width:3px}}
 @media(prefers-reduced-motion:reduce){.cell.clearing,.cell.power-clearing,.clear-beam,.cell.clearing:before,.cell.power-clearing:before{animation:none!important;transition:none!important}}
+
+/* BLOCK HUNT — clean drag silhouette and persistent board grid */
+.drag-ghost{
+ --drag-cell:clamp(22px,5.6vw,30px);
+ display:block;justify-items:initial;gap:0;padding:0;
+ border:0;border-radius:0;background:transparent;
+ box-shadow:none;backdrop-filter:none;
+ transform:translate(-50%,-50%);
+ animation:ghostLift .12s ease-out;
+}
+.drag-ghost-grid{
+ display:grid;gap:4px;
+ filter:drop-shadow(0 0 9px #79fff0aa) drop-shadow(0 5px 8px #0008);
+}
+.drag-ghost-cell{
+ width:var(--drag-cell);height:var(--drag-cell);
+ border:1px solid #ffffff88;border-radius:6px;
+ box-shadow:inset 0 1px #fff9,0 0 12px #76fff055;
+}
+.drag-ghost-caption{display:none!important}
+@keyframes ghostLift{from{opacity:.65;transform:translate(-50%,-46%) scale(.9)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+.cell.clearing,.cell.power-clearing{
+ animation:none!important;opacity:1!important;transform:none!important;
+ filter:none!important;pointer-events:none;
+}
+.cell.clearing::before,.cell.power-clearing::before{
+ content:"";position:absolute;inset:2px;border-radius:5px;pointer-events:none;
+ background:linear-gradient(135deg,#ffffffdd,#75f6e855 48%,#a68dff66);
+ box-shadow:0 0 18px #9fffff,inset 0 0 12px #fff;
+ animation:cellClearGlow .72s ease-out both;z-index:4;
+}
+@keyframes cellClearGlow{
+ 0%{opacity:0;transform:scale(.25) rotate(-20deg)}
+ 25%{opacity:1;transform:scale(1.08) rotate(7deg)}
+ 100%{opacity:0;transform:scale(1.45) rotate(24deg)}
+}
+.piece-card:focus-visible,.ghost-btn:focus-visible,.primary-btn:focus-visible,.power-btn:focus-visible{
+ outline:2px solid #aafff5;outline-offset:3px;
+}
+.piece-card{touch-action:none; -webkit-tap-highlight-color:transparent}
+.board{touch-action:pan-y;overscroll-behavior:contain}
+@media(max-width:760px){
+ .drag-ghost{--drag-cell:clamp(19px,5vw,26px)}
+ .drag-ghost-grid{gap:3px}
+}
+@media(prefers-reduced-motion:reduce){
+ .drag-ghost,.cell.clearing::before,.cell.power-clearing::before{animation:none!important}
+}
+
 </style>
 </head>
 <body>
@@ -437,9 +486,9 @@ return nearest&&distance<nearest.size*.9?nearest:null;
 function createDragGhost(piece){
 const ghost=document.createElement('div');ghost.className='drag-ghost';const height=Math.max(...piece.shape.map(p=>p[0]))+1,width=Math.max(...piece.shape.map(p=>p[1]))+1,grid=document.createElement('div');grid.className='drag-ghost-grid';grid.style.gridTemplateColumns='repeat('+width+',var(--drag-cell))';
 for(let r=0;r<height;r++)for(let c=0;c<width;c++){const tile=document.createElement('i');tile.className='drag-ghost-cell '+piece.color;tile.style.visibility=piece.shape.some(p=>p[0]===r&&p[1]===c)?'visible':'hidden';grid.appendChild(tile)}
-const caption=document.createElement('span');caption.className='drag-ghost-caption';caption.textContent='ОТПУСТИ НА ПОЛЕ';ghost.append(grid,caption);return ghost;
+ghost.appendChild(grid);return ghost;
 }
-function moveDragGhost(ghost,x,y){if(!ghost)return;ghost.style.left=Math.max(8,Math.min(window.innerWidth-ghost.offsetWidth-8,x+18))+'px';ghost.style.top=Math.max(8,Math.min(window.innerHeight-ghost.offsetHeight-8,y+18))+'px'}
+function moveDragGhost(ghost,x,y){if(!ghost)return;ghost.style.left=x+'px';ghost.style.top=y+'px'}
 function canPlace(index,r,c){const p=pieces[index];if(!p)return false;return p.shape.every(([dr,dc])=>r+dr>=0&&r+dr<SIZE&&c+dc>=0&&c+dc<SIZE&&!board[r+dr][c+dc])}
 function rotateSelected(){
 if(selected<0||!pieces[selected]||locked||animating){showToast('Сначала выбери фигуру');return}
@@ -486,15 +535,7 @@ if(kind==='line'){if(rows.includes(r))distances.push(Math.abs(c-4));if(cols.incl
 else distances.push(Math.abs(r-4)+Math.abs(c-4));
 const delay=Math.round((distances.length?Math.min(...distances):0)*(kind==='line'?30:17)+rand(16));maxDelay=Math.max(maxDelay,delay);
 cell.classList.add(kind==='line'?'clearing':'power-clearing');
-if(cell.animate){
-cell.animate([
-{transform:'translate(0,0) scale(1) rotate(0deg)',opacity:1,filter:'brightness(1) saturate(1)'},
-{transform:'translate(0,0) scale(1.08) rotate(3deg)',opacity:1,filter:'brightness(1.8) saturate(1.35)',offset:.18},
-{transform:'translate(0,0) scale(1.02) rotate(-3deg)',opacity:1,filter:'brightness(2.6) saturate(1.55)',offset:.52},
-{transform:'translateY(-3px) scale(.88) rotate(-8deg)',opacity:.94,filter:'brightness(2.8) saturate(1.7)',offset:.76},
-{transform:'translateY(-8px) scale(.08) rotate(52deg)',opacity:0,filter:'brightness(2.1) blur(3px)'}
-],{duration:820,delay:delay,easing:'cubic-bezier(.18,.72,.19,1)',fill:'forwards'});
-}
+
 for(let n=0;n<5;n++)makeShard(cell,n,5,delay+115,kind);
 nodes.push(cell);
 });
