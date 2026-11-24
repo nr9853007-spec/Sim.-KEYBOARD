@@ -1,17 +1,38 @@
 # N1kmeL Hub
 
-N1kmeL Hub is a responsive home page for a growing collection of browser games.
+N1kmeL Hub — веб-портал с браузерными играми, аккаунтами, отзывами и обращениями в поддержку.
 
-## Current games
-- **Shaverma Run** — open `shawarma-run.html` from the hub.
+## Возможности
+- Каталог браузерных игр и адаптивная главная страница.
+- Отдельные игровые страницы на HTML/CSS/JavaScript.
+- Аккаунты и API на Express с Supabase.
+- Отзывы, обращения в поддержку и административные функции.
+- Neon Shards — игра «три в ряд» с цепными реакциями, специальными кристаллами и бустерами.
 
-## Project structure
-- `index.html` — games hub homepage.
-- `hub.css` / `hub.js` — hub styles and navigation.
-- `assets/games/shawarma-run.svg` — Shaverma Run game artwork.
-- `shawarma-run.html` — standalone game.
+## Структура
+- `index.html` — главная и каталог.
+- `hub.css`, `hub.js` — стили, меню и каталог.
+- `server.js` — серверный API.
+- `portal.js` — интерфейс аккаунтов, отзывов и поддержки.
+- `supabase/schema.sql` — SQL-схема.
+- `neon-shards.html` — игра Neon Shards.
+- `docs.html` — документация.
+- `terms.html` — пользовательское соглашение.
+- Другие HTML-файлы — отдельные игры.
 
-The hub is a static HTML/CSS/JavaScript site and can be hosted on GitHub Pages. The older marketplace demo files remain in the repository but are no longer used by the homepage.
+## Требования
+Node.js 20+, проект Supabase и переменные окружения `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`, `SUPABASE_SECRET_KEY`. Рекомендуется задать стабильный `SESSION_SECRET`; порт настраивается через `PORT` (по умолчанию 3000).
 
-## Local preview
-Open `index.html` in a browser or serve the repository with any static file server.
+## Запуск
+```bash
+npm install
+npm start
+```
+Откройте `http://localhost:3000`. Без настроек Supabase серверные функции аккаунтов и поддержки не запустятся.
+
+## Документы
+- [Документация](docs.html)
+- [Пользовательское соглашение](terms.html)
+
+## Безопасность
+Не добавляйте секретные ключи, пароли или файлы окружения в Git. Для production настройте HTTPS, постоянное хранилище сессий, стабильный секрет сессии, резервное копирование и проверьте политики доступа Supabase.
