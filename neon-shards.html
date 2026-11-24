@@ -1,19 +1,274 @@
 <!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#151238"><meta name="description" content="Neon Shards — неоновая головоломка три в ряд от N1kmeL Hub."><title>Neon Shards — N1kmeL Hub</title>
 <style>
 :root{color-scheme:dark;--cyan:#8ff7ff;--pink:#ff83d4;--gold:#ffd58a;--muted:#b8b6df}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 12% 0%,#5637a855,transparent 36%),radial-gradient(ellipse at 90% 55%,#075d8b44,transparent 35%),#100f2b;color:#f5f4ff;font-family:system-ui,sans-serif}header{max-width:1100px;margin:auto;padding:22px 20px;display:flex;justify-content:space-between;gap:16px}.brand{font-weight:950;letter-spacing:1px}a{color:var(--cyan);text-decoration:none}main{width:min(1100px,calc(100% - 28px));margin:10px auto 50px}.intro{text-align:center;margin:10px 0 22px}.eyebrow{font-size:11px;letter-spacing:3px;color:var(--cyan);font-weight:900}.intro h1{font-size:clamp(32px,6vw,56px);margin:8px 0;background:linear-gradient(90deg,#fff,#8ff7ff,#d5a2ff);background-clip:text;color:transparent}.intro p{color:var(--muted)}.layout{display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:18px;align-items:start}.game-panel,.side-panel{background:linear-gradient(145deg,#242052ef,#171633f2);border:1px solid #8c8aff40;border-radius:22px;box-shadow:0 24px 70px #05051e88;padding:18px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:14px}.stat{padding:10px;border-radius:13px;background:#ffffff0a;text-align:center;border:1px solid #ffffff12}.stat small{display:block;color:#aaa8d5;font-size:10px;letter-spacing:1px}.stat b{font-size:23px;color:var(--cyan);font-variant-numeric:tabular-nums}.goal{display:flex;justify-content:space-between;gap:12px;color:#dcd9ff;font-size:13px;margin:0 2px 10px}.progress{height:9px;border-radius:99px;background:#0d0d27;overflow:hidden;margin-bottom:15px}.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,#62e9ff,#b78aff,#ff8bd5);transition:width .25s}.board-wrap{width:min(100%,560px);margin:auto;padding:7px;border-radius:17px;background:linear-gradient(135deg,#77eaff55,#a47aff44,#ff80d444)}.board{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:5px;padding:7px;border-radius:12px;background:#100f2b}.tile{border:1px solid #ffffff25;border-radius:10px;aspect-ratio:1;min-width:0;padding:0;display:grid;place-items:center;cursor:pointer;background:linear-gradient(145deg,#36325f,#201d49);font-size:clamp(16px,4vw,30px);text-shadow:0 2px 12px #080820;transition:transform .12s,border-color .12s;position:relative}.tile.selected{border:2px solid white;transform:scale(.91);filter:brightness(1.35);box-shadow:0 0 17px #7ceeffaa}.tile.special:after{content:"✦";position:absolute;right:3px;top:1px;color:white;font-size:10px}.actions{display:flex;flex-wrap:wrap;justify-content:center;gap:9px;margin-top:15px}.btn{border:1px solid #91eaff55;border-radius:12px;padding:11px 14px;background:#252452;color:#f5f4ff;font-weight:800;cursor:pointer}.btn.primary{background:linear-gradient(110deg,#8ff7ff,#b69cff);color:#17143a;border:0}.btn:disabled{opacity:.4;cursor:not-allowed}.hint{text-align:center;color:#aaa8d5;font-size:12px;min-height:20px;margin:12px 0 0}.side-panel h2{margin:2px 0 12px;font-size:18px}.side-panel p,.side-panel li{color:#c5c3e8;font-size:13px;line-height:1.65}.side-panel ul{padding-left:18px}.power{display:grid;gap:8px;margin:14px 0}.power .btn{display:flex;justify-content:space-between;align-items:center}.power small{color:#aeadcf}.record{margin-top:15px;padding:13px;border-radius:13px;background:#ffffff09;color:#c7c4e9;font-size:13px}.record b{color:var(--gold)}.overlay{position:fixed;inset:0;display:none;place-items:center;padding:20px;background:#09081dd9;backdrop-filter:blur(8px);z-index:5}.overlay.show{display:grid}.modal{width:min(420px,100%);padding:25px;border-radius:22px;background:#211e4a;border:1px solid #8ff7ff66;text-align:center}.modal h2{font-size:30px;margin:0 0 8px}.modal p{color:#c5c3e8}@media(max-width:780px){.layout{grid-template-columns:1fr}.game-panel{padding:10px}.board{gap:3px;padding:4px}.tile{border-radius:7px}.side-panel{padding:16px}}@media(prefers-reduced-motion:reduce){*{transition:none!important}}
-</style></head><body><header><a class="brand" href="index.html">N1kmeL <span>HUB</span></a><a href="index.html">← Все игры</a></header><main><div class="intro"><div class="eyebrow">N1KMEL ORIGINAL · MATCH THREE</div><h1>NEON SHARDS</h1><p>Собирай энергию. Запускай цепные реакции. Заряжай ядро.</p></div><div class="layout"><section class="game-panel" aria-label="Игровое поле"><div class="stats"><div class="stat"><small>ОЧКИ</small><b id="score">0</b></div><div class="stat"><small>ХОДЫ</small><b id="moves">25</b></div><div class="stat"><small>РЕКОРД</small><b id="best">0</b></div></div><div class="goal"><span>Цель: собрать <b>18</b> осколков</span><b id="goalCount">0 / 18</b></div><div class="progress"><i id="progress"></i></div><div class="board-wrap"><div class="board" id="board" role="grid" aria-label="Игровое поле 8 на 8"></div></div><div class="actions"><button class="btn primary" id="newGame">Новая игра</button><button class="btn" id="shuffle">Перемешать ↻</button></div><p class="hint" id="hint" aria-live="polite">Выбери кристалл, затем соседний, чтобы поменять их местами.</p></section><aside class="side-panel"><h2>Как играть</h2><ul><li>Меняй местами соседние кристаллы.</li><li>Собирай 3 или больше одинаковых в линию.</li><li>Собери 18 осколков за 25 ходов.</li><li>Комбо подряд увеличивают очки.</li></ul><h2>Энергетические фишки</h2><div class="power"><button class="btn" id="pulse"><span>⚡ Импульс</span><small>убрать линию · 1</small></button><button class="btn" id="prism"><span>✧ Призма</span><small>очистить цвет · 1</small></button></div><p>Совпадение из 4 кристаллов создаёт заряд-линейку. Линия из 5 запускает цветную призму.</p><div class="record">Лучший результат хранится <b>на этом устройстве</b>.</div></aside></div></main><div class="overlay" id="overlay"><div class="modal"><h2 id="resultTitle"></h2><p id="resultText"></p><button class="btn primary" id="again">Сыграть ещё</button></div></div>
-<script>
-(()=>{'use strict';const N=8,T=6,GOAL=18,icons=['◆','⬟','✦','⬢','◈','✧'],colors=['#5de6ff','#ffb56f','#c18bff','#67e3b5','#ff83c8','#8ea8ff'];const $=id=>document.getElementById(id),boardEl=$('board'),overlay=$('overlay');let board=[],selected=-1,score=0,moves=25,collected=0,boost={pulse:1,prism:1},busy=false,ended=false;let best=Number(localStorage.getItem('n1kmelNeonShardsBest')||0);$('best').textContent=best;const idx=(r,c)=>r*N+c,near=(a,b)=>Math.abs(Math.floor(a/N)-Math.floor(b/N))+Math.abs(a%N-b%N)===1,rand=()=>Math.floor(Math.random()*T);
-function matches(){let out=new Set();for(let r=0;r<N;r++){let s=0;for(let c=1;c<=N;c++){if(c<N&&board[idx(r,c)].type===board[idx(r,s)].type)continue;if(c-s>=3)for(let k=s;k<c;k++)out.add(idx(r,k));s=c}}for(let c=0;c<N;c++){let s=0;for(let r=1;r<=N;r++){if(r<N&&board[idx(r,c)].type===board[idx(s,c)].type)continue;if(r-s>=3)for(let k=s;k<r;k++)out.add(idx(k,c));s=r}}return out}
-function make(){board=Array.from({length:64},()=>({type:rand(),special:0}));let guard=0;while(matches().size&&guard++<80)for(const i of matches())board[i]={type:rand(),special:0}}
-function paint(){boardEl.innerHTML=board.map((t,i)=>'<button class="tile'+(i===selected?' selected':'')+(t.special?' special':'')+'" data-i="'+i+'" style="color:'+colors[t.type]+'" aria-label="Кристалл '+(i+1)+'">'+icons[t.type]+'</button>').join('');$('score').textContent=score;$('moves').textContent=moves;$('goalCount').textContent=collected+' / '+GOAL;$('progress').style.width=Math.min(100,collected/GOAL*100)+'%';$('pulse').disabled=busy||ended||!boost.pulse;$('prism').disabled=busy||ended||!boost.prism;$('shuffle').disabled=busy||ended}
-function say(t){$('hint').textContent=t}function fall(){for(let c=0;c<N;c++){let v=[];for(let r=N-1;r>=0;r--)if(board[idx(r,c)])v.push(board[idx(r,c)]);while(v.length<N)v.push({type:rand(),special:0});for(let r=N-1;r>=0;r--)board[idx(r,c)]=v[N-1-r]}}
-function expand(set){let x=new Set(set);for(const i of set){const t=board[i];if(t?.special===1){let r=Math.floor(i/N),c=i%N;for(let k=0;k<N;k++){x.add(idx(r,k));x.add(idx(k,c))}}if(t?.special===2)for(let k=0;k<64;k++)if(board[k].type===t.type)x.add(k)}return x}
-async function resolve(){let chain=0;while(true){let hit=matches();if(!hit.size)break;chain++;hit=expand(hit);let spec=-1,kind=0;for(let r=0;r<N;r++){let run=[];for(let col=0;col<=N;col++){if(col<N&&hit.has(idx(r,col)))run.push(idx(r,col));else{if(run.length>=5){spec=run[Math.floor(run.length/2)];kind=2;break}if(run.length===4){spec=run[1];kind=1}run=[]}}if(kind===2)break}if(kind!==2)for(let col=0;col<N;col++){let run=[];for(let r=0;r<=N;r++){if(r<N&&hit.has(idx(r,col)))run.push(idx(r,col));else{if(run.length>=5){spec=run[Math.floor(run.length/2)];kind=2;break}if(run.length===4){spec=run[1];kind=1}run=[]}}if(kind===2)break}for(const i of hit)if(board[i]){score+=10*chain;collected++;board[i]=null}if(spec>=0)board[spec]={type:rand(),special:kind};paint();await new Promise(r=>setTimeout(r,120));fall();paint();await new Promise(r=>setTimeout(r,80))}if(chain>1)say('Цепная реакция ×'+chain+'!');if(collected>=GOAL)finish(true);else if(moves<=0)finish(false)}
-function finish(win){ended=true;if(score>best){best=score;localStorage.setItem('n1kmelNeonShardsBest',String(best));$('best').textContent=best}$('resultTitle').textContent=win?'Ядро заряжено!':'Попробуем ещё?';$('resultText').textContent=win?'Цель выполнена! Очки: '+score:'Ходы закончились. Собрано '+collected+' из '+GOAL+'. Очки: '+score;overlay.classList.add('show');paint()}
-async function swap(a,b){if(busy||ended||!near(a,b))return;busy=true;[board[a],board[b]]=[board[b],board[a]];selected=-1;paint();if(!matches().size){[board[a],board[b]]=[board[b],board[a]];say('Этот обмен не создаёт совпадение.');busy=false;paint();return}moves--;await resolve();busy=false;paint()}
-boardEl.addEventListener('click',e=>{let el=e.target.closest('[data-i]');if(!el||busy||ended)return;let i=+el.dataset.i;if(selected<0){selected=i;paint()}else if(selected===i){selected=-1;paint()}else if(near(selected,i))swap(selected,i);else{selected=i;paint()}});
-function start(){score=0;moves=25;collected=0;boost={pulse:1,prism:1};selected=-1;busy=false;ended=false;overlay.classList.remove('show');make();paint();say('Выбери кристалл, затем соседний.')}function fresh(){start()}$('newGame').onclick=fresh;$('again').onclick=fresh;$('shuffle').onclick=()=>{if(busy||ended)return;make();moves--;paint();say('Поле перемешано: минус один ход.');if(moves<=0)finish(false)};
-$('pulse').onclick=()=>{if(busy||ended||!boost.pulse)return;boost.pulse=0;let r=Math.floor(Math.random()*N);for(let c=0;c<N;c++){score+=10;collected++;board[idx(r,c)]={type:rand(),special:0}}fall();paint();say('Импульс очистил горизонтальную линию!');if(collected>=GOAL)finish(true)};
-$('prism').onclick=async()=>{if(busy||ended||!boost.prism)return;busy=true;boost.prism=0;let counts=Array(T).fill(0);board.forEach(t=>counts[t.type]++);let color=counts.indexOf(Math.max(...counts));for(let i=0;i<64;i++)if(board[i].type===color){score+=10;collected++;board[i]={type:rand(),special:0}}paint();await resolve();busy=false;paint();if(collected>=GOAL)finish(true);else say('Призма преобразовала самый частый цвет!')};start()})();
-</script></body></html>
+
+/* Neon Shards: tactile mesh gems and game-feel polish */
+.board{position:relative;background:radial-gradient(ellipse at 50% 5%,#35306a 0,#11102f 66%)}
+.board-wrap{position:relative;box-shadow:0 0 34px #50ddff18,inset 0 0 20px #9c78ff18}
+.board-wrap:before{content:"";position:absolute;inset:-12px;border-radius:22px;border:1px solid #92f6ff22;pointer-events:none;animation:shard-board-breathe 3.6s ease-in-out infinite}
+@keyframes shard-board-breathe{50%{opacity:.35;box-shadow:0 0 28px #75eaff22}}
+.tile{overflow:visible;isolation:isolate;touch-action:none;user-select:none;-webkit-user-select:none;background:linear-gradient(145deg,#454078,#211d4d 72%);box-shadow:inset 0 1px 0 #ffffff25,inset 0 -5px 12px #06051e55,0 3px 7px #05041c66;transition:border-color .16s,background .16s,box-shadow .16s}
+.tile:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.tile.selected{z-index:3;background:linear-gradient(145deg,#5b528c,#272054);box-shadow:0 0 0 2px #aafaff88,0 0 24px #6ceeffaa,inset 0 0 16px #ffffff20}
+.shard-mesh{width:88%;height:88%;overflow:visible;pointer-events:none;filter:drop-shadow(0 4px 5px #05051f99);transform:translateY(0) scale(1);transition:transform .18s,filter .18s}
+.tile.selected .shard-mesh{transform:translateY(-3px) scale(1.1);filter:drop-shadow(0 0 9px var(--shard-color))}
+.shard-base{fill:var(--shard-color);stroke:#e9ffffc9;stroke-width:1.8;stroke-linejoin:round}
+.shard-facet{stroke:#ffffff40;stroke-width:.65;stroke-linejoin:round}
+.shard-facet.f0{fill:#ffffff78}.shard-facet.f1{fill:#ffffff35}.shard-facet.f2{fill:#09163a42}.shard-facet.f3{fill:#ffffff22}.shard-facet.f4{fill:#06133138}.shard-facet.f5{fill:#dffcff32}
+.shard-edge{fill:none;stroke:#ffffff8a;stroke-width:1.1;stroke-linecap:round;opacity:.85}
+.tile.special .shard-mesh{filter:drop-shadow(0 0 8px var(--shard-color)) drop-shadow(0 0 15px #ffffff55);animation:specialShardPulse 1.35s ease-in-out infinite}
+@keyframes specialShardPulse{50%{transform:scale(1.12) rotate(4deg);filter:drop-shadow(0 0 13px var(--shard-color))}}
+.shard-burst{position:absolute;inset:-8%;z-index:4;border-radius:50%;pointer-events:none;background:radial-gradient(circle,#fff 0 5%,#c8fbff 8%,#79eaff8c 19%,#c47cff28 42%,transparent 68%);animation:shardBurst .34s ease-out both}
+@keyframes shardBurst{from{opacity:0;transform:scale(.18)}35%{opacity:1}to{opacity:0;transform:scale(1.7)}}
+.actions .btn{transition:transform .16s,box-shadow .16s,filter .16s}.actions .btn:hover:not(:disabled),.power .btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 24px #6feaff24;filter:brightness(1.12)}
+.intro h1{filter:drop-shadow(0 4px 18px #75eaff24);animation:neonTitleGlow 3.5s ease-in-out infinite}
+@keyframes neonTitleGlow{50%{filter:drop-shadow(0 4px 26px #c08cff55)}}
+@media(prefers-reduced-motion:reduce){.board-wrap:before,.tile.special .shard-mesh,.intro h1{animation:none!important}.tile,.shard-mesh,.actions .btn{transition:none!important}}
+</style></head><body><header><a class="brand" href="index.html">N1kmeL <span>HUB</span></a><a href="index.html">← Все игры</a></header><main><div class="intro"><div class="eyebrow">N1KMEL ORIGINAL · MATCH THREE</div><h1>NEON SHARDS</h1><p>Собирай энергию. Запускай цепные реакции. Заряжай ядро.</p></div><div class="layout"><section class="game-panel" aria-label="Игровое поле"><div class="stats"><div class="stat"><small>ОЧКИ</small><b id="score">0</b></div><div class="stat"><small>ХОДЫ</small><b id="moves">25</b></div><div class="stat"><small>РЕКОРД</small><b id="best">0</b></div></div><div class="goal"><span>Цель: собрать <b>18</b> осколков</span><b id="goalCount">0 / 18</b></div><div class="progress"><i id="progress"></i></div><div class="board-wrap"><div class="board" id="board" role="grid" aria-label="Игровое поле 8 на 8"></div></div><div class="actions"><button class="btn primary" id="newGame">Новая игра</button><button class="btn" id="shuffle">Перемешать ↻</button></div><p class="hint" id="hint" aria-live="polite">Перетащи кристалл на соседнюю клетку или выбери два кристалла по очереди.</p></section><aside class="side-panel"><h2>Как играть</h2><ul><li>Меняй местами соседние кристаллы.</li><li>Собирай 3 или больше одинаковых в линию.</li><li>Собери 18 осколков за 25 ходов.</li><li>Комбо подряд увеличивают очки.</li></ul><h2>Энергетические фишки</h2><div class="power"><button class="btn" id="pulse"><span>⚡ Импульс</span><small>убрать линию · 1</small></button><button class="btn" id="prism"><span>✧ Призма</span><small>очистить цвет · 1</small></button></div><p>Совпадение из 4 кристаллов создаёт заряд-линейку. Линия из 5 запускает цветную призму.</p><div class="record">Лучший результат хранится <b>на этом устройстве</b>.</div></aside></div></main><div class="overlay" id="overlay"><div class="modal"><h2 id="resultTitle"></h2><p id="resultText"></p><button class="btn primary" id="again">Сыграть ещё</button></div></div>
+<script>(()=>{
+'use strict';
+const N=8,T=6,GOAL=18;
+const colors=['#5de6ff','#ffb56f','#c18bff','#67e3b5','#ff83c8','#8ea8ff'];
+const names=['лазурный','янтарный','аметистовый','мятный','розовый','сапфировый'];
+const $=id=>document.getElementById(id),boardEl=$('board'),overlay=$('overlay');
+const idx=(r,c)=>r*N+c,near=(a,b)=>Math.abs(Math.floor(a/N)-Math.floor(b/N))+Math.abs(a%N-b%N)===1;
+const rand=()=>Math.floor(Math.random()*T),wait=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const shapes=[
+ {outer:'40,5 64,20 70,49 40,75 10,49 16,20',facets:['40,5 40,39 16,20','40,5 64,20 40,39','16,20 40,39 10,49','64,20 70,49 40,39','10,49 40,39 40,75','40,39 70,49 40,75']},
+ {outer:'40,4 68,30 58,66 27,75 9,43 17,14',facets:['40,4 40,43 17,14','40,4 68,30 40,43','17,14 40,43 9,43','68,30 58,66 40,43','9,43 40,43 27,75','40,43 58,66 27,75']},
+ {outer:'40,4 70,25 60,61 40,76 14,62 8,29',facets:['40,4 40,42 8,29','40,4 70,25 40,42','8,29 40,42 14,62','70,25 60,61 40,42','14,62 40,42 40,76','40,42 60,61 40,76']},
+ {outer:'40,3 72,38 49,73 20,66 8,34',facets:['40,3 40,42 8,34','40,3 72,38 40,42','8,34 40,42 20,66','72,38 49,73 40,42','20,66 40,42 49,73']},
+ {outer:'40,5 67,18 73,49 40,76 7,49 13,18',facets:['40,5 40,40 13,18','40,5 67,18 40,40','13,18 40,40 7,49','67,18 73,49 40,40','7,49 40,40 40,76','40,40 73,49 40,76']},
+ {outer:'40,4 69,28 63,60 40,75 17,60 11,28',facets:['40,4 40,42 11,28','40,4 69,28 40,42','11,28 40,42 17,60','69,28 63,60 40,42','17,60 40,42 40,75','40,42 63,60 40,75']}
+];
+let board=[],selected=-1,score=0,moves=25,collected=0,boost={pulse:1,prism:1},busy=false,ended=false,epoch=0,pointerDrag=null,suppressClickUntil=0;
+let best=Number(localStorage.getItem('n1kmelNeonShardsBest')||0);
+$('best').textContent=best;
+function meshMarkup(type){
+ const shape=shapes[type];
+ return '<svg class="shard-mesh" viewBox="0 0 80 80" aria-hidden="true" focusable="false"><polygon class="shard-base" points="'+shape.outer+'"/>'+
+ shape.facets.map((points,i)=>'<polygon class="shard-facet f'+i+'" points="'+points+'"/>').join('')+
+ '<path class="shard-edge" d="M40 5L40 42M16 20L40 42L64 20M10 49L40 42L70 49"/> </svg>';
+}
+function matches(){
+ const out=new Set();
+ for(let r=0;r<N;r++){let s=0;for(let c=1;c<=N;c++){if(c<N&&board[idx(r,c)].type===board[idx(r,s)].type)continue;if(c-s>=3)for(let k=s;k<c;k++)out.add(idx(r,k));s=c}}
+ for(let c=0;c<N;c++){let s=0;for(let r=1;r<=N;r++){if(r<N&&board[idx(r,c)].type===board[idx(s,c)].type)continue;if(r-s>=3)for(let k=s;k<r;k++)out.add(idx(k,c));s=r}}
+ return out;
+}
+function make(){
+ board=Array.from({length:64},()=>({type:rand(),special:0}));
+ let guard=0;
+ while(matches().size&&guard++<100){for(const i of matches())board[i]={type:rand(),special:0}}
+}
+function paint(){
+ boardEl.innerHTML=board.map((t,i)=>'<button type="button" class="tile'+(i===selected?' selected':'')+(t.special?' special':'')+'" data-i="'+i+'" style="--shard-color:'+colors[t.type]+'" aria-label="'+names[t.type]+' осколок, клетка '+(i+1)+(t.special===1?', линейный заряд':t.special===2?', призма':'')+'">'+meshMarkup(t.type)+'</button>').join('');
+ $('score').textContent=score;$('moves').textContent=moves;$('goalCount').textContent=collected+' / '+GOAL;
+ $('progress').style.width=Math.min(100,collected/GOAL*100)+'%';
+ $('pulse').disabled=busy||ended||!boost.pulse;$('prism').disabled=busy||ended||!boost.prism;$('shuffle').disabled=busy||ended;
+}
+function say(text){$('hint').textContent=text}
+function capturePositions(){
+ const positions=new Map();
+ boardEl.querySelectorAll('[data-i]').forEach(el=>{const tile=board[Number(el.dataset.i)];if(tile)positions.set(tile,el.getBoundingClientRect())});
+ return positions;
+}
+async function animateLayout(previous,duration=300){
+ if(reducedMotion)return;
+ const animations=[];
+ board.forEach((tile,i)=>{
+  const el=boardEl.querySelector('[data-i="'+i+'"]');if(!el)return;
+  const rect=el.getBoundingClientRect(),old=previous.get(tile);
+  const dx=old?old.left-rect.left:0,dy=old?old.top-rect.top:-Math.min(100,rect.height*.85);
+  const delay=old?0:Math.min(120,Math.max(0,Math.floor(i/N)*12));
+  if(Math.abs(dx)<1&&Math.abs(dy)<1&&!old)return;
+  if(Math.abs(dx)<1&&Math.abs(dy)<1&&old)return;
+  const animation=el.animate([
+   {transform:'translate('+dx+'px,'+dy+'px) scale('+(old?1:.76)+')',opacity:old?1:0},
+   {transform:'translate(0,0) scale(1)',opacity:1}
+  ],{duration:old?duration:Math.max(220,duration),delay,easing:'cubic-bezier(.19,.78,.24,1)'});
+  animations.push(animation.finished.catch(()=>{}));
+ });
+ await Promise.all(animations);
+}
+async function animateClearCells(set,chain){
+ if(reducedMotion){await wait(60);return}
+ const animations=[];
+ const center=3.5;
+ for(const i of set){
+  const el=boardEl.querySelector('[data-i="'+i+'"]');if(!el)continue;
+  const burst=document.createElement('span');burst.className='shard-burst';burst.setAttribute('aria-hidden','true');el.appendChild(burst);
+  const row=Math.floor(i/N),col=i%N,delay=Math.round((Math.abs(row-center)+Math.abs(col-center))*13);
+  const a=el.animate([
+   {transform:'scale(1) rotate(0deg)',opacity:1,filter:'brightness(1) saturate(1)'},
+   {transform:'scale(1.16) rotate(7deg)',opacity:1,filter:'brightness(2.1) saturate(1.8)',offset:.38},
+   {transform:'scale(.2) rotate(-18deg)',opacity:0,filter:'brightness(2.5) blur(3px)'}
+  ],{duration:310,delay,easing:'cubic-bezier(.18,.72,.24,1)'});
+  animations.push(a.finished.catch(()=>{}));
+ }
+ await Promise.all(animations);
+}
+function expand(set){
+ const result=new Set(set);
+ for(const i of set){
+  const t=board[i];if(t?.special===1){const r=Math.floor(i/N),c=i%N;for(let k=0;k<N;k++){result.add(idx(r,k));result.add(idx(k,c))}}
+  if(t?.special===2)for(let k=0;k<64;k++)if(board[k].type===t.type)result.add(k);
+ }
+ return result;
+}
+function fall(){
+ for(let c=0;c<N;c++){
+  const values=[];for(let r=N-1;r>=0;r--)if(board[idx(r,c)])values.push(board[idx(r,c)]);
+  while(values.length<N)values.push({type:rand(),special:0});
+  for(let r=N-1;r>=0;r--)board[idx(r,c)]=values[N-1-r];
+ }
+}
+async function resolve(session=epoch){
+ let chain=0;
+ while(session===epoch){
+  let hit=matches();if(!hit.size)break;
+  chain++;hit=expand(hit);
+  let specialIndex=-1,specialKind=0;
+  for(let r=0;r<N;r++){
+   let run=[];
+   for(let col=0;col<=N;col++){
+    if(col<N&&hit.has(idx(r,col)))run.push(idx(r,col));
+    else{if(run.length>=5){specialIndex=run[Math.floor(run.length/2)];specialKind=2;break}
+     if(run.length===4){specialIndex=run[1];specialKind=1}run=[]}
+   }
+   if(specialKind===2)break;
+  }
+  if(specialKind!==2)for(let col=0;col<N;col++){
+   let run=[];
+   for(let r=0;r<=N;r++){
+    if(r<N&&hit.has(idx(r,col)))run.push(idx(r,col));
+    else{if(run.length>=5){specialIndex=run[Math.floor(run.length/2)];specialKind=2;break}
+     if(run.length===4){specialIndex=run[1];specialKind=1}run=[]}
+   }
+   if(specialKind===2)break;
+  }
+  const oldPositions=capturePositions();
+  await animateClearCells(hit,chain);
+  if(session!==epoch)return;
+  for(const i of hit)if(board[i]){score+=10*chain;collected++;board[i]=null}
+  if(specialIndex>=0)board[specialIndex]={type:rand(),special:specialKind};
+  fall();paint();
+  await animateLayout(oldPositions,300);
+  if(session!==epoch)return;
+ }
+ if(session!==epoch)return;
+ if(chain>1)say('Цепная реакция ×'+chain+'! Осколки резонируют.');
+ if(collected>=GOAL)finish(true);else if(moves<=0)finish(false);
+}
+function finish(win){
+ ended=true;
+ if(score>best){best=score;localStorage.setItem('n1kmelNeonShardsBest',String(best));$('best').textContent=best}
+ $('resultTitle').textContent=win?'Ядро заряжено!':'Попробуем ещё?';
+ $('resultText').textContent=win?'Цель выполнена! Очки: '+score:'Ходы закончились. Собрано '+collected+' из '+GOAL+'. Очки: '+score;
+ overlay.classList.add('show');paint();
+}
+async function animateInvalid(a,b){
+ const nodes=[boardEl.querySelector('[data-i="'+a+'"]'),boardEl.querySelector('[data-i="'+b+'"]')].filter(Boolean);
+ if(reducedMotion)return;
+ await Promise.all(nodes.map(el=>el.animate([
+  {transform:'translateX(0)',filter:'brightness(1)'},
+  {transform:'translateX(-5px)',filter:'brightness(1.6)'},
+  {transform:'translateX(5px)',filter:'brightness(1.6)'},
+  {transform:'translateX(0)',filter:'brightness(1)'}
+ ],{duration:220,easing:'ease-out'}).finished.catch(()=>{})));
+}
+async function swap(a,b){
+ if(busy||ended||!near(a,b))return;
+ const session=epoch;busy=true;
+ const oldPositions=capturePositions();
+ [board[a],board[b]]=[board[b],board[a]];
+ if(!matches().size){
+  [board[a],board[b]]=[board[b],board[a]];
+  selected=a;await animateInvalid(a,b);
+  if(session!==epoch)return;
+  say('Обмен не создаёт линию. Попробуй соседний кристалл.');
+  busy=false;paint();return;
+ }
+ selected=-1;moves--;paint();
+ await animateLayout(oldPositions,190);
+ if(session!==epoch)return;
+ await resolve(session);
+ if(session!==epoch)return;
+ busy=false;paint();
+}
+function tileAtPoint(x,y){
+ const el=document.elementFromPoint(x,y)?.closest('[data-i]');
+ return el&&boardEl.contains(el)?Number(el.dataset.i):-1;
+}
+function vectorTarget(from,dx,dy){
+ const r=Math.floor(from/N),c=from%N;
+ if(Math.abs(dx)>Math.abs(dy)){const nc=c+(dx>0?1:-1);return nc>=0&&nc<N?idx(r,nc):-1}
+ const nr=r+(dy>0?1:-1);return nr>=0&&nr<N?idx(nr,c):-1;
+}
+boardEl.addEventListener('pointerdown',e=>{
+ const el=e.target.closest('[data-i]');if(!el||busy||ended)return;
+ pointerDrag={from:Number(el.dataset.i),x:e.clientX,y:e.clientY,pointerId:e.pointerId};
+});
+boardEl.addEventListener('pointerup',e=>{
+ const drag=pointerDrag;if(!drag||drag.pointerId!==e.pointerId)return;
+ pointerDrag=null;
+ const dx=e.clientX-drag.x,dy=e.clientY-drag.y,moved=Math.hypot(dx,dy)>12;
+ if(!moved)return;
+ let to=tileAtPoint(e.clientX,e.clientY);
+ if(to<0||to===drag.from)to=vectorTarget(drag.from,dx,dy);
+ suppressClickUntil=Date.now()+500;
+ if(to>=0&&near(drag.from,to)){selected=-1;swap(drag.from,to)}
+ else if(to>=0){selected=to;paint();say('Перемещай осколок на соседнюю клетку.')}
+});
+boardEl.addEventListener('pointercancel',()=>{pointerDrag=null});
+boardEl.addEventListener('click',e=>{
+ if(Date.now()<suppressClickUntil)return;
+ const el=e.target.closest('[data-i]');if(!el||busy||ended)return;
+ const i=Number(el.dataset.i);
+ if(selected<0){selected=i;paint()}
+ else if(selected===i){selected=-1;paint()}
+ else if(near(selected,i)){const from=selected;selected=-1;swap(from,i)}
+ else{selected=i;paint()}
+});
+async function powerRemove(set,message){
+ if(busy||ended)return;
+ const session=epoch;busy=true;selected=-1;set=expand(set);
+ const oldPositions=capturePositions();paint();
+ await animateClearCells(set,1);
+ if(session!==epoch)return;
+ for(const i of set)if(board[i]){score+=10;collected++;board[i]=null}
+ fall();paint();await animateLayout(oldPositions,300);
+ if(session!==epoch)return;
+ await resolve(session);
+ if(session!==epoch)return;
+ busy=false;paint();
+ if(collected>=GOAL)finish(true);else if(moves<=0)finish(false);else say(message);
+}
+function start(){
+ epoch++;score=0;moves=25;collected=0;boost={pulse:1,prism:1};selected=-1;busy=false;ended=false;pointerDrag=null;
+ overlay.classList.remove('show');make();paint();say('Перетащи кристалл на соседнюю клетку или выбери два кристалла по очереди.');
+}
+$('newGame').onclick=start;$('again').onclick=start;
+$('shuffle').onclick=async()=>{
+ if(busy||ended)return;
+ const session=epoch,old=capturePositions();busy=true;make();selected=-1;moves--;paint();
+ await animateLayout(old,360);if(session!==epoch)return;
+ busy=false;paint();say('Кристаллы перемешаны. Минус один ход.');
+ if(moves<=0)finish(false);
+};
+$('pulse').onclick=()=>{
+ if(busy||ended||!boost.pulse)return;
+ boost.pulse=0;const row=Math.floor(Math.random()*N),hit=new Set();
+ for(let c=0;c<N;c++)hit.add(idx(row,c));
+ powerRemove(hit,'Импульс прошёл по линии и собрал осколки!');
+};
+$('prism').onclick=()=>{
+ if(busy||ended||!boost.prism)return;
+ boost.prism=0;const counts=Array(T).fill(0);board.forEach(t=>counts[t.type]++);
+ const color=counts.indexOf(Math.max(...counts)),hit=new Set();
+ for(let i=0;i<64;i++)if(board[i].type===color)hit.add(i);
+ powerRemove(hit,'Призма преобразовала самый частый цвет!');
+};
+start();
+})();</script></body></html>
