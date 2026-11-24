@@ -930,7 +930,7 @@ body{background:radial-gradient(ellipse at 12% 8%,#17436a55 0,transparent 34%),r
 </a>
 <div class="game-info"><div class="game-info-main"><div class="game-category">ГОЛОВОЛОМКА <span>·</span> PUZZLE</div><h3>Block Hunt</h3><p>Перетаскивай неоновые фигуры мышью или пальцем, очищай линии и собирай комбо. Проверь свою тактику в Block Hunt!</p></div>
 <div class="game-info-bottom"><span class="game-status"><i></i> Доступна</span><a class="play-link" href="block-hunt.html?v=3">Играть <span>↗</span></a></div></div>
-</article><article class="game-card"><a class="game-cover shard-cover" href="neon-shards.html" aria-label="Играть в Neon Shards"><div class="cover-noise"></div><div class="cover-orbit"></div><span class="cover-label">REZ1NA ORIGINAL · MATCH 3</span><span class="cover-spark spark-left">✦</span><span class="cover-spark spark-right">✧</span><div class="shard-art" aria-hidden="true"><i>◆</i><i>⬟</i><i>✦</i><i>◆</i><i>⬢</i></div><div class="cover-title">NEON<br><b>SHARDS</b></div><span class="cover-play">▶</span></a><div class="game-info"><div class="game-info-main"><div class="game-category">ГОЛОВОЛОМКА <span>·</span> ТРИ В РЯД</div><h3>Neon Shards</h3><p>Меняй местами кристаллы, собирай цепочки, запускай энергетические взрывы и выполняй цели уровня.</p></div><div class="game-info-bottom"><span class="game-status"><i></i> Доступна</span><a class="play-link" href="neon-shards.html">Играть <span>↗</span></a></div></div></article></div>
+</article><article class="game-card"><a class="game-cover shard-cover" href="neon-shards.html?v=2" aria-label="Играть в Neon Shards"><div class="cover-noise"></div><div class="cover-orbit"></div><span class="cover-label">REZ1NA ORIGINAL · GEM MATCH 3</span><span class="cover-spark spark-left">✦</span><span class="cover-spark spark-right">✧</span><div class="shard-art" aria-hidden="true"><i>◆</i><i>⬟</i><i>✦</i><i>◆</i><i>⬢</i></div><div class="cover-title">NEON<br><b>SHARDS</b></div><span class="cover-play">▶</span></a><div class="game-info"><div class="game-info-main"><div class="game-category">ГОЛОВОЛОМКА <span>·</span> ТРИ В РЯД</div><h3>Neon Shards</h3><p>Перетаскивай объёмные неоновые кристаллы, собирай комбо и запускай яркие цепные реакции.</p></div><div class="game-info-bottom"><span class="game-status"><i></i> Доступна</span><a class="play-link" href="neon-shards.html?v=2">Играть <span>↗</span></a></div></div></article></div>
 
 
 </section>
@@ -1116,6 +1116,26 @@ body{background:radial-gradient(ellipse at 12% 8%,#17436a55 0,transparent 34%),r
 @keyframes orbitDot{to{transform:rotate(360deg) translateX(64px) rotate(-360deg)}}
 .orbit-cover .cover-title{z-index:3;color:#edf7ff}.orbit-cover .cover-title b{color:#9adfff}.orbit-cover .cover-play{z-index:4;background:linear-gradient(145deg,#d8f5ff,#7dbdff);color:#13294b}
 @media(prefers-reduced-motion:reduce){.prism-cover:before,.prism-art i,.orbit-dot{animation:none!important}}
+
+/* Neon Shards launch card: faceted floating mesh crystals */
+.shard-cover{background:radial-gradient(ellipse at 50% 42%,#7448cf 0,#30205f 48%,#10152f 100%)!important;box-shadow:inset 0 0 48px #6a52ff24,0 14px 36px #05051e88}
+.shard-cover:after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at 50% 55%,transparent 12%,#060c2a22 68%,#08091e88 100%)}
+.shard-cover .cover-orbit{animation:shard-cover-pulse 4.2s ease-in-out infinite}
+@keyframes shard-cover-pulse{50%{box-shadow:0 0 0 23px #7b7aff18,0 0 0 48px #7b7aff0b,0 0 48px #7af5ff55;opacity:.75}}
+.shard-art{z-index:3!important;gap:12px!important;perspective:850px;transform:rotate(-8deg) translateY(-2px)!important}
+.shard-art:before{content:"";position:absolute;left:50%;top:50%;width:190px;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,#72eaff22,transparent 67%);filter:blur(4px);pointer-events:none}
+.shard-art i{position:relative!important;display:block!important;width:clamp(34px,5.4vw,58px)!important;aspect-ratio:.82!important;height:auto!important;flex:0 0 auto;font-size:0!important;line-height:0!important;border:1px solid #dcffffb8!important;border-radius:0!important;clip-path:polygon(50% 0,91% 23%,82% 75%,50% 100%,13% 77%,5% 27%)!important;background:linear-gradient(145deg,#f2ffff 0%,#a7f8ff 16%,#53cde9 47%,#3c58bd 100%)!important;box-shadow:0 10px 25px #020927aa,0 0 22px #62eaff77!important;filter:drop-shadow(0 8px 9px #05051f99);transform-style:preserve-3d;animation:shard-card-hover 3s ease-in-out infinite!important}
+.shard-art i:before{content:"";position:absolute;inset:0;background:linear-gradient(145deg,#ffffffc9,#ffffff13 58%);clip-path:polygon(50% 0,50% 52%,5% 27%);pointer-events:none}
+.shard-art i:after{content:"";position:absolute;inset:0;background:linear-gradient(35deg,#07164b55,#ffffff00 48%,#ffffff66 49%,#ffffff00 55%);clip-path:polygon(50% 0,91% 23%,82% 75%,50% 100%,50% 52%);pointer-events:none}
+.shard-art i:nth-child(2){background:linear-gradient(145deg,#fff3cf 0%,#ffc46b 39%,#ed6a89 100%)!important;animation-delay:.22s!important;transform:translateY(8px) rotateY(-16deg)!important}
+.shard-art i:nth-child(3){background:linear-gradient(145deg,#fff0ff 0%,#d29aff 42%,#6849d8 100%)!important;animation-delay:.44s!important;transform:translateY(-5px) rotateY(12deg)!important}
+.shard-art i:nth-child(4){background:linear-gradient(145deg,#d9ffe9 0%,#5ae0b4 46%,#2578a8 100%)!important;animation-delay:.66s!important}
+.shard-art i:nth-child(5){background:linear-gradient(145deg,#e1e8ff 0%,#8da9ff 42%,#4a45a9 100%)!important;animation-delay:.88s!important;transform:translateY(9px) rotateY(16deg)!important}
+@keyframes shard-card-hover{0%,100%{translate:0 0;filter:drop-shadow(0 8px 9px #05051f99)}50%{translate:0 -10px;filter:drop-shadow(0 14px 13px #05051fbb) drop-shadow(0 0 9px #8deeff66)}}
+.shard-cover .cover-title{z-index:4;text-shadow:0 4px 18px #05051fdd,0 0 18px #90faff55}
+.shard-cover .cover-play{z-index:5;box-shadow:0 0 22px #7ceeff44,0 7px 20px #05051f88}
+.shard-cover .cover-label{z-index:5;letter-spacing:1.6px}
+@media(prefers-reduced-motion:reduce){.shard-cover .cover-orbit,.shard-art i{animation:none!important}.shard-art i{translate:0 0!important}}
 </style>
 </body></html>
 
