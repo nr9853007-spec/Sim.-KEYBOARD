@@ -33,4 +33,45 @@ const syncPageVisibility=()=>document.body.classList.toggle('page-hidden',docume
 document.addEventListener('visibilitychange',syncPageVisibility,{passive:true});
 syncPageVisibility();
 
+
+const browser=document.querySelector('.game-browser');
+if(browser){
+ const cards=Array.from(document.querySelectorAll('.game-grid .game-card'));
+ const search=document.querySelector('#gameSearch'),genre=document.querySelector('#gameGenre'),range=document.querySelector('#gameRange');
+ const output=document.querySelector('#gameSliderValue'),hint=document.querySelector('#gameBrowserHint');
+ const prev=document.querySelector('#gamePrev'),next=document.querySelector('#gameNext');
+ const reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ let visible=[],active=0;
+ const updateLabel=()=>{
+  if(!visible.length){output.textContent='0 игр';hint.textContent='По запросу ничего не найдено. Попробуй изменить фильтр.';return}
+  const name=visible[active].querySelector('.game-info h3')?.textContent.trim()||'Игра';
+  output.textContent=(active+1)+' / '+visible.length+' · '+name;
+  hint.textContent='Выбрана игра: '+name+'. Нажми «Играть» на карточке или выбери другую ползунком.';
+ };
+ const selectCard=(index,scroll=true)=>{
+  if(!visible.length)return;
+  active=Math.max(0,Math.min(visible.length-1,index));
+  visible.forEach((card,i)=>card.classList.toggle('is-slider-active',i===active));
+  range.max=String(visible.length);range.value=String(active+1);
+  updateLabel();
+  if(scroll)visible[active].scrollIntoView({behavior:reduced?'auto':'smooth',block:'center'});
+ };
+ const filterCards=()=>{
+  const q=(search.value||'').trim().toLocaleLowerCase('ru'),g=genre.value;
+  visible=cards.filter(card=>{
+   const text=card.textContent.toLocaleLowerCase('ru');
+   const category=card.querySelector('.game-category')?.textContent.toLocaleUpperCase('ru')||'';
+   const match=(!q||text.includes(q))&&(g==='all'||category.includes(g));
+   card.hidden=!match;card.classList.remove('is-slider-active');return match;
+  });
+  active=0;range.disabled=!visible.length;prev.disabled=!visible.length;next.disabled=!visible.length;
+  selectCard(0,false);
+ };
+ range.addEventListener('input',()=>selectCard(Number(range.value)-1,true));
+ prev.addEventListener('click',()=>selectCard(active-1,true));
+ next.addEventListener('click',()=>selectCard(active+1,true));
+ search.addEventListener('input',filterCards);genre.addEventListener('change',filterCards);
+ cards.forEach(card=>card.addEventListener('click',()=>{const i=visible.indexOf(card);if(i>=0)selectCard(i,false)}));
+ filterCards();
+}
 })();
