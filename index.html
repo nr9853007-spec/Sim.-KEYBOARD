@@ -870,6 +870,44 @@ body{background:radial-gradient(ellipse at 12% 8%,#17436a55 0,transparent 34%),r
 
 /* NEON SHARDS cover */
 .shard-cover{isolation:isolate;overflow:hidden;background:radial-gradient(ellipse at 50% 42%,#6933b7 0,#21194d 52%,#10152f 100%)!important}.shard-cover:before{content:"";position:absolute;inset:-25%;z-index:0;background:repeating-conic-gradient(from 12deg at 50% 50%,#8df8ff12 0 7deg,transparent 7deg 17deg);animation:shard-spin 28s linear infinite}@keyframes shard-spin{to{transform:rotate(360deg)}}.shard-cover .cover-orbit{z-index:1;border-color:#8af5ff88!important;box-shadow:0 0 0 18px #7b7aff15,0 0 0 38px #7b7aff0c,0 0 35px #7af5ff35}.shard-art{position:absolute;z-index:2;inset:16% 0 24%;display:flex;align-items:center;justify-content:center;gap:9px;transform:rotate(-9deg)}.shard-art i{display:grid;place-items:center;width:clamp(30px,5vw,54px);aspect-ratio:1;border:1px solid #c9ffffaa;border-radius:12px 20px 12px 20px;background:linear-gradient(145deg,#b9ffff,#39c9ed 45%,#5d4cdb);color:#f3ffff;font-size:clamp(19px,3vw,31px);font-style:normal;text-shadow:0 2px 12px #071c6b;box-shadow:0 8px 24px #060a36aa,0 0 20px #55eaff66;animation:shard-float 2.8s ease-in-out infinite}.shard-art i:nth-child(2){background:linear-gradient(145deg,#ffe6a1,#ff9b58 55%,#d94b91);animation-delay:.3s}.shard-art i:nth-child(3){background:linear-gradient(145deg,#f4c5ff,#b35bff 55%,#4a51d9);animation-delay:.6s}.shard-art i:nth-child(4){background:linear-gradient(145deg,#c6ffe4,#48dcae 55%,#168baf);animation-delay:.9s}.shard-art i:nth-child(5){background:linear-gradient(145deg,#c5d5ff,#618bff 55%,#3638a6);animation-delay:1.2s}@keyframes shard-float{50%{transform:translateY(-10px) rotate(9deg)}}.shard-cover .cover-title{z-index:3;color:#f4f4ff;text-shadow:0 3px 18px #080a32}.shard-cover .cover-title b{color:#9ef8ff}.shard-cover .cover-label,.shard-cover .cover-spark{z-index:3;color:#b9faff}.shard-cover .cover-play{z-index:4;background:linear-gradient(145deg,#c8ffff,#65caff);color:#111b4c;box-shadow:0 0 22px #55eaff88}.game-card:has(.shard-cover):hover{border-color:#79edff99;box-shadow:0 22px 55px #0005,0 0 28px #6d59ff2a}.footer-links{display:flex;flex-wrap:wrap;gap:16px}.footer-links a{color:#a9d9dd;text-decoration:none;font-size:12px}.footer-links a:hover{color:#fff}@media(max-width:600px){.footer-links{gap:10px;justify-content:center}}@media(prefers-reduced-motion:reduce){.shard-cover:before,.shard-art i{animation:none!important}}
+
+/* PREMIUM MINI-GAME COVERS — layered mesh, depth and motion */
+.pro-golf-cover,.pro-pong-cover{isolation:isolate;overflow:hidden!important}
+.pro-golf-cover{background:radial-gradient(ellipse at 50% 40%,#3dba9c 0,#176d70 40%,#102b48 100%)!important}
+.pro-golf-cover:before,.pro-pong-cover:before{content:"";position:absolute;inset:-45%;z-index:0;pointer-events:none;opacity:.7;background:repeating-linear-gradient(115deg,transparent 0 24px,#ffffff0a 25px,#ffffff0a 26px,transparent 27px 52px),repeating-linear-gradient(25deg,transparent 0 34px,#8ff7ff0b 35px,#8ff7ff0b 36px,transparent 37px 70px);animation:premiumMeshDrift 24s linear infinite}
+.pro-golf-cover:after,.pro-pong-cover:after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(circle at 50% 45%,transparent 0 25%,#07142688 85%),linear-gradient(130deg,#ffffff13,transparent 42%,#9effed18)}
+@keyframes premiumMeshDrift{to{transform:rotate(360deg) scale(1.08)}}
+.golf-mesh,.pong-mesh{position:absolute;inset:0;z-index:1;pointer-events:none;background-image:radial-gradient(#d7fff655 .8px,transparent .8px);background-size:17px 17px;mask-image:linear-gradient(transparent,#000 22%,#000 80%,transparent);opacity:.28}
+.golf-orbit,.pong-orbit{position:absolute;z-index:1;width:245px;height:150px;left:50%;top:43%;translate:-50% -50%;border:1px solid #c1fff477;border-radius:50%;transform:rotate(-18deg);box-shadow:0 0 0 18px #9dffef0a,0 0 0 38px #9dffef08,0 0 36px #71ffe933;animation:premiumOrbit 7s ease-in-out infinite}
+@keyframes premiumOrbit{50%{transform:rotate(12deg) scale(1.1);opacity:.65}}
+.golf-scene,.pong-scene{position:absolute;z-index:2;inset:8% 0 23%;display:grid;place-items:center}
+.golf-sun{position:absolute;width:135px;height:135px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#eaffd7,#9df4c8 48%,#55c4a8 72%,#ffffff00 73%);filter:drop-shadow(0 0 28px #a5ffe9aa);animation:golfSunPulse 4s ease-in-out infinite}
+@keyframes golfSunPulse{50%{transform:scale(1.08);filter:drop-shadow(0 0 38px #a5ffe9cc)}}
+.golf-course{position:absolute;width:230px;height:105px;top:35%;border:2px solid #caffedaa;border-radius:50%;transform:rotate(-12deg);background:linear-gradient(160deg,#54d7a2,#176e79);box-shadow:0 16px 30px #041e2a99,inset 0 3px 14px #d5fff455;animation:golfCourseFloat 4.5s ease-in-out infinite}
+@keyframes golfCourseFloat{50%{translate:0 -7px;rotate:3deg}}
+.golf-hole{position:absolute;right:26px;top:42px;width:25px;height:11px;border-radius:50%;background:#082c3a;box-shadow:0 0 0 4px #d6ffe933}
+.golf-ball{position:absolute;left:37px;top:27px;width:19px;height:19px;border-radius:50%;background:radial-gradient(circle at 32% 28%,#fff,#d5faff 48%,#62c4dd);box-shadow:0 0 18px #b5ffff;animation:golfBallRoll 3.8s ease-in-out infinite}
+@keyframes golfBallRoll{0%,100%{translate:0 0}50%{translate:105px -24px}}
+.golf-flag{position:absolute;right:36px;top:13px;color:#ffe49a;font-size:28px;text-shadow:0 0 12px #ffd27b;animation:flagWave 1.8s ease-in-out infinite}
+@keyframes flagWave{50%{transform:rotate(9deg)}}
+.golf-spark{position:absolute;color:#d9fff3;text-shadow:0 0 14px #b6fff1;animation:premiumSpark 2.4s ease-in-out infinite}.gs-one{top:12%;left:23%}.gs-two{top:27%;right:22%;animation-delay:.7s}.gs-three{bottom:0;left:31%;animation-delay:1.2s}
+@keyframes premiumSpark{50%{opacity:.35;transform:scale(.6) rotate(45deg)}}
+.pro-golf-cover .cover-title,.pro-pong-cover .cover-title{z-index:3;color:#f1fffb;text-shadow:0 4px 20px #061b2b;letter-spacing:1.2px}.pro-golf-cover .cover-title b{color:#a7ffe0}.pro-golf-cover .cover-label,.pro-pong-cover .cover-label{z-index:3;color:#c9fff0}.pro-golf-cover .cover-play{z-index:4;background:linear-gradient(145deg,#d9fff0,#70e4bd);color:#073a3c;box-shadow:0 0 25px #70e4bd88}
+.pro-pong-cover{background:radial-gradient(ellipse at 50% 42%,#5a3ab2 0,#25205f 45%,#10152f 100%)!important}
+.pro-pong-cover .pong-orbit{border-color:#d6c5ff88;box-shadow:0 0 0 18px #b9a2ff10,0 0 0 38px #b9a2ff08,0 0 36px #a78bfa55}
+.pong-scene{perspective:600px}
+.pong-line{position:absolute;width:2px;height:100%;border-left:2px dashed #d9d2ff55;left:50%;top:0}
+.pong-paddle{position:absolute;width:10px;height:70px;border-radius:8px;top:35%;background:linear-gradient(#fff,#8ff7ff);box-shadow:0 0 12px #70f4ff,0 0 26px #70f4ff88;animation:paddleBob 2.2s ease-in-out infinite}
+.pp-left{left:23%}.pp-right{right:23%;background:linear-gradient(#fff,#d4a7ff);box-shadow:0 0 12px #c5a1ff,0 0 26px #c5a1ff88;animation-delay:.5s}
+@keyframes paddleBob{50%{translate:0 20px}}
+.pong-ball{position:absolute;left:50%;top:43%;width:14px;height:14px;border-radius:50%;background:#fff;box-shadow:0 0 12px #fff,0 0 24px #a78bfa,0 0 40px #8ff7ff;animation:pongFlight 2.4s cubic-bezier(.45,.05,.55,.95) infinite}
+@keyframes pongFlight{0%{translate:-76px 45px}50%{translate:76px -28px}100%{translate:-76px 45px}}
+.pong-score{position:absolute;top:7%;font-size:19px;letter-spacing:7px;color:#e8e1ff;text-shadow:0 0 14px #a78bfa}
+.pong-glint{position:absolute;right:27%;bottom:3%;color:#e2d7ff;font-size:24px;text-shadow:0 0 18px #bda7ff;animation:premiumSpark 2s infinite}
+.pro-pong-cover .cover-title b{color:#c7b5ff}.pro-pong-cover .cover-play{z-index:4;background:linear-gradient(145deg,#eee4ff,#a88bff);color:#201344;box-shadow:0 0 25px #a78bff99}
+.game-card:has(.pro-golf-cover):hover{border-color:#75f0c7aa;box-shadow:0 22px 55px #0007,0 0 30px #4ce2b72a}
+.game-card:has(.pro-pong-cover):hover{border-color:#bca2ffbb;box-shadow:0 22px 55px #0007,0 0 30px #a78bff35}
+@media(prefers-reduced-motion:reduce){.pro-golf-cover:before,.pro-pong-cover:before,.golf-orbit,.pong-orbit,.golf-sun,.golf-course,.golf-ball,.golf-flag,.golf-spark,.pong-paddle,.pong-ball,.pong-glint{animation:none!important}}
 </style></head>
 <body>
 <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
@@ -932,45 +970,25 @@ body{background:radial-gradient(ellipse at 12% 8%,#17436a55 0,transparent 34%),r
 <div class="game-info-bottom"><span class="game-status"><i></i> Доступна</span><a class="play-link" href="block-hunt.html?v=3">Играть <span>↗</span></a></div></div>
 </article><article class="game-card"><a class="game-cover shard-cover" href="neon-shards.html?v=2" aria-label="Играть в Neon Shards"><div class="cover-noise"></div><div class="cover-orbit"></div><span class="cover-label">N1KMEL'S HUB · SWIPE TO CONNECT</span><span class="cover-spark spark-left">✦</span><span class="cover-spark spark-right">✧</span><div class="shard-art" aria-hidden="true"><i>◆</i><i>⬟</i><i>✦</i><i>◆</i><i>⬢</i></div><div class="cover-title">NEON<br><b>SHARDS</b></div><span class="cover-play">▶</span></a><div class="game-info"><div class="game-info-main"><div class="game-category">ГОЛОВОЛОМКА <span>·</span> ТРИ В РЯД</div><h3>Neon Shards</h3><p>Перетаскивай объёмные неоновые кристаллы, собирай комбо и запускай яркие цепные реакции.</p></div><div class="game-info-bottom"><span class="game-status"><i></i> Доступна</span><a class="play-link" href="neon-shards.html?v=2">Играть <span>↗</span></a></div></div></article>
 
-<article class="game-card"><a class="game-cover arcade-block-cover" href="arcade.html?mode=sokoban" aria-label="Играть в SOKOBAN">
-<div class="cover-noise"></div><div class="cover-orbit"></div><span class="cover-label">N1KMEL'S HUB · ORIGINAL</span>
-<span class="cover-spark spark-left">✦</span><span class="cover-spark spark-right">✧</span>
-<div class="arcade-card-art" aria-hidden="true"><span>🧩</span><i></i><i></i><i></i></div>
-<div class="cover-title">BLOCK<br><b>POP</b></div><span class="cover-play">▶</span></a>
-<div class="game-info"><div class="game-info-main"><div class="game-category">ЛОГИЧЕСКАЯ · ЛАБИРИНТ</div><h3>SOKOBAN</h3><p>Толкай ящики на цели, продумывай маршрут и не загоняй себя в угол.</p></div>
-<div class="game-info-bottom"><span class="game-status"><i></i> Доступна</span><a class="play-link" href="arcade.html?mode=sokoban">Играть <span>↗</span></a></div></div></article>
 
-<article class="game-card"><a class="game-cover arcade-dash-cover" href="arcade.html?mode=mini-golf" aria-label="Играть в MINI GOLF">
-<div class="cover-noise"></div><div class="cover-orbit"></div><span class="cover-label">N1KMEL'S HUB · ORIGINAL</span>
-<span class="cover-spark spark-left">✦</span><span class="cover-spark spark-right">✧</span>
-<div class="arcade-card-art" aria-hidden="true"><span>⛳</span><i></i><i></i><i></i></div>
-<div class="cover-title">SKY<br><b>DASH</b></div><span class="cover-play">▶</span></a>
-<div class="game-info"><div class="game-info-main"><div class="game-category">СПОРТ · ФИЗИКА</div><h3>MINI GOLF</h3><p>Прицелься, выбери силу удара и закати мяч в лунку, обходя стены.</p></div>
+
+<article class="game-card"><a class="game-cover pro-golf-cover" href="arcade.html?mode=mini-golf" aria-label="Играть в MINI GOLF">
+<div class="cover-noise"></div><div class="golf-mesh"></div><div class="golf-orbit"></div><span class="cover-label">N1KMEL'S HUB · PHYSICS CLUB</span>
+<div class="golf-scene" aria-hidden="true"><div class="golf-sun"></div><div class="golf-course"><i class="golf-hole"></i><i class="golf-ball"></i><i class="golf-flag">⚑</i></div><i class="golf-spark gs-one">✦</i><i class="golf-spark gs-two">✧</i><i class="golf-spark gs-three">·</i></div>
+<div class="cover-title">MINI<br><b>GOLF</b></div><span class="cover-play">▶</span></a>
+<div class="game-info"><div class="game-info-main"><div class="game-category">СПОРТ · ФИЗИКА · 5 ЛУНОК</div><h3>MINI GOLF</h3><p>Пять трасс, точные удары, отскоки от стен и физика мяча. Собери минимум ударов!</p></div>
 <div class="game-info-bottom"><span class="game-status"><i></i> Доступна</span><a class="play-link" href="arcade.html?mode=mini-golf">Играть <span>↗</span></a></div></div></article>
 
-<article class="game-card"><a class="game-cover arcade-merge-cover" href="arcade.html?mode=neon-pong" aria-label="Играть в NEON PONG">
-<div class="cover-noise"></div><div class="cover-orbit"></div><span class="cover-label">N1KMEL'S HUB · ORIGINAL</span>
-<span class="cover-spark spark-left">✦</span><span class="cover-spark spark-right">✧</span>
-<div class="arcade-card-art" aria-hidden="true"><span>🏓</span><i></i><i></i><i></i></div>
-<div class="cover-title">NUMBER<br><b>MERGE</b></div><span class="cover-play">▶</span></a>
-<div class="game-info"><div class="game-info-main"><div class="game-category">АРКАДА · ПИНГ-ПОНГ</div><h3>NEON PONG</h3><p>Отбивай светящийся шар платформой и продержись как можно дольше.</p></div>
+<article class="game-card"><a class="game-cover pro-pong-cover" href="arcade.html?mode=neon-pong" aria-label="Играть в NEON PONG против бота">
+<div class="cover-noise"></div><div class="pong-mesh"></div><div class="pong-orbit"></div><span class="cover-label">N1KMEL'S HUB · VS CPU</span>
+<div class="pong-scene" aria-hidden="true"><i class="pong-paddle pp-left"></i><i class="pong-paddle pp-right"></i><i class="pong-ball"></i><i class="pong-line"></i><b class="pong-score">05 : 03</b><i class="pong-glint">✦</i></div>
+<div class="cover-title">NEON<br><b>PONG</b></div><span class="cover-play">▶</span></a>
+<div class="game-info"><div class="game-info-main"><div class="game-category">АРКАДА · ИГРА ПРОТИВ БОТА</div><h3>NEON PONG</h3><p>Сразись с умным CPU-соперником. Матч до пяти очков, ускорение мяча и неоновые эффекты.</p></div>
 <div class="game-info-bottom"><span class="game-status"><i></i> Доступна</span><a class="play-link" href="arcade.html?mode=neon-pong">Играть <span>↗</span></a></div></div></article>
 
-<article class="game-card"><a class="game-cover arcade-memory-cover" href="arcade.html?mode=beat-drop" aria-label="Играть в BEAT DROP">
-<div class="cover-noise"></div><div class="cover-orbit"></div><span class="cover-label">N1KMEL'S HUB · ORIGINAL</span>
-<span class="cover-spark spark-left">✦</span><span class="cover-spark spark-right">✧</span>
-<div class="arcade-card-art" aria-hidden="true"><span>🎵</span><i></i><i></i><i></i></div>
-<div class="cover-title">MEMORY<br><b>MATCH</b></div><span class="cover-play">▶</span></a>
-<div class="game-info"><div class="game-info-main"><div class="game-category">РИТМ · МУЗЫКА</div><h3>BEAT DROP</h3><p>Лови ритм и нажимай, когда импульс попадает в светящуюся зону.</p></div>
-<div class="game-info-bottom"><span class="game-status"><i></i> Доступна</span><a class="play-link" href="arcade.html?mode=beat-drop">Играть <span>↗</span></a></div></div></article>
 
-<article class="game-card"><a class="game-cover arcade-reaction-cover" href="arcade.html?mode=word-rush" aria-label="Играть в WORD RUSH">
-<div class="cover-noise"></div><div class="cover-orbit"></div><span class="cover-label">N1KMEL'S HUB · ORIGINAL</span>
-<span class="cover-spark spark-left">✦</span><span class="cover-spark spark-right">✧</span>
-<div class="arcade-card-art" aria-hidden="true"><span>⌨️</span><i></i><i></i><i></i></div>
-<div class="cover-title">NEON<br><b>REACTION</b></div><span class="cover-play">▶</span></a>
-<div class="game-info"><div class="game-info-main"><div class="game-category">СКОРОСТЬ · ПЕЧАТЬ</div><h3>WORD RUSH</h3><p>Набирай слова на время, повышай серию и проверяй скорость печати.</p></div>
-<div class="game-info-bottom"><span class="game-status"><i></i> Доступна</span><a class="play-link" href="arcade.html?mode=word-rush">Играть <span>↗</span></a></div></div></article></div>
+
+</div>
 
 
 </section>
