@@ -1189,6 +1189,22 @@ body{background:radial-gradient(ellipse at 12% 8%,#17436a55 0,transparent 34%),r
 @keyframes arcadeFloat{50%{transform:translateY(-9px) rotate(5deg)}}
 @keyframes arcadeSpark{50%{transform:translateY(-8px) scale(.7);opacity:.5}}
 @media(prefers-reduced-motion:reduce){.arcade-card-art span,.arcade-card-art i{animation:none!important}}
+
+/* NEON SHARDS — refreshed swipe-first launch artwork */
+.shard-cover{isolation:isolate;overflow:hidden!important;background:radial-gradient(ellipse at 50% 40%,#8657e8 0,#35216f 48%,#10152f 100%)!important}
+.shard-cover:before{content:"";position:absolute;inset:-45%;z-index:0;pointer-events:none;background:conic-gradient(from 20deg,transparent 0 18%,#7ceeff22 25%,transparent 34% 48%,#d18cff25 57%,transparent 68% 82%,#7ceeff20 91%,transparent);animation:shardLaunchAurora 18s linear infinite}
+.shard-cover:after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at 50% 48%,transparent 10%,#080b2680 100%),linear-gradient(145deg,#c8faff12,transparent 45%,#d4a0ff20)}
+.shard-cover .shard-art{z-index:3!important;animation:shardLaunchFloat 4.5s ease-in-out infinite;filter:drop-shadow(0 0 22px #80f3ff55)}
+.shard-cover .shard-art i{animation-duration:2.5s!important}
+.shard-cover .cover-title{letter-spacing:1.5px;text-shadow:0 4px 20px #08051f,0 0 22px #9df8ff77!important}
+.shard-cover .cover-label{background:#121638bb;border:1px solid #9af4ff55;border-radius:999px;padding:7px 10px;backdrop-filter:blur(8px)}
+.shard-cover .cover-play{transition:transform .25s,box-shadow .25s;box-shadow:0 0 0 6px #7ceeff1a,0 0 28px #7ceeff88,0 7px 20px #05051f88!important}
+.shard-cover:hover .cover-play{transform:translateY(-4px) scale(1.12);box-shadow:0 0 0 9px #7ceeff22,0 0 38px #7ceeffbb!important}
+.game-card:has(.shard-cover):hover{border-color:#8cf4ff;box-shadow:0 22px 55px #0006,0 0 34px #795cff38}
+@keyframes shardLaunchAurora{to{transform:rotate(360deg)}}
+@keyframes shardLaunchFloat{0%,100%{translate:0 0;rotate:-2deg}50%{translate:0 -7px;rotate:2deg}}
+@media(prefers-reduced-motion:reduce){.shard-cover:before,.shard-cover .shard-art{animation:none!important}.shard-cover .cover-play{transition:none!important}}
+
 </style>
 </body></html>
 
