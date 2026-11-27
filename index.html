@@ -908,6 +908,48 @@ body{background:radial-gradient(ellipse at 12% 8%,#17436a55 0,transparent 34%),r
 .game-card:has(.pro-golf-cover):hover{border-color:#75f0c7aa;box-shadow:0 22px 55px #0007,0 0 30px #4ce2b72a}
 .game-card:has(.pro-pong-cover):hover{border-color:#bca2ffbb;box-shadow:0 22px 55px #0007,0 0 30px #a78bff35}
 @media(prefers-reduced-motion:reduce){.pro-golf-cover:before,.pro-pong-cover:before,.golf-orbit,.pong-orbit,.golf-sun,.golf-course,.golf-ball,.golf-flag,.golf-spark,.pong-paddle,.pong-ball,.pong-glint{animation:none!important}}
+</style><style id="arcade-card-repair">
+.game-grid{grid-template-columns:repeat(2,minmax(0,1fr));align-items:stretch;gap:22px}
+.game-card{display:flex;flex-direction:column;min-width:0}
+.game-card .game-info{display:flex;flex:1;flex-direction:column;min-width:0}
+.game-card .game-info-bottom{margin-top:auto}
+.game-cover.pro-golf-cover,.game-cover.pro-pong-cover{height:clamp(220px,25vw,270px);min-height:220px;isolation:isolate;overflow:hidden;border-radius:20px 20px 0 0}
+.pro-golf-cover{background:radial-gradient(ellipse at 50% 43%,#45c7a2 0,#176d70 42%,#0b2440 100%)!important}
+.pro-pong-cover{background:radial-gradient(ellipse at 50% 43%,#6041b8 0,#29205f 48%,#10152f 100%)!important}
+.pro-golf-cover:before,.pro-pong-cover:before{content:"";position:absolute;inset:-40%;z-index:0;pointer-events:none;background:repeating-linear-gradient(115deg,transparent 0 24px,#ffffff0d 25px,#ffffff0d 26px,transparent 27px 52px),repeating-linear-gradient(25deg,transparent 0 32px,#b6faff0b 33px,#b6faff0b 34px,transparent 35px 68px);animation:arcadeMesh 28s linear infinite}
+.pro-golf-cover:after,.pro-pong-cover:after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(circle at 50% 43%,transparent 0 26%,#07142688 85%),linear-gradient(130deg,#ffffff14,transparent 42%,#9effed18)}
+@keyframes arcadeMesh{to{transform:rotate(360deg)}}
+.pro-golf-cover .cover-label,.pro-pong-cover .cover-label{z-index:4;color:#e4fff8;left:20px;right:20px;top:17px;font-size:8px;letter-spacing:1.7px}
+.golf-scene,.pong-scene{position:absolute;z-index:2;inset:12% 0 24%;display:grid;place-items:center;pointer-events:none}
+.golf-sun{position:absolute;width:clamp(90px,12vw,130px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,#f0ffd9,#9df4c8 48%,#55c4a8 72%,transparent 73%);filter:drop-shadow(0 0 25px #a5ffe9aa);animation:golfSunPulse 4s ease-in-out infinite}
+.golf-course{position:absolute;width:min(64%,250px);height:94px;border:2px solid #caffedaa;border-radius:50%;transform:rotate(-12deg);background:linear-gradient(160deg,#54d7a2,#176e79);box-shadow:0 16px 30px #041e2a99,inset 0 3px 14px #d5fff455;animation:golfCourseFloat 4.5s ease-in-out infinite}
+.golf-hole{position:absolute;right:10%;top:42%;width:24px;height:11px;border-radius:50%;background:#082c3a;box-shadow:0 0 0 4px #d6ffe933}
+.golf-ball{position:absolute;left:16%;top:25%;width:18px;height:18px;border-radius:50%;background:radial-gradient(circle at 32% 28%,#fff,#d5faff 48%,#62c4dd);box-shadow:0 0 18px #b5ffff;animation:golfBallRoll 3.8s ease-in-out infinite}
+.golf-flag{position:absolute;right:12%;top:0;color:#ffe49a;font-size:26px;text-shadow:0 0 12px #ffd27b;animation:flagWave 1.8s ease-in-out infinite}
+@keyframes golfSunPulse{50%{transform:scale(1.07);filter:drop-shadow(0 0 36px #a5ffe9cc)}}
+@keyframes golfCourseFloat{50%{translate:0 -7px;rotate:3deg}}
+@keyframes golfBallRoll{0%,100%{translate:0 0}50%{translate:105px -22px}}
+@keyframes flagWave{50%{transform:rotate(9deg)}}
+.golf-spark{position:absolute;color:#e4fff8;text-shadow:0 0 14px #b6fff1;animation:arcadeSpark 2.4s ease-in-out infinite}.gs-one{top:12%;left:23%}.gs-two{top:25%;right:22%;animation-delay:.7s}
+@keyframes arcadeSpark{50%{opacity:.35;transform:scale(.6) rotate(45deg)}}
+.pong-line{position:absolute;height:100%;border-left:2px dashed #ded4ff66;left:50%;top:0}
+.pong-paddle{position:absolute;width:10px;height:68px;border-radius:8px;top:35%;background:linear-gradient(#fff,#8ff7ff);box-shadow:0 0 12px #70f4ff,0 0 26px #70f4ff88;animation:paddleBob 2.2s ease-in-out infinite}
+.pp-left{left:23%}.pp-right{right:23%;background:linear-gradient(#fff,#d4a7ff);box-shadow:0 0 12px #c5a1ff,0 0 26px #c5a1ff88;animation-delay:.5s}
+@keyframes paddleBob{50%{translate:0 20px}}
+.pong-ball{position:absolute;left:50%;top:43%;width:14px;height:14px;border-radius:50%;background:#fff;box-shadow:0 0 12px #fff,0 0 24px #a78bfa,0 0 40px #8ff7ff;animation:pongFlight 2.4s ease-in-out infinite}
+@keyframes pongFlight{0%{translate:-76px 45px}50%{translate:76px -28px}100%{translate:-76px 45px}}
+.pong-score{position:absolute;top:7%;font-size:18px;letter-spacing:7px;color:#e8e1ff;text-shadow:0 0 14px #a78bfa}
+.pong-glint{position:absolute;right:27%;bottom:3%;color:#e2d7ff;font-size:22px;text-shadow:0 0 18px #bda7ff;animation:arcadeSpark 2s infinite}
+.pro-golf-cover .cover-title,.pro-pong-cover .cover-title{z-index:5;left:20px;bottom:18px;width:calc(100% - 82px);font-size:clamp(19px,2.4vw,25px);line-height:.95;color:#f1fffb;text-shadow:0 4px 20px #061b2b}
+.pro-golf-cover .cover-title b{font-size:clamp(29px,3.8vw,39px);color:#a7ffe0}
+.pro-pong-cover .cover-title b{font-size:clamp(29px,3.8vw,39px);color:#c7b5ff}
+.pro-golf-cover .cover-play,.pro-pong-cover .cover-play{z-index:6;right:18px;bottom:18px;width:42px;height:42px}
+.pro-golf-cover .cover-play{background:linear-gradient(145deg,#d9fff0,#70e4bd);color:#073a3c;box-shadow:0 0 25px #70e4bd88}
+.pro-pong-cover .cover-play{background:linear-gradient(145deg,#eee4ff,#a88bff);color:#201344;box-shadow:0 0 25px #a78bff99}
+.game-card:has(.pro-golf-cover):hover{border-color:#75f0c7aa;box-shadow:0 22px 55px #0007,0 0 30px #4ce2b72a}
+.game-card:has(.pro-pong-cover):hover{border-color:#bca2ffbb;box-shadow:0 22px 55px #0007,0 0 30px #a78bff35}
+@media(max-width:650px){.game-grid{grid-template-columns:minmax(0,1fr);gap:16px}.game-cover.pro-golf-cover,.game-cover.pro-pong-cover{height:230px;min-height:230px}.pro-golf-cover .cover-title,.pro-pong-cover .cover-title{font-size:22px}.pro-golf-cover .cover-title b,.pro-pong-cover .cover-title b{font-size:34px}}
+@media(prefers-reduced-motion:reduce){.pro-golf-cover:before,.pro-pong-cover:before,.golf-sun,.golf-course,.golf-ball,.golf-flag,.golf-spark,.pong-paddle,.pong-ball,.pong-glint{animation:none!important}}
 </style></head>
 <body>
 <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
