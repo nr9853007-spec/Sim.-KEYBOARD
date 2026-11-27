@@ -535,35 +535,6 @@ body{background:radial-gradient(ellipse at 12% 8%,#17436a55 0,transparent 34%),r
 @keyframes acornTumble{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-7px) rotate(18deg)}}
 @keyframes flowerNod{50%{transform:rotate(14deg) scale(1.06)}}
 @keyframes forestStampFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
-/* HOT SUMMER 1989 — sun shimmer, courtyard motion and warm highlights */
-.yard-cover{transition:transform .4s cubic-bezier(.2,.8,.2,1),box-shadow .4s,border-color .4s}
-.yard-cover:after{content:"";position:absolute;inset:0;z-index:4;pointer-events:none;background:linear-gradient(115deg,transparent 28%,#fff0bd22 46%,transparent 62%),radial-gradient(ellipse at 78% 15%,#fff0b533,transparent 42%);background-size:220% 100%,100% 100%;animation:summerGlint 8s ease-in-out infinite}
-.yard-cover .yard-clouds{animation:summerClouds 19s ease-in-out infinite alternate}
-.yard-cover .yard-flag{transform-origin:0 0;animation:summerFlagWave 2.6s ease-in-out infinite}
-.yard-cover .yard-kids{transform-box:fill-box;transform-origin:center bottom;animation:summerKidsPlay 1.9s ease-in-out infinite}
-.yard-cover .yard-ball-svg{transform-box:fill-box;transform-origin:center;animation:summerBallBounce 2.4s ease-in-out infinite}
-.yard-cover .yard-bike-svg{transform-box:fill-box;transform-origin:center;animation:summerBikeRock 4s ease-in-out infinite}
-.yard-cover .yard-boombox{transform-box:fill-box;transform-origin:center;animation:boomboxBeat 1.1s ease-in-out infinite}
-.yard-cover .yard-window-glow circle{animation:windowSunFlash 2.3s ease-in-out infinite alternate}
-.yard-cover .yard-window-glow circle:nth-child(2n){animation-delay:-1.15s}
-.yard-summer-stamp{position:absolute;z-index:8;right:16%;top:19%;padding:7px 11px;border:1px solid #ffe6a9bb;border-radius:99px;background:linear-gradient(100deg,#6a2b20e8,#b44d29e8);color:#ffe8b4;font-size:8px;font-weight:1000;letter-spacing:1.5px;box-shadow:0 0 18px #ffb34a66,0 7px 18px #250d0b88;animation:summerStampPulse 2.8s ease-in-out infinite}
-.yard-cover .cover-label{background:#512319d9!important;border-color:#ffc27a99!important}
-.yard-cover .cover-title{color:#fff0cf!important;text-shadow:0 4px 0 #682b27,0 8px 24px #1a0b0b!important}
-.game-card:has(.yard-cover){transition:transform .35s,border-color .35s,box-shadow .35s}
-.game-card:has(.yard-cover):hover{transform:translateY(-6px);border-color:#ffc77a;box-shadow:0 24px 58px #1c0b0a88,0 0 32px #f38b4055}
-.game-card:has(.yard-cover):hover .yard-cover-art{filter:saturate(1.18) brightness(1.06);transform:scale(1.035);transition:transform .7s,filter .7s}
-@keyframes summerGlint{0%,20%{background-position:140% 0,0 0}75%,100%{background-position:-140% 0,0 0}}
-@keyframes summerClouds{from{transform:translateX(-7px)}to{transform:translateX(9px)}}
-@keyframes summerFlagWave{0%,100%{transform:skewY(-1deg)}50%{transform:skewY(4deg) rotate(1deg)}}
-@keyframes summerKidsPlay{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
-@keyframes summerBallBounce{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-10px) rotate(24deg)}}
-@keyframes summerBikeRock{0%,100%{transform:rotate(0)}50%{transform:rotate(-1deg)}}
-@keyframes boomboxBeat{0%,100%{transform:scale(1)}50%{transform:scale(1.045)}}
-@keyframes windowSunFlash{from{opacity:.45;filter:brightness(1)}to{opacity:1;filter:brightness(1.6)}}
-@keyframes summerStampPulse{0%,100%{transform:translateY(0);box-shadow:0 0 14px #ffb34a44}50%{transform:translateY(-4px);box-shadow:0 0 24px #ffb34a88}}
-@media(max-width:600px){.forest-letter-stamp,.yard-summer-stamp{top:17%;right:10%;font-size:7px;padding:6px 8px}}
-@media(prefers-reduced-motion:reduce){.forest-cover:after,.forest-cover .forest-sun-rays,.forest-cover .forest-clouds,.forest-cover .forest-nebula,.forest-cover .forest-planet-rings,.forest-cover .forest-starfield circle,.forest-cover .cover-timka,.forest-cover .cover-envelope,.forest-cover .cover-acorn,.forest-cover .forest-flower,.forest-cover .cover-flower,.forest-letter-stamp,.yard-cover:after,.yard-cover .yard-clouds,.yard-cover .yard-flag,.yard-cover .yard-kids,.yard-cover .yard-ball-svg,.yard-cover .yard-bike-svg,.yard-cover .yard-boombox,.yard-cover .yard-window-glow circle,.yard-summer-stamp{animation:none!important}}
-
 /* FOREST MEADOW + HOT YARD — unified neon arcade launch cards */
 .forest-cover{
  background:radial-gradient(ellipse at 50% 30%,#1d5964 0,#18304d 48%,#10172d 100%)!important;
@@ -608,54 +579,6 @@ body{background:radial-gradient(ellipse at 12% 8%,#17436a55 0,transparent 34%),r
 .game-card:has(.forest-cover):hover{
  border-color:#80fff0!important;box-shadow:0 22px 55px #0006,0 0 32px #52e8d744!important;
 }
-.yard-cover{
- background:
-  radial-gradient(ellipse at 60% 18%,#ffbd6b55,transparent 36%),
-  radial-gradient(ellipse at 12% 85%,#ff5e8a35,transparent 45%),
-  linear-gradient(145deg,#542b48,#211b3c 65%,#11182e)!important;
- border:1px solid #ffad7dcc!important;
- box-shadow:inset 0 1px #fff5,0 18px 48px #0008,0 0 30px #ff8a6530!important;
-}
-.yard-cover:before{
- background:
-  radial-gradient(ellipse at 55% 12%,#ffe1a044,transparent 42%),
-  linear-gradient(180deg,#24173b22 0%,#111329aa 100%),
-  repeating-linear-gradient(125deg,transparent 0 40px,#ffb77b0c 41px 42px)!important;
-}
-.yard-cover:after{
- background:linear-gradient(180deg,transparent 35%,#17142fc2 100%),radial-gradient(ellipse at 50% 100%,#ff8e7044,transparent 60%)!important;
-}
-.yard-cover .cover-orbit{
- border-color:#ffc58b99!important;
- box-shadow:0 0 0 20px #ffad7b18,0 0 0 44px #c69aff12,0 0 40px #ff9a6c66!important;
-}
-.yard-cover-art{filter:saturate(1.35) contrast(1.08) drop-shadow(0 0 18px #ff956c55)}
-.yard-cover .cover-label{
- color:#ffe1c5!important;background:#211b3ddd!important;
- border:1px solid #ffc08b77;border-radius:99px;padding:7px 11px;
- box-shadow:0 0 18px #ff9c6c22;backdrop-filter:blur(8px);
-}
-.yard-cover .cover-title{
- color:#fff3e9!important;text-shadow:0 0 18px #ff9c7aaa,0 5px 18px #170d24!important;
-}
-.yard-cover .cover-title b{
- color:#ffc58c!important;text-shadow:0 0 18px #ff986dcc!important;
-}
-.yard-cover .cover-play{
- background:linear-gradient(145deg,#ffe0b6,#ff9c83)!important;
- color:#351a32!important;box-shadow:0 0 0 5px #ffad8622,0 0 25px #ff9c7f88!important;
-}
-.yard-cover .cover-spark{
- color:#ffd9b5!important;text-shadow:0 0 15px #ff9e79!important;
-}
-.game-card:has(.yard-cover):hover{
- border-color:#ffbc91!important;box-shadow:0 22px 55px #0006,0 0 32px #ff916044!important;
-}
-@media(prefers-reduced-motion:reduce){
- .forest-cover .cover-orbit{animation:none!important}
-}
-
-
 /* FULL RE-ART: FOREST MEADOW — enchanted neon woodland */
 .forest-cover{min-height:290px!important;isolation:isolate;overflow:hidden!important;background:radial-gradient(ellipse at 50% 45%,#263e83 0,#171d48 48%,#080f27 100%)!important;border:1px solid #75f6e9aa!important;box-shadow:inset 0 1px #ffffff28,0 20px 55px #020716aa,0 0 34px #5eece62c!important}
 .forest-cover:before{z-index:1!important;background:radial-gradient(ellipse at 50% 75%,#42f3d833,transparent 42%),radial-gradient(circle at 15% 24%,#c3fff9 0 1px,transparent 2px),radial-gradient(circle at 83% 18%,#c3fff9 0 2px,transparent 3px),linear-gradient(145deg,#0a153a22,#6e6dff20)!important}
