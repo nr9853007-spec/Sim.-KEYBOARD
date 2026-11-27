@@ -843,39 +843,13 @@ body{background:radial-gradient(ellipse at 12% 8%,#17436a55 0,transparent 34%),r
 @keyframes forestStarPulse{from{opacity:.4}to{opacity:1}}
 @keyframes forestNebulaFlow{from{opacity:.08;transform:translateX(-8px)}to{opacity:.22;transform:translateX(10px)}}
 
-.yard-cover{
- isolation:isolate;overflow:hidden!important;
- background:linear-gradient(155deg,#2b1b2a 0%,#63302f 48%,#201822 100%)!important;
- border-color:#d17a54aa!important;
- box-shadow:inset 0 1px #ffffff24,inset 0 -45px 65px #130d18aa,0 18px 44px #0008!important
-}
-.yard-cover:before{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(180deg,#ffcf8420,transparent 45%,#160d1ba8 100%)}
-.yard-cover-art{position:absolute!important;inset:0!important;z-index:2!important;overflow:hidden}
-.yard-art-svg{display:block;width:100%;height:100%;filter:saturate(1.06)}
-.yard-clouds{animation:yardCloudDrift 18s ease-in-out infinite alternate}
-.yard-flag{transform-origin:0 0;animation:yardFlagWave 3.2s ease-in-out infinite}
-.yard-kids{transform-box:fill-box;transform-origin:center bottom;animation:yardKidsBounce 2.8s ease-in-out infinite}
-.yard-ball-svg{transform-box:fill-box;transform-origin:center;animation:yardBallRoll 4s ease-in-out infinite}
-.yard-cover .cover-label{z-index:7!important;color:#ffe0bd!important;background:#321b24ca!important;border:1px solid #e7a06c77!important;border-radius:999px;padding:7px 11px;backdrop-filter:blur(8px)}
-.yard-cover .cover-title{z-index:7!important;color:#fff0d3!important;text-shadow:0 3px 0 #5d2730,0 0 18px #d16a4d88!important}
-.yard-cover .cover-title b{color:#ffc47a!important;text-shadow:0 3px 0 #812f2d,0 0 20px #ff9c4b55!important}
-.yard-cover .cover-spark{z-index:7!important;color:#ffd79a!important;text-shadow:0 0 14px #ff9f59;animation:yardSparkHub 2.8s ease-in-out infinite}
-.yard-cover .spark-right{animation-delay:-1.3s}
-.yard-cover .cover-play{z-index:8!important;background:linear-gradient(145deg,#ffe4ad,#e58b55)!important;color:#4b2028!important;border:1px solid #fff0cd!important;box-shadow:0 0 0 6px #ffba7022,0 7px 22px #130d18aa}
-.yard-cover .beta-test-ribbon{border-color:#ffbd7a99;background:linear-gradient(110deg,#5b1f32ee,#a94335ee);color:#ffe5c6;box-shadow:0 0 18px #ed795044,inset 0 1px #ffffff30}
-.game-card:has(.yard-cover):hover{border-color:#e99a61;box-shadow:0 22px 55px #0006,0 0 30px #e4774938}
-@keyframes yardCloudDrift{from{transform:translateX(-8px)}to{transform:translateX(8px)}}
-@keyframes yardFlagWave{0%,100%{transform:skewY(0)}50%{transform:skewY(2deg)}}
-@keyframes yardKidsBounce{50%{transform:translateY(-3px)}}
-@keyframes yardBallRoll{50%{transform:translateY(-7px) rotate(15deg)}}
-@keyframes yardSparkHub{50%{opacity:.45;transform:scale(.75) rotate(22deg)}}
 @media(max-width:600px){
  .beta-test-ribbon{top:11px;right:12px;padding:6px 9px;font-size:9px}
- .forest-cover .cover-title,.yard-cover .cover-title{font-size:clamp(25px,7vw,34px)!important;left:16px!important;bottom:15px!important}
- .forest-cover .cover-play,.yard-cover .cover-play{right:14px!important;bottom:14px!important;width:42px;height:42px}
+ .forest-cover .cover-title{font-size:clamp(25px,7vw,34px)!important;left:16px!important;bottom:15px!important}
+ .forest-cover .cover-play{right:14px!important;bottom:14px!important;width:42px;height:42px}
 }
 @media(prefers-reduced-motion:reduce){
- .forest-planet-rings,.forest-starfield circle,.forest-nebula,.yard-clouds,.yard-flag,.yard-kids,.yard-ball-svg,.yard-cover .cover-spark{animation:none!important}
+ .forest-planet-rings,.forest-starfield circle,.forest-nebula{animation:none!important}
 }
 
 /* BLOCK HUNT — neon crystal puzzle cover */
